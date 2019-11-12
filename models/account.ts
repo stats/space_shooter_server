@@ -8,9 +8,6 @@ export class Account extends Schema {
   password:string;
 
   @type("string")
-  uuid:string;
-
-  @type("string")
   username:string;
 
   public toSaveObject(): any {

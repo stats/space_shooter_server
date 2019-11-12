@@ -1,7 +1,8 @@
 import { Room } from 'colyseus';
 
 import { JWTHelper } from '../helpers/jwthelper';
-import { Accounthelper } from '../helpers/AccountHelper';
+import { AccountHelper } from '../helpers/AccountHelper';
+import { ShipHelper } from '../helpers/ShipHelper';
 
 import { Ship } from '../models/ship';
 
@@ -41,15 +42,7 @@ export class ShipBuilderRoom extends Room {
   }
 
   private async playShip(client, uuid) {
-    const account = await AccountHelper.getAccountByUsername(client.username);
-    if(!account) {
-      this.send(client, {
-        error: 'error_invalid_account'
-      })
-      return;
-    }
-
-    const ship = await DB.$ships.findOne({ uuid: uuid });
+    const ship = ShipHelper.getShip(client.username, uuid);
 
     if(!ship) {
       this.send(client, {
@@ -67,7 +60,7 @@ export class ShipBuilderRoom extends Room {
   }
 
   private async createShip(client, { ship }) {
-    let success = ShipHelper.buildShip(client.username, ship);
+    let success = ShipHelper.createShip(client.username, ship);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully created.'});
     } else {

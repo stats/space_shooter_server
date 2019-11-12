@@ -3,7 +3,7 @@ import { Account } from '../models/account';
 
 export class AccountHelper {
   static async getAccountById(userId: string): Promise<Account> {
-    const account = await DB.$account.findOne({userId});
+    const account = await DB.$accounts.findOne({userId});
     if(account) return Account(account);
     return null;
   }
