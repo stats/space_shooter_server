@@ -1,0 +1,27 @@
+{
+  "name": "space_shooter_server",
+  "version": "0.1.0",
+  "description": "Multiplayer server for a colyseus space shooter.",
+  "repository": "https://github.com/stats/space_shooter_server",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "author": "Dan Curran",
+  "license": "MIT",
+  "dependencies": {
+    "@colyseus/monitor": "^0.11.7",
+    "colyseus": "^0.11.22",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "nonenumerable": "^1.1.1",
+    "superagent": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.7",
+    "ts-node": "^8.5.0",
+    "typescript": "^3.7.2"
+  }
+}
