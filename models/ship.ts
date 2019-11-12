@@ -25,8 +25,8 @@ export class Ship extends Entity {
 
   createdAt:number;
 
-  constructor() {
-    super();
+  constructor(opts) {
+    super(opts);
     this.registerBehaviour(new KeyboardMovementBehaviour(this));
   }
 

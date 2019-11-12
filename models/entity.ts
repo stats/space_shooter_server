@@ -1,4 +1,5 @@
 import { Schema, type } from "@colyseus/schema";
+import { merge } from 'lodash';
 
 export class Entity extends Schema {
 
@@ -14,6 +15,11 @@ export class Entity extends Schema {
   $room:any;
 
   protected $behaviours:any[] = [];
+
+  constructor(opts:any) {
+    super();
+    merge(this, opts);
+  }
 
   protected registerBehaviour(behaviour:any) {
     this.$behaviours.push(behaviour);
