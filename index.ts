@@ -12,7 +12,7 @@ import { GameRoom } from "./rooms/GameRoom";
 import { AccountHelper } from './helpers/AccountHelper';
 import { JWTHelper } from './helpers/JWTHelper';
 
-cost port = Number(process.nv.PORT || 2567 ) + Number(preocess.env.NODE_APP_INSTANCE || 0);
+cost port = Number(process.env.PORT || 2567 ) + Number(process.env.NODE_APP_INSTANCE || 0);
 const app = express();
 const game_api = GameAPI();
 

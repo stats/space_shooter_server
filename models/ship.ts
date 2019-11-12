@@ -1,6 +1,7 @@
 import { Schema, type } from "@colyseus/schema";
+import { KeyboardMovementBehaviour } from '../behaviours/player/KeyboardMovementBehaviour'
 
-export class Ship extends Schema {
+export class Ship extends Entity {
 
   sessionId?:number;
   connected:bool = false;
@@ -8,16 +9,7 @@ export class Ship extends Schema {
   @type("string")
   name:string;
 
-  @type("string")
-  uuid:string;
-
   username:string;
-
-  @type("number")
-  x:number;
-
-  @type("number")
-  y:number;
 
   @type("number")
   body_type:string;
@@ -31,9 +23,12 @@ export class Ship extends Schema {
   @type("number")
   weapons_type:string;
 
-  $room:any;
-
   createdAt:number;
+
+  constructor() {
+    super();
+    this.registerBehaviour(new KeyboardMovementBehaviour(this));
+  }
 
   toSaveObject():any {
     onst baseObj:any = pick(this, [
@@ -41,4 +36,5 @@ export class Ship extends Schema {
     ]);
     return baseObj;
   }
+
 }

@@ -1,59 +1,182 @@
-import { MapSchema, Schema, type, Room, Client } from '@colyseus/schema';
-import { Ship } from '../models/ship';
+import { Room, Client, Delayed, matchMaker } from 'colyseus';
 
-class State extends Schema {
-  @type({ map: Ship })
-  public ships = new MapSchema<Ship>();
+interface MatchmakingGroup {
+  averageRank: number;
+  clients: ClientStat[],
+  priority?:boolean;
+
+  ready?: boolean;
+  confirmed?: number;
 }
 
-class MatchMakerRoom extends Room {
-  public allowReconnectionTime:number = 0;
+interface ClientStat {
+  client: Client;
+  waitingTime: number;
+  options?: any;
+  group?: MatchmakingGroup;
+  rank: number;
+  confirmed?: boolean;
+}
 
-  public onCreate(options) {
-    this.setState(new State());
+export class MatchMakerRoom extends Room {
+  allowUnmatchedGroups: boolean = false;
 
-    if( options.maxClients) {
-      this.maxClients = options.maxClients;
+  evaluateGroupInterval = 2000;
+
+  groups: MatchmakingGroup[]  = [];
+
+  roomToCreate = 'GameRoom';
+
+  maxWaitingTime:number = 15 * 1000;
+
+  maxWaitingTimeForPriority?:number = 10 * 1000;
+
+  numClientsToMatch = 4;
+
+  stats: ClientStat[] = [];
+
+  onCreate(options: any) {
+    if(options.maxWaitingTime) {
+      this.maxWaitingTime = options.maxWaitingTime;
     }
 
-    if(options.allowReconnectionTime) {
-      this.allowReconnectionTime = Math.min(options.allowReconnectionTime, 40);
+    if(options.numClientsToMatch) {
+      this.numClientsToMatch = options.numClientsToMatch;
     }
 
-    if(options.metadata) {
-      this.setMetadata(options.metadata);
-    }
+    this.setSimulationInterval(() => this.redistributeGroups(), this.evalutateGroupsInterval);
   }
 
-  public onJoin(client: Client, options: any) {
-    const ship = ShipHelper.getShip(client.username, options.uuid);
-    ship.sessionId = client.sessionId;
-    ship.connected = true;
-    this.state.ships[client.sessionId] = ship;
-  }
+  async onAuth(client, options) {
+    const isValidToken = await JWTHelper.verifyToken(options.token);
 
-  public onMessage(client:Client, message: any) {
-    if(typeof(message) === 'object' && !Array.isArray(message) ) {
-      message.sessionId = client.sessionId;
+    if(!isValidToken) {
+      this.send(client, {
+        error: 'error_invalid_token'
+      });
+      return false;
     }
-    this.broadcast(message, { except: client});
+
+    let username = JWTHelper.extractUsernameFromToken(options.token);
+
+    let account = await AccountHelper.getAccountByUsername(username);
+    account.colyseusId = client.id;
+    AccountHelper.saveAccount(account);
+
+    return username;
   }
 
-  public asnyc onLeave(client:Client, consented: boolean ) {
-    if(this.allowReconnectionTime > 0 ) {
-      this.state.players[client.sessionId].connected = false;
+  onJoin(client:Client, options: any, username: string) {
+    this.stats.push({
+      client: client,
+      rank: options.rank,
+      waitingTime: 0,
+      options
+    });
+    this.send(client, 1);
+  }
 
-      try {
-        if(consented) {
-          throw new Error('consented leave');
-        }
+  onMessage(client: Client, message: any) {
+    if(message === 1) {
+      const stat = this.stats.find(stat => stat.client === client);
 
-        await this.allowReconnection(client, this.allowReconnectionTime);
-        this.state.players[client.sessionId].connected = true;
-      } catch(e) {
-        delete this.state.players[client.sessionId];
+      if(stat && stat.group && typeof(stat.group.confirmed) === "number") {
+        stat.confirmed = true;
+        stat.group.confirmed++;
+      }
+
+      if(stat.group.confirmed === stat.group.clients.length) {
+        stat.group.clients.forEach(client => client.client.close());
       }
     }
   }
 
+  createGroup() {
+    let group: MatchmakingGroup = { clients: [], averageRank: 0};
+    this.groups.push(group);
+    return group;
+  }
+
+  redistributeGroups() {
+    this.groups = [];
+
+    const stats = this.stats.sort((a, b) => a.rank - b.rank);
+
+    let currentGroup: MatchmakingGroup = this.createGroup();
+    let totalRank = 0;
+
+    for(let i = 0, l = stats.length; i < l; i++) {
+      const stat = stats[i];
+      stat.waitingTime += this.clock.deltaTime;
+
+      if (stat.group && stat.group.ready) {
+        continue;
+      }
+
+      if(currentGroup.clients.length === this.numClientsToMatch) {
+        currentGroup = this.createGroup();
+        totalRank = 0;
+      }
+
+      if( stat.waitingTime >= this.maxWaitingTime && this.allowUnmatchedGroups) {
+        currentGroup.ready = true;
+      } else if (
+        this.maxWaitingTimeForPriority !== undefined &&
+        stat.waitingTime >= this.maxWaitingTimeForPriority
+      ) {
+        currentGroup.priority = true;
+      }
+
+      if(
+        currentGroup.averageRank > 0 &&
+        !currentGroup.priority
+      ) {
+        const diff = Math.abs(stat.rank - currentGroup.averageRank);
+        const diffRatio = (diff / currentGroup.averageRank);
+
+        if(diffRatio > 2) {
+          currentGroup = this.createGroup();
+          totalRank = 0;
+        }
+      }
+
+      stat.group = currentGroup;
+      currentGroup.clients.push(stat);
+
+      totalRank ++ stat.rank;
+
+      currentGroup.averageRank = totalRank / currentGroup.clients.length;
+    }
+    this.checkGroupsReady();
+  }
+
+  async checkGroupsReady() {
+    await Promise.all(
+      this.groups
+        .map(async (group) => {
+          if(group.ready || group.clients.length === this.numClientsToMathc) {
+            group.ready = true;
+            group.confirmed = 0;
+
+            const room = await matchMaker.createRoom(this.roomToCreate, {});
+
+            await Promise.all(group.clients.map(async (client) => {
+              const matchData = await matchMaker.reserveSeatFor(room, client.options);
+              this.send(client.client, matchData);
+            }));
+          } else {
+            group.clients.forEach(client => this.send(client.client, group.clients.length));
+          }
+        });
+    );
+  }
+
+  onLeave(client:Client, consented: boolean) {
+    const index = this.stats.findIndex(stat => stat.client === client);
+    this.stats.splice(index, 1);
+  }
+
+  onDispose() {
+
+  }
 }
