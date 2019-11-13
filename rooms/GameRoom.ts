@@ -3,6 +3,7 @@ import { GameState } from '../models/gamestate';
 
 import { JWTHelper } from '../helpers/JWTHelper';
 import { CollisionHelper } from '../helpers/CollisionHelper';
+import { ShipHelper } from '../helpers/ShipHelper';
 
 export class GameRoom extends Room<GameState> {
 
@@ -66,12 +67,30 @@ export class GameRoom extends Room<GameState> {
   }
 
   onLeave(client) {
-    this.state.removePlayer(this.clientShipHash[client.id]);
+    let ship = this.clientShipHash[client.id]
+    this.state.removeShip(ship);
+    ShipHelper.removeInGame(ship.uuid)
     delete this.clientShipHash[client.id];
   }
 
   onDispose() {
 
+  }
+
+  onUpdate( deltaTime ) {
+
+    this.checkCollisions();
+
+    let i, l;
+    for(let ship of this.ships) {
+      ship.onUpdate(deltaTime);
+    }
+    for(let enemy of this.enemies) {
+      enemy.onUpdate(deltaTime);
+    }
+    for(let bullet of this.bullets) {
+      bullet.onUpdate(deltaTime);
+    }
   }
 
   /** This is the complex function that sets difficulty based on the current wave **/
@@ -153,17 +172,5 @@ export class GameRoom extends Room<GameState> {
     return true;
   }
 
-  onUpdate( deltaTime ) {
-    let i, l;
-    for(let ship of this.ships) {
-      ship.onUpdate(deltaTime);
-    }
-    for(let enemy of this.enemies) {
-      enemy.onUpdate(deltaTime);
-    }
-    for(let bullet of this.bullets) {
-      bullet.onUpdate(deltaTime);
-    }
-  }
 
 }

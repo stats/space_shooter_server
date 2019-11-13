@@ -3,7 +3,8 @@ import { MongoClient, ObjectID } from 'mongodb';
 const DB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/development';
 
 class Database {
-  public $account:any;
+  public $accounts:any;
+  public $ships:any;
 
   private client:MongoClient;
   private db:any;

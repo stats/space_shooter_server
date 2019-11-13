@@ -1,4 +1,9 @@
 import { Schema, type } from "@colyseus/schema";
+import { GameRoom } from '../rooms/GameRoom';
+
+import { CollidesWithEnemyBullet } from '../behaviours/player/CollidesWithShipBullet';
+
+import { Entity } from './entity';
 
 export class Enemy extends Entity {
   health:number = 1;
@@ -18,5 +23,10 @@ export class Enemy extends Entity {
     this.health = this.health + (this.health_growth * this.wave);
     this.speed = this.speed + (this.speed_growth * this.wave);
     this.collision_damage = this.collision_damage + (this.collision_damage_growth * this.wave);
+  }
+
+  onInitGame(room:GameRoom) {
+    super.onInitGame(room);
+    this.registerBehaviour(new CollidesWithShipBullet(this, this.$room.state.ship_bullets));
   }
 }

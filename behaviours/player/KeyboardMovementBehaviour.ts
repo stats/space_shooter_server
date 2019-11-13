@@ -1,6 +1,6 @@
 import { Behaviour } from '../behaviour';
 import { C } from '../../constants';
-import { Bounds } from '.././helpers/Bounds';
+import { Bounds } from '../../helpers/Bounds';
 
 export class KeyboardMovementBehaviour extends Behaviour {
 
@@ -11,9 +11,9 @@ export class KeyboardMovementBehaviour extends Behaviour {
   acceleration_x:number;
   acceleration_y:number;
 
-  boundaries:Bounds;
+  bounds:Bounds;
 
-  constructor(target, bounds:Boundaries) {
+  constructor(target) {
     super('WASDMovement', target);
     this.bounds = C.BOUNDS;
 
@@ -26,33 +26,33 @@ export class KeyboardMovementBehaviour extends Behaviour {
     if(args.right) this.target.incrementX();
   }
 
-  public handleTick(deltaTime:number) {
-    this.x += this.acceleration_x * deltaTime;
-    this.y += this.acceleration_y * deltaTime;
-    if(this.x < this.bounds.min_x) this.x = this.bounds.min_x;
-    if(this.x > this.bounds.max_x) this.x = this.bounds.max_x;
-    if(this.y < this.bounds.min_y) this.y = this.bounds.min_y;
-    if(this.y > this.bounds.max_y) this.y = this.bounds.max_y;
+  public onUpdate(deltaTime:number) {
+    this.target.x += this.acceleration_x * deltaTime;
+    this.target.y += this.acceleration_y * deltaTime;
+    if(this.target.x < this.bounds.minX) this.target.x = this.bounds.minX;
+    if(this.target.x > this.bounds.maxX) this.target.x = this.bounds.maxX;
+    if(this.target.y < this.bounds.minY) this.target.y = this.bounds.minY;
+    if(this.target.y > this.bounds.maxY) this.target.y = this.bounds.maxY;
   }
 
   private incrementX() {
     this.acceleration_x += this.acceleration;
-    this.acceleration = this.clampAcceleration();
+    this.clampAcceleration();
   }
 
   private deincrementX() {
     this.acceleration_x -= this.acceleration;
-    this.acceleration = this.clampAcceleration();
+    this.clampAcceleration();
   }
 
   private incrementY() {
     this.acceleration_y += this.acceleration;
-    this.acceleration = this.clampAcceleration();
+    this.clampAcceleration();
   }
 
   private deincrementY() {
     this.acceleration_y -= this.acceleration;
-    this.acceleration = this.clampAcceleration();
+    this.clampAcceleration();
   }
 
   private clampAcceleration() {

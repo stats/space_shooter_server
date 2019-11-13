@@ -31,4 +31,16 @@ export class JWTHelper {
     const decodedToken = jwt.decode(token);
     return decodedToken.data
   }
+
+  public static getSuccessJSON(username) {
+    return {
+      success: true,
+      token: JWTHelper.createJWToken({
+        sessionData: username,
+        maxAge: 3600
+      }),
+      expiresIn: 3600,
+      username: username
+    };
+  }
 }

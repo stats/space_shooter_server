@@ -1,5 +1,7 @@
 import { Schema, type } from "@colyseus/schema";
 import { merge } from 'lodash';
+import { GameRoom } from '../rooms/GameRoom';
+import { Entity } from './entity';
 
 export class Entity extends Schema {
 
@@ -18,7 +20,7 @@ export class Entity extends Schema {
 
   collision_type:number;
 
-  $room:any;
+  public $room:GameRoom;
 
   protected $behaviours:any[] = [];
 
@@ -38,6 +40,10 @@ export class Entity extends Schema {
       }
     }
   }
+
+  protected onInitGame(room:GameRoom) {
+    this.$room = room;
+  };
 
   protected onEvent(event_type:string, args:any) {
     for(let i = 0; i < this.$behaviours.length; i++) {

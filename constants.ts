@@ -1,4 +1,4 @@
-import { Bounds } from 'helpers/Bounds';
+import { Bounds } from './helpers/Bounds';
 
 /* Game constants*/
 export class C {

@@ -26,6 +26,7 @@ export class GameState extends Schema {
 
   addShip(ship:Ship) {
     this.ships[ship.uuid] = ship;
+    ship.initGame();
   }
 
   removeShip(ship:Ship) {
@@ -34,6 +35,7 @@ export class GameState extends Schema {
 
   addEnemy(enemy:Enemy) {
     this.enemies[enemy.uuid] = enemy;
+    enemy.initGame();
   }
 
   removeEnemy(enemy:Enemy) {
@@ -42,6 +44,7 @@ export class GameState extends Schema {
 
   addShipBullet(ship_bullet:Bullet) {
     this.ship_bullets[ship_bullet.uuid] = ship_bullet;
+    bullet.initGame();
   }
 
   removeShipBullet(ship_bullet:Bullet) {

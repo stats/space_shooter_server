@@ -22,10 +22,6 @@ export class ShipBuilderRoom extends Room {
 
     let username = JWTHelper.extractUsernameFromToken(options.token);
 
-    let account = await AccountHelper.getAccountByUsername(username);
-    account.colyseusId = client.id;
-    AccountHelper.saveAccount(account);
-
     return username;
   }
 
@@ -57,12 +53,12 @@ export class ShipBuilderRoom extends Room {
       this.send(client, { error: 'error_invalid_ship' })
       return;
     }
-    ShipHelper.setInGame(uuid);
+    ShipHelper.addInGame(uuid);
     this.send(client, { action: 'enter_match_making', ship});
   }
 
   private async sendShips(client) {
-    let ships = ShipHelper.getShipForUsername(client.username);
+    let ships = ShipHelper.getShips(client.username);
     this.send(client, { action: 'ships', ships});
   }
 

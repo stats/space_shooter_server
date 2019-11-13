@@ -4,7 +4,7 @@ import { Account } from '../models/account';
 export class AccountHelper {
   static async getAccountById(userId: string): Promise<Account> {
     const account = await DB.$accounts.findOne({userId});
-    if(account) return Account(account);
+    if(account) return new Account(account);
     return null;
   }
 

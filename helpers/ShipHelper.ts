@@ -1,12 +1,13 @@
 import { DB } from '../database';
 import { Account } from '../models/account';
+import { Ship } from '../models/ship';
 import * as uuid from 'uuid/v4';
 
 export class ShipHelper {
 
   static async getShip(username:string, ship_uuid:string) {
     const ship = await DB.$ships.findOne({username, uuid: ship_uuid});
-    if(ship) return Ship(ship);
+    if(ship) return new Ship(ship);
     return null;
   }
 
@@ -39,7 +40,7 @@ export class ShipHelper {
     return await DB.$ships.updateOne({uuid: uuid}, { $set: { inGame: -1 }});
   }
 
-  static async getShipInGame(username:string):Ship {
+  static async getShipInGame(username:string):Promise<Ship> {
     let data = await DB.$ships.findOne({ username, inGame: 1});
     if(!data) return;
     return new Ship(data);

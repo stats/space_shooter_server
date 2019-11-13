@@ -59,10 +59,6 @@ export class MatchMakerRoom extends Room {
 
     let username = JWTHelper.extractUsernameFromToken(options.token);
 
-    let account = await AccountHelper.getAccountByUsername(username);
-    account.colyseusId = client.id;
-    AccountHelper.saveAccount(account);
-
     return username;
   }
 

@@ -5,18 +5,25 @@ import { createServer } from 'http';
 import { Server } from 'colyseus';
 import { monitor } from '@colyseus/monitor';
 
-import { SelectShipRoom } from "./rooms/SelectShipRoom";
+import { ShipBuilderRoom } from "./rooms/ShipBuilderRoom";
 import { MatchMakerRoom } from "./rooms/MatchMakerRoom";
 import { GameRoom } from "./rooms/GameRoom";
+
+import { Account } from "./models/account";
 
 import { AccountHelper } from './helpers/AccountHelper';
 import { JWTHelper } from './helpers/JWTHelper';
 
 import { DB } from './database';
 
-cost port = Number(process.env.PORT || 2567 ) + Number(process.env.NODE_APP_INSTANCE || 0);
+const asyncMiddleware = fn =>
+(req, res, next) => {
+  Promise.resolve(fn(req, res, next))
+    .catch(next);
+};
+
+const port = Number(process.env.PORT || 2567 ) + Number(process.env.NODE_APP_INSTANCE || 0);
 const app = express();
-const game_api = GameAPI();
 
 /** Mark all ships out of game when the server restarts **/
 DB.$ships.update({}, { $set: { inGame: -1} }, { multi:true});
@@ -25,12 +32,12 @@ app.use(cors());
 app.user(express.json());
 
 const gameServer = new Server({
-  server: createServer(app);
+  server: createServer(app),
   express: app
 });
 
-gameServer.define("SelectShipRoom", SelectShipRoom);
-gameServer.define("ShipBuilderRoom", MatchMakerRoom);
+gameServer.define("ShipBuilderRoom", ShipBuilderRoom);
+gameServer.define("MatchMakerRoom", MatchMakerRoom);
 gameServer.define("GameRoom", GameRoom);
 
 app.use('/colyseus', monitor(gameServer));
