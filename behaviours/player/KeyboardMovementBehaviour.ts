@@ -1,19 +1,6 @@
 import { Behaviour } from '../behaviour';
-import { Contancts } from '../../constants';
-
-export class Bounds {
-  x_min:number;
-  x_max:number;
-  y_min:number;
-  y_max:number;
-
-  constructor(x_min:number, x_max:number, y_min:number, y_max:number) {
-    this.x_min = x_min;
-    this.x_max = y_max;
-    this.y_min = y_min;
-    this.y_max = y_max;
-  }
-}
+import { C } from '../../constants';
+import { Bounds } from '.././helpers/Bounds';
 
 export class KeyboardMovementBehaviour extends Behaviour {
 
@@ -28,7 +15,7 @@ export class KeyboardMovementBehaviour extends Behaviour {
 
   constructor(target, bounds:Boundaries) {
     super('WASDMovement', target);
-    this.bounds = Contants.BOUNDS;
+    this.bounds = C.BOUNDS;
 
   }
 

@@ -12,6 +12,12 @@ export class Entity extends Schema {
   @type('number')
   y:number;
 
+  diameter:number;
+  width:number;
+  height:number;
+
+  collision_type:number;
+
   $room:any;
 
   protected $behaviours:any[] = [];
