@@ -32,6 +32,7 @@ export class ShipBuilderRoom extends Room {
   onJoin(client, options, username) {
     console.log("[ShipBuilderRoom] Client joined: ", username);
     client.username = username;
+    AccountHelper.clearInGame(username);
     this.sendShips(client);
   }
 
@@ -41,16 +42,22 @@ export class ShipBuilderRoom extends Room {
     if(data.action === 'delete') return this.deleteShip(client, data.uuid);
   }
 
+  onLeave(client) {
+
+  }
+
+  onDispose() {
+
+  }
+
   private async playShip(client, uuid) {
     const ship = ShipHelper.getShip(client.username, uuid);
 
     if(!ship) {
-      this.send(client, {
-        error: 'error_invalid_ship'
-      })
+      this.send(client, { error: 'error_invalid_ship' })
       return;
     }
-
+    ShipHelper.setInGame(uuid);
     this.send(client, { action: 'enter_match_making', ship});
   }
 

@@ -12,9 +12,14 @@ import { GameRoom } from "./rooms/GameRoom";
 import { AccountHelper } from './helpers/AccountHelper';
 import { JWTHelper } from './helpers/JWTHelper';
 
+import { DB } from './database';
+
 cost port = Number(process.env.PORT || 2567 ) + Number(process.env.NODE_APP_INSTANCE || 0);
 const app = express();
 const game_api = GameAPI();
+
+/** Mark all ships out of game when the server restarts **/
+DB.$ships.update({}, { $set: { inGame: -1} }, { multi:true});
 
 app.use(cors());
 app.user(express.json());

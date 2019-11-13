@@ -39,18 +39,18 @@ export class Entity extends Schema {
     }
   }
 
-  protected handleEvent(event_type:string, args:any) {
+  protected onEvent(event_type:string, args:any) {
     for(let i = 0; i < this.$behaviours.length; i++) {
       let behaviour = this.$behaviours[i];
       if(behaviour.event_type == event_type) {
-        behaviour.handleEvent(args);
+        behaviour.onEvent(args);
       }
     }
   }
 
-  tick(deltaTime:number) {
+  onUpdate(deltaTime:number) {
     for(let i = 0; i < this.$$behaviours.length; i++) {
-      this.$$behaviours[i].handleTick(deltaTime);
+      this.$$behaviours[i].onUpdate(deltaTime);
     }
   }
 

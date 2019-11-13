@@ -25,3 +25,7 @@ A server for a colyseus space shooter game
 - starting wave = max( wave_rank - 10, 1 )
 - wave_rank = wave_rank + round( (current_wave - wave_rank) / 5 )
 - matchmaker: starting wave = average(wave_rank)
+
+- There are 32 spawners in a game.
+- 16 spawners on the total
+- 8 spawners on each side

@@ -7,6 +7,6 @@ export class Behaviour {
     this.target = target;
   }
 
-  public handleEvent(args:any) {}
-  public handleTick(deltaTime:number) {}
+  public onEvent(args:any) {}
+  public onUpdate(deltaTime:number) {}
 }

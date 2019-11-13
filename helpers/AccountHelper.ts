@@ -28,4 +28,8 @@ export class AccountHelper {
     return DB.$accounts.updateOne({ username: account.username }, { $set: account.toSaveObject() });
   }
 
+  static async clearInGame(username: string) {
+    return DB.$ships.update({username}, {$set: {inGame: -1}}, {multi:true});
+  }
+
 }

@@ -23,7 +23,12 @@ export class Ship extends Entity {
   @type("number")
   weapons_type:string;
 
+  @type("number")
+  rank:number; //The current ranking of the ship which corresponds to which wave to start on
+
   createdAt:number;
+
+  inGame:number;
 
   constructor(opts) {
     super(opts);
@@ -32,7 +37,7 @@ export class Ship extends Entity {
 
   toSaveObject():any {
     onst baseObj:any = pick(this, [
-      'username', 'name', 'uuid', 'body_type', 'wing_type', 'engine_type', 'weapon_type'
+      'username', 'name', 'uuid', 'body_type', 'wing_type', 'engine_type', 'weapon_type', 'ranks', 'inGame', 'createdAt'
     ]);
     return baseObj;
   }

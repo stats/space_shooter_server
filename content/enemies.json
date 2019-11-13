@@ -1,0 +1,28 @@
+{
+  "1": {
+    "name": "Scout",
+    "width": 10,
+    "height": 10,
+    "health": 1,
+    "speed": 1,
+    "fires_bullets": false,
+    "bullet_damage": 0,
+    "bullet_speed": 0,
+    "bullet_rate": 0,
+    "collide_damage": 1,
+    "behaviour": "straight_line"
+  },
+  "2": {
+    "name": "Hunter",
+    "health" : 1,
+    "speed": 2,
+    "width": 10,
+    "height": 10,
+    "fires_bullets": false,
+    "bullet_damage": 0,
+    "bullet_speed": 0,
+    "bullet_rate": 0,
+    "collide_damage": 1,
+    "behaviour": "straight_line_closest_target"
+  }
+}
