@@ -71,7 +71,28 @@ describe("Integration", () => {
       shipBuilderRoom = await client.joinOrCreate('ShipBuilderRoom', {token: access_token});
       let promise = await new Promise((resolve) => {
         shipBuilderRoom.onMessage((message) => {
-          resolve(message);
+          console.log(message);
+          if(message.action == 'ships') {
+            assert.ok(message.ships);
+            if(Object.keys(message.ships).length === 0){
+              console.log('Attempting to build a ship');
+              shipBuilderRoom.send({action: 'create', ship: {
+                name: 'Test Ship Name',
+                body_visual: 1,
+                wing_visual: 1,
+                weapon_visual: 1,
+                engine_visual: 1,
+                primary_attack: 1,
+                secondary_attack: 1,
+                weapon_type: 1,
+                shield_type: 1,
+                hull_type: 1,
+                engine_type: 1
+              }});
+            } else {
+              resolve(message);
+            }
+          }
         });
       });
       console.log(promise);

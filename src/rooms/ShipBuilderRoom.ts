@@ -35,7 +35,7 @@ export class ShipBuilderRoom extends Room {
 
   onMessage(client, data) {
     if(data.action === 'play') return this.playShip(client, data.uuid);
-    if(data.action === 'create') return this.createShip(client, data);
+    if(data.action === 'create') return this.createShip(client, data.ship);
     if(data.action === 'delete') return this.deleteShip(client, data.uuid);
   }
 
@@ -63,7 +63,10 @@ export class ShipBuilderRoom extends Room {
     this.send(client, { action: 'ships', ships});
   }
 
-  private async createShip(client, { ship }) {
+  private async createShip(client, ship) {
+    console.log('[ShipBuilderROom] creating a ship', ship);
+    /** TODO: Validate that the client can actually create this type of ship **/
+    ship.rank = 0;
     let success = ShipHelper.createShip(client.username, ship);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully created.'});
