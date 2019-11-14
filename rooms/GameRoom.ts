@@ -82,13 +82,13 @@ export class GameRoom extends Room<GameState> {
     this.checkCollisions();
 
     let i, l;
-    for(let ship of this.ships) {
+    for(let ship of this.state.ships) {
       ship.onUpdate(deltaTime);
     }
-    for(let enemy of this.enemies) {
+    for(let enemy of this.state.enemies) {
       enemy.onUpdate(deltaTime);
     }
-    for(let bullet of this.bullets) {
+    for(let bullet of this.state.bullets) {
       bullet.onUpdate(deltaTime);
     }
   }

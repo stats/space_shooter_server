@@ -1,7 +1,6 @@
 import { Schema, type } from "@colyseus/schema";
 import { merge } from 'lodash';
 import { GameRoom } from '../rooms/GameRoom';
-import { Entity } from './entity';
 
 export class Entity extends Schema {
 
@@ -54,9 +53,11 @@ export class Entity extends Schema {
     }
   }
 
+  destroy() { }
+
   onUpdate(deltaTime:number) {
-    for(let i = 0; i < this.$$behaviours.length; i++) {
-      this.$$behaviours[i].onUpdate(deltaTime);
+    for(let i = 0; i < this.$behaviours.length; i++) {
+      this.$behaviours[i].onUpdate(deltaTime);
     }
   }
 

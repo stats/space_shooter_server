@@ -16,10 +16,7 @@ export class GameState extends Schema {
   enemies = new MapSchema<Enemy>();
 
   @type({map:Bullet})
-  ship_bullets = new MapSchema<Bullet>();
-
-  @type({map:Bullet})
-  enemy_bullets = new MapSchema<Bullet>();
+  bullets = new MapSchema<Bullet>();
 
   @type("number")
   start_game:number = 10; //number of seconds until the game starts
@@ -42,21 +39,14 @@ export class GameState extends Schema {
     delete this.enemies[enemy.uuid];
   }
 
-  addShipBullet(ship_bullet:Bullet) {
-    this.ship_bullets[ship_bullet.uuid] = ship_bullet;
+  addBullet(bullet:Bullet) {
+    this.bullets[bullet.uuid] = bullet;
     bullet.initGame();
   }
 
-  removeShipBullet(ship_bullet:Bullet) {
-    delete this.ship_bullets[ship_bullet.uuid];
+  removeBullet(bullet:Bullet) {
+    delete this.bullets[bullet.uuid];
   }
 
-  addEnemyBullet(enemy_bullet:Bullet) {
-    this.enemy_bullets[enemy_bullet.uuid] = enemy_bullet;
-  }
-
-  removeEnemyBullet(enemy_bullet:Bullet) {
-    delete this.enemy_bullets[enemy_bullet.uuid];
-  }
 
 }

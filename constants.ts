@@ -8,6 +8,8 @@ export class C {
   public static SPAWN_OFFSET:Number = 96; //This may need to be bigger to provide more warning, if warning is provided
   public static CIRCLE:number = 0;
   public static RECTANGLE:number = 1;
+  public static SHIP_BULLET:number = 0;
+  public static ENEMY_BULLET:number = 1;
 }
 
 /* collision layers used by rbush */

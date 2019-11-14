@@ -48,7 +48,7 @@ export class Ship extends Entity {
     super.onInitGame(room);
     this.registerBehaviour(new KeyboardMovementBehaviour(this));
     this.registerBehaviour(new CollidesWithEnemy(this, this.$room.state.enemies));
-    this.registerBehaviour(new CollidesWithEnemyBullet(this, this.$room.state.enemy_bullets));
+    this.registerBehaviour(new CollidesWithEnemyBullet(this, this.$room.state.bullets));
   }
 
   toSaveObject():any {

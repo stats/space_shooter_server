@@ -1,10 +1,11 @@
 import { Behaviour } from '../behaviour';
-import { Bullet } from '../../models/Bullet';
+import { Enemy } from '../../models/Enemy';
 import { CollisionHelper } from '../../helpers/CollisionHelper';
+
 
 export class CollidesWithEnemy extends Behaviour {
 
-  enemies:[Enemies];
+  enemies:[Enemy];
 
   constructor(target, enemies:[Enemy]) {
     super('CollidesWithEnemy', target);
@@ -13,8 +14,8 @@ export class CollidesWithEnemy extends Behaviour {
   }
 
   public onUpdate(deltaTime:number) {
-    for(let enemy in this.enemies) {
-      if(CollisionHelper.collisionBetween(this.target, ship)) {
+    for(let enemy of this.enemies) {
+      if(CollisionHelper.collisionBetween(this.target, enemy)) {
         this.target.takeDamage(enemy.collision_damage);
         enemy.destroy();
       }

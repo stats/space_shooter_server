@@ -1,3 +1,5 @@
+import { Entity } from '../models/entity';
+
 export class CollisionHelper {
 
   static collisionBetween(e1:Entity, e2:Entity) {

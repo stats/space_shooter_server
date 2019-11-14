@@ -13,7 +13,7 @@ export class CollidesWithEnemyBullet extends Behaviour {
   }
 
   public onUpdate(deltaTime:number) {
-    for(let bullet in this.enemyBullets) {
+    for(let bullet of this.enemyBullets) {
       if(CollisionHelper.collisionBetween(this.target, bullet)) {
         this.target.takeDamage(bullet.damage);
         bullet.destroy();

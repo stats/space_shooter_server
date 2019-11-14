@@ -25,8 +25,12 @@ export class Enemy extends Entity {
     this.collision_damage = this.collision_damage + (this.collision_damage_growth * this.wave);
   }
 
+  destroy() {
+    this.$room.state.removeEnemy(this);
+  }
+
   onInitGame(room:GameRoom) {
     super.onInitGame(room);
-    this.registerBehaviour(new CollidesWithShipBullet(this, this.$room.state.ship_bullets));
+    this.registerBehaviour(new CollidesWithShipBullet(this, this.$room.state.bullets));
   }
 }
