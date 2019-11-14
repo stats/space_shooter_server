@@ -3,6 +3,15 @@
 mkdir db
 mddir db\development
 
+* Galaxy of Strife
+* GalaxyStrike
+* SpaceStrike
+* DreadStar
+* Space Strike
+* Galaxy Strike
+* Star Hunter
+
+
 A server for a colyseus space shooter game
 
 - Player does not have to create an account. They can join and the server will recognize their device ID.
