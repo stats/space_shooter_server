@@ -1,4 +1,9 @@
-import { ClockTimer, Delayed } from 'colyseus';
+import { Delayed } from 'colyseus';
+import Clock from '@gamestdio/timer';
+
+import { Enemy } from '../models/enemy';
+import { GameState} from '../models/GameState';
+
 import { sample } from 'lodash';
 
 export class Spawner {
@@ -11,9 +16,9 @@ export class Spawner {
   timeTillStart:number;
 
   totalSpawns:number;
-  enemyTypes:[Enemy];
+  enemyTypes:Enemy[];
 
-  clock:ClockTimer;
+  clock:Clock;
 
   wave:number;
 
@@ -46,9 +51,10 @@ export class Spawner {
 
   spawn() {
     this.totalSpawns--;
-    let enemy = new sample(this.enemyTypes)({wave: this.current_wave});
+    let enemy = new sample(this.enemyTypes)();
     enemy.x = this.x;
     enemy.y = this.y;
+    enemy.updateStats(this.wave);
     this.state.addEnemy(enemy);
     this.checkSpawnInterval();
   }

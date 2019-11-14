@@ -1,4 +1,4 @@
-import { Schema } from 'colyseus';
+import { Schema, type, MapSchema } from '@colyseus/schema';
 
 import { Ship } from './ship';
 import { Enemy } from './enemy';
@@ -23,7 +23,7 @@ export class GameState extends Schema {
 
   addShip(ship:Ship) {
     this.ships[ship.uuid] = ship;
-    ship.initGame();
+    ship.onInitGame(this);
   }
 
   removeShip(ship:Ship) {
@@ -32,7 +32,7 @@ export class GameState extends Schema {
 
   addEnemy(enemy:Enemy) {
     this.enemies[enemy.uuid] = enemy;
-    enemy.initGame();
+    enemy.onInitGame(this);
   }
 
   removeEnemy(enemy:Enemy) {
@@ -41,7 +41,7 @@ export class GameState extends Schema {
 
   addBullet(bullet:Bullet) {
     this.bullets[bullet.uuid] = bullet;
-    bullet.initGame();
+    bullet.onInitGame(this);
   }
 
   removeBullet(bullet:Bullet) {

@@ -7,12 +7,13 @@ export class Bullet extends Entity {
   bullet_type:number;
   damage:number;
 
-  constructor(bullet_type:number) {
-    this.bullet_type = bullet_type;
+  constructor(options) {
+    super(options);
+    //TODO: Double check that bullet_type actually gets set by the super call
   }
 
   destroy() {
-    this.$room.removeBullet(this);
+    this.$state.removeBullet(this);
   }
 
 }

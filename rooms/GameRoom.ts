@@ -5,6 +5,15 @@ import { JWTHelper } from '../helpers/JWTHelper';
 import { CollisionHelper } from '../helpers/CollisionHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
+import { Scout } from '../models/enemies/scout';
+import { Enemy } from '../models/enemy';
+import { Ship } from '../models/ship';
+import { Bullet } from '../models/bullet';
+import { Spawner } from '../spawner/spawner';
+
+
+import { C } from '../constants';
+
 export class GameRoom extends Room<GameState> {
 
   maxClients = 4;
@@ -15,31 +24,28 @@ export class GameRoom extends Room<GameState> {
 
   private current_wave:number;
 
-  private spawners_top:[Spawner];
-  private spawners_left:[Spawner];
-  private spawners_right:[Spawner];
+  private spawners_top:Spawner[];
+  private spawners_left:Spawner[];
+  private spawners_right:Spawner[];
 
   private spawnCompleteInterval:Delayed;
 
-  private collision:CollisionHelper;
-
   onCreate(options) {
-    this.collisionHelper = new CollisionHelper();
     this.current_wave = options.wave_rank;
-    this.setSimulationINterval((deltaTime) => this.onUpdate(deltaTime));
-    this.setState(new State());
+    this.setSimulationInterval((deltaTime) => this.onUpdate(deltaTime));
+    this.setState(new GameState());
 
     let game_start_timeout = this.clock.setInterval(() => {
       this.state.start_game -= 1;
       if(this.state.start_game <= 0) {
-        this.startGame();
+        this.startWave();
         game_start_timeout.clear();
       }
     }, 1000);
 
   }
 
-  onAuth(client, options) {
+  async onAuth(client, options) {
     const isValidToken = await JWTHelper.verifyToken(options.token);
 
     if(!isValidToken) {
@@ -52,8 +58,8 @@ export class GameRoom extends Room<GameState> {
     return username;
   }
 
-  onJoin(client, options, username) {
-    let ship = ShipHelper.getShipInGame(username);
+  async onJoin(client, options, username) {
+    let ship = await ShipHelper.getShipInGame(username);
     if(!ship) {
       this.send(client, { error: 'no_ship_in_game'});
       return;
@@ -78,17 +84,17 @@ export class GameRoom extends Room<GameState> {
   }
 
   onUpdate( deltaTime ) {
-
-    this.checkCollisions();
-
-    let i, l;
-    for(let ship of this.state.ships) {
+    let uuid;
+    for(uuid in this.state.ships) {
+      let ship:Ship = this.state.ships[uuid];
       ship.onUpdate(deltaTime);
     }
-    for(let enemy of this.state.enemies) {
+    for(uuid in this.state.enemies) {
+      let enemy:Enemy = this.state.enemies[uuid];
       enemy.onUpdate(deltaTime);
     }
-    for(let bullet of this.state.bullets) {
+    for(uuid in this.state.bullets) {
+      let bullet:Bullet = this.state.bullets[uuid];
       bullet.onUpdate(deltaTime);
     }
   }
@@ -136,7 +142,7 @@ export class GameRoom extends Room<GameState> {
         clock: this.clock,
         state: this.state,
         wave: this.current_wave,
-        x: C.SPAWN_TOP + C.SPAWN_OFFSET;,
+        x: C.SPAWN_TOP + C.SPAWN_OFFSET,
         y: y,
         timeBetweenSpans: 1000,
         timeTillStart: 0,
@@ -149,8 +155,8 @@ export class GameRoom extends Room<GameState> {
   startWave() {
     this.setupWave();
 
-    this.spawnsCompleteInterval = this.clock.setInterval(() => {
-      if(this.spawnersComplete()) {
+    this.spawnCompleteInterval = this.clock.setInterval(() => {
+      if(this.spawnsComplete()) {
         this.spawnCompleteInterval.clear();
         this.current_wave++;
         this.startWave();
@@ -160,7 +166,7 @@ export class GameRoom extends Room<GameState> {
 
   spawnsComplete():boolean {
     let spawner;
-    for(spawner of this.spawners_top) {
+    for(spawner in this.spawners_top) {
       if(!spawner.complete) return false;
     }
     for(spawner of this.spawners_left) {

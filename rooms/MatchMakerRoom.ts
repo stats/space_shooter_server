@@ -1,4 +1,5 @@
 import { Room, Client, Delayed, matchMaker } from 'colyseus';
+import { JWTHelper } from '../helpers/JWTHelper';
 
 interface MatchmakingGroup {
   averageRank: number;
@@ -44,7 +45,7 @@ export class MatchMakerRoom extends Room {
       this.numClientsToMatch = options.numClientsToMatch;
     }
 
-    this.setSimulationInterval(() => this.redistributeGroups(), this.evalutateGroupsInterval);
+    this.setSimulationInterval(() => this.redistributeGroups(), this.evaluateGroupInterval);
   }
 
   async onAuth(client, options) {
@@ -139,7 +140,7 @@ export class MatchMakerRoom extends Room {
       stat.group = currentGroup;
       currentGroup.clients.push(stat);
 
-      totalRank ++ stat.rank;
+      totalRank += stat.rank;
 
       currentGroup.averageRank = totalRank / currentGroup.clients.length;
     }
@@ -150,7 +151,7 @@ export class MatchMakerRoom extends Room {
     await Promise.all(
       this.groups
         .map(async (group) => {
-          if(group.ready || group.clients.length === this.numClientsToMathc) {
+          if(group.ready || group.clients.length === this.numClientsToMatch) {
             group.ready = true;
             group.confirmed = 0;
 
@@ -163,7 +164,7 @@ export class MatchMakerRoom extends Room {
           } else {
             group.clients.forEach(client => this.send(client.client, group.clients.length));
           }
-        });
+        })
     );
   }
 

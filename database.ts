@@ -13,7 +13,7 @@ class Database {
     if(this.client) return;
 
     try {
-      this.client = await MongoClient.connect(DB_URI, { useNewUrlParser: true });
+      this.client = await MongoClient.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
       this.db = this.client.db('development');
     } catch (err) {
       console.log('[Database] Error', err);

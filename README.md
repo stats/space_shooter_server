@@ -1,4 +1,7 @@
-* Space Shooter Server
+* Space Shooter Server *
+
+mkdir db
+mddir db\development
 
 A server for a colyseus space shooter game
 

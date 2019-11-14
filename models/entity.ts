@@ -1,6 +1,6 @@
 import { Schema, type } from "@colyseus/schema";
 import { merge } from 'lodash';
-import { GameRoom } from '../rooms/GameRoom';
+import { GameState } from './GameState';
 
 export class Entity extends Schema {
 
@@ -19,7 +19,7 @@ export class Entity extends Schema {
 
   collision_type:number;
 
-  public $room:GameRoom;
+  public $state:GameState;
 
   protected $behaviours:any[] = [];
 
@@ -40,8 +40,8 @@ export class Entity extends Schema {
     }
   }
 
-  protected onInitGame(room:GameRoom) {
-    this.$room = room;
+  onInitGame(state:GameState) {
+    this.$state = state;
   };
 
   protected onEvent(event_type:string, args:any) {

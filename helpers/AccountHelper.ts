@@ -29,7 +29,7 @@ export class AccountHelper {
   }
 
   static async clearInGame(username: string) {
-    return DB.$ships.update({username}, {$set: {inGame: -1}}, {multi:true});
+    return DB.$ships.updateMany({username}, {$set: {inGame: -1}});
   }
 
 }

@@ -3,7 +3,7 @@ import { KeyboardMovementBehaviour } from '../behaviours/player/KeyboardMovement
 import { CollidesWithEnemy } from '../behaviours/player/CollidesWithEnemy';
 import { CollidesWithEnemyBullet } from '../behaviours/player/CollidesWithEnemyBullet';
 
-import { GameRoom } from '../rooms/GameRoom';
+import { GameState } from './GameState';
 
 import { Entity } from './entity';
 
@@ -44,11 +44,11 @@ export class Ship extends Entity {
     super(opts);
   }
 
-  onInitGame(room:GameRoom) {
-    super.onInitGame(room);
+  onInitGame(state:GameState) {
+    super.onInitGame(state);
     this.registerBehaviour(new KeyboardMovementBehaviour(this));
-    this.registerBehaviour(new CollidesWithEnemy(this, this.$room.state.enemies));
-    this.registerBehaviour(new CollidesWithEnemyBullet(this, this.$room.state.bullets));
+    this.registerBehaviour(new CollidesWithEnemy(this, this.$state));
+    this.registerBehaviour(new CollidesWithEnemyBullet(this, this.$state));
   }
 
   toSaveObject():any {
