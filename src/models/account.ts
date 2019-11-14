@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema";
-import { pick } from 'lodash';
+import { pick, merge } from 'lodash';
 
 export class Account extends Schema {
 
@@ -9,6 +9,12 @@ export class Account extends Schema {
 
   @type("string")
   username:string;
+
+  constructor(options) {
+    super();
+    merge(this, options);
+    if(!this.createdAt) this.createdAt = Date.now();
+  }
 
   public toSaveObject(): any {
     const baseObj:any = pick(this, [

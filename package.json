@@ -6,8 +6,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npm-run-all --parallel start:mongo start:server",
-    "start:server": "nodemon --exec \"ts-node \" -- \"src/index.ts\"",
-    "start:mongo": "mongod --dbpath ./db/development"
+    "start:server": "nodemon --ignore \"test/\" --exec \"ts-node \" -- \"src/index.ts\"",
+    "start:mongo": "mongod --dbpath ./db/development",
+    "test": "mocha --require ts-node/register test/integration.ts --exit --timeout 15000"
   },
   "author": "Dan Curran",
   "license": "MIT",
@@ -24,7 +25,12 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.7",
+    "assert": "^2.0.0",
+    "colyseus.js": "^0.11.5",
+    "httpie": "^1.1.2",
+    "mocha": "^6.2.2",
     "ts-node": "^8.5.0",
     "typescript": "^3.7.2"
   }

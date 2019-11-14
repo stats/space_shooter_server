@@ -11,6 +11,7 @@ import { DB } from '../database';
 export class ShipBuilderRoom extends Room {
 
   async onAuth(client, options) {
+    console.log("[ShipBuilderRoom] Client auth attempt");
     const isValidToken = await JWTHelper.verifyToken(options.token);
 
     if(!isValidToken) {
