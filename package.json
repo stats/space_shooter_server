@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "description": "Multiplayer server for a colyseus space shooter.",
   "repository": "https://github.com/stats/space_shooter_server",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "npm-run-all --parallel start:mongo start:server",
-    "start:server": "nodemon --exec \"ts-node \" -- \"index.ts\"",
+    "start:server": "nodemon --exec \"ts-node \" -- \"src/index.ts\"",
     "start:mongo": "mongod --dbpath ./db/development"
   },
   "author": "Dan Curran",
