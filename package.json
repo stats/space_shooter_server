@@ -8,7 +8,8 @@
     "start": "npm-run-all --parallel start:mongo start:server",
     "start:server": "nodemon --ignore \"test/\" --exec \"ts-node \" -- \"src/index.ts\"",
     "start:mongo": "mongod --dbpath ./db/development",
-    "test:server": "mocha --require ts-node/register test/ServerTest.ts --exit --timeout 15000"
+    "test:server": "mocha --require ts-node/register test/ServerTest.ts --exit --timeout 15000",
+    "codegen": "npx schema-codegen src/models/Account.ts src/models/GameState.ts src/models/enemies/Scout.ts --output build/codegen --csharp"
   },
   "author": "Dan Curran",
   "license": "MIT",

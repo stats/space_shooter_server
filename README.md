@@ -1,15 +1,11 @@
 * Space Shooter Server *
 
 mkdir db
-mddir db\development
+mkdir db\development
+mkdir build
+mkdir build\codegen
 
-* Galaxy of Strife
-* GalaxyStrike
-* SpaceStrike
-* DreadStar
-* Space Strike
-* Galaxy Strike
-* Star Hunter
+
 
 
 A server for a colyseus space shooter game
