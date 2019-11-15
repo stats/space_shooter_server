@@ -1,7 +1,9 @@
 import { DB } from '../database';
 import { Account } from '../models/account';
 import { Ship } from '../models/ship';
-import * as uuid from 'uuid/v4';
+//import * as uuid from 'uuid/v4';
+
+const uuid = require('uuid/v4');
 
 export class ShipHelper {
 
@@ -25,7 +27,7 @@ export class ShipHelper {
       engine_type: data.engine_type,
       weapon_type: data.weapon_type
     });
-    return DB.$ships.insertOne(ship);
+    return DB.$ships.insertOne(ship.toSaveObject());
   }
 
   static async deleteShip(username:string, uuid:string) {

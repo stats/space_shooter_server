@@ -6,7 +6,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npm-run-all --parallel start:mongo start:server",
-    "start:server": "nodemon --ignore \"test/\" --exec \"ts-node \" -- \"src/index.ts\"",
+    "start:debug": "npm-run-all --parallel start:mongo start:server:debug",
+    "start:server": "nodemon --ignore \"test/\" --exec node -r ts-node/register src/index.ts",
+    "start:server:debug": "nodemon --ignore \"test/\" --exec node --inspect -r ts-node/register src/index.ts",
     "start:mongo": "mongod --dbpath ./db/development",
     "test:server": "mocha --require ts-node/register test/ServerTest.ts --exit --timeout 15000",
     "codegen": "npx schema-codegen src/models/Account.ts src/models/GameState.ts src/models/enemies/Scout.ts --output build/codegen --csharp"
@@ -15,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@colyseus/monitor": "^0.11.7",
+    "body-parser": "^1.19.0",
     "colyseus": "^0.11.22",
     "cors": "^2.8.5",
     "express": "^4.17.1",

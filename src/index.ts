@@ -1,5 +1,6 @@
 import path from 'path';
 import express from 'express';
+import * as bodyParser from 'body-parser';
 import cors from 'cors';
 import { createServer } from 'http';
 import { Server } from 'colyseus';
@@ -40,7 +41,8 @@ DB.init().then(() => {
   gameServer.define("GameRoom", GameRoom);
 
   app.use(cors());
-  app.use(express.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
   app.use('/colyseus', monitor(gameServer));
 
   app.post('/login', asyncMiddleware( async function(req, res, next) {
@@ -76,6 +78,7 @@ DB.init().then(() => {
           message: "Unable to create account.",
           error: err
         });
+        console.log(err);
         return;
       }
 

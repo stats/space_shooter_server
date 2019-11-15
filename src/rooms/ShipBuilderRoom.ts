@@ -4,7 +4,7 @@ import { JWTHelper } from '../helpers/jwthelper';
 import { AccountHelper } from '../helpers/AccountHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
-import { Ship } from '../models/ship';
+import { Ship } from '../models/ship'
 
 import { DB } from '../database';
 
@@ -71,10 +71,10 @@ export class ShipBuilderRoom extends Room {
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully created.'});
     } else {
-
         this.send(client, { action: 'message', message: 'Unable to create the ship.'});
+        return;
     }
-    this.sendShips(client);
+    this.playShip(client, ship.uuid);
   }
 
   private async deleteShip(client, uuid) {
