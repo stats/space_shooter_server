@@ -74,7 +74,7 @@ export class ShipBuilderRoom extends Room {
         this.send(client, { action: 'message', message: 'Unable to create the ship.'});
         return;
     }
-    this.playShip(client, ship.uuid);
+    this.sendShips(client);
   }
 
   private async deleteShip(client, uuid) {
