@@ -19,38 +19,50 @@ export class Ship extends Entity {
 
   username:string;
 
-  @type("number")
-  body_type:number;
+  @type("int32")
+  body_mesh:number;
 
-  @type("number")
-  wing_visual:number;
+  @type("int32")
+  body_mat:number;
 
-  @type("number")
-  engine_visual:number;
+  @type("int32")
+  wing_mesh:number;
 
-  @type("number")
-  weapons_visual:number;
+  @type("int32")
+  wing_mat:number;
 
-  @type("number")
-  texture_visual:number;
+  @type("int32")
+  engine_mesh:number;
 
-  @type("number")
+  @type("int32")
+  engine_mat:number;
+
+  @type("int32")
+  weapon_mesh:number;
+
+  @type("int32")
+  weapon_mat:number;
+
+  @type("int32")
   primary_attack:number;
 
-  @type("number")
+  @type("int32")
   special_attack:number;
 
-  @type("number")
-  shield_type:number;
+  @type("int32")
+  shields:number;
+
+  @type("int32")
+  max_shields:number;
 
   @type("number")
-  hull_type:number;
+  speed:number;
 
   @type("number")
-  engine_type:number;
+  accelleration:number;
 
   @type("number")
-  weapon_type:number;
+  weapon_power:number
 
   @type("number")
   rank:number; //The current ranking of the ship which corresponds to which wave to start on
