@@ -1,0 +1,1 @@
+/* Fires a spread of bullets from the ship */

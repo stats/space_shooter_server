@@ -1,9 +1,29 @@
 * Space Shooter Server *
 
+* Setup *
+
 mkdir db
 mkdir db\development
 mkdir build
 mkdir build\codegen
+
+* Todo List *
+
+- Create and use Event Manager instead of passing around objects
+  https://learn.unity.com/tutorial/create-a-simple-messaging-system-with-events#5cf5960fedbc2a281acd21fa
+- Update the ship code so that it sets ShipData better
+- Figure out unity to server bounding boxes and ship movement
+- Create Loading Screens
+  - Ship Builder Login
+  - Match Maker Loading
+  - Starting the Game Countdown
+- Style buttons for space theme and make them prefabs
+- Add primary and secondary attacks to ship ShipBuilder
+- Allow deleting of Ships from ShipBuilder
+- The game needs to spawn enemies and bullets
+- Track number of ships create and deleted
+- Track number of enemies killed by type
+- Gain Experience and level up abilities for the ship
 
 
 

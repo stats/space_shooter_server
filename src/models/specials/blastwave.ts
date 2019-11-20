@@ -1,0 +1,1 @@
+/* fires a large damaging shot in a straight line in front of the ship */
