@@ -20,7 +20,7 @@ interface ClientStat {
 }
 
 export class MatchMakerRoom extends Room {
-  allowUnmatchedGroups: boolean = false;
+  allowUnmatchedGroups: boolean = true;
 
   evaluateGroupInterval = 2000;
 
@@ -28,9 +28,9 @@ export class MatchMakerRoom extends Room {
 
   roomToCreate = 'GameRoom';
 
-  maxWaitingTime:number = 15 * 1000;
+  maxWaitingTime:number = 8 * 1000;
 
-  maxWaitingTimeForPriority?:number = 10 * 1000;
+  maxWaitingTimeForPriority?:number = 5 * 1000;
 
   numClientsToMatch = 4;
 
@@ -80,10 +80,10 @@ export class MatchMakerRoom extends Room {
       if(stat && stat.group && typeof(stat.group.confirmed) === "number") {
         stat.confirmed = true;
         stat.group.confirmed++;
-      }
 
-      if(stat.group.confirmed === stat.group.clients.length) {
-        stat.group.clients.forEach(client => client.client.close());
+        if(stat.group.confirmed === stat.group.clients.length) {
+          stat.group.clients.forEach(client => client.client.close());
+        }
       }
     }
   }
@@ -105,10 +105,13 @@ export class MatchMakerRoom extends Room {
     for(let i = 0, l = stats.length; i < l; i++) {
       const stat = stats[i];
       stat.waitingTime += this.clock.deltaTime;
+      console.log("Time waiting: ", stat.waitingTime);
 
       if (stat.group && stat.group.ready) {
         continue;
       }
+
+      console.log("Group:", stat.group);
 
       if(currentGroup.clients.length === this.numClientsToMatch) {
         currentGroup = this.createGroup();
@@ -159,6 +162,7 @@ export class MatchMakerRoom extends Room {
 
             await Promise.all(group.clients.map(async (client) => {
               const matchData = await matchMaker.reserveSeatFor(room, client.options);
+              console.log("Sending match data", matchData);
               this.send(client.client, matchData);
             }));
           } else {

@@ -8,10 +8,10 @@ export class Entity extends Schema {
   uuid:string;
 
   @type('number')
-  x:number;
+  x:number = 0;
 
   @type('number')
-  y:number;
+  y:number = 0;
 
   diameter:number;
   width:number;

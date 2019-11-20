@@ -51,7 +51,7 @@ export class Spawner {
 
   spawn() {
     this.totalSpawns--;
-    let enemy = new sample(this.enemyTypes)();
+    let enemy = new (sample(this.enemyTypes))();
     enemy.x = this.x;
     enemy.y = this.y;
     enemy.updateStats(this.wave);

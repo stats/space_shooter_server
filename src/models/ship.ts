@@ -7,7 +7,7 @@ import { GameState } from './GameState';
 
 import { Entity } from './entity';
 
-import { pick } from 'lodash';
+import { pick, merge } from 'lodash';
 
 export class Ship extends Entity {
 
@@ -56,10 +56,10 @@ export class Ship extends Entity {
   max_shields:number;
 
   @type("number")
-  speed:number;
+  speed:number = 1;
 
   @type("number")
-  accelleration:number;
+  accelleration:number = 0.1;
 
   @type("number")
   weapon_power:number
@@ -75,6 +75,7 @@ export class Ship extends Entity {
 
   constructor(opts) {
     super(opts);
+    merge(this, opts);
   }
 
   onInitGame(state:GameState) {
@@ -86,9 +87,30 @@ export class Ship extends Entity {
 
   toSaveObject():any {
     const baseObj:any = pick(this, [
-      'username', 'name', 'uuid', 'body_type', 'wing_type', 'engine_type', 'weapon_type', 'ranks', 'diameter', 'width', 'height', 'inGame', 'createdAt'
+      'username',
+      'name',
+      'uuid',
+      'body_mesh',
+      'body_mat',
+      'wing_mesh',
+      'wing_mat',
+      'engine_mesh',
+      'engine_mat',
+      'weapon_mesh',
+      'weapon_mat',
+      'primary_attack',
+      'special_attack',
+      'max_shields',
+      'speed',
+      'accelleration',
+      'weapon_power',
+      'ranks',
+      'diameter',
+      'width',
+      'height',
+      'inGame',
+      'createdAt'
     ]);
     return baseObj;
   }
-
 }

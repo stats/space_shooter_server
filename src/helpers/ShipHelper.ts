@@ -18,15 +18,9 @@ export class ShipHelper {
   }
 
   static async createShip(username:string, data:any) {
-    let ship = new Ship({
-      username,
-      uuid: uuid(),
-      name: data.name,
-      body_type: data.body_type,
-      wind_type: data.wing_type,
-      engine_type: data.engine_type,
-      weapon_type: data.weapon_type
-    });
+    data["username"] = username;
+    data["uuid"] = uuid();
+    let ship = new Ship(data);
     return DB.$ships.insertOne(ship.toSaveObject());
   }
 

@@ -8,8 +8,8 @@ export class KeyboardMovementBehaviour extends Behaviour {
 
   acceleration:number;
 
-  acceleration_x:number;
-  acceleration_y:number;
+  acceleration_x:number = 0;
+  acceleration_y:number = 0;
 
   bounds:Bounds;
 
@@ -36,27 +36,27 @@ export class KeyboardMovementBehaviour extends Behaviour {
   }
 
   private incrementX() {
-    this.acceleration_x += this.acceleration;
+    this.acceleration_x += this.target.acceleration;
     this.clampAcceleration();
   }
 
   private deincrementX() {
-    this.acceleration_x -= this.acceleration;
+    this.acceleration_x -= this.target.acceleration;
     this.clampAcceleration();
   }
 
   private incrementY() {
-    this.acceleration_y += this.acceleration;
+    this.acceleration_y += this.target.acceleration;
     this.clampAcceleration();
   }
 
   private deincrementY() {
-    this.acceleration_y -= this.acceleration;
+    this.acceleration_y -= this.target.acceleration;
     this.clampAcceleration();
   }
 
   private clampAcceleration() {
-    this.acceleration = Math.min(Math.max(this.acceleration, -this.max_speed), this.max_speed);
+    this.acceleration = Math.min(Math.max(this.target.acceleration, -this.target.speed), this.target.speed);
   }
 
 }
