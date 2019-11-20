@@ -17,7 +17,7 @@ mkdir build\codegen
   - Ship Builder Login
   - Match Maker Loading
   - Starting the Game Countdown
-- Style buttons for space theme and make them prefabs
+- Style buttons for space theme and make them prefabs, update the UI with a nice space theme.
 - Add primary and secondary attacks to ship ShipBuilder
 - Allow deleting of Ships from ShipBuilder
 - The game needs to spawn enemies and bullets

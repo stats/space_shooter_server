@@ -17,6 +17,9 @@ export class Entity extends Schema {
   width:number;
   height:number;
 
+  bullet_offset_x:number = 0;
+  bullet_offset_y:number = ;
+
   collision_type:number;
 
   public $state:GameState;
@@ -37,6 +40,13 @@ export class Entity extends Schema {
       if(this.$behaviours[i] == behaviour) {
         this.$behaviours.splice(i, 1);
       }
+    }
+  }
+
+  public getBulletSpawnLocation() {
+    return {
+      x: this.x + this.bullet_offset_x,
+      y: this.y + this.bullet_offset_y
     }
   }
 
