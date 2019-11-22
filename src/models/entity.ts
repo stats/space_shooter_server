@@ -18,7 +18,7 @@ export class Entity extends Schema {
   height:number;
 
   bullet_offset_x:number = 0;
-  bullet_offset_y:number = ;
+  bullet_offset_y:number = 0;
 
   collision_type:number;
 
@@ -43,9 +43,6 @@ export class Entity extends Schema {
     }
   }
 
-  public primaryAttack() { }
-  public specialAttack() { }
-
   public getBulletSpawnLocation() {
     return {
       x: this.x + this.bullet_offset_x,
@@ -58,15 +55,18 @@ export class Entity extends Schema {
   };
 
   protected handleEvent(event_type:string, args:any) {
+    let handled_event = false;
     for(let i = 0; i < this.$behaviours.length; i++) {
       let behaviour = this.$behaviours[i];
       if(behaviour.event_type == event_type) {
         behaviour.handleEvent(args);
+        handled_event = true;
       }
     }
+    if(!handled_event) {
+      console.log('Warning:', behaviour.event_type, 'not handled in', this);
+    }
   }
-
-  destroy() { }
 
   onUpdate(deltaTime:number) {
     for(let i = 0; i < this.$behaviours.length; i++) {

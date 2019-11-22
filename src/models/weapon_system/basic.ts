@@ -55,7 +55,7 @@ export class Basic {
       x: spawn_location.x,
       y: spawn_location.y
     }
-    this.state.addBullet(new Bullet(options));
+    this.state.addBullet(new Bullet(options);
   }
 
   update(deltaTime):void {

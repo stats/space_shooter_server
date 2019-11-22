@@ -18,8 +18,8 @@ export class CollidesWithEnemyBullet extends Behaviour {
     for(let uuid in this.state.bullets) {
       let bullet:Bullet = this.state.bullets[uuid];
       if(bullet.bullet_type == C.ENEMY_BULLET && CollisionHelper.collisionBetween(this.target, bullet)) {
-        this.target.takeDamage(bullet.damage);
-        bullet.destroy();
+        this.target.handleEvent('take_damage', bullet.damage);
+        this.target.handleEvent('destroyed');
       }
     }
   }

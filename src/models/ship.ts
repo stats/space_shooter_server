@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema";
-import { KeyboardMovementBehaviour } from '../behaviours/player/KeyboardMovementBehaviour';
+import { KeyboardMovementBehaviour } from '../behaviours/player/InputBehaviour';
 import { CollidesWithEnemy } from '../behaviours/player/CollidesWithEnemy';
 import { CollidesWithEnemyBullet } from '../behaviours/player/CollidesWithEnemyBullet';
 
@@ -80,7 +80,7 @@ export class Ship extends Entity {
 
   onInitGame(state:GameState) {
     super.onInitGame(state);
-    this.registerBehaviour(new KeyboardMovementBehaviour(this));
+    this.registerBehaviour(new InputBehaviour(this));
     this.registerBehaviour(new CollidesWithEnemy(this, this.$state));
     this.registerBehaviour(new CollidesWithEnemyBullet(this, this.$state));
   }

@@ -28,9 +28,4 @@ export class Bullet extends Entity {
     super(options);
     merge(this, options);
   }
-
-  destroy() {
-    this.$state.removeBullet(this);
-  }
-
 }

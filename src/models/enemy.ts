@@ -32,10 +32,6 @@ export class Enemy extends Entity {
     this.collision_damage = this.collision_damage_base + (this.collision_damage_growth * wave);
   }
 
-  destroy() {
-    this.$state.removeEnemy(this);
-  }
-
   onInitGame(state:GameState) {
     super.onInitGame(state);
     this.registerBehaviour(new CollidesWithShipBullet(this, this.$state));

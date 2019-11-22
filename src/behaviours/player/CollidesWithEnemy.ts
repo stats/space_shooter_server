@@ -18,8 +18,8 @@ export class CollidesWithEnemy extends Behaviour {
     for(let uuid in this.state.enemies) {
       let enemy = this.state.enemies[uuid];
       if(CollisionHelper.collisionBetween(this.target, enemy)) {
-        this.target.takeDamage(enemy.collision_damage);
-        enemy.destroy();
+        this.target.handleEvent('take_damage', enemy.collision_damage);
+        enemy.handleEvent('destroyed');
       }
     }
   }

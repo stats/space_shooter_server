@@ -12,7 +12,7 @@ export class StraightLineUpPath extends Behaviour {
   onUpdate(deltaTime) {
     this.target.y += this.target.speed * deltaTime;
 
-    if(this.target.y - this.start_y >= this.target.range) this.target.Destroy();
+    if(this.target.y - this.start_y >= this.target.range) this.target.handleEvent('destroyed');
     /** TODO: Determine if we want to remove bullets when offscreen **/
   }
 }
