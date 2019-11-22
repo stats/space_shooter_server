@@ -6,17 +6,14 @@ import { CollisionHelper } from '../../helpers/CollisionHelper';
 
 export class CollidesWithEnemy extends Behaviour {
 
-  state:GameState;
-
-  constructor(target, state) {
+  constructor(target) {
     super('CollidesWithEnemy', target);
-    this.state = state;
 
   }
 
   public onUpdate(deltaTime:number) {
-    for(let uuid in this.state.enemies) {
-      let enemy = this.state.enemies[uuid];
+    for(let uuid in this.target.$state.enemies) {
+      let enemy = this.target.$state.enemies[uuid];
       if(CollisionHelper.collisionBetween(this.target, enemy)) {
         this.target.handleEvent('take_damage', enemy.collision_damage);
         enemy.handleEvent('destroyed');

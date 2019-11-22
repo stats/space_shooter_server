@@ -29,5 +29,10 @@ export class Bullet extends Entity {
   constructor(options) {
     super(options);
     merge(this, options);
+    if(options.behaviours) {
+      for(let behaviour of options.behaviours) {
+        this.registerBehaviour(new behaviour(this))
+      }
+    }
   }
 }

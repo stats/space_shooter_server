@@ -86,8 +86,8 @@ export class Ship extends Entity {
     super.onInitGame(state);
     this.registerBehaviours([
       new InputBehaviour(this),
-      new CollidesWithEnemy(this, this.$state),
-      new CollidesWithEnemyBullet(this, this.$state),
+      new CollidesWithEnemy(this),
+      new CollidesWithEnemyBullet(this),
       new DestroyedBehaviour(this),
       new TakesDamageBehaviour(this),
       new PrimaryAttackBehaviour(this),

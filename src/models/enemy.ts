@@ -34,6 +34,6 @@ export class Enemy extends Entity {
 
   onInitGame(state:GameState) {
     super.onInitGame(state);
-    this.registerBehaviour(new CollidesWithShipBullet(this, this.$state));
+    this.registerBehaviours([new CollidesWithShipBullet(this)]);
   }
 }

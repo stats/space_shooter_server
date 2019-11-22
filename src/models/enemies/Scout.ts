@@ -13,7 +13,7 @@ export class Scout extends Enemy {
 
   onInitGame(state:GameState) {
     super.onInitGame(state);
-    this.registerBehaviour(new StraightLinePath(this));
+    this.registerBehaviours([new StraightLinePath(this)]);
   }
 
 }
