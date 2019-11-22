@@ -1,7 +1,11 @@
 import { Schema, type } from "@colyseus/schema";
-import { KeyboardMovementBehaviour } from '../behaviours/player/InputBehaviour';
+import { InputBehaviour } from '../behaviours/player/InputBehaviour';
 import { CollidesWithEnemy } from '../behaviours/player/CollidesWithEnemy';
 import { CollidesWithEnemyBullet } from '../behaviours/player/CollidesWithEnemyBullet';
+import { DestroyedBehaviour } from '../behaviours/player/DestroyedBehaviour';
+import { TakesDamageBehaviour } from '../behaviours/player/TakesDamageBehaviour';
+import { PrimaryAttackBehaviour } from '../behaviours/player/PrimaryAttackBehaviour';
+import { SpecialAttackBehaviour } from '../behaviours/player/SpecialAttackBehaviour';
 
 import { GameState } from './GameState';
 
@@ -80,9 +84,15 @@ export class Ship extends Entity {
 
   onInitGame(state:GameState) {
     super.onInitGame(state);
-    this.registerBehaviour(new InputBehaviour(this));
-    this.registerBehaviour(new CollidesWithEnemy(this, this.$state));
-    this.registerBehaviour(new CollidesWithEnemyBullet(this, this.$state));
+    this.registerBehaviours([
+      new InputBehaviour(this),
+      new CollidesWithEnemy(this, this.$state),
+      new CollidesWithEnemyBullet(this, this.$state),
+      new DestroyedBehaviour(this),
+      new TakesDamageBehaviour(this),
+      new PrimaryAttackBehaviour(this),
+      new SpecialAttackBehaviour(this)
+    ]);
   }
 
   toSaveObject():any {

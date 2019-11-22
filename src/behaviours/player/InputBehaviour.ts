@@ -10,7 +10,7 @@ export class InputBehaviour extends Behaviour {
   vertical:number = 0;
 
   constructor(target) {
-    super('Input', target);
+    super('input', target);
     this.bounds = C.BOUNDS;
   }
 

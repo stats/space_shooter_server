@@ -18,7 +18,7 @@
   "dependencies": {
     "@colyseus/monitor": "^0.11.7",
     "body-parser": "^1.19.0",
-    "colyseus": "^0.11.22",
+    "colyseus": "^0.11.23",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
@@ -30,11 +30,11 @@
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.12.7",
+    "@types/node": "^12.12.11",
     "assert": "^2.0.0",
     "httpie": "^1.1.2",
     "mocha": "^6.2.2",
-    "ts-node": "^8.5.0",
+    "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
   }
 }

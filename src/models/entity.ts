@@ -31,6 +31,12 @@ export class Entity extends Schema {
     merge(this, opts);
   }
 
+  protected registerBehaviours(list:any[]) {
+    for(var item of list) {
+      this.registerBehaviour(item);
+    }
+  }
+
   protected registerBehaviour(behaviour:any) {
     this.$behaviours.push(behaviour);
   }
@@ -54,7 +60,7 @@ export class Entity extends Schema {
     this.$state = state;
   };
 
-  protected handleEvent(event_type:string, args:any) {
+  public handleEvent(event_type:string, args?:any) {
     let handled_event = false;
     for(let i = 0; i < this.$behaviours.length; i++) {
       let behaviour = this.$behaviours[i];
@@ -64,7 +70,7 @@ export class Entity extends Schema {
       }
     }
     if(!handled_event) {
-      console.log('Warning:', behaviour.event_type, 'not handled in', this);
+      console.log('Warning:', event_type, 'not handled in', this);
     }
   }
 
