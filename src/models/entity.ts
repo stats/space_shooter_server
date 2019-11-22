@@ -43,6 +43,9 @@ export class Entity extends Schema {
     }
   }
 
+  public primaryAttack() { }
+  public specialAttack() { }
+
   public getBulletSpawnLocation() {
     return {
       x: this.x + this.bullet_offset_x,
