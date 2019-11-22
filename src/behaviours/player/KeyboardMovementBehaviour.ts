@@ -19,7 +19,7 @@ export class KeyboardMovementBehaviour extends Behaviour {
 
   }
 
-  public onEvent(args: {up:boolean, down:boolean, left:boolean, right:boolean}) {
+  public handleEvent(args: {up:boolean, down:boolean, left:boolean, right:boolean}) {
     if(args.up) this.target.incrementY();
     if(args.down) this.target.deincrementY();
     if(args.left) this.target.deincrementX();

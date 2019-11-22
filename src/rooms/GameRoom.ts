@@ -69,7 +69,7 @@ export class GameRoom extends Room<GameState> {
   }
 
   onMessage(client, data) {
-
+    if(data.action === "input") this.handleClientInput(client, data.input);
   }
 
   onLeave(client) {
@@ -97,6 +97,11 @@ export class GameRoom extends Room<GameState> {
       let bullet:Bullet = this.state.bullets[uuid];
       bullet.onUpdate(deltaTime);
     }
+  }
+
+  handleClientInput(client, input) {
+    let ship:Ship = this.clientShipHash[client.id];
+    ship.handleEvent('input', input);
   }
 
   /** This is the complex function that sets difficulty based on the current wave **/
