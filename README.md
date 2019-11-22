@@ -7,11 +7,7 @@ mkdir db\development
 mkdir build
 mkdir build\codegen
 
-* Todo List *
-
-- Create and use Event Manager instead of passing around objects
-  https://learn.unity.com/tutorial/create-a-simple-messaging-system-with-events#5cf5960fedbc2a281acd21fa
-- Update the ship code so that it sets ShipData better
+- allow initial login by device ID without password
 - Figure out unity to server bounding boxes and ship movement
 - Create Loading Screens
   - Ship Builder Login

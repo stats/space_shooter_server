@@ -57,11 +57,11 @@ export class Entity extends Schema {
     this.$state = state;
   };
 
-  protected onEvent(event_type:string, args:any) {
+  protected handleEvent(event_type:string, args:any) {
     for(let i = 0; i < this.$behaviours.length; i++) {
       let behaviour = this.$behaviours[i];
       if(behaviour.event_type == event_type) {
-        behaviour.onEvent(args);
+        behaviour.handleEvent(args);
       }
     }
   }
