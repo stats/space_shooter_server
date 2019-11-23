@@ -21,7 +21,10 @@ class Database {
     }
 
     this.$accounts = this.db.collection('accounts');
+    this.$accounts.createIndex({ username: 1 }, { unique: true });
+
     this.$ships = this.db.collection('ships');
+    this.$ships.createIndex({ username: 1 });
   }
 }
 

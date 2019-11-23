@@ -12,15 +12,23 @@ describe("Server", () => {
 
   var access_token = "";
 
-  const client = new Colyseus.Client(`${ws}`);
-
   describe("signup, login and renew", () => {
     after(async () => {
-      await DB.init().then(() => {
-        DB.$accounts.deleteOne({username: dummy_username});
-        DB.$ships.deleteMany({username: dummy_username});
-      })
+      await DB.init();
+      await DB.$accounts.deleteMany({username: dummy_username});
+      await DB.$ships.deleteMany({username: dummy_username});
     })
+
+    it("should respond to POST /quick_login to register a user", async() => {
+      const response = await httpClient.post(`${url}/quick_login`, {
+        body: {
+          system_id: 1
+        }
+      });
+
+      assert.ok(response.data.success);
+      assert.ok(response.data.token);
+    });
 
     it("should respond to POST /signup to register a user", async() => {
       const response = await httpClient.post(`${url}/signup`, {

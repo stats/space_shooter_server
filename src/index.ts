@@ -45,6 +45,29 @@ DB.init().then(() => {
   app.use(bodyParser.json());
   app.use('/colyseus', monitor(gameServer));
 
+  app.post('/quick_login', asyncMiddleware( async function(req, res, next) {
+    let { system_id } = req.body;
+    let account = null;
+    try {
+      account = await AccountHelper.getAccountBySystemID(system_id);
+    } catch (err) {
+      res.status(401).json({
+        message: "Unable to sign in.",
+        error: err
+      });
+      return;
+    }
+
+    if(account) {
+      res.status(200).json(JWTHelper.getSuccessJSON(account.username));
+    } else {
+      res.status(401).json({
+        message: "Could not create your account."
+      });
+    }
+
+  }));
+
   app.post('/login', asyncMiddleware( async function(req, res, next) {
     let { email, password } = req.body;
     let account = null;
