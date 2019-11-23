@@ -25,7 +25,8 @@ export class AccountHelper {
     if(account){
       return new Account(account);
     } else {
-      return new Account(DB.$accounts.insertOne({system_id}));
+      let tmp_act = new Account({system_id});
+      return new Account(DB.$accounts.insertOne(tmp_act.toSaveObject()));
     }
   }
 

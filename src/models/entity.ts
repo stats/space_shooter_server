@@ -65,7 +65,7 @@ export class Entity extends Schema {
     for(let i = 0; i < this.$behaviours.length; i++) {
       let behaviour = this.$behaviours[i];
       if(behaviour.event_type == event_type) {
-        behaviour.handleEvent(args);
+        behaviour.onEvent(args);
         handled_event = true;
       }
     }

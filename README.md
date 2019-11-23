@@ -20,6 +20,8 @@ mkdir build\codegen
 - Track number of ships create and deleted
 - Track number of enemies killed by type
 - Gain Experience and level up abilities for the ship
+- Auto renew JWT token
+- Message for server being down or not accessible
 
 
 

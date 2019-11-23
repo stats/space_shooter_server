@@ -9,7 +9,7 @@ export class DestroyedBehaviour extends Behaviour {
     super('destroyed', target);
   }
 
-  handleEvent() {
+  onEvent() {
     this.target.$state.removeEnemy(this);
   }
 }

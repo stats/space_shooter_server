@@ -28,9 +28,9 @@ export class MatchMakerRoom extends Room {
 
   roomToCreate = 'GameRoom';
 
-  maxWaitingTime:number = 8 * 1000;
+  maxWaitingTime:number = 2 * 1000;
 
-  maxWaitingTimeForPriority?:number = 5 * 1000;
+  maxWaitingTimeForPriority?:number = 1 * 1000;
 
   numClientsToMatch = 4;
 

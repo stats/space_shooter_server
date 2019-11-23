@@ -15,6 +15,7 @@ export class InputBehaviour extends Behaviour {
   }
 
   public onEvent(args: {horizontal?:number, vertical?:number, primary_attack?:number, special_attack?:number}) {
+    console.log("target", this.target.accelleration, this.target.speed);
     if(args.horizontal) {
       this.horizontal += Math.min(Math.max(this.target.accelleration * args.horizontal, this.target.speed), -this.target.speed);
     }
@@ -27,6 +28,7 @@ export class InputBehaviour extends Behaviour {
     if(args.special_attack) {
       this.target.handleEvent('special_attack');
     }
+    console.log("Handling Input", args, this.vertical, this.horizontal);
   }
 
   public onUpdate(deltaTime:number) {

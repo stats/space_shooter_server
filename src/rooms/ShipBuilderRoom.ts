@@ -48,7 +48,7 @@ export class ShipBuilderRoom extends Room {
   }
 
   private async playShip(client, uuid) {
-    const ship = ShipHelper.getShip(client.username, uuid);
+    const ship = await ShipHelper.getShip(client.username, uuid);
 
     if(!ship) {
       this.send(client, { error: 'error_invalid_ship' })
@@ -66,7 +66,7 @@ export class ShipBuilderRoom extends Room {
   private async createShip(client, ship) {
     console.log('[ShipBuilderROom] creating a ship', ship);
     /** TODO: Validate that the client can actually create this type of ship **/
-    let success = ShipHelper.createShip(client.username, ship);
+    let success = await ShipHelper.createShip(client.username, ship);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully created.'});
     } else {
@@ -77,7 +77,7 @@ export class ShipBuilderRoom extends Room {
   }
 
   private async deleteShip(client, uuid) {
-    let success = ShipHelper.deleteShip(client.username, uuid);
+    let success = await ShipHelper.deleteShip(client.username, uuid);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully destroyed.'});
     } else {
