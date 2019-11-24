@@ -2,7 +2,7 @@ import { Bounds } from './helpers/Bounds';
 
 /* Game constants*/
 export class C {
-  public static BOUNDS:Bounds = new Bounds(0, 1024, 0, 768);
+  public static BOUNDS:Bounds = new Bounds(0, 1600, 0, 900);
   public static SPAWN_TOP:number = 1024;
   public static SPAWN_SIDE:number = 512;
   public static SPAWN_OFFSET:number = 96; //This may need to be bigger to provide more warning, if warning is provided

@@ -15,12 +15,13 @@ export class InputBehaviour extends Behaviour {
   }
 
   public onEvent(args: {horizontal?:number, vertical?:number, primary_attack?:number, special_attack?:number}) {
-    console.log("target", this.target.accelleration, this.target.speed);
     if(args.horizontal) {
-      this.horizontal += Math.min(Math.max(this.target.accelleration * args.horizontal, this.target.speed), -this.target.speed);
+      this.horizontal += this.target.accelleration * args.horizontal;
+      this.clampHorizontal();
     }
     if(args.vertical) {
-      this.vertical += Math.min(Math.max(this.target.accelleration * args.vertical, this.target.speed), -this.target.speed);
+      this.vertical += this.target.accelleration * args.vertical
+      this.clampVertical();
     }
     if(args.primary_attack) {
       this.target.handleEvent('primary_attack');
@@ -28,15 +29,25 @@ export class InputBehaviour extends Behaviour {
     if(args.special_attack) {
       this.target.handleEvent('special_attack');
     }
-    console.log("Handling Input", args, this.vertical, this.horizontal);
+  }
+
+  private clampHorizontal() {
+    this.horizontal = Math.min(Math.max(this.horizontal, -this.target.speed), this.target.speed);
+  }
+
+  private clampVertical() {
+    this.vertical = Math.min(Math.max(this.vertical, -this.target.speed), this.target.speed);
   }
 
   public onUpdate(deltaTime:number) {
-    this.target.x += this.horizontal * deltaTime;
-    this.target.y += this.vertical * deltaTime;
-    if(this.target.x < this.bounds.minX) this.target.x = this.bounds.minX;
-    if(this.target.x > this.bounds.maxX) this.target.x = this.bounds.maxX;
-    if(this.target.y < this.bounds.minY) this.target.y = this.bounds.minY;
-    if(this.target.y > this.bounds.maxY) this.target.y = this.bounds.maxY;
+    if(this.horizontal != 0 || this.vertical != 0){
+      this.target.x += this.horizontal * (deltaTime/1000);
+      this.target.y += this.vertical * (deltaTime/1000);
+      if(this.target.x < this.bounds.minX) this.target.x = this.bounds.minX;
+      if(this.target.x > this.bounds.maxX) this.target.x = this.bounds.maxX;
+      if(this.target.y < this.bounds.minY) this.target.y = this.bounds.minY;
+      if(this.target.y > this.bounds.maxY) this.target.y = this.bounds.maxY;
+      console.log('movement', this.target.x, this.target.y);
+    }
   }
 }
