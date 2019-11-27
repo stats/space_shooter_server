@@ -32,7 +32,7 @@ export class Spawner {
     this.wave = options.wave;
     this.x = options.x;
     this.y = options.y;
-    this.timeBetweenSpawns = options.timeBetweenSpawns || 500;
+    this.timeBetweenSpawns = options.timeBetweenSpawns || 1500;
     this.timeTillStart = options.timeTillStart || 1000;
     this.totalSpawns = options.totalSpawns || 0;
     this.enemyTypes = options.enemyTypes || [];
@@ -43,18 +43,20 @@ export class Spawner {
   }
 
   start() {
+    console.log("Spawner Started:", this.totalSpawns, "total spawns (", this.x, ",", this.y, ")");
     this.spawnInterval = this.clock.setInterval(() => {
       this.spawn();
     }, this.timeBetweenSpawns);
-
   }
 
   spawn() {
     this.totalSpawns--;
+    console.log("Spawning enemy:", this.totalSpawns, "spawns left");
     let enemy = new (sample(this.enemyTypes))();
+    enemy.updateStats(this.wave);
     enemy.x = this.x;
     enemy.y = this.y;
-    enemy.updateStats(this.wave);
+    console.log("Enemy spawn location:", enemy.x, ",", enemy.y);
     this.state.addEnemy(enemy);
     this.checkSpawnInterval();
   }

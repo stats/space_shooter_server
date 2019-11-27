@@ -12,10 +12,21 @@ export class StraightLinePath extends Behaviour {
     if(this.target.x > C.BOUNDS.maxX) this.xDir = -1;
     if(this.target.y < C.BOUNDS.minY) this.yDir = 1;
     if(this.target.y > C.BOUNDS.maxY) this.yDir = -1;
+    console.log(this.xDir, this.yDir);
   }
 
   onUpdate(deltaTime) {
-    if(this.xDir) this.target.x += this.target.speed * this.xDir * deltaTime;
-    if(this.yDir) this.target.y += this.target.speed * this.yDir * deltaTime;
+    if(this.xDir != 0) this.target.x += this.target.speed * this.xDir * (deltaTime/1000);
+    if(this.yDir != 0) this.target.y += this.target.speed * this.yDir * (deltaTime/1000);
+    if(this.target.x < C.BOUNDS.minX - (C.SPAWN_OFFSET * 2) ||
+      this.target.x > C.BOUNDS.maxX + (C.SPAWN_OFFSET * 2) ||
+      this.target.y < C.BOUNDS.minY - (C.SPAWN_OFFSET * 2) ||
+      this.target.y > C.BOUNDS.maxY + (C.SPAWN_OFFSET * 2)) {
+      this.remove();
+    }
+  }
+
+  remove() {
+    this.target.$state.removeEnemy(this.target);
   }
 }

@@ -118,13 +118,13 @@ export class GameRoom extends Room<GameState> {
     this.spawners_right = [];
 
     for(i = 0; i < number_of_spawners_top; i++) {
-      x = ( i * C.SPAWN_TOP / number_of_spawners_top ) + 32;
+      x = Math.floor(Math.random() * (C.BOUNDS.maxX - C.SPAWN_OFFSET)) + C.BOUNDS.minX + C.SPAWN_OFFSET;
       this.spawners_top.push(new Spawner({
           clock: this.clock,
           state: this.state,
           wave: this.current_wave,
           x: x,
-          y: -C.SPAWN_OFFSET,
+          y: C.BOUNDS.maxY + C.SPAWN_OFFSET,
           timeBetweenSpans: 1000,
           timeTillStart: 0,
           totalSpawns: 5,
@@ -133,7 +133,7 @@ export class GameRoom extends Room<GameState> {
     }
 
     for(i = 0; i < number_of_spawners_side; i++) {
-      y = ( i * C.SPAWN_TOP / number_of_spawners_side) + 32;
+      y = Math.floor(Math.random() * (C.BOUNDS.maxY - C.SPAWN_OFFSET)/2) + (C.BOUNDS.maxY/2);
       this.spawners_left.push(new Spawner({
         clock: this.clock,
         state: this.state,
@@ -145,11 +145,13 @@ export class GameRoom extends Room<GameState> {
         totalSpawns: 5,
         enemyTypes: [Scout]
       }));
+
+      y = Math.floor(Math.random() * (C.BOUNDS.maxY - C.SPAWN_OFFSET)/2) + (C.BOUNDS.maxY/2);
       this.spawners_left.push(new Spawner({
         clock: this.clock,
         state: this.state,
         wave: this.current_wave,
-        x: C.SPAWN_TOP + C.SPAWN_OFFSET,
+        x: C.BOUNDS.maxX + C.SPAWN_OFFSET,
         y: y,
         timeBetweenSpans: 1000,
         timeTillStart: 0,
@@ -161,6 +163,7 @@ export class GameRoom extends Room<GameState> {
 
   startWave() {
     this.setupWave();
+    this.broadcast(`Wave ${this.current_wave} Starting`);
 
     this.spawnCompleteInterval = this.clock.setInterval(() => {
       if(this.spawnsComplete()) {

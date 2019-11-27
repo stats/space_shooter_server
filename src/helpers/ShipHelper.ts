@@ -20,8 +20,8 @@ export class ShipHelper {
   static async createShip(username:string, data:any) {
     data["username"] = username;
     data["uuid"] = uuid();
-    data["accelleration"] = 0.1;
-    data["speed"] = 25;
+    data["accelleration"] = 5;
+    data["speed"] = 100;
     data["max_shields"] = 1;
     let ship = new Ship(data);
     console.log("Ship to save", ship.toSaveObject());

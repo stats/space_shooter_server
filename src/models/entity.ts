@@ -1,6 +1,7 @@
 import { Schema, type } from "@colyseus/schema";
 import { merge } from 'lodash';
 import { GameState } from './GameState';
+const uuid = require('uuid/v4');
 
 export class Entity extends Schema {
 
@@ -29,6 +30,7 @@ export class Entity extends Schema {
   constructor(opts:any) {
     super();
     merge(this, opts);
+    if(!this.uuid) this.uuid = uuid();
   }
 
   protected registerBehaviours(list:any[]) {

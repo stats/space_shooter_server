@@ -47,7 +47,6 @@ export class InputBehaviour extends Behaviour {
       if(this.target.x > this.bounds.maxX) this.target.x = this.bounds.maxX;
       if(this.target.y < this.bounds.minY) this.target.y = this.bounds.minY;
       if(this.target.y > this.bounds.maxY) this.target.y = this.bounds.maxY;
-      console.log('movement', this.target.x, this.target.y);
     }
   }
 }

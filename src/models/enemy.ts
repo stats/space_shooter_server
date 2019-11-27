@@ -18,18 +18,19 @@ export class Enemy extends Entity {
   collision_damage_base:number = 1;
   collision_damage_growth:number = 0.1;
 
+  @type("string")
+  model_type:string = "";
+
   wave:number;
 
   constructor(options) {
     super(options);
-
-
   }
 
   updateStats(wave) {
-    this.health = this.health_base + (this.health_growth * wave);
-    this.speed = this.speed_base + (this.speed_growth * wave);
-    this.collision_damage = this.collision_damage_base + (this.collision_damage_growth * wave);
+    this.health = Math.floor(this.health_base + (this.health_growth * wave));
+    this.speed = Math.floor(this.speed_base + (this.speed_growth * wave));
+    this.collision_damage = Math.floor(this.collision_damage_base + (this.collision_damage_growth * wave));
   }
 
   onInitGame(state:GameState) {
