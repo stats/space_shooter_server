@@ -51,12 +51,10 @@ export class Spawner {
 
   spawn() {
     this.totalSpawns--;
-    console.log("Spawning enemy:", this.totalSpawns, "spawns left");
     let enemy = new (sample(this.enemyTypes))();
     enemy.updateStats(this.wave);
     enemy.x = this.x;
     enemy.y = this.y;
-    console.log("Enemy spawn location:", enemy.x, ",", enemy.y);
     this.state.addEnemy(enemy);
     this.checkSpawnInterval();
   }

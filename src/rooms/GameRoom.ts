@@ -175,16 +175,24 @@ export class GameRoom extends Room<GameState> {
   }
 
   spawnsComplete():boolean {
-    let spawner;
-    for(spawner in this.spawners_top) {
-      if(!spawner.complete) return false;
+    let spawner:Spawner;
+    console.log("Checking Spawns Complete");
+    for(spawner of this.spawners_top) {
+      if(!spawner.complete) {
+        return false;
+      }
     }
     for(spawner of this.spawners_left) {
-      if(!spawner.complete) return false;
+      if(!spawner.complete) {
+        return false;
+      }
     }
     for(spawner of this.spawners_right) {
-      if(!spawner.complete) return false;
+      if(!spawner.complete) {
+        return false;
+      }
     }
+    console.log("Spawn Complete");
     return true;
   }
 

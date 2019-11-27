@@ -12,7 +12,6 @@ export class StraightLinePath extends Behaviour {
     if(this.target.x > C.BOUNDS.maxX) this.xDir = -1;
     if(this.target.y < C.BOUNDS.minY) this.yDir = 1;
     if(this.target.y > C.BOUNDS.maxY) this.yDir = -1;
-    console.log(this.xDir, this.yDir);
   }
 
   onUpdate(deltaTime) {

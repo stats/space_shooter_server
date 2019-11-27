@@ -19,7 +19,7 @@ export class GameState extends Schema {
   bullets = new MapSchema<Bullet>();
 
   @type("number")
-  start_game:number = 10; //number of seconds until the game starts
+  start_game:number = 2; //number of seconds until the game starts
 
   addShip(ship:Ship) {
     this.ships[ship.uuid] = ship;
