@@ -16,6 +16,8 @@ export class Scout extends Enemy {
     this.collision_damage_growth = 0.1;
 
     this.model_type = "scout";
+
+    this.diameter = 25;
   }
 
   onInitGame(state:GameState) {

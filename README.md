@@ -7,21 +7,32 @@ mkdir db\development
 mkdir build
 mkdir build\codegen
 
-- allow initial login by device ID without password
-- Figure out unity to server bounding boxes and ship movement
-- Create Loading Screens
-  - Ship Builder Login
-  - Match Maker Loading
-  - Starting the Game Countdown
-- Style buttons for space theme and make them prefabs, update the UI with a nice space theme.
-- Add primary and secondary attacks to ship ShipBuilder
-- Allow deleting of Ships from ShipBuilder
-- The game needs to spawn enemies and bullets
-- Track number of ships create and deleted
-- Track number of enemies killed by type
-- Gain Experience and level up abilities for the ship
-- Auto renew JWT token
-- Message for server being down or not accessible
+* Current Tasks *
+
+- [ ] Ensure broadcast messages do not collide, or queue them
+- [ ] If no players in room stop room processing
+- [ ] Style buttons for space theme and make them prefabs, update the UI with a nice space theme.
+- [ ] Add primary and secondary attacks to ship ShipBuilder
+- [ ] The game needs to spawn bullets
+- [ ] Track number of ships create and deleted
+- [ ] Track number of enemies killed by type
+- [ ] Gain Experience and level up abilities for the ship
+- [ ] Auto renew JWT token
+- [ ] Message for server being down or not accessible
+- [ ] Show ship speed in UI
+- [ ] Show acceleration in UI
+- [ ] Show shields in the UI
+
+* Completed Tasks *
+
+- [x] allow initial login by device ID without password
+- [x] Figure out unity to server bounding boxes and ship movement
+- [x] Ship Builder Login Loading Screen
+- [x] Match Maker Loading
+- [x] Allow deleting of Ships from ShipBuilder
+- [x] The game needs to spawn enemies
+- [x] Show broadcast messages
+- [x] Starting the Game Countdown
 
 
 

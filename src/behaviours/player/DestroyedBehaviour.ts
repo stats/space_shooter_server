@@ -10,6 +10,6 @@ export class DestroyedBehaviour extends Behaviour {
   }
 
   onEvent() {
-    this.target.$state.removePlayer(this);
+    this.target.$state.removeShip(this.target);
   }
 }

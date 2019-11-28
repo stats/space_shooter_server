@@ -80,6 +80,7 @@ export class Ship extends Entity {
   constructor(opts) {
     super(opts);
     merge(this, opts);
+    this.diameter = 25;
   }
 
   onInitGame(state:GameState) {
@@ -93,6 +94,8 @@ export class Ship extends Entity {
       new PrimaryAttackBehaviour(this),
       new SpecialAttackBehaviour(this)
     ]);
+    this.shields = this.max_shields;
+    console.log(this, this.shields, this.max_shields);
   }
 
   toSaveObject():any {

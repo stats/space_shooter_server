@@ -37,6 +37,7 @@ export class GameRoom extends Room<GameState> {
 
     let game_start_timeout = this.clock.setInterval(() => {
       this.state.start_game -= 1;
+      this.broadcast(`Battle Starts In ${this.state.start_game} Seconds`);
       if(this.state.start_game <= 0) {
         this.startWave();
         game_start_timeout.clear();
