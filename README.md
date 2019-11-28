@@ -1,13 +1,15 @@
-* Space Shooter Server *
+*Space Shooter Server*
 
-* Setup *
+A server for a colyseus space shooter game
+
+*Setup*
 
 mkdir db
 mkdir db\development
 mkdir build
 mkdir build\codegen
 
-* Current Tasks *
+*Current Tasks*
 
 - [ ] Ensure broadcast messages do not collide, or queue them
 - [ ] If no players in room stop room processing
@@ -23,7 +25,7 @@ mkdir build\codegen
 - [ ] Show acceleration in UI
 - [ ] Show shields in the UI
 
-* Completed Tasks *
+*Completed Tasks*
 
 - [x] allow initial login by device ID without password
 - [x] Figure out unity to server bounding boxes and ship movement
@@ -35,9 +37,7 @@ mkdir build\codegen
 - [x] Starting the Game Countdown
 
 
-
-
-A server for a colyseus space shooter game
+*Simple Design Documentation*
 
 - Player does not have to create an account. They can join and the server will recognize their device ID.
 - Player enters the ship yard. They can then either select one of their existing ships or create a new ship using the parts they have unlocked.
