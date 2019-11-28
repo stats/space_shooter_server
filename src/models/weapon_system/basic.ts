@@ -20,12 +20,14 @@ export class Basic {
     this.range = options.range;
   }
 
-  getBullet() {
+  getBullet(x, y) {
     let options = {
       damage: this.damage,
       speed: this.speed,
       range: this.range,
       bullet_mesh: 0,
+      x: x,
+      y: y,
       behaviours: [StraightLineUpPath],
       bullet_type: C.SHIP_BULLET
     }

@@ -5,8 +5,9 @@ export class StraightLineUpPath extends Behaviour {
 
   start_y:number;
 
-  constructor(target:any, ) {
+  constructor(target:any) {
     super('StraightLineUpPath', target);
+    this.start_y = this.target.y;
   }
 
   onUpdate(deltaTime) {

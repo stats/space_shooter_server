@@ -15,7 +15,7 @@ export class PrimaryAttackBehaviour extends Behaviour {
       damage: 1,
       range: 200,
       speed: 1,
-      firerate: 1000
+      fire_rate: 1000
     }
   ]
 
@@ -25,18 +25,19 @@ export class PrimaryAttackBehaviour extends Behaviour {
   }
 
   public onEvent() {
+    console.log("Primary Attack");
     if(!this.canFire()) return;
 
+    console.log("Allowed to fire");
+
     let spawn_location = this.target.getBulletSpawnLocation();
-    let bullet = this.system.getBullet();
-    bullet.x = spawn_location.x;
-    bullet.y = spawn_location.y;
+    let bullet = this.system.getBullet(spawn_location.x, spawn_location.y);
     this.target.$state.addBullet(bullet);
   }
 
   public onUpdate(deltaTime:number) {
-    if(this.cooldown < this.fire_rate) {
-      this.cooldown += deltaTime
+    if(this.cooldown <= this.fire_rate) {
+      this.cooldown += deltaTime;
     }
   }
 
@@ -51,6 +52,7 @@ export class PrimaryAttackBehaviour extends Behaviour {
   }
 
   canFire():boolean {
+    console.log(this.cooldown, this.fire_rate);
     return this.cooldown >= this.fire_rate;
   }
 

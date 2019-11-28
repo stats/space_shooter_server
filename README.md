@@ -27,6 +27,7 @@ mkdir build\codegen
 - [ ] Add popup warning to confirm destruction of a ship
 - [ ] Automatically handle server disconnect on client side
 - [ ] Make the background of the gameroom move
+- [ ] Add effects for air thrusters when ship moves side to side or backwards
 
 ## Completed Tasks
 
