@@ -95,7 +95,6 @@ export class Ship extends Entity {
       new SpecialAttackBehaviour(this)
     ]);
     this.shields = this.max_shields;
-    console.log(this, this.shields, this.max_shields);
   }
 
   toSaveObject():any {

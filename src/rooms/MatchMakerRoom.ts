@@ -105,13 +105,10 @@ export class MatchMakerRoom extends Room {
     for(let i = 0, l = stats.length; i < l; i++) {
       const stat = stats[i];
       stat.waitingTime += this.clock.deltaTime;
-      console.log("Time waiting: ", stat.waitingTime);
 
       if (stat.group && stat.group.ready) {
         continue;
       }
-
-      console.log("Group:", stat.group);
 
       if(currentGroup.clients.length === this.numClientsToMatch) {
         currentGroup = this.createGroup();
@@ -162,7 +159,6 @@ export class MatchMakerRoom extends Room {
 
             await Promise.all(group.clients.map(async (client) => {
               const matchData = await matchMaker.reserveSeatFor(room, client.options);
-              console.log("Sending match data", matchData);
               this.send(client.client, matchData);
             }));
           } else {

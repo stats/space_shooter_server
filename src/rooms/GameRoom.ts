@@ -100,6 +100,12 @@ export class GameRoom extends Room<GameState> {
       let bullet:Bullet = this.state.bullets[uuid];
       bullet.onUpdate(deltaTime);
     }
+
+    if(this.state.hasStarted() && !this.state.hasShips()) {
+      this.broadcast('The Battle Has Been Lost');
+      this.state.battleLost();
+      this.disconnect();
+    }
   }
 
   handleClientInput(client, input) {
@@ -167,7 +173,7 @@ export class GameRoom extends Room<GameState> {
     this.broadcast(`Wave ${this.current_wave} Starting`);
 
     this.spawnCompleteInterval = this.clock.setInterval(() => {
-      if(this.spawnsComplete()) {
+      if(this.spawnsComplete() && !this.state.hasEnemies()) {
         this.spawnCompleteInterval.clear();
         this.current_wave++;
         this.startWave();
@@ -177,7 +183,6 @@ export class GameRoom extends Room<GameState> {
 
   spawnsComplete():boolean {
     let spawner:Spawner;
-    console.log("Checking Spawns Complete");
     for(spawner of this.spawners_top) {
       if(!spawner.complete) {
         return false;
@@ -193,7 +198,6 @@ export class GameRoom extends Room<GameState> {
         return false;
       }
     }
-    console.log("Spawn Complete");
     return true;
   }
 

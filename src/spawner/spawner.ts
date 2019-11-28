@@ -43,10 +43,15 @@ export class Spawner {
   }
 
   start() {
-    console.log("Spawner Started:", this.totalSpawns, "total spawns (", this.x, ",", this.y, ")");
     this.spawnInterval = this.clock.setInterval(() => {
       this.spawn();
     }, this.timeBetweenSpawns);
+  }
+
+  stop() {
+    if(this.spawnInterval) {
+      this.spawnInterval.clear();
+    }
   }
 
   spawn() {

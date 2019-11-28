@@ -11,19 +11,22 @@ mkdir build\codegen
 
 ## Current Tasks
 
-- [ ] Ensure broadcast messages do not collide, or queue them
-- [ ] If no players in room stop room processing
-- [ ] Style buttons for space theme and make them prefabs, update the UI with a nice space theme.
-- [ ] Add primary and secondary attacks to ship ShipBuilder
 - [ ] The game needs to spawn bullets
+- [ ] Add primary and secondary attacks to ship ShipBuilder
 - [ ] Track number of ships create and deleted
 - [ ] Track number of enemies killed by type
-- [ ] Gain Experience and level up abilities for the ship
 - [ ] Auto renew JWT token
 - [ ] Message for server being down or not accessible
 - [ ] Show ship speed in UI
 - [ ] Show acceleration in UI
 - [ ] Show shields in the UI
+- [ ] Handle error when building a null ship
+- [ ] Add button from shipyard to logout
+- [ ] Add instructions on how to play the game
+- [ ] Gain Experience and level up abilities for the ship
+- [ ] Add popup warning to confirm destruction of a ship
+- [ ] Automatically handle server disconnect on client side
+- [ ] Make the background of the gameroom move
 
 ## Completed Tasks
 
@@ -35,6 +38,10 @@ mkdir build\codegen
 - [x] The game needs to spawn enemies
 - [x] Show broadcast messages
 - [x] Starting the Game Countdown
+- [x] If no players in room stop room processing
+- [x] Add button to the shipyard for returning to ship list
+- [x] Style buttons for space theme and make them prefabs, update the UI with a nice space theme.
+- [x] Ensure broadcast messages do not collide, or queue them
 
 
 ## Simple Design Documentation
