@@ -4,6 +4,8 @@ import { Entity } from './entity';
 
 import { merge } from 'lodash';
 
+import { DestroyedBehaviour } from '../behaviours/bullet/DestroyedBehaviour';
+
 export class Bullet extends Entity {
 
   /* An enemy bullet or a ship bullet. This determines which collision to check */
@@ -18,6 +20,9 @@ export class Bullet extends Entity {
   /* The distance the bullet will travel */
   range:number;
 
+  /* Tracks who fired this entity */
+  fired_by:Entity;
+
   /* The mesh to display for the bullet */
   @type("int32")
   bullet_mesh:number;
@@ -29,6 +34,9 @@ export class Bullet extends Entity {
   constructor(options) {
     super(options);
     merge(this, options);
+    this.registerBehaviours([
+      new DestroyedBehaviour(this)
+    ]);
     if(options.behaviours) {
       for(let behaviour of options.behaviours) {
         this.registerBehaviour(new behaviour(this))

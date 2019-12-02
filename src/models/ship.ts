@@ -50,8 +50,23 @@ export class Ship extends Entity {
   @type("int32")
   primary_attack:number;
 
+  @type("number")
+  primary_cooldown_max:number;
+
+  @type("number")
+  primary_cooldown:number;
+
   @type("int32")
   special_attack:number;
+
+  @type("number")
+  special_cooldown_max:number;
+
+  @type("number")
+  special_cooldown:number;
+
+  @type("number")
+  kills:number = 0;
 
   @type("int32")
   shields:number;
@@ -60,10 +75,10 @@ export class Ship extends Entity {
   max_shields:number;
 
   @type("number")
-  speed:number = 1;
+  speed:number = 100;
 
   @type("number")
-  accelleration:number = 0.1;
+  accelleration:number = 5;
 
   @type("number")
   weapon_power:number
@@ -71,7 +86,7 @@ export class Ship extends Entity {
   @type("number")
   rank:number; //The current ranking of the ship which corresponds to which wave to start on
 
-  radius:number;
+  diameter:number;
 
   createdAt:number;
 
@@ -80,7 +95,8 @@ export class Ship extends Entity {
   constructor(opts) {
     super(opts);
     merge(this, opts);
-    this.diameter = 25;
+    this.diameter = 55;
+    this.bullet_offset_y = 25;
   }
 
   onInitGame(state:GameState) {

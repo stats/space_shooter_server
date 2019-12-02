@@ -11,7 +11,6 @@ mkdir build\codegen
 
 ## Current Tasks
 
-- [ ] The game needs to spawn bullets
 - [ ] Add primary and secondary attacks to ship ShipBuilder
 - [ ] Track number of ships create and deleted
 - [ ] Track number of enemies killed by type
@@ -27,7 +26,11 @@ mkdir build\codegen
 - [ ] Add popup warning to confirm destruction of a ship
 - [ ] Automatically handle server disconnect on client side
 - [ ] Make the background of the gameroom move
-- [ ] Add effects for air thrusters when ship moves side to side or backwards
+- [ ] Add effects for air thrusters when ship moves side to side or backwards\
+- [ ] Implement davidfig/intersects collision library for ellipse-ellipse and ellipse-circle collisions
+- [ ] Implement a heartbeat function
+- [ ] Add UI that shows primary weapon fire_rate
+- [ ] Add UI that shows secondary weapon fire_rate
 
 ## Completed Tasks
 
@@ -43,6 +46,7 @@ mkdir build\codegen
 - [x] Add button to the shipyard for returning to ship list
 - [x] Style buttons for space theme and make them prefabs, update the UI with a nice space theme.
 - [x] Ensure broadcast messages do not collide, or queue them
+- [x] The game needs to spawn bullets
 
 
 ## Simple Design Documentation

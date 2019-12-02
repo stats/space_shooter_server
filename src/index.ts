@@ -124,6 +124,7 @@ DB.init().then(() => {
     if(token) {
       if(JWTHelper.verifyToken(token)) {
         let username = JWTHelper.extractUsernameFromToken(token);
+        console.log("Sending new token");
         res.status(200).json(JWTHelper.getSuccessJSON(username));
       } else {
         res.status(401).json({

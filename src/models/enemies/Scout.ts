@@ -17,7 +17,7 @@ export class Scout extends Enemy {
 
     this.model_type = "scout";
 
-    this.diameter = 25;
+    this.diameter = 35;
   }
 
   onInitGame(state:GameState) {

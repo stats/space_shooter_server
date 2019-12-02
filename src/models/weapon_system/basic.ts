@@ -13,11 +13,13 @@ export class Basic {
   damage:number;
   speed:number;
   range:number;
+  diameter:number;
 
   constructor(options) {
     this.damage = options.damage;
     this.speed = options.speed;
     this.range = options.range;
+    this.diameter = options.diameter;
   }
 
   getBullet(x, y) {
@@ -25,6 +27,7 @@ export class Basic {
       damage: this.damage,
       speed: this.speed,
       range: this.range,
+      diameter: this.diameter,
       bullet_mesh: 0,
       x: x,
       y: y,

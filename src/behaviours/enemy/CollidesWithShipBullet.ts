@@ -14,7 +14,7 @@ export class CollidesWithShipBullet extends Behaviour {
     for(let uuid in this.target.$state.bullets) {
       let bullet:Bullet = this.target.$state.bullets[uuid];
       if(bullet.bullet_type == C.SHIP_BULLET && CollisionHelper.collisionBetween(this.target, bullet)) {
-        this.target.takeDamage(bullet.damage);
+        this.target.handleEvent('take_damage', { damage: bullet.damage, fired_by: bullet.fired_by });
         bullet.handleEvent('destroyed');
       }
     }

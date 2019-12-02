@@ -5,7 +5,7 @@ export class DestroyedBehaviour extends Behaviour {
 
   start_y:number;
 
-  constructor(target:any, ) {
+  constructor(target:any) {
     super('destroyed', target);
   }
 

@@ -9,7 +9,7 @@ export class DestroyedBehaviour extends Behaviour {
     super('destroyed', target);
   }
 
-  handleEvent() {
-    this.target.$state.removeBullet(this);
+  onEvent() {
+    this.target.$state.removeBullet(this.target);
   }
 }

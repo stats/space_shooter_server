@@ -13,31 +13,32 @@ export class PrimaryAttackBehaviour extends Behaviour {
     {
       system_type: Basic,
       damage: 1,
-      range: 200,
-      speed: 1,
-      fire_rate: 1000
+      range: 500,
+      speed: 400,
+      fire_rate: 1000,
+      diameter: 15,
     }
   ]
 
   constructor(target) {
     super('primary_attack', target);
     this.setWeaponSystem();
+    this.target.primary_cooldown_max = this.fire_rate;
   }
 
   public onEvent() {
-    console.log("Primary Attack");
     if(!this.canFire()) return;
-
-    console.log("Allowed to fire");
-
+    this.cooldown = 0;
     let spawn_location = this.target.getBulletSpawnLocation();
     let bullet = this.system.getBullet(spawn_location.x, spawn_location.y);
+    bullet.fired_by = this.target;
     this.target.$state.addBullet(bullet);
   }
 
   public onUpdate(deltaTime:number) {
     if(this.cooldown <= this.fire_rate) {
       this.cooldown += deltaTime;
+        this.target.primary_cooldown = this.cooldown;
     }
   }
 
@@ -46,13 +47,13 @@ export class PrimaryAttackBehaviour extends Behaviour {
     this.system = new system_type({
       damage: this.weapon_systems[this.target.primary_attack]["damage"],
       range: this.weapon_systems[this.target.primary_attack]["range"],
-      speed: this.weapon_systems[this.target.primary_attack]["speed"]
+      speed: this.weapon_systems[this.target.primary_attack]["speed"],
+      diameter: this.weapon_systems[this.target.primary_attack]["diameter"]
     });
     this.fire_rate = this.weapon_systems[this.target.primary_attack]["fire_rate"];
   }
 
   canFire():boolean {
-    console.log(this.cooldown, this.fire_rate);
     return this.cooldown >= this.fire_rate;
   }
 
