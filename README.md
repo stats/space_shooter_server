@@ -16,9 +16,12 @@ mkdir build\codegen
 - [ ] Track number of enemies killed by type
 - [ ] Auto renew JWT token
 - [ ] Message for server being down or not accessible
+- [ ] Create a HUD master class for managing all HUD events and updates
 - [ ] Show ship speed in UI
 - [ ] Show acceleration in UI
 - [ ] Show shields in the UI
+- [ ] Add UI that shows primary weapon fire_rate
+- [ ] Add UI that shows secondary weapon fire_rate
 - [ ] Handle error when building a null ship
 - [ ] Add button from shipyard to logout
 - [ ] Add instructions on how to play the game
@@ -29,8 +32,7 @@ mkdir build\codegen
 - [ ] Add effects for air thrusters when ship moves side to side or backwards\
 - [ ] Implement davidfig/intersects collision library for ellipse-ellipse and ellipse-circle collisions
 - [ ] Implement a heartbeat function
-- [ ] Add UI that shows primary weapon fire_rate
-- [ ] Add UI that shows secondary weapon fire_rate
+- [ ] Allow the ship name to display under the player
 
 ## Completed Tasks
 
@@ -47,6 +49,8 @@ mkdir build\codegen
 - [x] Style buttons for space theme and make them prefabs, update the UI with a nice space theme.
 - [x] Ensure broadcast messages do not collide, or queue them
 - [x] The game needs to spawn bullets
+- [x] Utilize the event system for managing the game
+- [x] Rewrite the screens UI to be modular
 
 
 ## Simple Design Documentation
