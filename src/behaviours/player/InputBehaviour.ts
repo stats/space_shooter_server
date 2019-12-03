@@ -6,6 +6,9 @@ export class InputBehaviour extends Behaviour {
 
   bounds:Bounds;
 
+  horizontal_vector:number;
+  vertical_vector:number;
+
   constructor(target) {
     super('input', target);
     this.bounds = C.BOUNDS;
@@ -13,12 +16,10 @@ export class InputBehaviour extends Behaviour {
 
   public onEvent(args: {horizontal?:number, vertical?:number, primary_attack?:number, special_attack?:number}) {
     if(args.horizontal) {
-      this.target.horizontal_accelleration += this.target.accelleration * args.horizontal;
-      this.clampHorizontal();
+      this.horizontal_vector = args.horizontal;
     }
     if(args.vertical) {
-      this.target.vertical_accelleration += this.target.accelleration * args.vertical
-      this.clampVertical();
+      this.vertical_vector = args.vertical;
     }
     if(args.primary_attack) {
       this.target.handleEvent('primary_attack');
@@ -37,6 +38,16 @@ export class InputBehaviour extends Behaviour {
   }
 
   public onUpdate(deltaTime:number) {
+    if(this.horizontal_vector != 0) {
+      this.target.horizontal_acceleration += this.target.accelleration * this.horizontal_vector * (deltaTime/1000);
+      this.clampHorizontal();
+      this.horizontal_vector = 0;
+    }
+    if(this.vertical_vector != 0) {
+      this.target.vertical_acceleration += this.target.accelleration * this.horizontal_vector * (deltaTime/1000);
+      this.clampVertical();
+      this.vertical_vector = 0;
+    }
     if(this.target.horizontal_accelleration != 0 || this.target.vertical_accelleration != 0){
       this.target.x += this.target.horizontal_accelleration * (deltaTime/1000);
       this.target.y += this.target.vertical_accelleration * (deltaTime/1000);
