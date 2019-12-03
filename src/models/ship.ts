@@ -81,6 +81,12 @@ export class Ship extends Entity {
   accelleration:number = 5;
 
   @type("number")
+  horizontal_accelleration:number = 0;
+
+  @type("number")
+  vertical_accelleration:number = 0;
+
+  @type("number")
   weapon_power:number
 
   @type("number")

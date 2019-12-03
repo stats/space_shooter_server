@@ -9,7 +9,7 @@ mkdir db\development
 mkdir build
 mkdir build\codegen
 
-## Current Tasks
+## Current Tasksart
 
 - [ ] Add primary and secondary attacks to ship ShipBuilder
 - [ ] Track number of ships create and deleted
@@ -33,6 +33,7 @@ mkdir build\codegen
 - [ ] Implement davidfig/intersects collision library for ellipse-ellipse and ellipse-circle collisions
 - [ ] Implement a heartbeat function
 - [ ] Allow the ship name to display under the player
+- [ ] Show ship stats in the shipyard: rank, level, kills, abilities, primary and secondary
 
 ## Completed Tasks
 
