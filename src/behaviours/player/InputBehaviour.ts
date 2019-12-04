@@ -6,8 +6,8 @@ export class InputBehaviour extends Behaviour {
 
   bounds:Bounds;
 
-  horizontal_vector:number;
-  vertical_vector:number;
+  horizontal_vector:number = 0;
+  vertical_vector:number = 0;
 
   constructor(target) {
     super('input', target);
@@ -39,12 +39,12 @@ export class InputBehaviour extends Behaviour {
 
   public onUpdate(deltaTime:number) {
     if(this.horizontal_vector != 0) {
-      this.target.horizontal_acceleration += this.target.accelleration * this.horizontal_vector * (deltaTime/1000);
+      this.target.horizontal_accelleration += this.target.accelleration * this.horizontal_vector * (deltaTime/1000);
       this.clampHorizontal();
       this.horizontal_vector = 0;
     }
     if(this.vertical_vector != 0) {
-      this.target.vertical_acceleration += this.target.accelleration * this.horizontal_vector * (deltaTime/1000);
+      this.target.vertical_accelleration += this.target.accelleration * this.vertical_vector * (deltaTime/1000);
       this.clampVertical();
       this.vertical_vector = 0;
     }

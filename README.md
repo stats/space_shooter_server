@@ -11,29 +11,34 @@ mkdir build\codegen
 
 ## Current Tasksart
 
+- [ ] Add the ability to modify ship attributes on the fly in development mode
+- [ ] Add AI ships for testing
+- [ ] Add an emote system
 - [ ] Add primary and secondary attacks to ship ShipBuilder
 - [ ] Track number of ships create and deleted
 - [ ] Track number of enemies killed by type
-- [ ] Auto renew JWT token
-- [ ] Message for server being down or not accessible
-- [ ] Create a HUD master class for managing all HUD events and updates
-- [ ] Show ship speed in UI
-- [ ] Show acceleration in UI
-- [ ] Show shields in the UI
-- [ ] Add UI that shows primary weapon fire_rate
-- [ ] Add UI that shows secondary weapon fire_rate
 - [ ] Handle error when building a null ship
-- [ ] Add button from shipyard to logout
 - [ ] Add instructions on how to play the game
 - [ ] Gain Experience and level up abilities for the ship
-- [ ] Add popup warning to confirm destruction of a ship
-- [ ] Automatically handle server disconnect on client side
 - [ ] Make the background of the gameroom move
-- [ ] Add effects for air thrusters when ship moves side to side or backwards\
+- [ ] Add effects for air thrusters when ship moves side to side or backwards
+- [ ] Add bullet explosion effects
+- [ ] Add ship explosion effects
 - [ ] Implement davidfig/intersects collision library for ellipse-ellipse and ellipse-circle collisions
-- [ ] Implement a heartbeat function
-- [ ] Allow the ship name to display under the player
+
+### User Interface
+- [ ] Add UI that shows secondary weapon fire_rate
+- [ ] Add HUD for friendly ships
+- [ ] Add ship names in the HUD under the ship
+- [ ] Add popup warning to confirm destruction of a ship
 - [ ] Show ship stats in the shipyard: rank, level, kills, abilities, primary and secondary
+- [ ] Make ship acceleration a bar graph (maybe shaped like a plus) [----|==--]
+
+### Networking
+- [ ] Auto renew JWT token
+- [ ] Message for server being down or not accessible
+- [ ] Implement a heartbeat function
+- [ ] Automatically handle server disconnect on client side
 
 ## Completed Tasks
 
@@ -52,6 +57,12 @@ mkdir build\codegen
 - [x] The game needs to spawn bullets
 - [x] Utilize the event system for managing the game
 - [x] Rewrite the screens UI to be modular
+- [x] Add button from shipyard to logout
+- [x] Create a HUD master class for managing all HUD events and updates
+- [x] Show ship speed in UI
+- [x] Show acceleration in UI
+- [x] Show shields in the UI
+- [x] Add UI that shows primary weapon fire_rate
 
 
 ## Simple Design Documentation
