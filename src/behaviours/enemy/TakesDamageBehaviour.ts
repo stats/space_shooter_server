@@ -14,7 +14,11 @@ export class TakesDamageBehaviour extends Behaviour {
     this.target.health = Math.max(this.target.health - args.damage, 0);
     if(this.target.health <= 0) {
       if(args.fired_by && args.fired_by instanceof Ship) {
-        (args.fired_by as Ship).kills += 1;
+        let ship = args.fired_by as Ship;
+        ship.current_kills += 1;
+        ship.kills += 1;
+        ship.kill_score += this.target.$state.current_wave;
+
       }
       this.target.handleEvent('destroyed');
     }

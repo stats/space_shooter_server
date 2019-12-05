@@ -68,6 +68,12 @@ export class Ship extends Entity {
   @type("number")
   kills:number = 0;
 
+  @type("number")
+  kill_score:number = 0;
+
+  @type("number")
+  current_kills:number = 0;
+
   @type("int32")
   shields:number;
 
@@ -92,7 +98,7 @@ export class Ship extends Entity {
   @type("number")
   rank:number; //The current ranking of the ship which corresponds to which wave to start on
 
-  diameter:number;
+  radius:number;
 
   createdAt:number;
 
@@ -143,6 +149,7 @@ export class Ship extends Entity {
       'width',
       'height',
       'inGame',
+      'kills',
       'createdAt'
     ]);
     return baseObj;

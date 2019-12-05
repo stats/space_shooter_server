@@ -22,9 +22,6 @@ mkdir build\codegen
 - [ ] Gain Experience and level up abilities for the ship
 - [ ] Make the background of the gameroom move
 - [ ] Add effects for air thrusters when ship moves side to side or backwards
-- [ ] Add bullet explosion effects
-- [ ] Add ship explosion effects
-- [ ] Implement davidfig/intersects collision library for ellipse-ellipse and ellipse-circle collisions
 
 ### User Interface
 - [ ] Add UI that shows secondary weapon fire_rate
@@ -63,6 +60,9 @@ mkdir build\codegen
 - [x] Show acceleration in UI
 - [x] Show shields in the UI
 - [x] Add UI that shows primary weapon fire_rate
+- [x] Implement davidfig/intersects collision library for ellipse-ellipse and ellipse-circle collisions
+- [x] Add bullet explosion effects
+- [x] Add ship explosion effects
 
 
 ## Simple Design Documentation
