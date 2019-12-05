@@ -1,7 +1,9 @@
 import { Schema, type } from "@colyseus/schema";
 import { merge } from 'lodash';
 import { GameState } from './GameState';
+import { CT } from '../constants';
 const uuid = require('uuid/v4');
+
 
 export class Entity extends Schema {
 
@@ -14,14 +16,15 @@ export class Entity extends Schema {
   @type('number')
   y:number = 0;
 
-  diameter:number;
-  width:number;
-  height:number;
-
   bullet_offset_x:number = 0;
   bullet_offset_y:number = 0;
 
-  collision_type:number;
+  collision_type:number = CT.CIRCLE;
+  radius:number;
+  width:number;
+  height:number;
+  radiusX:number;
+  radiusY:number;
 
   public $state:GameState;
 

@@ -101,8 +101,8 @@ export class Ship extends Entity {
   constructor(opts) {
     super(opts);
     merge(this, opts);
-    this.diameter = 55;
-    this.bullet_offset_y = 25;
+    this.radius= 27;
+    this.bullet_offset_y = 30;
   }
 
   onInitGame(state:GameState) {

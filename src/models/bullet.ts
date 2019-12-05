@@ -6,6 +6,8 @@ import { merge } from 'lodash';
 
 import { DestroyedBehaviour } from '../behaviours/bullet/DestroyedBehaviour';
 
+import { CT } from '../constants';
+
 export class Bullet extends Entity {
 
   /* An enemy bullet or a ship bullet. This determines which collision to check */
@@ -30,6 +32,9 @@ export class Bullet extends Entity {
   /* The material to color the bullet with */
   @type("int32")
   bullet_mat:number;
+
+  collision_tpe = CT.CIRCLE;
+  radius:number = 15;
 
   constructor(options) {
     super(options);

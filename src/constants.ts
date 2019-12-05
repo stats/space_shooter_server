@@ -17,3 +17,9 @@ export class L {
   public static ENEMY_BULLETS:number = 2;
   public static SHIP_BULLETS:number = 3;
 }
+
+export class CT {
+  public static CIRCLE:number = 0;
+  public static ELLIPSE:number = 1;
+  public static BOX:number = 2;
+}

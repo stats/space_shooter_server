@@ -84,4 +84,18 @@ export class GameState extends Schema {
     return Object.keys(this.ships).length > 0;
   }
 
+  getClosestShip(x:number, y:number):Ship {
+    let return_ship:Ship = this.ships[0];
+    let distance:number = CollisionHelper.distance(x, y, return_ship.x, return_ship.y);
+    for(let i:number = 1, l:number = this.ships.length; i < l; i++) {
+      let ship:Ship = this.ships[i];
+      let d:number = CollisionHelper.distance(x, y, ship.x, ship.y)
+      if(d < distance) {
+        return_ship = ship;
+        distance = d;
+      }
+    }
+    return return_ship;
+  }
+
 }

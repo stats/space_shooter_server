@@ -1,6 +1,7 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
 import { StraightLinePath } from '../../behaviours/enemy/StraightLinePath';
+import { CT } from '../../constants';
 
 export class Scout extends Enemy {
 
@@ -17,7 +18,9 @@ export class Scout extends Enemy {
 
     this.model_type = "scout";
 
-    this.diameter = 35;
+    this.collision_type = CT.ELLIPSE;
+    this.radiusX = 15;
+    this.radiusY = 30;
   }
 
   onInitGame(state:GameState) {

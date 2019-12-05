@@ -1,5 +1,6 @@
 import { Behaviour } from '../behaviour';
 import { C } from '../../constants';
+import { CollisionHelper } from '../../helpers/CollisionHelper';
 
 export class StraightLinePath extends Behaviour {
 
@@ -17,11 +18,8 @@ export class StraightLinePath extends Behaviour {
   onUpdate(deltaTime) {
     if(this.xDir != 0) this.target.x += this.target.speed * this.xDir * (deltaTime/1000);
     if(this.yDir != 0) this.target.y += this.target.speed * this.yDir * (deltaTime/1000);
-    if(this.target.x < C.BOUNDS.minX - (C.SPAWN_OFFSET * 2) ||
-      this.target.x > C.BOUNDS.maxX + (C.SPAWN_OFFSET * 2) ||
-      this.target.y < C.BOUNDS.minY - (C.SPAWN_OFFSET * 2) ||
-      this.target.y > C.BOUNDS.maxY + (C.SPAWN_OFFSET * 2)) {
-      this.remove();
+    if(CollisionHelper.outsideBounds(this.target)) {
+      this.target.handleEvent('destroyed');
     }
   }
 
