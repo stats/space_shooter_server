@@ -20,12 +20,16 @@ export class ShipHelper {
   static async createShip(username:string, data:any) {
     data["username"] = username;
     data["uuid"] = uuid();
-    data["accelleration"] = 25;
-    data["speed"] = 100;
+    data["accelleration"] = 50;
+    data["speed"] = 50;
     data["max_shields"] = 1;
     let ship = new Ship(data);
     console.log("Ship to save", ship.toSaveObject());
     return DB.$ships.insertOne(ship.toSaveObject());
+  }
+
+  static async saveShip(ship:Ship) {
+    return await DB.$ships.updateOne({uuid: ship.uuid}, { $set: ship.toSaveObject() });
   }
 
   static async deleteShip(username:string, uuid:string) {

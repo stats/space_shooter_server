@@ -6,6 +6,7 @@ import { CollisionHelper } from '../helpers/CollisionHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
 import { Scout } from '../models/enemies/scout';
+import { Hunter } from '../models/enemies/hunter';
 import { Enemy } from '../models/enemy';
 import { Ship } from '../models/ship';
 import { Bullet } from '../models/bullet';
@@ -22,8 +23,6 @@ export class GameRoom extends Room<GameState> {
 
   clientShipHash:any = {};
 
-  private current_wave:number;
-
   private spawners_top:Spawner[];
   private spawners_left:Spawner[];
   private spawners_right:Spawner[];
@@ -31,9 +30,10 @@ export class GameRoom extends Room<GameState> {
   private spawnCompleteInterval:Delayed;
 
   onCreate(options) {
-    this.current_wave = options.wave_rank;
     this.setSimulationInterval((deltaTime) => this.onUpdate(deltaTime));
     this.setState(new GameState());
+
+    this.state.current_wave = options.wave_rank || 0;
 
     let game_start_timeout = this.clock.setInterval(() => {
       this.state.start_game -= 1;
@@ -77,6 +77,7 @@ export class GameRoom extends Room<GameState> {
 
   onLeave(client) {
     let ship = this.clientShipHash[client.id]
+    ShipHelper.saveShip(ship);
     this.state.removeShip(ship);
     ShipHelper.removeInGame(ship.uuid)
     delete this.clientShipHash[client.id];
@@ -115,8 +116,8 @@ export class GameRoom extends Room<GameState> {
 
   /** This is the complex function that sets difficulty based on the current wave **/
   setupWave() {
-    let number_of_spawners_top = Math.min(this.current_wave/2, 16);
-    let number_of_spawners_side = Math.min(this.current_wave/4, 8);
+    let number_of_spawners_top = Math.min(this.state.current_wave/2, 16);
+    let number_of_spawners_side = Math.min(this.state.current_wave/4, 8);
 
     let i, x, y;
 
@@ -129,13 +130,13 @@ export class GameRoom extends Room<GameState> {
       this.spawners_top.push(new Spawner({
           clock: this.clock,
           state: this.state,
-          wave: this.current_wave,
+          wave: this.state.current_wave,
           x: x,
           y: C.BOUNDS.maxY + C.SPAWN_OFFSET,
           timeBetweenSpans: 1000,
           timeTillStart: 0,
           totalSpawns: 5,
-          enemyTypes: [Scout]
+          enemyTypes: [Scout, Hunter]
         }));
     }
 
@@ -144,7 +145,7 @@ export class GameRoom extends Room<GameState> {
       this.spawners_left.push(new Spawner({
         clock: this.clock,
         state: this.state,
-        wave: this.current_wave,
+        wave: this.state.current_wave,
         x: -C.SPAWN_OFFSET,
         y: y,
         timeBetweenSpans: 1000,
@@ -157,7 +158,7 @@ export class GameRoom extends Room<GameState> {
       this.spawners_left.push(new Spawner({
         clock: this.clock,
         state: this.state,
-        wave: this.current_wave,
+        wave: this.state.current_wave,
         x: C.BOUNDS.maxX + C.SPAWN_OFFSET,
         y: y,
         timeBetweenSpans: 1000,
@@ -170,12 +171,12 @@ export class GameRoom extends Room<GameState> {
 
   startWave() {
     this.setupWave();
-    this.broadcast(`Wave ${this.current_wave} Starting`);
+    this.broadcast(`Wave ${this.state.current_wave} Starting`);
 
     this.spawnCompleteInterval = this.clock.setInterval(() => {
       if(this.spawnsComplete() && !this.state.hasEnemies()) {
         this.spawnCompleteInterval.clear();
-        this.current_wave++;
+        this.state.current_wave++;
         this.startWave();
       }
     }, this.spawnCompleteFrequency);

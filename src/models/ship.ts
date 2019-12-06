@@ -150,6 +150,7 @@ export class Ship extends Entity {
       'height',
       'inGame',
       'kills',
+      'kill_score',
       'createdAt'
     ]);
     return baseObj;

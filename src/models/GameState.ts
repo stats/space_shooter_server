@@ -21,6 +21,8 @@ export class GameState extends Schema {
   @type("number")
   start_game:number = 5; //number of seconds until the game starts
 
+  current_wave:number = 0;
+
   addShip(ship:Ship) {
     this.ships[ship.uuid] = ship;
     ship.onInitGame(this);
@@ -85,11 +87,11 @@ export class GameState extends Schema {
   }
 
   getClosestShip(x:number, y:number):Ship {
-    let return_ship:Ship = this.ships[0];
-    let distance:number = CollisionHelper.distance(x, y, return_ship.x, return_ship.y);
-    for(let i:number = 1, l:number = this.ships.length; i < l; i++) {
-      let ship:Ship = this.ships[i];
-      let d:number = CollisionHelper.distance(x, y, ship.x, ship.y)
+    let return_ship:Ship = null;
+    let distance:number = 99999;
+    for(let key in this.ships) {
+      let ship = this.ships[key];
+      let d:number = CollisionHelper.distance(x, y, ship.x, ship.y);
       if(d < distance) {
         return_ship = ship;
         distance = d;

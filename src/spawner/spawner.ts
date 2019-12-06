@@ -56,10 +56,8 @@ export class Spawner {
 
   spawn() {
     this.totalSpawns--;
-    let enemy = new (sample(this.enemyTypes))();
+    let enemy = new (sample(this.enemyTypes))({x: this.x, y: this.y});
     enemy.updateStats(this.wave);
-    enemy.x = this.x;
-    enemy.y = this.y;
     this.state.addEnemy(enemy);
     this.checkSpawnInterval();
   }

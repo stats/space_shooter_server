@@ -1,6 +1,8 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
-import { TargetPlayerStartPath } from '../../behaviours/enemy/StraightLinePath';
+import { TargetPlayerStartPath } from '../../behaviours/enemy/TargetPlayerStartPath';
+import { CT } from '../../constants';
+
 
 export class Hunter extends Enemy {
 
@@ -15,13 +17,11 @@ export class Hunter extends Enemy {
     this.collision_damage_base = 1;
     this.collision_damage_growth = 0.1;
 
-    this.model_type = "scout";
-
-    this.diameter = 35;
+    this.model_type = "hunter";
 
     this.collision_type = CT.ELLIPSE;
-    this.radiusX = 15;
-    this.radiusY = 30;
+    this.radiusX = 30;
+    this.radiusY = 15;
   }
 
   onInitGame(state:GameState) {
