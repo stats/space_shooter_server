@@ -1,20 +1,17 @@
 import { Schema, type } from "@colyseus/schema";
 import { merge } from 'lodash';
 import { GameState } from './GameState';
+import { Position } from './position';
 import { CT } from '../constants';
 const uuid = require('uuid/v4');
-
 
 export class Entity extends Schema {
 
   @type('string')
   uuid:string;
 
-  @type('number')
-  x:number = 0;
-
-  @type('number')
-  y:number = 0;
+  @type(Position)
+  position:Position = new Position(0, 0);
 
   bullet_offset_x:number = 0;
   bullet_offset_y:number = 0;
@@ -33,6 +30,7 @@ export class Entity extends Schema {
   constructor(opts:any) {
     super();
     merge(this, opts);
+    if(!this.position) this.position = new Position(0, 0);
     if(!this.uuid) this.uuid = uuid();
   }
 
@@ -56,8 +54,8 @@ export class Entity extends Schema {
 
   public getBulletSpawnLocation() {
     return {
-      x: this.x + this.bullet_offset_x,
-      y: this.y + this.bullet_offset_y
+      x: this.position.x + this.bullet_offset_x,
+      y: this.position.y + this.bullet_offset_y
     }
   }
 

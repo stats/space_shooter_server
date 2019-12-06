@@ -49,12 +49,12 @@ export class InputBehaviour extends Behaviour {
       this.vertical_vector = 0;
     }
     if(this.target.horizontal_accelleration != 0 || this.target.vertical_accelleration != 0){
-      this.target.x += this.target.horizontal_accelleration * (deltaTime/1000);
-      this.target.y += this.target.vertical_accelleration * (deltaTime/1000);
-      if(this.target.x < this.bounds.minX) this.target.x = this.bounds.minX;
-      if(this.target.x > this.bounds.maxX) this.target.x = this.bounds.maxX;
-      if(this.target.y < this.bounds.minY) this.target.y = this.bounds.minY;
-      if(this.target.y > this.bounds.maxY) this.target.y = this.bounds.maxY;
+      this.target.position.x += this.target.horizontal_accelleration * (deltaTime/1000);
+      this.target.position.y += this.target.vertical_accelleration * (deltaTime/1000);
+      if(this.target.position.x < this.bounds.minX) this.target.position.x = this.bounds.minX;
+      if(this.target.position.x > this.bounds.maxX) this.target.position.x = this.bounds.maxX;
+      if(this.target.position.y < this.bounds.minY) this.target.position.y = this.bounds.minY;
+      if(this.target.position.y > this.bounds.maxY) this.target.position.y = this.bounds.maxY;
     }
   }
 }

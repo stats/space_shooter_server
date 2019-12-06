@@ -3,12 +3,12 @@ import Clock from '@gamestdio/timer';
 
 import { Enemy } from '../models/enemy';
 import { GameState} from '../models/GameState';
+import { Position } from '../models/position';
 
 import { sample } from 'lodash';
 
 export class Spawner {
-  x:number;
-  y:number;
+  position:Position = new Position(0,0);
 
   state:GameState;
 
@@ -30,8 +30,8 @@ export class Spawner {
     this.clock = options.clock;
     this.state = options.state;
     this.wave = options.wave;
-    this.x = options.x;
-    this.y = options.y;
+    this.position.x = options.x;
+    this.position.y = options.y;
     this.timeBetweenSpawns = options.timeBetweenSpawns || 1500;
     this.timeTillStart = options.timeTillStart || 1000;
     this.totalSpawns = options.totalSpawns || 0;
@@ -56,7 +56,7 @@ export class Spawner {
 
   spawn() {
     this.totalSpawns--;
-    let enemy = new (sample(this.enemyTypes))({x: this.x, y: this.y});
+    let enemy = new (sample(this.enemyTypes))({x: this.position.x, y: this.position.y});
     enemy.updateStats(this.wave);
     this.state.addEnemy(enemy);
     this.checkSpawnInterval();

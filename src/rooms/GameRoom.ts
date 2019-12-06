@@ -61,8 +61,8 @@ export class GameRoom extends Room<GameState> {
 
   async onJoin(client, options, username) {
     let ship = await ShipHelper.getShipInGame(username);
-    ship.x = 450;
-    ship.y = 50;
+    ship.position.x = 700 + (Math.random() * 200);
+    ship.position.y = 350 + (Math.random() * 200);
     if(!ship) {
       this.send(client, { error: 'no_ship_in_game'});
       return;

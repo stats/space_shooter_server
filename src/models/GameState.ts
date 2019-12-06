@@ -91,7 +91,7 @@ export class GameState extends Schema {
     let distance:number = 99999;
     for(let key in this.ships) {
       let ship = this.ships[key];
-      let d:number = CollisionHelper.distance(x, y, ship.x, ship.y);
+      let d:number = CollisionHelper.distance(x, y, ship.position.x, ship.position.y);
       if(d < distance) {
         return_ship = ship;
         distance = d;
