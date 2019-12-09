@@ -5,12 +5,13 @@ export class EmergencyBrake {
   private target:Ship;
 
   constructor(target:Ship) {
-    this.ship = ship;
+    this.target = target;
   }
 
   handleEvent() {
-    this.ship.vertical_accelleration = 0;
-    this.ship.horizontal_accelleration = 0;
+    this.target.vertical_accelleration = 0;
+    this.target.horizontal_accelleration = 0;
   }
 
+  //TODO: ADD COOLDOWN
 }

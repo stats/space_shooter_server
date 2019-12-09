@@ -139,5 +139,7 @@ DB.init().then(() => {
     }
   }));
 
+
+  console.log('[SERVER] Starting on port: ' + port);
   server.listen(port);
 });

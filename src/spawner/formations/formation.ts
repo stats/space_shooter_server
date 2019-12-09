@@ -1,12 +1,14 @@
+import { GameState } from '../../models/GameState';
+
 export class Formation {
 
-  private state:GameState;
+  protected state:GameState;
 
-  constructor(GameState state) {
+  constructor(state:GameState) {
     this.state = state;
   }
 
-  onSpawnEnemies() {}
+  onSpawnEnemies(spawn_type:any) {}
 
 
 }

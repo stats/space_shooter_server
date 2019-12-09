@@ -50,7 +50,7 @@ export class PrimaryAttackBehaviour extends Behaviour {
       range: this.weapon_systems[this.target.primary_attack]["range"],
       speed: this.weapon_systems[this.target.primary_attack]["speed"],
       diameter: this.weapon_systems[this.target.primary_attack]["diameter"],
-      fire_rate: this.this.weapon_systems[this.target.primary_attack]["fire_rate"]
+      fire_rate: this.weapon_systems[this.target.primary_attack]["fire_rate"]
     });
 
   }

@@ -22,6 +22,9 @@ export class Bullet extends Entity {
   /* The distance the bullet will travel */
   range:number;
 
+  /* The angle for the bullet to travel */
+  angle:number;
+
   /* Tracks who fired this entity */
   fired_by:Entity;
 

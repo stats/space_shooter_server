@@ -28,9 +28,10 @@ export class GameRoom extends Room<GameState> {
   private spawnCompleteInterval:Delayed;
 
   onCreate(options) {
+    console.log('[GameRoom]', this.id, 'Created');
     this.setSimulationInterval((deltaTime) => this.onUpdate(deltaTime));
     this.setState(new GameState());
-    spawner = new Spawner(this.state, this.clock);
+    this.spawner = new Spawner(this.state, this.clock);
 
     this.state.current_wave = options.wave_rank || 0;
 
@@ -59,6 +60,7 @@ export class GameRoom extends Room<GameState> {
   }
 
   async onJoin(client, options, username) {
+    console.log('[GameRoom]', this.id, 'Client Join', username);
     let ship = await ShipHelper.getShipInGame(username);
     ship.position.x = 700 + (Math.random() * 200);
     ship.position.y = 350 + (Math.random() * 200);
@@ -75,6 +77,7 @@ export class GameRoom extends Room<GameState> {
   }
 
   onLeave(client) {
+    console.log("[GameRoom]", this.id, "Client Leave", + client.username);
     let ship = this.clientShipHash[client.id];
     ship.checkLevelUp();
     ShipHelper.saveShip(ship);
@@ -84,7 +87,7 @@ export class GameRoom extends Room<GameState> {
   }
 
   onDispose() {
-
+    console.log("[GameRoom]", this.id, "Disposed");
   }
 
   onUpdate( deltaTime ) {

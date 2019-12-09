@@ -8,7 +8,7 @@ import { GameState} from '../models/GameState';
 import { Position } from '../models/position';
 import { LineFormation } from './formations/LineFormation';
 import { RandomFormation } from './formations/RandomFormation';
-import { SquareFormation } from './formationsSquareFormation';
+import { SquareFormation } from './formations/SquareFormation';
 import { TriangleFormation } from './formations/TriangleFormation';
 import { DiagonalFormation } from './formations/DiagonalFormation';
 
@@ -39,7 +39,6 @@ export class Spawner {
   }
 
   nextWave() {
-    this.complete = false;
     this.number_of_formations = (this.state.current_wave + 3);
     this.possible_enemies = [];
     this.min_formations = Math.ceil(this.state.current_wave / 10);
@@ -64,7 +63,7 @@ export class Spawner {
       formation.onSpawnEnemies();
       this.number_of_formations--;
     }
-    if(number_of_formations > 0) {
+    if(this.number_of_formations > 0) {
       this.clock.setInterval(() => {
         this.spawnFormation();
       }, (Math.random() * 6000) + 4000);

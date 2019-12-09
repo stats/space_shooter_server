@@ -6,6 +6,7 @@ import { DestroyedBehaviour } from '../behaviours/player/DestroyedBehaviour';
 import { TakesDamageBehaviour } from '../behaviours/player/TakesDamageBehaviour';
 import { PrimaryAttackBehaviour } from '../behaviours/player/PrimaryAttackBehaviour';
 import { SpecialAttackBehaviour } from '../behaviours/player/SpecialAttackBehaviour';
+import { ShieldRechargeBehaviour } from '../behaviours/player/ShieldRechargeBehaviour';
 
 import { GameState } from './GameState';
 
@@ -81,10 +82,10 @@ export class Ship extends Entity {
   max_shields:number = 1; //TODO: Be the upgrade value
 
   @type("number")
-  shield_recharge_cooldown:number = 0;
+  shields_recharge_cooldown:number = 0;
 
   @type("number")
-  shield_recharge_time:number = 30000;
+  shields_recharge_time:number = 30000;
 
   @type("number")
   speed:number = 100; //TODO: Be the upgrade value
@@ -189,7 +190,7 @@ export class Ship extends Entity {
     this.shields = this.max_shields = this.getMaxShields();
     this.speed = this.getSpeed();
     this.accelleration = this.getAccelleration();
-    this.shield_recharge_time = 30000 - (20000 * (this.upgrade_shield_recharge / 20));
+    this.shields_recharge_time = 30000 - (20000 * (this.upgrade_shields_recharge / 20));
     this.updateNextLevel();
   }
 
