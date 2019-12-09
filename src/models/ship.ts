@@ -81,6 +81,12 @@ export class Ship extends Entity {
   max_shields:number = 1; //TODO: Be the upgrade value
 
   @type("number")
+  shield_recharge_cooldown:number = 0;
+
+  @type("number")
+  shield_recharge_time:number = 30000;
+
+  @type("number")
   speed:number = 100; //TODO: Be the upgrade value
 
   @type("number")
@@ -176,12 +182,14 @@ export class Ship extends Entity {
       new CollidesWithEnemyBullet(this),
       new DestroyedBehaviour(this),
       new TakesDamageBehaviour(this),
+      new ShieldRechargeBehaviour(this),
       new PrimaryAttackBehaviour(this),
       new SpecialAttackBehaviour(this)
     ]);
     this.shields = this.max_shields = this.getMaxShields();
     this.speed = this.getSpeed();
     this.accelleration = this.getAccelleration();
+    this.shield_recharge_time = 30000 - (20000 * (this.upgrade_shield_recharge / 20));
     this.updateNextLevel();
   }
 

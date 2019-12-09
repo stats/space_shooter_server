@@ -45,16 +45,18 @@ export class PrimaryAttackBehaviour extends Behaviour {
   setWeaponSystem() {
     let system_type = this.weapon_systems[this.target.primary_attack]["system_type"];
     this.system = new system_type({
+      entity: this.target,
       damage: this.weapon_systems[this.target.primary_attack]["damage"],
       range: this.weapon_systems[this.target.primary_attack]["range"],
       speed: this.weapon_systems[this.target.primary_attack]["speed"],
-      diameter: this.weapon_systems[this.target.primary_attack]["diameter"]
+      diameter: this.weapon_systems[this.target.primary_attack]["diameter"],
+      fire_rate: this.this.weapon_systems[this.target.primary_attack]["fire_rate"]
     });
-    this.fire_rate = this.weapon_systems[this.target.primary_attack]["fire_rate"];
+
   }
 
   canFire():boolean {
-    return this.cooldown >= this.fire_rate;
+    return this.cooldown >= this.system.fire_rate;
   }
 
 }

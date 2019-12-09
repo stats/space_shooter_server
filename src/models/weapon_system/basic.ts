@@ -14,12 +14,14 @@ export class Basic {
   speed:number;
   range:number;
   diameter:number;
+  fire_rate:number;
 
   constructor(options) {
-    this.damage = options.damage;
+    this.damage = options.damage + options.entity.upgrade_weapon_damage;
     this.speed = options.speed;
-    this.range = options.range;
+    this.range = options.range + (options.entity.upgrade_weapon_range * 20);
     this.diameter = options.diameter;
+    this.fire_rate = options.fire_rate - (options.fire_rate * .75 * (options.entity.upgade_weapon_fire_rate / 20));
   }
 
   getBullet(x, y) {
