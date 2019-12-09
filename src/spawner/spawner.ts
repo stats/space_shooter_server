@@ -2,70 +2,72 @@ import { Delayed } from 'colyseus';
 import Clock from '@gamestdio/timer';
 
 import { Enemy } from '../models/enemy';
+import { Scout } from '../models/enemies/scout';
+import { Hunter } from '../models/enemies/hunter';
 import { GameState} from '../models/GameState';
 import { Position } from '../models/position';
+import { LineFormation } from './formations/LineFormation';
+import { RandomFormation } from './formations/RandomFormation';
+import { SquareFormation } from './formationsSquareFormation';
+import { TriangleFormation } from './formations/TriangleFormation';
+import { DiagonalFormation } from './formations/DiagonalFormation';
 
 import { sample } from 'lodash';
 
 export class Spawner {
-  position:Position = new Position(0,0);
 
-  state:GameState;
+  private state:GameState;
+  private clock:Clock;
 
-  timeBetweenSpawns:number;
-  timeTillStart:number;
+  private number_of_formations:number = 0;
 
-  totalSpawns:number;
-  enemyTypes:Enemy[];
+  private enemy_types:any = [
+    [1, Scout],
+    [3, Hunter]
+  ];
 
-  clock:Clock;
+  private formations:any = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];
 
-  wave:number;
+  private possible_enemies:any;
 
-  spawnInterval:Delayed;
+  private min_formations = 1;
+  private max_formations = 1;
 
-  complete:boolean = false;
-
-  constructor(options) {
-    this.clock = options.clock;
-    this.state = options.state;
-    this.wave = options.wave;
-    this.position.x = options.x;
-    this.position.y = options.y;
-    this.timeBetweenSpawns = options.timeBetweenSpawns || 1500;
-    this.timeTillStart = options.timeTillStart || 1000;
-    this.totalSpawns = options.totalSpawns || 0;
-    this.enemyTypes = options.enemyTypes || [];
-
-    this.clock.setTimeout(() => {
-      this.start();
-    }, this.timeTillStart);
+  constructor(state:GameState, clock:Clock) {
+    this.state = state;
+    this.clock = clock;
   }
 
-  start() {
-    this.spawnInterval = this.clock.setInterval(() => {
-      this.spawn();
-    }, this.timeBetweenSpawns);
-  }
-
-  stop() {
-    if(this.spawnInterval) {
-      this.spawnInterval.clear();
+  nextWave() {
+    this.complete = false;
+    this.number_of_formations = (this.state.current_wave + 3);
+    this.possible_enemies = [];
+    this.min_formations = Math.ceil(this.state.current_wave / 10);
+    this.max_formations = Math.ceil(this.state.current_wave / 6);
+    for(let item of this.enemy_types) {
+      if(this.state.current_wave >= item[0]) {
+        this.possible_enemies.push(item[1]);
+      } else {
+        break;
+      }
     }
   }
 
-  spawn() {
-    this.totalSpawns--;
-    let enemy = new (sample(this.enemyTypes))({x: this.position.x, y: this.position.y});
-    enemy.updateStats(this.wave);
-    this.state.addEnemy(enemy);
-    this.checkSpawnInterval();
+  public complete() {
+    return this.number_of_formations == 0;
   }
 
-  checkSpawnInterval() {
-    if(this.totalSpawns <= 0) {
-      this.complete = true;
-      this.spawnInterval.clear();
+  spawnFormation() {
+    let formations = Math.min((Math.random() * (this.max_formations - this.min_formations)) + this.min_formations, this.number_of_formations);
+    for(let i = 0; i < formations; i++) {
+      let formation = new sample(this.formations)(this.state);
+      formation.onSpawnEnemies();
+      this.number_of_formations--;
+    }
+    if(number_of_formations > 0) {
+      this.clock.setInterval(() => {
+        this.spawnFormation();
+      }, (Math.random() * 6000) + 4000);
     }
   }
 }

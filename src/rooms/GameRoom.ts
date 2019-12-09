@@ -23,15 +23,14 @@ export class GameRoom extends Room<GameState> {
 
   clientShipHash:any = {};
 
-  private spawners_top:Spawner[];
-  private spawners_left:Spawner[];
-  private spawners_right:Spawner[];
+  private spawner;
 
   private spawnCompleteInterval:Delayed;
 
   onCreate(options) {
     this.setSimulationInterval((deltaTime) => this.onUpdate(deltaTime));
     this.setState(new GameState());
+    spawner = new Spawner(this.state, this.clock);
 
     this.state.current_wave = options.wave_rank || 0;
 
@@ -115,93 +114,17 @@ export class GameRoom extends Room<GameState> {
     ship.handleEvent('input', input);
   }
 
-  /** This is the complex function that sets difficulty based on the current wave **/
-  setupWave() {
-    let number_of_spawners_top = Math.min(this.state.current_wave/2, 16);
-    let number_of_spawners_side = Math.min(this.state.current_wave/4, 8);
-
-    let i, x, y;
-
-    this.spawners_top = [];
-    this.spawners_left = [];
-    this.spawners_right = [];
-
-    for(i = 0; i < number_of_spawners_top; i++) {
-      x = Math.floor(Math.random() * (C.BOUNDS.maxX - C.SPAWN_OFFSET)) + C.BOUNDS.minX + C.SPAWN_OFFSET;
-      this.spawners_top.push(new Spawner({
-          clock: this.clock,
-          state: this.state,
-          wave: this.state.current_wave,
-          x: x,
-          y: C.BOUNDS.maxY + C.SPAWN_OFFSET,
-          timeBetweenSpans: 1000,
-          timeTillStart: 0,
-          totalSpawns: 5,
-          enemyTypes: [Scout, Hunter]
-        }));
-    }
-
-    for(i = 0; i < number_of_spawners_side; i++) {
-      y = Math.floor(Math.random() * (C.BOUNDS.maxY - C.SPAWN_OFFSET)/2) + (C.BOUNDS.maxY/2);
-      this.spawners_left.push(new Spawner({
-        clock: this.clock,
-        state: this.state,
-        wave: this.state.current_wave,
-        x: -C.SPAWN_OFFSET,
-        y: y,
-        timeBetweenSpans: 1000,
-        timeTillStart: 0,
-        totalSpawns: 5,
-        enemyTypes: [Scout]
-      }));
-
-      y = Math.floor(Math.random() * (C.BOUNDS.maxY - C.SPAWN_OFFSET)/2) + (C.BOUNDS.maxY/2);
-      this.spawners_left.push(new Spawner({
-        clock: this.clock,
-        state: this.state,
-        wave: this.state.current_wave,
-        x: C.BOUNDS.maxX + C.SPAWN_OFFSET,
-        y: y,
-        timeBetweenSpans: 1000,
-        timeTillStart: 0,
-        totalSpawns: 5,
-        enemyTypes: [Scout]
-      }));
-    }
-  }
-
   startWave() {
-    this.setupWave();
+    this.spawner.nextWave();
     this.broadcast(`Wave ${this.state.current_wave} Starting`);
 
     this.spawnCompleteInterval = this.clock.setInterval(() => {
-      if(this.spawnsComplete() && !this.state.hasEnemies()) {
+      if(this.spawner.complete() && !this.state.hasEnemies()) {
         this.spawnCompleteInterval.clear();
         this.state.current_wave++;
         this.startWave();
       }
     }, this.spawnCompleteFrequency);
   }
-
-  spawnsComplete():boolean {
-    let spawner:Spawner;
-    for(spawner of this.spawners_top) {
-      if(!spawner.complete) {
-        return false;
-      }
-    }
-    for(spawner of this.spawners_left) {
-      if(!spawner.complete) {
-        return false;
-      }
-    }
-    for(spawner of this.spawners_right) {
-      if(!spawner.complete) {
-        return false;
-      }
-    }
-    return true;
-  }
-
 
 }
