@@ -36,6 +36,7 @@ export class ShipBuilderRoom extends Room {
   onMessage(client, data) {
     if(data.action === 'play') return this.playShip(client, data.uuid);
     if(data.action === 'create') return this.createShip(client, data.ship);
+    if(data.action === 'upgrade') return this.upgradeShip(client, data.uuid, data.upgrades);
     if(data.action === 'delete') return this.deleteShip(client, data.uuid);
   }
 
@@ -47,11 +48,29 @@ export class ShipBuilderRoom extends Room {
 
   }
 
+  private async upgradeShip(client, uuid, upgrades) {
+    const ship = await ShipHelper.getShip(client.username, uuid);
+    if(!ship) {
+      this.send(client, { action: "error", message: 'invalid_ship_to_upgrade'});
+      return;
+    }
+    const return_ship = await ShipHelper.upgradeShip(ship, upgrades);
+    console.log("Return Ship", return_ship);
+    if(return_ship) {
+      this.send(client, { action: 'ship_upgrade_success'});
+      this.sendShips(client);
+      return;
+    } else {
+      this.send(client, { action: "error", message: 'error_could_not_upgrade'});
+      return;
+    }
+  }
+
   private async playShip(client, uuid) {
     const ship = await ShipHelper.getShip(client.username, uuid);
 
     if(!ship) {
-      this.send(client, { error: 'error_invalid_ship' })
+      this.send(client, { error: 'error_invalid_ship' });
       return;
     }
     ShipHelper.addInGame(uuid);
@@ -61,7 +80,11 @@ export class ShipBuilderRoom extends Room {
   private async sendShips(client) {
     console.log('[ShipBuilderRoom] sending ships');
     let ships = await ShipHelper.getShips(client.username);
-    this.send(client, { action: 'ships', ships});
+    let ship_list = [];
+    for(let ship of ships) {
+      ship_list.push(new Ship(ship));
+    }
+    this.send(client, { action: 'ships', ships: ship_list});
   }
 
   private async createShip(client, ship) {

@@ -76,7 +76,8 @@ export class GameRoom extends Room<GameState> {
   }
 
   onLeave(client) {
-    let ship = this.clientShipHash[client.id]
+    let ship = this.clientShipHash[client.id];
+    ship.checkLevelUp();
     ShipHelper.saveShip(ship);
     this.state.removeShip(ship);
     ShipHelper.removeInGame(ship.uuid)

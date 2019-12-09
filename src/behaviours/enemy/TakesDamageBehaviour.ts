@@ -18,6 +18,7 @@ export class TakesDamageBehaviour extends Behaviour {
         ship.current_kills += 1;
         ship.kills += 1;
         ship.kill_score += this.target.$state.current_wave;
+        //TODO: Check if player leveled up and send a message if so
 
       }
       this.target.handleEvent('destroyed');

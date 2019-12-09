@@ -23,6 +23,9 @@ export class ShipHelper {
     data["accelleration"] = 50;
     data["speed"] = 50;
     data["max_shields"] = 1;
+    data["upgrade_points"] = 5;
+    data["level"] = 1;
+    data["next_level"] = 50;
     let ship = new Ship(data);
     console.log("Ship to save", ship.toSaveObject());
     return DB.$ships.insertOne(ship.toSaveObject());
@@ -34,6 +37,22 @@ export class ShipHelper {
 
   static async deleteShip(username:string, uuid:string) {
     return await DB.$ships.deleteOne({username: username, uuid: uuid});
+  }
+
+  static async upgradeShip(ship:Ship, upgrades:any) {
+    let spent_points:number = 0;
+    for (let key in upgrades) {
+      spent_points += upgrades[key];
+    }
+    if(spent_points > ship.upgrade_points) {
+      return false;
+    } else {
+      ship.upgrade_points -= spent_points;
+      for(let key in upgrades) {
+        ship["upgrade_" + key] += upgrades[key];
+      }
+      return await DB.$ships.updateOne({uuid: ship.uuid}, {$set: ship.toSaveObject() });
+    }
   }
 
   static async addInGame(uuid:string) {

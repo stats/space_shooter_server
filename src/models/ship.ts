@@ -75,16 +75,16 @@ export class Ship extends Entity {
   current_kills:number = 0;
 
   @type("int32")
-  shields:number;
+  shields:number = 1;
 
   @type("int32")
-  max_shields:number;
+  max_shields:number = 1; //TODO: Be the upgrade value
 
   @type("number")
-  speed:number = 100;
+  speed:number = 100; //TODO: Be the upgrade value
 
   @type("number")
-  accelleration:number = 5;
+  accelleration:number = 5; //TODO: Be the upgrade value
 
   @type("number")
   horizontal_accelleration:number = 0;
@@ -93,10 +93,13 @@ export class Ship extends Entity {
   vertical_accelleration:number = 0;
 
   @type("number")
-  weapon_power:number
+  rank:number = 1; //The current ranking of the ship which corresponds to which wave to start on
 
   @type("number")
-  rank:number; //The current ranking of the ship which corresponds to which wave to start on
+  level:number = 1;
+
+  @type("number")
+  next_level:number = 0;
 
   radius:number;
 
@@ -104,11 +107,65 @@ export class Ship extends Entity {
 
   inGame:number;
 
+  //upgrades
+  @type("int32")
+  upgrade_points:number = 0;
+
+  @type("int32")
+  upgrade_weapon_damage:number = 0;
+
+  @type("int32")
+  upgrade_weapon_range:number = 0;
+
+  @type("int32")
+  upgrade_weapon_fire_rate:number = 0;
+
+  @type("int32")
+  upgrade_accelleration:number = 0;
+
+  @type("int32")
+  upgrade_speed:number = 0;
+
+  @type("int32")
+  upgrade_shields_max:number = 0;
+
+  @type("int32")
+  upgrade_shields_recharge:number = 0;
+
+  getDamage() {
+    return 1 + this.upgrade_weapon_damage;
+  }
+
+  getRange() {
+    return 0 + (this.upgrade_weapon_range * 25)
+  }
+
+  getFireRate() {
+    return 0 + (this.upgrade_weapon_fire_rate * 250);
+  }
+
+  getMaxShields() {
+    return 1 + (this.upgrade_shields_max);
+  }
+
+  getShieldRecharge() {
+    return 0 + (this.upgrade_shields_recharge * 50);
+  }
+
+  getSpeed() {
+    return 50 + (this.upgrade_speed * 50);
+  }
+
+  getAccelleration() {
+    return 50 + (this.upgrade_accelleration * 50);
+  }
+
   constructor(opts) {
     super(opts);
     merge(this, opts);
     this.radius= 27;
     this.bullet_offset_y = 30;
+    this.updateNextLevel();
   }
 
   onInitGame(state:GameState) {
@@ -122,7 +179,22 @@ export class Ship extends Entity {
       new PrimaryAttackBehaviour(this),
       new SpecialAttackBehaviour(this)
     ]);
-    this.shields = this.max_shields;
+    this.shields = this.max_shields = this.getMaxShields();
+    this.speed = this.getSpeed();
+    this.accelleration = this.getAccelleration();
+    this.updateNextLevel();
+  }
+
+  checkLevelUp() {
+    while( this.kills > this.next_level ) {
+      this.level += 1;
+      this.upgrade_points += 1;
+      this.updateNextLevel();
+    }
+  }
+
+  updateNextLevel() {
+    this.next_level = Math.floor(50*Math.pow(this.level, 1.25))
   }
 
   toSaveObject():any {
@@ -143,14 +215,23 @@ export class Ship extends Entity {
       'max_shields',
       'speed',
       'accelleration',
-      'weapon_power',
       'ranks',
+      'level',
+      'next_level',
       'diameter',
       'width',
       'height',
       'inGame',
       'kills',
       'kill_score',
+      'upgrade_points',
+      'upgrade_weapon_damage',
+      'upgrade_weapon_range',
+      'upgrade_weapon_fire_rate',
+      'upgrade_speed',
+      'upgrade_accelleration',
+      'upgrade_shields_max',
+      'upgrade_shields_recharge',
       'createdAt'
     ]);
     return baseObj;

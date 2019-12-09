@@ -16,8 +16,8 @@ export class TargetPlayerStartPath extends Behaviour {
   }
 
   onUpdate(deltaTime) {
-    this.target.x += -Math.cos(this.theta) * this.target.speed * deltaTime/1000;
-    this.target.y += -Math.sin(this.theta) * this.target.speed * deltaTime/1000;
+    this.target.position.x += -Math.cos(this.theta) * this.target.speed * deltaTime/1000;
+    this.target.position.y += -Math.sin(this.theta) * this.target.speed * deltaTime/1000;
 
     if(CollisionHelper.outsideBounds(this.target)) this.target.handleEvent('destroyed');
   }

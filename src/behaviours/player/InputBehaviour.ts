@@ -30,21 +30,21 @@ export class InputBehaviour extends Behaviour {
   }
 
   private clampHorizontal() {
-    this.target.horizontal_accelleration = Math.min(Math.max(this.target.horizontal_accelleration, -this.target.speed), this.target.speed);
+    this.target.horizontal_accelleration = Math.min(Math.max(this.target.horizontal_accelleration, -this.target.getSpeed()), this.target.getSpeed());
   }
 
   private clampVertical() {
-    this.target.vertical_accelleration = Math.min(Math.max(this.target.vertical_accelleration, -this.target.speed), this.target.speed);
+    this.target.vertical_accelleration = Math.min(Math.max(this.target.vertical_accelleration, -this.target.getSpeed()), this.target.getSpeed());
   }
 
   public onUpdate(deltaTime:number) {
     if(this.horizontal_vector != 0) {
-      this.target.horizontal_accelleration += this.target.accelleration * this.horizontal_vector * (deltaTime/1000);
+      this.target.horizontal_accelleration += this.target.getAccelleration() * this.horizontal_vector * (deltaTime/1000);
       this.clampHorizontal();
       this.horizontal_vector = 0;
     }
     if(this.vertical_vector != 0) {
-      this.target.vertical_accelleration += this.target.accelleration * this.vertical_vector * (deltaTime/1000);
+      this.target.vertical_accelleration += this.target.getAccelleration() * this.vertical_vector * (deltaTime/1000);
       this.clampVertical();
       this.vertical_vector = 0;
     }

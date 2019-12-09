@@ -11,6 +11,7 @@ mkdir build\codegen
 
 ## Current Tasksart
 
+- [ ] Add debug information to the room for figure out why it gets disposed
 - [ ] Add the ability to modify ship attributes on the fly in development mode
 - [ ] Add AI ships for testing
 - [ ] Add an emote system

@@ -31,6 +31,8 @@ export class Entity extends Schema {
     super();
     merge(this, opts);
     if(!this.position) this.position = new Position(0, 0);
+    if(opts && opts.x) this.position.x = opts.x;
+    if(opts && opts.y) this.position.y = opts.y;
     if(!this.uuid) this.uuid = uuid();
   }
 
