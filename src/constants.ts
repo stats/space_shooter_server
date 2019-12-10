@@ -23,3 +23,9 @@ export class CT {
   public static ELLIPSE:number = 1;
   public static BOX:number = 2;
 }
+
+export class S {
+  public static TOP:number = 0;
+  public static LEFT:number = 1;
+  public static RIGHT:number = 2;
+}

@@ -1,5 +1,5 @@
 import { Formation } from './formation';
-import { C } from '../../constants';
+import { C, S } from '../../constants';
 
 export class TriangleFormation extends Formation {
 
@@ -21,26 +21,31 @@ export class TriangleFormation extends Formation {
     [160, 80]
   ];
 
-  onSpawnEnemies(spawn_type:any) {
-    let side:number = Math.floor(Math.random() * 3);
-    let start_x:number, start_y:number;
-    switch(side) {
-      case 0:
-        start_y = C.BOUNDS.maxY + C.SPAWN_OFFSET;
-        start_x = (Math.random() * (C.BOUNDS.maxX - 200)) + 100;
-        break;
-      case 1:
-        start_y = (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100;
-        start_x = -C.SPAWN_OFFSET;
+  onSpawnEnemies(spawn_type:any, allowed_sides?:number[]) {
+    let side:number, spawns:number, i:number, start_x:number, start_y:number;
 
+    if (sides) {
+      side = sample(sides);
+    } else {
+      side = Math.floor(Math.random() * 3);
+    }
+
+    switch(side) {
+      case S.TOP:
+        start_y = this.topOffset();
+        start_x = this.randomX();
         break;
-      case 2:
-        start_y = (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100;
-        start_x = C.BOUNDS.maxX + C.SPAWN_OFFSET;
+      case S.LEFT:
+        start_y = this.randomY();
+        start_x = this.leftOffset();
+        break;
+      case S.RIGTH:
+        start_y = this.randomY();
+        start_x = this.rightOffset();
         break;
     }
 
-    let spawns = 1;
+    spawns = 1;
     if(this.state.current_wave > 5) {
       spawns = 3;
     } else if (this.state.current_wave > 10 ) {
@@ -51,7 +56,7 @@ export class TriangleFormation extends Formation {
       spawns = 15;
     }
 
-    for(var i = 0; i < spawns; i++) {
+    for(i = 0; i < spawns; i++) {
       if(side == 1) {
         this.state.addEnemy(new spawn_type({x: start_y - this.positions[i][1], y: start_x + this.positions[i][0]}));
       } else if (side == 2) {
