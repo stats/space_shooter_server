@@ -15,17 +15,17 @@ mkdir build\codegen
 - [ ] Add the ability to modify ship attributes on the fly in development mode
 - [ ] Add AI ships for testing
 - [ ] Add an emote system
-- [ ] Add primary and secondary attacks to ship ShipBuilder
 - [ ] Track number of ships create and deleted
 - [ ] Track number of enemies killed by type
 - [ ] Handle error when building a null ship
 - [ ] Add instructions on how to play the game
-- [ ] Gain Experience and level up abilities for the ship
 - [ ] Make the background of the gameroom move
 - [ ] Add effects for air thrusters when ship moves side to side or backwards
 
 ### User Interface
 - [ ] Add UI that shows secondary weapon fire_rate
+- [ ] Add primary and secondary attacks to ship ShipBuilder
+- [ ] Add UI that shows shield recharge
 - [ ] Add HUD for friendly ships
 - [ ] Add ship names in the HUD under the ship
 - [ ] Add popup warning to confirm destruction of a ship
@@ -64,6 +64,7 @@ mkdir build\codegen
 - [x] Implement davidfig/intersects collision library for ellipse-ellipse and ellipse-circle collisions
 - [x] Add bullet explosion effects
 - [x] Add ship explosion effects
+- [x] Gain Experience and level up abilities for the ship
 
 
 ## Simple Design Documentation
