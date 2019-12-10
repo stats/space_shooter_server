@@ -1,1 +1,0 @@
-/* A shield that activates for a short period of time */

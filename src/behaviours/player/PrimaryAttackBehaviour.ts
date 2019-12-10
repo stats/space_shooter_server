@@ -14,7 +14,16 @@ export class PrimaryAttackBehaviour extends Behaviour {
       range: 500,
       speed: 400,
       fire_rate: 1000,
-      diameter: 15,
+      radius: 15,
+    },
+    {
+      system_type: Blaster,
+      damage: 2,
+      range: 400,
+      speed: 350,
+      fire_rate: 1500,
+      radiusX: 20,
+      radiusY: 30
     }
   ]
 
@@ -47,7 +56,7 @@ export class PrimaryAttackBehaviour extends Behaviour {
       damage: this.weapon_systems[this.target.primary_attack]["damage"],
       range: this.weapon_systems[this.target.primary_attack]["range"],
       speed: this.weapon_systems[this.target.primary_attack]["speed"],
-      diameter: this.weapon_systems[this.target.primary_attack]["diameter"],
+      radius: this.weapon_systems[this.target.primary_attack]["radius"],
       fire_rate: this.weapon_systems[this.target.primary_attack]["fire_rate"]
     });
 

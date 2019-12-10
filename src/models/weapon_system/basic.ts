@@ -13,14 +13,14 @@ export class Basic {
   damage:number;
   speed:number;
   range:number;
-  diameter:number;
+  dradius:number;
   fire_rate:number;
 
   constructor(options) {
     this.damage = options.damage + options.entity.upgrade_weapon_damage;
     this.speed = options.speed;
     this.range = options.range + (options.entity.upgrade_weapon_range * 20);
-    this.diameter = options.diameter;
+    this.radius = options.radius;
     this.fire_rate = options.fire_rate - (options.fire_rate * 0.75 * (options.entity.upgrade_weapon_fire_rate / 20));
   }
 
@@ -30,7 +30,7 @@ export class Basic {
       speed: this.speed,
       range: this.range,
       collision_type: CT.CIRCLE,
-      radius: this.diameter,
+      radius: this.radius,
       bullet_mesh: 0,
       x: x,
       y: y,

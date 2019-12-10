@@ -14,6 +14,10 @@ export class SpecialAttackBehaviour extends Behaviour {
     {
       system_type: Shotgun,
       fire_rate: 10000
+    },
+    {
+      system_type: ScatterShot,
+      fire_rate: 30000
     }
   ];
 
