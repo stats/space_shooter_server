@@ -1,12 +1,12 @@
 import { Formation } from './formation';
-import { C } from '../../constants';
+import { C, S } from '../../constants';
 import { Scout } from '../../models/enemies/scout';
 
 export class RandomFormation extends Formation {
 
   onSpawnEnemies(spawn_type:any) {
 
-    let spawns = 3;
+    let i:number, spawns:number = 3;
     if(this.state.current_wave > 5) {
       spawns = 4;
     } else if (this.state.current_wave > 10 ) {
@@ -21,21 +21,21 @@ export class RandomFormation extends Formation {
       spawns = 12;
     }
 
-    for(var i = 0; i < spawns; i++) {
+    for(i = 0; i < spawns; i++) {
       let side:number = Math.floor(Math.random() * 3);
       let start_x:number, start_y:number;
       switch(side) {
-        case 0:
-          start_y = C.BOUNDS.maxY + C.SPAWN_OFFSET + (Math.random() * C.SPAWN_OFFSET * 10);
-          start_x = (Math.random() * (C.BOUNDS.maxX - 200)) + 100;
+        case S.TOP:
+          start_x = this.randomX();
+          start_y = this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 10);
           break;
-        case 1:
-          start_y = (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100;
-          start_x = -C.SPAWN_OFFSET - (Math.random() * C.SPAWN_OFFSET * 10) + C.BOUNDS.maxY/2;
+        case S.LEFT:
+          start_x = this.leftOffset() - (Math.random() * C.SPAWN_OFFSET * 10) + C.BOUNDS.maxY/2;
+          start_y = this.randomY();
           break;
-        case 2:
-          start_y = (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100;
-          start_x = C.BOUNDS.maxX + C.SPAWN_OFFSET + (Math.random() * C.SPAWN_OFFSET * 10) + C.BOUNDS.maxY/2;
+        case S.RIGHT:
+          start_x = this.rightOffset() + (Math.random() * C.SPAWN_OFFSET * 10) + C.BOUNDS.maxY/2;
+          start_y = this.randomY();
           break;
       }
       this.state.addEnemy(new spawn_type({x: start_x , y: start_y }));
