@@ -11,10 +11,10 @@ export class SquareFormation extends Formation {
     [-120, 180], [-60, 180], [0, 180], [-60, 180], [120, 180]
   ];
 
-  onSpawnEnemies(spawn_type:any) {
+  onSpawnEnemies(spawn_type:any, allowed_sides?:number[]) {
     let side:number, spawns:number, i:number, start_x:number, start_y:number;
 
-    side = this.getRandomSide();
+    side = this.getRandomSide(allowed_sides);
     [start_x, start_y] = this.getStartPositions(side);
 
     spawns = 3;
@@ -28,7 +28,7 @@ export class SquareFormation extends Formation {
       spawns = 20;
     }
 
-    this.spawnEnemy(side, spawns, spawn_type);
+    this.spawnEnemies(start_x, start_y, side, spawns, spawn_type);
   }
 
 }

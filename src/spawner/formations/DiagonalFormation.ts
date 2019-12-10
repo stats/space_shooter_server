@@ -5,13 +5,13 @@ import { Scout } from '../../models/enemies/scout';
 export class DiagonalFormation extends Formation {
 
   positions:any = [
-    [0,0],[20, 60],[40,120],[60,180],[80,240],[100,300],[120, 360]
+    [0,0],[60, 100],[120,200],[180,300],[240,400],[300,500],[360, 600]
   ];
 
-  onSpawnEnemies(spawn_type:any) {
+  onSpawnEnemies(spawn_type:any, allowed_sides?:number[]) {
     let side:number, spawns:number, i:number, start_x:number, start_y:number, swap:number;
 
-    side = this.getRandomSide();
+    side = this.getRandomSide(allowed_sides);
     [start_x, start_y] = this.getStartPositions(side);
 
     swap = Math.random() > 0.5 ? 1 : -1;
@@ -27,7 +27,7 @@ export class DiagonalFormation extends Formation {
       spawns = 7;
     }
 
-    this.spawnEnemy(side, spawns, spawn_type);
+    this.spawnEnemies(start_x, start_y, side, spawns, spawn_type);
   }
 
 }

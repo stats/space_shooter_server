@@ -4,9 +4,10 @@ import { Scout } from '../../models/enemies/scout';
 
 export class RandomFormation extends Formation {
 
-  onSpawnEnemies(spawn_type:any) {
+  onSpawnEnemies(spawn_type:any, allowed_sides?:number[]) {
 
-    let i:number, spawns:number = 3;
+    let i:number, spawns:number;
+    spawns = 3;
     if(this.state.current_wave > 5) {
       spawns = 4;
     } else if (this.state.current_wave > 10 ) {
@@ -22,19 +23,19 @@ export class RandomFormation extends Formation {
     }
 
     for(i = 0; i < spawns; i++) {
-      let side:number = Math.floor(Math.random() * 3);
-      let start_x:number, start_y:number;
+      let side:number, start_x:number, start_y:number;
+      side = this.getRandomSide(allowed_sides);
       switch(side) {
         case S.TOP:
           start_x = this.randomX();
           start_y = this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 10);
           break;
         case S.LEFT:
-          start_x = this.leftOffset() - (Math.random() * C.SPAWN_OFFSET * 10) + C.BOUNDS.maxY/2;
+          start_x = this.leftOffset() - (Math.random() * C.SPAWN_OFFSET * 10);
           start_y = this.randomY();
           break;
         case S.RIGHT:
-          start_x = this.rightOffset() + (Math.random() * C.SPAWN_OFFSET * 10) + C.BOUNDS.maxY/2;
+          start_x = this.rightOffset() + (Math.random() * C.SPAWN_OFFSET * 10);
           start_y = this.randomY();
           break;
       }

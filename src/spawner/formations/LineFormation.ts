@@ -8,10 +8,10 @@ export class LineFormation extends Formation {
     [0,0],[0,100],[0,200],[0,300],[0,400],[0,500],[0,600]
   ];
 
-  onSpawnEnemies(spawn_type:any) {
+  onSpawnEnemies(spawn_type:any, allowed_sides?:number[]) {
     let side:number, spawns:number, i:number, start_x:number, start_y:number;
 
-    side = this.getRandomSide();
+    side = this.getRandomSide(allowed_sides);
     [start_x, start_y] = this.getStartPositions(side);
 
     spawns = 3;
@@ -25,7 +25,7 @@ export class LineFormation extends Formation {
       spawns = 7;
     }
 
-    this.spawnEnemy(side, spawns, spawn_type);
+    this.spawnEnemies(start_x, start_y, side, spawns, spawn_type);
   }
 
 }
