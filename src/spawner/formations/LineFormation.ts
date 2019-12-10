@@ -5,7 +5,7 @@ import { Scout } from '../../models/enemies/scout';
 export class LineFormation extends Formation {
 
   positions:any = [
-    [0,0],[0, 60],[0,120],[0,180],[0,240],[0,300],[0, 360]
+    [0,0],[0,100],[0,200],[0,300],[0,400],[0,500],[0,600]
   ];
 
   onSpawnEnemies(spawn_type:any) {
@@ -14,15 +14,15 @@ export class LineFormation extends Formation {
     switch(side) {
       case 0:
         start_y = C.BOUNDS.maxY + C.SPAWN_OFFSET;
-        start_x = (Math.random() * (C.BOUNDS.maxX - 200)) + 100;
+        start_x = Math.round((Math.random() * (C.BOUNDS.maxX - 200)) + 100);
         break;
       case 1:
-        start_y = (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100;
+        start_y = Math.round((Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100 + C.BOUNDS.maxY/2);
         start_x = -C.SPAWN_OFFSET;
 
         break;
       case 2:
-        start_y = (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100;
+        start_y = Math.round((Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100 + C.BOUNDS.maxY/2);
         start_x = C.BOUNDS.maxX + C.SPAWN_OFFSET;
         break;
     }
@@ -38,13 +38,14 @@ export class LineFormation extends Formation {
       spawns = 7;
     }
 
+    console.log('Side:', side, spawns);
     for(var i = 0; i < spawns; i++) {
       if(side == 1) {
-        this.state.addEnemy(new spawn_type({x: start_y - this.positions[i][1], y: start_x + this.positions[i][0]}));
+        this.state.addEnemy(new spawn_type({x: start_x - this.positions[i][1], y: start_y + this.positions[i][0]}));
       } else if (side == 2) {
-        this.state.addEnemy(new spawn_type({x: start_y + this.positions[i][1], y: start_x - this.positions[i][0]}));
+        this.state.addEnemy(new spawn_type({x: start_x + this.positions[i][1], y: start_y - this.positions[i][0]}));
       } else {
-        this.state.addEnemy(new spawn_type({x:start_x + this.positions[i][0], y: start_y + this.positions[i][1]}));
+        this.state.addEnemy(new spawn_type({x: start_x + this.positions[i][0], y: start_y + this.positions[i][1]}));
       }
     }
   }

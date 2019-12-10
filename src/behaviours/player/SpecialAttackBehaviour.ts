@@ -24,6 +24,7 @@ export class SpecialAttackBehaviour extends Behaviour {
     let system_type = this.special_systems[this.target.special_attack]["system_type"];
     this.system = new system_type(this.target);
     this.target.special_cooldown_max = this.special_systems[this.target.special_attack]["fire_rate"];
+    this.target.special_cooldown = this.target.special_cooldown_max;
   }
 
   public onEvent() {

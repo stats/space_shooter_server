@@ -49,22 +49,22 @@ export class Ship extends Entity {
   weapon_mat:number;
 
   @type("int32")
-  primary_attack:number;
+  primary_attack:number = 0;
 
   @type("number")
-  primary_cooldown_max:number;
+  primary_cooldown_max:number = 0;
 
   @type("number")
-  primary_cooldown:number;
+  primary_cooldown:number = 0;
 
   @type("int32")
-  special_attack:number;
+  special_attack:number = 0;
 
   @type("number")
-  special_cooldown_max:number;
+  special_cooldown_max:number = 0;
 
   @type("number")
-  special_cooldown:number;
+  special_cooldown:number = 0;
 
   @type("number")
   kills:number = 0;

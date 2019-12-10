@@ -6,6 +6,7 @@ import { Ship } from '../../models/ship';
 export class TargetPlayerStartPath extends Behaviour {
 
   theta:number = 0;
+  entered_screen:boolean = false;
 
   constructor(target:any) {
     super('TargetPlayerStartPath', target);
@@ -19,6 +20,11 @@ export class TargetPlayerStartPath extends Behaviour {
     this.target.position.x += -Math.cos(this.theta) * this.target.speed * deltaTime/1000;
     this.target.position.y += -Math.sin(this.theta) * this.target.speed * deltaTime/1000;
 
-    if(CollisionHelper.outsideBounds(this.target)) this.target.handleEvent('destroyed');
+    if(!this.entered_screen && CollisionHelper.insideBounds(this.target)){
+      this.entered_screen = true;
+    }
+    if(this.entered_screen && CollisionHelper.outsideBounds(this.target)) {
+      this.target.handleEvent('destroyed');
+    }
   }
 }

@@ -26,16 +26,16 @@ export class RandomFormation extends Formation {
       let start_x:number, start_y:number;
       switch(side) {
         case 0:
-          start_y = C.BOUNDS.maxY + C.SPAWN_OFFSET + (Math.random() * C.SPAWN_OFFSET * 3);
+          start_y = C.BOUNDS.maxY + C.SPAWN_OFFSET + (Math.random() * C.SPAWN_OFFSET * 10);
           start_x = (Math.random() * (C.BOUNDS.maxX - 200)) + 100;
           break;
         case 1:
           start_y = (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100;
-          start_x = -C.SPAWN_OFFSET - (Math.random() * C.SPAWN_OFFSET * 3);
+          start_x = -C.SPAWN_OFFSET - (Math.random() * C.SPAWN_OFFSET * 10) + C.BOUNDS.maxY/2;
           break;
         case 2:
           start_y = (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100;
-          start_x = C.BOUNDS.maxX + C.SPAWN_OFFSET + (Math.random() * C.SPAWN_OFFSET * 3);
+          start_x = C.BOUNDS.maxX + C.SPAWN_OFFSET + (Math.random() * C.SPAWN_OFFSET * 10) + C.BOUNDS.maxY/2;
           break;
       }
       this.state.addEnemy(new spawn_type({x: start_x , y: start_y }));

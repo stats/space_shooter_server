@@ -21,7 +21,7 @@ export class Basic {
     this.speed = options.speed;
     this.range = options.range + (options.entity.upgrade_weapon_range * 20);
     this.diameter = options.diameter;
-    this.fire_rate = options.fire_rate - (options.fire_rate * .75 * (options.entity.upgade_weapon_fire_rate / 20));
+    this.fire_rate = options.fire_rate - (options.fire_rate * 0.75 * (options.entity.upgrade_weapon_fire_rate / 20));
   }
 
   getBullet(x, y) {

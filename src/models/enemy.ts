@@ -42,5 +42,6 @@ export class Enemy extends Entity {
       new DestroyedBehaviour(this),
       new TakesDamageBehaviour(this)
     ]);
+    this.updateStats(state.current_wave);
   }
 }
