@@ -58,11 +58,11 @@ export class TriangleFormation extends Formation {
 
     for(i = 0; i < spawns; i++) {
       if(side == 1) {
-        this.state.addEnemy(new spawn_type({x: start_y - this.positions[i][1], y: start_x + this.positions[i][0]}));
+        this.state.addEnemy(new spawn_type({x: start_x - this.positions[i][1], y: start_y + this.positions[i][0]}));
       } else if (side == 2) {
-        this.state.addEnemy(new spawn_type({x: start_y + this.positions[i][1], y: start_x - this.positions[i][0]}));
+        this.state.addEnemy(new spawn_type({x: start_x + this.positions[i][1], y: start_y - this.positions[i][0]}));
       } else {
-        this.state.addEnemy(new spawn_type({x:start_x + this.positions[i][0], y: start_y + this.positions[i][1]}));
+        this.state.addEnemy(new spawn_type({x: start_x + this.positions[i][0], y: start_y + this.positions[i][1]}));
       }
     }
   }

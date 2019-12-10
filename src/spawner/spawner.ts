@@ -50,6 +50,7 @@ export class Spawner {
         break;
       }
     }
+    this.spawnFormation();
   }
 
   public complete() {
@@ -59,12 +60,13 @@ export class Spawner {
   spawnFormation() {
     let formations = Math.min((Math.random() * (this.max_formations - this.min_formations)) + this.min_formations, this.number_of_formations);
     for(let i = 0; i < formations; i++) {
-      let formation = new sample(this.formations)(this.state);
-      formation.onSpawnEnemies();
+      let formation = new (sample(this.formations))(this.state);
+      console.log('Spawned Formation:', formation.constructor.name);
+      formation.onSpawnEnemies(sample(this.possible_enemies));
       this.number_of_formations--;
     }
     if(this.number_of_formations > 0) {
-      this.clock.setInterval(() => {
+      this.clock.setTimeout(() => {
         this.spawnFormation();
       }, (Math.random() * 6000) + 4000);
     }

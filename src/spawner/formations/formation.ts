@@ -16,8 +16,7 @@ export class Formation {
   }
 
   randomY() {
-    return (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100;
-  }
+    return (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100 + C.BOUNDS.maxY/2;
 
   topOffset() {
     return C.BOUNDS.maxY + C.SPAWN_OFFSET;
