@@ -24,7 +24,7 @@ export class ScatterShot {
         bullet_mesh: 0,
         x: spawn_location.x,
         y: spawn_location.y,
-        angle: i * 10,
+        angle: i * 10 * (Math.PI/180),
         behaviours: [StraightAnglePath],
         bullet_type: C.SHIP_BULLET
       });

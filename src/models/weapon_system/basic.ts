@@ -13,7 +13,7 @@ export class Basic {
   damage:number;
   speed:number;
   range:number;
-  dradius:number;
+  radius:number;
   fire_rate:number;
 
   constructor(options) {

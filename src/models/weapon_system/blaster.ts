@@ -1,14 +1,10 @@
-/* Basic bullet */
-
-/* This is also the mechanism for firing the bullet */
-
 import { Bullet } from '../bullet';
 import { C, CT } from '../../constants';
 import { GameState } from '../GameState';
 import { Entity } from '../entity';
 import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
 
-export class Basic {
+export class Blaster {
 
   damage:number;
   speed:number;

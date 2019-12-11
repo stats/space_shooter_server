@@ -8,7 +8,7 @@ export class StraightAnglePath extends Behaviour {
 
   constructor(target:any) {
     super('StraightAnglePath', target);
-    this.start = this.target.position;
+    this.start = new Position(this.target.position.x, this.target.position.y);
   }
 
   onUpdate(deltaTime) {

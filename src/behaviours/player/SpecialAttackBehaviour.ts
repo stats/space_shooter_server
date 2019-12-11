@@ -3,6 +3,7 @@ import { C } from '../../constants';
 import { Bounds } from '../../helpers/Bounds';
 import { EmergencyBrake } from '../../models/specials/emergency_brake';
 import { Shotgun } from '../../models/specials/shotgun';
+import { ScatterShot } from '../../models/specials/scatter_shot';
 
 export class SpecialAttackBehaviour extends Behaviour {
 
@@ -13,11 +14,11 @@ export class SpecialAttackBehaviour extends Behaviour {
     },
     {
       system_type: Shotgun,
-      fire_rate: 10000
+      fire_rate: 3000
     },
     {
       system_type: ScatterShot,
-      fire_rate: 30000
+      fire_rate: 5000
     }
   ];
 
