@@ -27,7 +27,7 @@ export class Shotgun {
         behaviours: [StraightAnglePath],
         bullet_type: C.SHIP_BULLET
       });
-      this.target.$state.addBullet(bullet)
+      this.target.$state.addBullet(bullet);
     }
   }
 }

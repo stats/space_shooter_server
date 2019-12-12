@@ -13,9 +13,9 @@ export class ScatterShot {
   }
 
   handleEvent() {
-    for(let i = 0; i < 36; i++) {
+    for(let i = 0; i < 18; i++) {
       let spawn_location = this.target.getBulletSpawnLocation();
-      return new Bullet({
+      let bullet:Bullet = new Bullet({
         damage: Math.floor(1 + (this.target.upgrade_weapon_damage / 5)),
         speed: 500,
         range: 250,
@@ -24,10 +24,11 @@ export class ScatterShot {
         bullet_mesh: 0,
         x: spawn_location.x,
         y: spawn_location.y,
-        angle: i * 10 * (Math.PI/180),
+        angle: i * 20 * (Math.PI/180),
         behaviours: [StraightAnglePath],
         bullet_type: C.SHIP_BULLET
       });
+      this.target.$state.addBullet(bullet);
     }
   }
 }
