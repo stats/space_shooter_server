@@ -28,6 +28,7 @@ export class ScatterShot {
         behaviours: [StraightAnglePath],
         bullet_type: C.SHIP_BULLET
       });
+      bullet.fired_by = this.target;
       this.target.$state.addBullet(bullet);
     }
   }

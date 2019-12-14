@@ -11,6 +11,10 @@ mkdir build\codegen
 
 ## Current Tasksart
 
+- [ ] Fix duplication of ship in the creator window
+- [ ] Make the weapons models correspond to the actually equipped weapons.
+- [ ] Make models for special abilities being attached to a ship.
+- [ ] Add effects for when special abilities fire.
 - [ ] Add debug information to the room for figure out why it gets disposed
 - [ ] Add the ability to modify ship attributes on the fly in development mode
 - [ ] Add AI ships for testing
@@ -21,16 +25,17 @@ mkdir build\codegen
 - [ ] Add instructions on how to play the game
 - [ ] Make the background of the gameroom move
 - [ ] Add effects for air thrusters when ship moves side to side or backwards
+- [ ] Add account level unlock points to allow a player to purchase upgrades as they complete wave benchmarks
 
 ### User Interface
-- [ ] Add UI that shows secondary weapon fire_rate
 - [ ] Add primary and secondary attacks to ship ShipBuilder
-- [ ] Add UI that shows shield recharge
 - [ ] Add HUD for friendly ships
 - [ ] Add ship names in the HUD under the ship
 - [ ] Add popup warning to confirm destruction of a ship
 - [ ] Show ship stats in the shipyard: rank, level, kills, abilities, primary and secondary
 - [ ] Make ship acceleration a bar graph (maybe shaped like a plus) [----|==--]
+- [ ] Add experience bar in the game window
+- [ ] Add notification icon when user levels up
 
 ### Networking
 - [ ] Auto renew JWT token
@@ -65,6 +70,9 @@ mkdir build\codegen
 - [x] Add bullet explosion effects
 - [x] Add ship explosion effects
 - [x] Gain Experience and level up abilities for the ship
+- [x] Add UI that shows secondary weapon fire_rate
+- [x] Add UI that shows shield recharge
+- [x] Track user progress through waves to increase the player's wave rank.
 
 
 ## Simple Design Documentation

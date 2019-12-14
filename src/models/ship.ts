@@ -103,6 +103,9 @@ export class Ship extends Entity {
   rank:number = 1; //The current ranking of the ship which corresponds to which wave to start on
 
   @type("number")
+  highest_wave:number = 1;
+
+  @type("number")
   level:number = 1;
 
   @type("number")
@@ -167,6 +170,17 @@ export class Ship extends Entity {
     return 50 + (this.upgrade_accelleration * 50);
   }
 
+  updateWaveRank(wave:number) {
+    if(wave > this.highest_wave) {
+      this.highest_wave = wave;
+    }
+    if( wave > this.rank ) {
+      this.rank += Math.round((wave - this.rank) / 2);
+    } else if ( wave < this.rank) {
+      this.rank -= Math.floor((this.rank - wave) / 4);
+    }
+  }
+
   constructor(opts) {
     super(opts);
     merge(this, opts);
@@ -224,7 +238,8 @@ export class Ship extends Entity {
       'max_shields',
       'speed',
       'accelleration',
-      'ranks',
+      'rank',
+      'highest_wave',
       'level',
       'next_level',
       'diameter',

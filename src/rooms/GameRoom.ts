@@ -80,6 +80,7 @@ export class GameRoom extends Room<GameState> {
     console.log("[GameRoom]", this.roomId, "Client Leave", + client.username);
     let ship = this.clientShipHash[client.id];
     ship.checkLevelUp();
+    ship.updateWaveRank(this.state.current_wave);
     ShipHelper.saveShip(ship);
     this.state.removeShip(ship);
     ShipHelper.removeInGame(ship.uuid)

@@ -11,6 +11,11 @@ export class TargetPlayerStartPath extends Behaviour {
   constructor(target:any) {
     super('TargetPlayerStartPath', target);
     let ship:Ship = this.target.$state.getClosestShip(this.target.x, this.target.y);
+    if(ship == null){
+      console.log("Error: Ship is null in TargetPlayerStartPath");
+      this.target.handleEvent('destroyed');
+      return;
+    }
     let dx = this.target.position.x - ship.position.x;
     let dy = this.target.position.y - ship.position.y;
     this.theta = Math.atan2(dy, dx);

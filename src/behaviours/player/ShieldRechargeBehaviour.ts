@@ -13,11 +13,11 @@ export class ShieldRechargeBehaviour extends Behaviour {
   }
 
   public onUpdate(deltaTime:number) {
-    if(this.target.shield_recharge_cooldown <= this.target.shield_recharge_time && this.target.shield < this.target.max_shields) {
-      this.target.shield_recharge_cooldown += deltaTime;
-    } else if(this.target.shield_recharge_cooldown > this.target.shield_recharge_time && this.target.shield < this.target.max_shields) {
-      this.target.shield_recharge_cooldown = 0;
-      this.target.shield += 1;
+    if(this.target.shields_recharge_cooldown <= this.target.shields_recharge_time && this.target.shields < this.target.max_shields) {
+      this.target.shields_recharge_cooldown += deltaTime;
+    } else if(this.target.shields_recharge_cooldown > this.target.shields_recharge_time && this.target.shields < this.target.max_shields) {
+      this.target.shields_recharge_cooldown = 0;
+      this.target.shields += 1;
     }
   }
 
