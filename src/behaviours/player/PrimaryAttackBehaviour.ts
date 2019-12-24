@@ -15,16 +15,15 @@ export class PrimaryAttackBehaviour extends Behaviour {
       range: 500,
       speed: 400,
       fire_rate: 1000,
-      radius: 15,
+      radius: 15
     },
     {
       system_type: Blaster,
       damage: 2,
-      range: 400,
-      speed: 350,
+      range: 300,
+      speed: 250,
       fire_rate: 1500,
-      radiusX: 20,
-      radiusY: 30
+      radius: 15
     }
   ]
 
@@ -60,9 +59,9 @@ export class PrimaryAttackBehaviour extends Behaviour {
       radius: this.weapon_systems[this.target.primary_attack]["radius"],
       fire_rate: this.weapon_systems[this.target.primary_attack]["fire_rate"]
     });
-
+    console.log(this.system);
   }
-
+das
   canFire():boolean {
     return this.target.primary_cooldown >= this.target.primary_cooldown_max;
   }

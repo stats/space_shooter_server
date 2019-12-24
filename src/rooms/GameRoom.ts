@@ -33,7 +33,7 @@ export class GameRoom extends Room<GameState> {
     this.setState(new GameState());
     this.spawner = new Spawner(this.state, this.clock);
 
-    this.state.current_wave = options.wave_rank || 0;
+    this.state.current_wave = Math.max(options.wave_rank, 1) || 1;
 
     let game_start_timeout = this.clock.setInterval(() => {
       this.state.start_game -= 1;

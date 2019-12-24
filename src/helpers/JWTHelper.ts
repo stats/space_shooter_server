@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 
 const AUTH_SECRET = process.env.AUTH_SECRET || 'change_me_make_me_secret';
+const MAX_AGE = 3600;
 
 export class JWTHelper {
   public static createJWToken(details) {
@@ -37,9 +38,9 @@ export class JWTHelper {
       success: true,
       token: JWTHelper.createJWToken({
         sessionData: username,
-        maxAge: 3600
+        maxAge: MAX_AGE
       }),
-      expiresIn: 3600,
+      expiresIn: MAX_AGE,
       username: username
     };
   }

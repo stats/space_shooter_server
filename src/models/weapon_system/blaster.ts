@@ -9,16 +9,14 @@ export class Blaster {
   damage:number;
   speed:number;
   range:number;
-  radiusX:number;
-  radiusY:number;
+  radius:number;
   fire_rate:number;
 
   constructor(options) {
     this.damage = options.damage + options.entity.upgrade_weapon_damage;
     this.speed = options.speed;
     this.range = options.range + (options.entity.upgrade_weapon_range * 20);
-    this.radiusX = options.radiusX;
-    this.radiusY = options.radiusY;
+    this.radius = options.radius;
     this.fire_rate = options.fire_rate - (options.fire_rate * 0.75 * (options.entity.upgrade_weapon_fire_rate / 20));
   }
 
@@ -27,9 +25,8 @@ export class Blaster {
       damage: this.damage,
       speed: this.speed,
       range: this.range,
-      collision_type: CT.ELLIPSE,
-      radiusX: this.radiusX,
-      radiusY: this.radiusY,
+      collision_type: CT.CIRCLE,
+      radius: this.radius,
       bullet_mesh: 1,
       x: x,
       y: y,
