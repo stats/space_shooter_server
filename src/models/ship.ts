@@ -49,16 +49,16 @@ export class Ship extends Entity {
   weapon_mat:number;
 
   @type("int32")
-  primary_attack:number = 0;
+  special_mesh:number;
+
+  @type("int32")
+  special_mat:number;
 
   @type("number")
   primary_cooldown_max:number = 0;
 
   @type("number")
   primary_cooldown:number = 0;
-
-  @type("int32")
-  special_attack:number = 0;
 
   @type("number")
   special_cooldown_max:number = 0;
@@ -185,7 +185,7 @@ export class Ship extends Entity {
     super(opts);
     merge(this, opts);
     this.radius= 27;
-    this.bullet_offset_y = 30;
+    this.bullet_offset_y = 50;
     this.updateNextLevel();
   }
 
@@ -233,8 +233,8 @@ export class Ship extends Entity {
       'engine_mat',
       'weapon_mesh',
       'weapon_mat',
-      'primary_attack',
-      'special_attack',
+      'special_mesh',
+      'special_mat',
       'max_shields',
       'speed',
       'accelleration',

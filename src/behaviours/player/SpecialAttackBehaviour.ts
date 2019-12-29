@@ -26,9 +26,9 @@ export class SpecialAttackBehaviour extends Behaviour {
 
   constructor(target) {
     super('special_attack', target);
-    let system_type = this.special_systems[this.target.special_attack]["system_type"];
+    let system_type = this.special_systems[this.target.special_mesh]["system_type"];
     this.system = new system_type(this.target);
-    this.target.special_cooldown_max = this.special_systems[this.target.special_attack]["fire_rate"];
+    this.target.special_cooldown_max = this.special_systems[this.target.special_mesh]["fire_rate"];
     this.target.special_cooldown = this.target.special_cooldown_max;
   }
 
