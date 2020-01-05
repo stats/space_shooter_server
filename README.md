@@ -9,8 +9,9 @@ A server for a colyseus space shooter game
 
 ## Setup
 
+```
 mkdir db
 mkdir db\development
 mkdir build
 mkdir build\codegen
-
+```
