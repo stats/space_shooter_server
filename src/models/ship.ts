@@ -109,6 +109,9 @@ export class Ship extends Entity {
   level:number = 1;
 
   @type("number")
+  previous_level:number = 0;
+
+  @type("number")
   next_level:number = 0;
 
   radius:number;
@@ -177,9 +180,11 @@ export class Ship extends Entity {
     if( wave > this.rank ) {
       this.rank += Math.round((wave - this.rank) / 2);
     } else if ( wave < this.rank) {
-      this.rank -= Math.floor((this.rank - wave) / 4);
+      this.rank -= Math.ceil((this.rank - wave) / 4);
     }
+    this.rank = Math.max(this.rank, 1);
   }
+
 
   constructor(opts) {
     super(opts);
@@ -216,8 +221,17 @@ export class Ship extends Entity {
     }
   }
 
+  addKill(current_wave) {
+    this.current_kills += 1;
+    this.kills += 1;
+    this.kill_score += current_wave;
+    this.$state.enemies_killed++;
+    this.checkLevelUp();
+  }
+
   updateNextLevel() {
-    this.next_level = Math.floor(50*Math.pow(this.level, 1.25))
+    this.previous_level = Math.floor(50*Math.pow(this.level-1, 1.25));
+    this.next_level = Math.floor(50*Math.pow(this.level, 1.25));
   }
 
   toSaveObject():any {

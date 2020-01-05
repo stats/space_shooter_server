@@ -21,7 +21,14 @@ export class GameState extends Schema {
   @type("number")
   start_game:number = 5; //number of seconds until the game starts
 
+  @type("int32")
   current_wave:number = 0;
+
+  @type("int32")
+  enemies_spawned:number = 0;
+
+  @type("int32")
+  enemies_killed:number = 0;
 
   addShip(ship:Ship) {
     this.ships[ship.uuid] = ship;
@@ -34,6 +41,7 @@ export class GameState extends Schema {
 
   addEnemy(enemy:Enemy) {
     this.enemies[enemy.uuid] = enemy;
+    this.enemies_spawned++;
     enemy.onInitGame(this);
   }
 

@@ -162,7 +162,7 @@ export class MatchMakerRoom extends Room {
               rankings += client.rank;
             }
 
-            const room = await matchMaker.createRoom(this.roomToCreate, {wave_rank: Math.round(rankings/count)}); //TODO: Set the wave_rank to be the correct wave rank
+            const room = await matchMaker.createRoom(this.roomToCreate, {wave_rank: Math.max(Math.round(rankings/count) - 5, 1)}); //TODO: Set the wave_rank to be the correct wave rank
 
             await Promise.all(group.clients.map(async (client) => {
               const matchData = await matchMaker.reserveSeatFor(room, client.options);

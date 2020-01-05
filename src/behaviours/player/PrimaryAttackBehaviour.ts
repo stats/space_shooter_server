@@ -14,7 +14,7 @@ export class PrimaryAttackBehaviour extends Behaviour {
       damage: 1,
       range: 500,
       speed: 400,
-      fire_rate: 1000,
+      fire_rate: 500,
       radius: 15
     },
     {
@@ -22,7 +22,7 @@ export class PrimaryAttackBehaviour extends Behaviour {
       damage: 2,
       range: 300,
       speed: 250,
-      fire_rate: 1500,
+      fire_rate: 750,
       radius: 15
     }
   ]
