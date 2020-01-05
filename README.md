@@ -4,8 +4,8 @@ A server for a colyseus space shooter game
 
 ## Requirements
 
-node must be installed
-mongo must be installed
+* node must be installed
+* mongo must be installed
 
 ## Setup
 
