@@ -1,6 +1,6 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
-import { TargetPlayerStartPath } from '../../behaviours/enemy/TargetPlayerStartPath';
+import { TargetPlayerStartPath } from '../../behaviours/enemy/movement/TargetPlayerStartPath';
 import { CT } from '../../constants';
 
 

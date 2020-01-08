@@ -1,6 +1,6 @@
-import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
-import { CollisionHelper } from '../../helpers/CollisionHelper';
+import { Behaviour } from '../../behaviour';
+import { C } from '../../../constants';
+import { CollisionHelper } from '../../../helpers/CollisionHelper';
 
 export class StraightLinePath extends Behaviour {
 

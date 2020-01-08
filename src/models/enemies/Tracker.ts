@@ -1,6 +1,6 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
-import { ClosestPlayerPath } from '../../behaviours/enemy/ClosestPlayerPath';
+import { ClosestPlayerPath } from '../../behaviours/enemy/movement/ClosestPlayerPath';
 import { CT } from '../../constants';
 
 
