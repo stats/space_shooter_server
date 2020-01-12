@@ -14,6 +14,8 @@ import { Entity } from './entity';
 
 import { pick, merge } from 'lodash';
 
+import { SHIPS } from '../constants';
+
 export class Ship extends Entity {
 
   sessionId?:number;
@@ -24,35 +26,17 @@ export class Ship extends Entity {
 
   username:string;
 
-  @type("int32")
-  body_mesh:number;
+  @type("string")
+  ship_type:string;
 
-  @type("int32")
-  body_mat:number;
+  @type("string")
+  ship_material:string;
 
-  @type("int32")
-  wing_mesh:number;
+  @type("string")
+  primary_weapon:string;
 
-  @type("int32")
-  wing_mat:number;
-
-  @type("int32")
-  engine_mesh:number;
-
-  @type("int32")
-  engine_mat:number;
-
-  @type("int32")
-  weapon_mesh:number;
-
-  @type("int32")
-  weapon_mat:number;
-
-  @type("int32")
-  special_mesh:number;
-
-  @type("int32")
-  special_mat:number;
+  @type("string")
+  special_weapon:string;
 
   @type("number")
   primary_cooldown_max:number = 0;
@@ -88,16 +72,10 @@ export class Ship extends Entity {
   shields_recharge_time:number = 30000;
 
   @type("number")
-  speed:number = 100; //TODO: Be the upgrade value
+  speed:number = 0;
 
   @type("number")
-  accelleration:number = 5; //TODO: Be the upgrade value
-
-  @type("number")
-  horizontal_accelleration:number = 0;
-
-  @type("number")
-  vertical_accelleration:number = 0;
+  accelleration:number = 0;
 
   @type("number")
   rank:number = 1; //The current ranking of the ship which corresponds to which wave to start on
@@ -125,13 +103,13 @@ export class Ship extends Entity {
   upgrade_points:number = 0;
 
   @type("int32")
-  upgrade_weapon_damage:number = 0;
+  upgrade_damage:number = 0;
 
   @type("int32")
-  upgrade_weapon_range:number = 0;
+  upgrade_range:number = 0;
 
   @type("int32")
-  upgrade_weapon_fire_rate:number = 0;
+  upgrade_fire_rate:number = 0;
 
   @type("int32")
   upgrade_accelleration:number = 0;
@@ -146,31 +124,31 @@ export class Ship extends Entity {
   upgrade_shields_recharge:number = 0;
 
   getDamage() {
-    return 1 + this.upgrade_weapon_damage;
+    return SHIPS.DAMAGE_BASE + (this.upgrade_damage * SHIPS.DAMAGE_GROWTH);
   }
 
   getRange() {
-    return 0 + (this.upgrade_weapon_range * 25)
+    return SHIPS.RANGE_BASE + (this.upgrade_range * SHIP.RANGE_GROWTH)
   }
 
   getFireRate() {
-    return 0 + (this.upgrade_weapon_fire_rate * 250);
+    return SHIPS.FIRE_RATE_BASE + (this.upgrade_fire_rate * SHIPS.FIRE_RATE_GROWTH);
   }
 
   getMaxShields() {
-    return 1 + (this.upgrade_shields_max);
+    return SHIPS.SHIELDS_BASE + (this.upgrade_shields_max * SHIPS.SHIELDS_GROWTH);
   }
 
   getShieldRecharge() {
-    return 0 + (this.upgrade_shields_recharge * 50);
+    return SHIPS.SHIELD_RECHARGE_BASE - (this.upgrade_shields_recharge * SHIPS.SHIELD_RECHARGE_GROWTH);
   }
 
   getSpeed() {
-    return 50 + (this.upgrade_speed * 50);
+    return SHIPS.SPEED_BASE + (this.upgrade_speed * SHIPS.SPEED_GROWTH);
   }
 
   getAccelleration() {
-    return 50 + (this.upgrade_accelleration * 50);
+    return SHIPS.ACCELLERATION_BASE + (this.upgrade_accelleration * SHIPS.ACCELLERATION_GROWTH);
   }
 
   updateWaveRank(wave:number) {
@@ -209,7 +187,7 @@ export class Ship extends Entity {
     this.shields = this.max_shields = this.getMaxShields();
     this.speed = this.getSpeed();
     this.accelleration = this.getAccelleration();
-    this.shields_recharge_time = 30000 - (20000 * (this.upgrade_shields_recharge / 20));
+    this.shields_recharge_time = this.getShieldRecharge();
     this.updateNextLevel();
   }
 

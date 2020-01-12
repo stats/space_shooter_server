@@ -17,7 +17,7 @@
   "author": "Dan Curran",
   "license": "MIT",
   "dependencies": {
-    "@colyseus/monitor": "^0.11.9",
+    "@colyseus/monitor": "^0.11.12",
     "body-parser": "^1.19.0",
     "colyseus": "^0.11.25",
     "cors": "^2.8.5",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
-    "@types/node": "^13.1.0",
+    "@types/node": "^13.1.4",
     "assert": "^2.0.0",
     "httpie": "^1.1.2",
     "mocha": "^6.2.2",

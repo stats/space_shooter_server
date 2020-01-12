@@ -1,5 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
+import { C, WEAPONS } from '../../constants';
 import { Bounds } from '../../helpers/Bounds';
 import { Basic } from '../../models/weapon_system/basic';
 import { Blaster } from '../../models/weapon_system/blaster';
@@ -7,25 +7,6 @@ import { Blaster } from '../../models/weapon_system/blaster';
 export class PrimaryAttackBehaviour extends Behaviour {
 
   private system:any;
-
-  private weapon_systems = [
-    {
-      system_type: Basic,
-      damage: 1,
-      range: 500,
-      speed: 400,
-      fire_rate: 500,
-      radius: 15
-    },
-    {
-      system_type: Blaster,
-      damage: 2,
-      range: 300,
-      speed: 250,
-      fire_rate: 750,
-      radius: 15
-    }
-  ]
 
   constructor(target) {
     super('primary_attack', target);
@@ -53,11 +34,11 @@ export class PrimaryAttackBehaviour extends Behaviour {
     let system_type = this.weapon_systems[this.target.weapon_mesh]["system_type"];
     this.system = new system_type({
       entity: this.target,
-      damage: this.weapon_systems[this.target.weapon_mesh]["damage"],
-      range: this.weapon_systems[this.target.weapon_mesh]["range"],
-      speed: this.weapon_systems[this.target.weapon_mesh]["speed"],
-      radius: this.weapon_systems[this.target.weapon_mesh]["radius"],
-      fire_rate: this.weapon_systems[this.target.weapon_mesh]["fire_rate"]
+      damage: WEAPONS.PRIMARY[this.target.weapon_mesh]["damage"],
+      range: WEAPONS.PRIMARY[this.target.weapon_mesh]["range"],
+      speed: WEAPONS.PRIMARY[this.target.weapon_mesh]["speed"],
+      radius: WEAPONS.PRIMARY[this.target.weapon_mesh]["radius"],
+      fire_rate: WEAPONS.PRIMARY[this.target.weapon_mesh]["fire_rate"]
     });
     console.log(this.system);
   }
