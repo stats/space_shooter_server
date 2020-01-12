@@ -1,16 +1,16 @@
-import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
-import { Ship } from '../../models/ship';
-import { CollisionHelper } from '../../helpers/CollisionHelper';
+import { Behaviour } from '../../behaviour';
+import { C } from '../../../constants';
+import { Ship } from '../../../models/ship';
+import { CollisionHelper } from '../../../helpers/CollisionHelper';
 
-export class ClosestPlayerPath extends Behaviour {
+export class ClosestPlayerAtStartPath extends Behaviour {
 
   target_player:Ship;
   theta:number;
   entered_screen:boolean = false;
 
   constructor(target:any) {
-    super('ClosestPlayerPath', target);
+    super('ClosestPlayerAtStartPath', target);
     this.target_player = this.target.$state.getClosestShip(this.target.x, this.target.y);
     if(this.target_player == null){
       console.log("Error: Ship is null in TargetPlayerStartPath");
@@ -23,7 +23,6 @@ export class ClosestPlayerPath extends Behaviour {
   }
 
   onUpdate(deltaTime) {
-    this.target_player = this.target.$state.getClosestShip(this.target.x, this.target.y);
     if(this.target_player != null) {
       let dx = this.target.position.x - this.target_player.position.x;
       let dy = this.target.position.y - this.target_player.position.y;

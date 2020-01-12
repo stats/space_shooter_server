@@ -1,7 +1,7 @@
-import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
-import { CollisionHelper } from '../../helpers/CollisionHelper';
-import { Ship } from '../../models/ship';
+import { Behaviour } from '../../behaviour';
+import { C } from '../../../constants';
+import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Ship } from '../../../models/ship';
 
 export class TargetPlayerStartPath extends Behaviour {
 
