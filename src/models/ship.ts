@@ -123,32 +123,53 @@ export class Ship extends Entity {
   @type("int32")
   upgrade_shields_recharge:number = 0;
 
-  getDamage() {
-    return SHIPS.DAMAGE_BASE + (this.upgrade_damage * SHIPS.DAMAGE_GROWTH);
+  damage_base:number = 1;
+  damage_growth:number = 1;
+
+  range_base:number = 0;
+  range_growth:number = 25;
+
+  fire_rate_base:number = 0;
+  fire_rate_growth:number = 250;
+
+  speed_base:number = 100;
+  speed_growth:number = 50;
+
+  accelleration_base:number = 100;
+  accelleration_growth:number = 50;
+
+  shields_base:number = 1;
+  shields_growth:number = 1;
+
+  shield_recharge_base:number = 30000;
+  shield_recharge_growth:number = 750;
+
+  getdamage() {
+    return damage_base + (this.upgrade_damage * damage_growth);
   }
 
   getRange() {
-    return SHIPS.RANGE_BASE + (this.upgrade_range * SHIP.RANGE_GROWTH)
+    return range_base + (this.upgrade_range * range_growth)
   }
 
   getFireRate() {
-    return SHIPS.FIRE_RATE_BASE + (this.upgrade_fire_rate * SHIPS.FIRE_RATE_GROWTH);
+    return fire_rate_base + (this.upgrade_fire_rate * fire_rate_growth);
   }
 
   getMaxShields() {
-    return SHIPS.SHIELDS_BASE + (this.upgrade_shields_max * SHIPS.SHIELDS_GROWTH);
+    return shields_base + (this.upgrade_shields_max * shields_growth);
   }
 
   getShieldRecharge() {
-    return SHIPS.SHIELD_RECHARGE_BASE - (this.upgrade_shields_recharge * SHIPS.SHIELD_RECHARGE_GROWTH);
+    return shield_recharge_base - (this.upgrade_shields_recharge * shield_recharge_growth);
   }
 
   getSpeed() {
-    return SHIPS.SPEED_BASE + (this.upgrade_speed * SHIPS.SPEED_GROWTH);
+    return speed_base + (this.upgrade_speed * speed_growth);
   }
 
   getAccelleration() {
-    return SHIPS.ACCELLERATION_BASE + (this.upgrade_accelleration * SHIPS.ACCELLERATION_GROWTH);
+    return accelleration_base + (this.upgrade_accelleration * accelleration_growth);
   }
 
   updateWaveRank(wave:number) {

@@ -37,7 +37,6 @@ export class SHIP {
   public static RANGE_BASE:number = 0;
   public static RANGE_GROWTH:number = 25;
 
-
   public static FIRE_RATE_BASE:number = 0;
   public static FIRE_RATE_GROWTH:number = 250;
 
@@ -53,73 +52,108 @@ export class SHIP {
   public static SHIELD_RECHARGE_BASE:number = 30000;
   public static SHIELD_RECHARGE_GROWTH:number = 750;
 
-  /**
-  There are levels of ships. At base level ships have 5 upgrade points.
-  Mark II have 7 upgrade.
-  Mark III have 9
-  MARK IV 11
-  MARK V 13
-  **/
   public static TYPES = {
     "explorer" : {
       name: "Explorer",
-      upgrade_weapon_damage: 0,
-      upgrade_weapon_range: 0,
-      upgrade_weapon_fire_rate: 0,
-      upgrade_accelleration: 2,
-      upgrade_speed: 2,
-      upgrade_shields_max: 1,
-      upgrade_shields_recharge: 0
+      damage_base: 4,
+      damage_growth: 1,
+      range_base: 0,
+      range_growth: 25,
+      fire_rate_base: 0,
+      fire_rate_growth: 250,
+      speed_base: 120,
+      speed_growth: 60,
+      accelleration_base: 120,
+      accelleration_growth: 60,
+      shields_base: 3,
+      shields_growth: 1,
+      shield_recharge_base: 28000,
+      shield_recharge_growth: 750
     },
     "scout" : {
       name: "Scout",
-      upgrade_weapon_damage: 0,
-      upgrade_weapon_range: 0,
-      upgrade_weapon_fire_rate: 0,
-      upgrade_accelleration: 2,
-      upgrade_speed: 3,
-      upgrade_shields_max: 0,
-      upgrade_shields_recharge: 0
+      damage_base: 4,
+      damage_growth: 1,
+      range_base: 0,
+      range_growth: 25,
+      fire_rate_base: 0,
+      fire_rate_growth: 250,
+      speed_base: 130,
+      speed_growth: 70,
+      accelleration_base: 130,
+      accelleration_growth: 70,
+      shields_base: 2,
+      shields_growth: 1,
+      shield_recharge_base: 30000,
+      shield_recharge_growth: 750
     },
     "gunship" : {
       name: "Gunship",
-      upgrade_weapon_damage: 2,
-      upgrade_weapon_range: 2,
-      upgrade_weapon_fire_rate: 1,
-      upgrade_accelleration: 0,
-      upgrade_speed: 0,
-      upgrade_shields_max: 0,
-      upgrade_shields_recharge: 0
-    },
-    "fighter" : {
-      name: "Fighter",
-      upgrade_weapon_damage: 1,
-      upgrade_weapon_range: 0,
-      upgrade_weapon_fire_rate: 0,
-      upgrade_accelleration: 1,
-      upgrade_speed: 1,
-      upgrade_shields_max: 1,
-      upgrade_shields_recharge: 1
+      damage_base: 6,
+      damage_growth: 2,
+      range_base: 0,
+      range_growth: 30,
+      fire_rate_base: 150,
+      fire_rate_growth: 275,
+      speed_base: 100,
+      speed_growth: 50,
+      accelleration_base: 100,
+      accelleration_growth: 50,
+      shields_base: 3,
+      shields_growth: 1,
+      shield_recharge_base: 30000,
+      shield_recharge_growth: 750
     },
     "defender" : {
       name: "Defender",
-      upgrade_weapon_damage: 1,
-      upgrade_weapon_range: 0,
-      upgrade_weapon_fire_rate: 0,
-      upgrade_accelleration: 0,
-      upgrade_speed: 0,
-      upgrade_shields_max: 2,
-      upgrade_shields_recharge: 2
+      damage_base: 4,
+      damage_growth: 1,
+      range_base: 0,
+      range_growth: 25,
+      fire_rate_base: 0,
+      fire_rate_growth: 250,
+      speed_base: 100,
+      speed_growth: 50,
+      accelleration_base: 100,
+      accelleration_growth: 50,
+      shields_base: 5,
+      shields_growth: 2,
+      shield_recharge_base: 26000,
+      shield_recharge_growth: 850
+    },
+    "fighter" : {
+      name: "Fighter",
+      damage_base: 5,
+      damage_growth: 2,
+      range_base: 25,
+      range_growth: 30,
+      fire_rate_base: 250,
+      fire_rate_growth: 300,
+      speed_base: 110,
+      speed_growth: 55,
+      accelleration_base: 110,
+      accelleration_growth: 55,
+      shields_base: 3,
+      shields_growth: 1,
+      shield_recharge_base: 29000,
+      shield_recharge_growth: 800
     },
     "fighter2" : {
       name: "Fighter Mark II",
-      upgrade_weapon_damage: 2,
-      upgrade_weapon_range: 0,
-      upgrade_weapon_fire_rate: 1,
-      upgrade_accelleration: 1,
-      upgrade_speed: 1,
-      upgrade_shields_max: 1,
-      upgrade_shields_recharge: 1
+      damage_base: 1,
+      damage_growth: 1,
+      range_base: 0,
+      range_growth: 25,
+      fire_rate_base: 0,
+      fire_rate_growth: 250,
+      speed_base: 100,
+      speed_growth: 50,
+      accelleration_base: 100,
+      accelleration_growth: 50,
+      shields_base: 1,
+      shields_growth: 1,
+      shield_recharge_base: 30000,
+      shield_recharge_growth: 750
     }
   }
 }
