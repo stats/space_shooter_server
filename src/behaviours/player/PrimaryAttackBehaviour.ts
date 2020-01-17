@@ -1,8 +1,6 @@
 import { Behaviour } from '../behaviour';
 import { C, WEAPONS } from '../../constants';
 import { Bounds } from '../../helpers/Bounds';
-import { Basic } from '../../models/weapon_system/basic';
-import { Blaster } from '../../models/weapon_system/blaster';
 
 export class PrimaryAttackBehaviour extends Behaviour {
 
@@ -31,7 +29,7 @@ export class PrimaryAttackBehaviour extends Behaviour {
   }
 
   setWeaponSystem() {
-    let system_type = this.weapon_systems[this.target.weapon_mesh]["system_type"];
+    let system_type = WEAPONS.PRIMARY[this.target.weapon_mesh]["system_type"];
     this.system = new system_type({
       entity: this.target,
       damage: WEAPONS.PRIMARY[this.target.weapon_mesh]["damage"],

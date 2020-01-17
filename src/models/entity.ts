@@ -54,6 +54,10 @@ export class Entity extends Schema {
     }
   }
 
+  protected removeAllBehaviours() {
+    this.$behaviours = [];
+  }
+
   public getBulletSpawnLocation() {
     return {
       x: this.position.x + this.bullet_offset_x,

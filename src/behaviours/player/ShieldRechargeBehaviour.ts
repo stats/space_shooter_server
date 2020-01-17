@@ -1,7 +1,4 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
-import { Bounds } from '../../helpers/Bounds';
-import { Basic } from '../../models/weapon_system/basic';
 
 export class ShieldRechargeBehaviour extends Behaviour {
 

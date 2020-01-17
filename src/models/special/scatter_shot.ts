@@ -1,9 +1,10 @@
+/* Fires a spread of bullets from the ship */
 import { Ship } from '../ship';
 import { C, CT } from '../../constants';
 import { StraightAnglePath} from '../../behaviours/bullet/StraightAnglePath';
 import { Bullet } from '../bullet';
 
-export class Shotgun {
+export class ScatterShot {
 
   private target:Ship;
 
@@ -12,10 +13,10 @@ export class Shotgun {
   }
 
   handleEvent() {
-    for(let i = 0; i < 5; i++) {
+    for(let i = 0; i < 18; i++) {
       let spawn_location = this.target.getBulletSpawnLocation();
       let bullet:Bullet = new Bullet({
-        damage: Math.floor(1 + (this.target.upgrade_weapon_damage / 3)),
+        damage: this.target.getDamage() / 5,
         speed: 500,
         range: 250,
         collision_type: CT.CIRCLE,
@@ -23,7 +24,7 @@ export class Shotgun {
         bullet_mesh: 0,
         x: spawn_location.x,
         y: spawn_location.y,
-        angle: ((i * 10) + 70) * (Math.PI/180),
+        angle: i * 20 * (Math.PI/180),
         behaviours: [StraightAnglePath],
         bullet_type: C.SHIP_BULLET
       });

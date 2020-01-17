@@ -1,4 +1,10 @@
 import { Bounds } from './helpers/Bounds';
+import { Basic } from './models/primary/basic';
+import { Blaster } from './models/primary/blaster';
+
+import {ScatterShot } from './models/special/scatter_shot';
+import {EmergencyBrake } from './models/special/emergency_brake';
+import { Shotgun } from './models/special/shotgun';
 
 /* Game constants*/
 export class C {
@@ -31,27 +37,6 @@ export class S {
 }
 
 export class SHIP {
-  public static DAMAGE_BASE:number = 1;
-  public static DAMAGE_GROWTH:number = 1;
-
-  public static RANGE_BASE:number = 0;
-  public static RANGE_GROWTH:number = 25;
-
-  public static FIRE_RATE_BASE:number = 0;
-  public static FIRE_RATE_GROWTH:number = 250;
-
-  public static SPEED_BASE:number = 100;
-  public static SPEED_GROWTH:number = 50;
-
-  public static ACCELLERATION_BASE:number = 100;
-  public static ACCELLERATION_GROWTH:number = 50;
-
-  public static SHIELDS_BASE:number = 1;
-  public static SHIELDS_GROWTH:number = 1;
-
-  public static SHIELD_RECHARGE_BASE:number = 30000;
-  public static SHIELD_RECHARGE_GROWTH:number = 750;
-
   public static TYPES = {
     "explorer" : {
       name: "Explorer",

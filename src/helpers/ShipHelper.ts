@@ -1,7 +1,7 @@
 import { DB } from '../database';
 import { Account } from '../models/account';
 import { Ship } from '../models/ship';
-//import * as uuid from 'uuid/v4';
+import { SHIP } from '../constants';
 
 const uuid = require('uuid/v4');
 
@@ -17,17 +17,53 @@ export class ShipHelper {
     return await DB.$ships.find({username}).toArray();
   }
 
-  static async createShip(username:string, data:any) {
-    data["username"] = username;
-    data["uuid"] = uuid();
-    data["accelleration"] = 50;
-    data["speed"] = 50;
-    data["max_shields"] = 1;
-    data["upgrade_points"] = 5;
-    data["level"] = 1;
-    data["next_level"] = 50;
-    let ship = new Ship(data);
-    console.log("Ship to save", ship.toSaveObject());
+  static async validateShipParameters(username:string, data:{ name:string, ship_type:string, ship_material:string, primary_weapon:number, special_weapon:number }) {
+    /** TODO Check that the account has access to the items trying to be created **/
+    return true;
+  }
+
+  static setShipValues(ship_data:any) {
+    ship_data['damage_base'] = SHIP.TYPES[ship_data.ship_type].damage_base;
+    ship_data['damage_growth'] = SHIP.TYPES[ship_data.ship_type].damage_growth;
+
+    ship_data['range_base'] = SHIP.TYPES[ship_data.ship_type].range_base;
+    ship_data['range_growth'] = SHIP.TYPES[ship_data.ship_type].range_growth;
+
+    ship_data['fire_rate_base'] = SHIP.TYPES[ship_data.ship_type].fire_rate_base;
+    ship_data['fire_rate_growth'] = SHIP.TYPES[ship_data.ship_type].fire_rate_growth;
+
+    ship_data['speed_base'] = SHIP.TYPES[ship_data.ship_type].speed_base;
+    ship_data['speed_growth'] = SHIP.TYPES[ship_data.ship_type].speed_growth;
+
+    ship_data['accelleration_base'] = SHIP.TYPES[ship_data.ship_type].accelleration_base;
+    ship_data['accelleration_growth'] = SHIP.TYPES[ship_data.ship_type].accelleration_growth;
+
+    ship_data['shields_base'] = SHIP.TYPES[ship_data.ship_type].shields_base;
+    ship_data['shields_growth'] = SHIP.TYPES[ship_data.ship_type].shields_growth;
+
+    ship_data['shield_recharge_base'] = SHIP.TYPES[ship_data.ship_type].shield_recharge_base;
+    ship_data['shield_recharge_growth'] = SHIP.TYPES[ship_data.ship_type].shield_recharge_growth;
+
+    return ship_data;
+  }
+
+  static async createShip(username:string, data:{ name:string, ship_type:string, ship_material:string, primary_weapon:number, special_weapon:number }) {
+    let can_create = ShipHelper.validateShipParameters(username, data);
+    if(!can_create) return false;
+
+    let ship_data = {};
+    ship_data['username'] = username;
+    ship_data['name'] = data.name;
+    ship_data['uuid'] = uuid;
+    ship_data['ship_type'] = data.ship_type;
+    ship_data['ship_material'] = data.ship_material;
+    ship_data['primary_weapon'] = data.primary_weapon;
+    ship_data['special_weapon'] = data.special_weapon;
+    ship_data['level'] = 1;
+    ship_data['created_at'] = Date.now();
+    ship_data = ShipHelper.setShipValues(ship_data);
+
+    let ship = new Ship(ship_data);
     return DB.$ships.insertOne(ship.toSaveObject());
   }
 

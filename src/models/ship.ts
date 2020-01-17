@@ -14,8 +14,6 @@ import { Entity } from './entity';
 
 import { pick, merge } from 'lodash';
 
-import { SHIPS } from '../constants';
-
 export class Ship extends Entity {
 
   sessionId?:number;
@@ -62,6 +60,15 @@ export class Ship extends Entity {
   @type("int32")
   shields:number = 1;
 
+  @type("number")
+  damage:number = 1;
+
+  @type("number")
+  fire_rate:number = 1;
+
+  @type("number")
+  range:number = 1;
+
   @type("int32")
   max_shields:number = 1; //TODO: Be the upgrade value
 
@@ -76,6 +83,9 @@ export class Ship extends Entity {
 
   @type("number")
   accelleration:number = 0;
+
+  horizontal_accelleration:number = 0;
+  vertical_accelleration:number = 0;
 
   @type("number")
   rank:number = 1; //The current ranking of the ship which corresponds to which wave to start on
@@ -144,32 +154,32 @@ export class Ship extends Entity {
   shield_recharge_base:number = 30000;
   shield_recharge_growth:number = 750;
 
-  getdamage() {
-    return damage_base + (this.upgrade_damage * damage_growth);
+  getDamage() {
+    return this.damage_base + (this.upgrade_damage * this.damage_growth);
   }
 
   getRange() {
-    return range_base + (this.upgrade_range * range_growth)
+    return this.range_base + (this.upgrade_range * this.range_growth)
   }
 
   getFireRate() {
-    return fire_rate_base + (this.upgrade_fire_rate * fire_rate_growth);
+    return this.fire_rate_base + (this.upgrade_fire_rate * this.fire_rate_growth);
   }
 
   getMaxShields() {
-    return shields_base + (this.upgrade_shields_max * shields_growth);
+    return this.shields_base + (this.upgrade_shields_max * this.shields_growth);
   }
 
   getShieldRecharge() {
-    return shield_recharge_base - (this.upgrade_shields_recharge * shield_recharge_growth);
+    return this.shield_recharge_base - (this.upgrade_shields_recharge * this.shield_recharge_growth);
   }
 
   getSpeed() {
-    return speed_base + (this.upgrade_speed * speed_growth);
+    return this.speed_base + (this.upgrade_speed * this.speed_growth);
   }
 
   getAccelleration() {
-    return accelleration_base + (this.upgrade_accelleration * accelleration_growth);
+    return this.accelleration_base + (this.upgrade_accelleration * this.accelleration_growth);
   }
 
   updateWaveRank(wave:number) {
@@ -188,13 +198,25 @@ export class Ship extends Entity {
   constructor(opts) {
     super(opts);
     merge(this, opts);
-    this.radius= 27;
+    this.radius = 27;
     this.bullet_offset_y = 50;
+    this.setupShip();
+  }
+
+  setupShip() {
+    this.damage = this.getDamage();
+    this.fire_rate = this.getFireRate();
+    this.range = this.getRange();
+    this.shields = this.max_shields = this.getMaxShields();
+    this.speed = this.getSpeed();
+    this.accelleration = this.getAccelleration();
+    this.shields_recharge_time = this.getShieldRecharge();
     this.updateNextLevel();
   }
 
   onInitGame(state:GameState) {
     super.onInitGame(state);
+    this.removeAllBehaviours();
     this.registerBehaviours([
       new InputBehaviour(this),
       new CollidesWithEnemy(this),
@@ -205,11 +227,7 @@ export class Ship extends Entity {
       new PrimaryAttackBehaviour(this),
       new SpecialAttackBehaviour(this)
     ]);
-    this.shields = this.max_shields = this.getMaxShields();
-    this.speed = this.getSpeed();
-    this.accelleration = this.getAccelleration();
-    this.shields_recharge_time = this.getShieldRecharge();
-    this.updateNextLevel();
+    this.setupShip()
   }
 
   checkLevelUp() {
@@ -235,41 +253,41 @@ export class Ship extends Entity {
 
   toSaveObject():any {
     const baseObj:any = pick(this, [
-      'username',
       'name',
-      'uuid',
-      'body_mesh',
-      'body_mat',
-      'wing_mesh',
-      'wing_mat',
-      'engine_mesh',
-      'engine_mat',
-      'weapon_mesh',
-      'weapon_mat',
-      'special_mesh',
-      'special_mat',
-      'max_shields',
-      'speed',
-      'accelleration',
+      'username',
+      'ship_type',
+      'ship_material',
+      'primary_weapon',
+      'special_weapon',
+      'kills',
+      'kill_score',
       'rank',
       'highest_wave',
       'level',
-      'next_level',
-      'diameter',
-      'width',
-      'height',
-      'inGame',
-      'kills',
-      'kill_score',
+      'radius',
+      'createdAt',
       'upgrade_points',
-      'upgrade_weapon_damage',
-      'upgrade_weapon_range',
-      'upgrade_weapon_fire_rate',
-      'upgrade_speed',
+      'upgrade_damage',
+      'upgrade_range',
+      'upgrade_fire_rate',
       'upgrade_accelleration',
+      'upgrade_speed',
       'upgrade_shields_max',
       'upgrade_shields_recharge',
-      'createdAt'
+      'damage_base',
+      'damage_growth',
+      'range_base',
+      'range_growth',
+      'fire_rate_base',
+      'fire_rate_growth',
+      'speed_base',
+      'speed_growth',
+      'accelleration_base',
+      'accelleration_growth',
+      'shields_base',
+      'shields_growth',
+      'shield_recharge_base',
+      'shield_recharge_growth'
     ]);
     return baseObj;
   }

@@ -89,7 +89,6 @@ export class ShipBuilderRoom extends Room {
 
   private async createShip(client, ship) {
     console.log('[ShipBuilderRoom] creating a ship', ship);
-    /** TODO: Validate that the client can actually create this type of ship **/
     let success = await ShipHelper.createShip(client.username, ship);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully created.'});

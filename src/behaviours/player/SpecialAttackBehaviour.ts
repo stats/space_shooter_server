@@ -1,9 +1,7 @@
 import { Behaviour } from '../behaviour';
 import { C, WEAPONS } from '../../constants';
 import { Bounds } from '../../helpers/Bounds';
-import { EmergencyBrake } from '../../models/specials/emergency_brake';
-import { Shotgun } from '../../models/specials/shotgun';
-import { ScatterShot } from '../../models/specials/scatter_shot';
+
 
 export class SpecialAttackBehaviour extends Behaviour {
 
