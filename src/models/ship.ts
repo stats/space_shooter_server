@@ -30,10 +30,10 @@ export class Ship extends Entity {
   @type("string")
   ship_material:string;
 
-  @type("string")
+  @type("int32")
   primary_weapon:string;
 
-  @type("string")
+  @type("int32")
   special_weapon:string;
 
   @type("number")

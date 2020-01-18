@@ -38,7 +38,7 @@ export class S {
 
 export class SHIP {
   public static TYPES = {
-    "explorer" : {
+    "explorer1" : {
       name: "Explorer",
       damage_base: 4,
       damage_growth: 1,
@@ -55,7 +55,7 @@ export class SHIP {
       shield_recharge_base: 28000,
       shield_recharge_growth: 750
     },
-    "scout" : {
+    "scout1" : {
       name: "Scout",
       damage_base: 4,
       damage_growth: 1,
@@ -72,7 +72,7 @@ export class SHIP {
       shield_recharge_base: 30000,
       shield_recharge_growth: 750
     },
-    "gunship" : {
+    "gunship1" : {
       name: "Gunship",
       damage_base: 6,
       damage_growth: 2,
@@ -89,7 +89,7 @@ export class SHIP {
       shield_recharge_base: 30000,
       shield_recharge_growth: 750
     },
-    "defender" : {
+    "defender1" : {
       name: "Defender",
       damage_base: 4,
       damage_growth: 1,
@@ -106,7 +106,7 @@ export class SHIP {
       shield_recharge_base: 26000,
       shield_recharge_growth: 850
     },
-    "fighter" : {
+    "fighter1" : {
       name: "Fighter",
       damage_base: 5,
       damage_growth: 2,
