@@ -29,14 +29,14 @@ export class PrimaryAttackBehaviour extends Behaviour {
   }
 
   setWeaponSystem() {
-    let system_type = WEAPONS.PRIMARY[this.target.weapon_mesh]["system_type"];
+    let system_type = WEAPONS.PRIMARY[this.target.primary_weapon]["system_type"];
     this.system = new system_type({
       entity: this.target,
-      damage: WEAPONS.PRIMARY[this.target.weapon_mesh]["damage"],
-      range: WEAPONS.PRIMARY[this.target.weapon_mesh]["range"],
-      speed: WEAPONS.PRIMARY[this.target.weapon_mesh]["speed"],
-      radius: WEAPONS.PRIMARY[this.target.weapon_mesh]["radius"],
-      fire_rate: WEAPONS.PRIMARY[this.target.weapon_mesh]["fire_rate"]
+      damage: WEAPONS.PRIMARY[this.target.primary_weapon]["damage"],
+      range: WEAPONS.PRIMARY[this.target.primary_weapon]["range"],
+      speed: WEAPONS.PRIMARY[this.target.primary_weapon]["speed"],
+      radius: WEAPONS.PRIMARY[this.target.primary_weapon]["radius"],
+      fire_rate: WEAPONS.PRIMARY[this.target.primary_weapon]["fire_rate"]
     });
     console.log(this.system);
   }

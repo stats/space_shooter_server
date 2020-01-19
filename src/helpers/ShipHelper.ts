@@ -3,8 +3,6 @@ import { Account } from '../models/account';
 import { Ship } from '../models/ship';
 import { SHIP } from '../constants';
 
-const uuid = require('uuid/v4');
-
 export class ShipHelper {
 
   static async getShip(username:string, ship_uuid:string) {
@@ -56,7 +54,6 @@ export class ShipHelper {
     let ship_data = {};
     ship_data['username'] = username;
     ship_data['name'] = data.name;
-    ship_data['uuid'] = uuid;
     ship_data['ship_type'] = data.ship_type;
     ship_data['ship_material'] = data.ship_material;
     ship_data['primary_weapon'] = data.primary_weapon;

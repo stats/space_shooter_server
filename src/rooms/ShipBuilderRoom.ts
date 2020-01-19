@@ -67,10 +67,11 @@ export class ShipBuilderRoom extends Room {
   }
 
   private async playShip(client, uuid) {
+    console.log('[ShipBuilderRoom] playShip', uuid);
     const ship = await ShipHelper.getShip(client.username, uuid);
 
     if(!ship) {
-      this.send(client, { error: 'error_invalid_ship' });
+      this.send(client, { action: "error", message: 'error_invalid_ship' });
       return;
     }
     ShipHelper.addInGame(uuid);

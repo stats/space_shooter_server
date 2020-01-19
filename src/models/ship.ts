@@ -14,6 +14,8 @@ import { Entity } from './entity';
 
 import { pick, merge } from 'lodash';
 
+const uuid = require('uuid/v4');
+
 export class Ship extends Entity {
 
   sessionId?:number;
@@ -23,6 +25,7 @@ export class Ship extends Entity {
   name:string;
 
   username:string;
+  uuid:string;
 
   @type("string")
   ship_type:string;
@@ -198,6 +201,7 @@ export class Ship extends Entity {
   constructor(opts) {
     super(opts);
     merge(this, opts);
+    if(this.uuid == null) this.uuid = uuid();
     this.radius = 27;
     this.bullet_offset_y = 50;
     this.setupShip();
@@ -254,6 +258,7 @@ export class Ship extends Entity {
   toSaveObject():any {
     const baseObj:any = pick(this, [
       'name',
+      'uuid',
       'username',
       'ship_type',
       'ship_material',
