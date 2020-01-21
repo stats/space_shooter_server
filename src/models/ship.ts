@@ -33,10 +33,10 @@ export class Ship extends Entity {
   @type("string")
   ship_material:string;
 
-  @type("int32")
+  @type("string")
   primary_weapon:string;
 
-  @type("int32")
+  @type("string")
   special_weapon:string;
 
   @type("number")
@@ -166,7 +166,7 @@ export class Ship extends Entity {
   }
 
   getFireRate() {
-    return this.fire_rate_base + (this.upgrade_fire_rate * this.fire_rate_growth);
+    return this.fire_rate_base - (this.upgrade_fire_rate * this.fire_rate_growth);
   }
 
   getMaxShields() {

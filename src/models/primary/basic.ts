@@ -17,11 +17,12 @@ export class Basic {
   fire_rate:number;
 
   constructor(options) {
-    this.damage = options.damage + options.entity.upgrade_weapon_damage;
-    this.speed = options.speed;
-    this.range = options.range + (options.entity.upgrade_weapon_range * 20);
+    let entity = options.entity;
+    this.damage = entity.getDamage() * options.damage;
+    this.speed =  options.speed;
+    this.range = entity.getRange() * options.range;
     this.radius = options.radius;
-    this.fire_rate = options.fire_rate - (options.fire_rate * 0.75 * (options.entity.upgrade_weapon_fire_rate / 20));
+    this.fire_rate = entity.getFireRate() * options.fire_rate;
   }
 
   getBullet(x, y) {

@@ -42,13 +42,13 @@ export class SHIP {
       name: "Explorer",
       damage_base: 4,
       damage_growth: 1,
-      range_base: 0,
-      range_growth: 25,
-      fire_rate_base: 0,
-      fire_rate_growth: 250,
-      speed_base: 120,
+      range_base: 300,
+      range_growth: 15,
+      fire_rate_base: 2000,
+      fire_rate_growth: 50,
+      speed_base: 240,
       speed_growth: 60,
-      accelleration_base: 120,
+      accelleration_base: 240,
       accelleration_growth: 60,
       shields_base: 3,
       shields_growth: 1,
@@ -144,37 +144,37 @@ export class SHIP {
 }
 
 export class WEAPONS {
-  public static PRIMARY = [
-    {
+  public static PRIMARY = {
+    "Basic": {
       system_type: Basic,
       damage: 1,
-      range: 500,
+      range: 1,
       speed: 400,
-      fire_rate: 500,
+      fire_rate: 1,
       radius: 15
     },
-    {
+    "Blaster": {
       system_type: Blaster,
-      damage: 2,
-      range: 300,
-      speed: 250,
-      fire_rate: 750,
+      damage: 1.2,
+      range: 1.2,
+      speed: 350,
+      fire_rate: 0.8,
       radius: 15
     }
-  ];
+  };
 
-  public static SPECIAL = [
-    {
+  public static SPECIAL = {
+    "Emergency Brake": {
       system_type: EmergencyBrake,
       fire_rate: 2000
     },
-    {
+    "Shotgun": {
       system_type: Shotgun,
       fire_rate: 3000
     },
-    {
+    "Scatter Shot": {
       system_type: ScatterShot,
       fire_rate: 5000
     }
-  ];
+  };
 }
