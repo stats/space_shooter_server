@@ -1,1 +1,0 @@
-/* A banana shaped wave that moves back and forth in the X direction when fired */

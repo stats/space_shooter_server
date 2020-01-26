@@ -1,7 +1,7 @@
 import { DB } from '../database';
 import { Account } from '../models/account';
 import { Ship } from '../models/ship';
-import { SHIP } from '../constants';
+import { SHIP } from '../Ship';
 
 export class ShipHelper {
 

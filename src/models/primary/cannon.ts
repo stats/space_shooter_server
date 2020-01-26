@@ -8,7 +8,7 @@ import { GameState } from '../GameState';
 import { Entity } from '../entity';
 import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
 
-export class Basic {
+export class Cannon {
 
   damage:number;
   speed:number;

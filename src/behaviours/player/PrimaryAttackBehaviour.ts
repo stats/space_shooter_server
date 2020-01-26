@@ -1,6 +1,8 @@
 import { Behaviour } from '../behaviour';
-import { C, WEAPONS } from '../../constants';
+import { C } from '../../constants';
+import { PRIMARY } from '../../Primary';
 import { Bounds } from '../../helpers/Bounds';
+
 
 export class PrimaryAttackBehaviour extends Behaviour {
 
@@ -29,14 +31,14 @@ export class PrimaryAttackBehaviour extends Behaviour {
   }
 
   setWeaponSystem() {
-    let system_type = WEAPONS.PRIMARY[this.target.primary_weapon]["system_type"];
+    let system_type = PRIMARY.TYPE[this.target.primary_weapon]["system_type"];
     this.system = new system_type({
       entity: this.target,
-      damage: WEAPONS.PRIMARY[this.target.primary_weapon]["damage"],
-      range: WEAPONS.PRIMARY[this.target.primary_weapon]["range"],
-      speed: WEAPONS.PRIMARY[this.target.primary_weapon]["speed"],
-      radius: WEAPONS.PRIMARY[this.target.primary_weapon]["radius"],
-      fire_rate: WEAPONS.PRIMARY[this.target.primary_weapon]["fire_rate"]
+      damage: PRIMARY.TYPE[this.target.primary_weapon]["damage"],
+      range: PRIMARY.TYPE[this.target.primary_weapon]["range"],
+      speed: PRIMARY.TYPE[this.target.primary_weapon]["speed"],
+      radius: PRIMARY.TYPE[this.target.primary_weapon]["radius"],
+      fire_rate: PRIMARY.TYPE[this.target.primary_weapon]["fire_rate"]
     });
     console.log(this.system);
   }
