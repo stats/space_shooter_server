@@ -94,6 +94,32 @@ export class GameState extends Schema {
     return Object.keys(this.ships).length > 0;
   }
 
+  getClosestEnemy(x:number, y:number):Ship {
+    let return_enemy:Ship = null;
+    let distance:number = 99999;
+    for(let key in this.enemies) {
+      let enemy = this.enemies[key];
+      let d:number = CollisionHelper.distance(x, y, enemy.position.x, enemy.position.y);
+      if(d < distance) {
+        return_enemy = enemy;
+        distance = d;
+      }
+    }
+    return return_enemy;
+  }
+
+  getEnemyInRange(x:number, y:number, radius:number) {
+    let enemies:Enemy[] = [];
+    for(let key in this.enemies) {
+      let enemy = this.enemies[key];
+      let d:number = CollisionHelper.distance(x, y, enemy.position.x, enemy.position.y);
+      if(d <= radius){
+        enemies.push(enemy);
+      }
+    }
+    return enemies;
+  }
+
   getClosestShip(x:number, y:number):Ship {
     let return_ship:Ship = null;
     let distance:number = 99999;

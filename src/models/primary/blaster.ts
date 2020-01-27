@@ -35,7 +35,6 @@ export class Blaster {
       bullet_mesh: 1,
       x: x,
       y: y,
-      behaviours: [StraightLineUpPath],
       bullet_type: C.SHIP_BULLET
     }
 

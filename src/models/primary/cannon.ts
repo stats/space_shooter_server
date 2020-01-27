@@ -20,7 +20,6 @@ export class Cannon {
   bullet_angle:number;
   bullet_offset:number;
 
-
   constructor(entity, options) {
     this.damage = entity.getDamage() * options.damage;
     this.speed =  options.speed;
