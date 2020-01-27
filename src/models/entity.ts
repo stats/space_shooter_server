@@ -46,7 +46,7 @@ export class Entity extends Schema {
     this.$behaviours.push(behaviour);
   }
 
-  protected removeBehaviour(behaviour:any) {
+  public removeBehaviour(behaviour:any) {
     for(let i = this.$behaviours.length - 1; i >=0; i--) {
       if(this.$behaviours[i] == behaviour) {
         this.$behaviours.splice(i, 1);
@@ -54,7 +54,7 @@ export class Entity extends Schema {
     }
   }
 
-  protected removeAllBehaviours() {
+  public removeAllBehaviours() {
     this.$behaviours = [];
   }
 

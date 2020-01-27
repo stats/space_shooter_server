@@ -1,6 +1,6 @@
-import { Cannon } from './blaster';
+import { Blaster } from './blaster';
 
-export class Beam  extends Blaster {
+export class Beam extends Blaster {
 
 
 }

@@ -16,6 +16,7 @@ export class Torpedo {
   fire_rate:number;
   bullet_count:number;
   bullet_offset:number;
+  blast_radius:number;
 
   constructor(entity, options) {
     this.damage = entity.getDamage() * options.damage;
@@ -39,7 +40,8 @@ export class Torpedo {
       bullet_mesh: 1,
       x: x,
       y: y,
-      bullet_type: C.SHIP_BULLET
+      bullet_type: C.SHIP_BULLET,
+      explodes: true
     }
 
     let offset_start = 0;

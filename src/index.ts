@@ -43,7 +43,9 @@ DB.init().then(() => {
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
-  app.use('/colyseus', monitor(gameServer));
+
+
+  app.use('/colyseus', monitor());
 
   app.post('/quick_login', asyncMiddleware( async function(req, res, next) {
     let { system_id } = req.body;

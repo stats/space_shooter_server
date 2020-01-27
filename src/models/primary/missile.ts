@@ -2,7 +2,7 @@ import { Bullet } from '../bullet';
 import { C, CT } from '../../constants';
 import { GameState } from '../GameState';
 import { Entity } from '../entity';
-import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
+import { ClosestEnemyPath } from '../../behaviours/bullet/ClosestEnemyPath';
 
 export class Missile {
 

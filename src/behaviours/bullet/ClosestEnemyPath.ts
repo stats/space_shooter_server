@@ -1,7 +1,7 @@
-import { Behaviour } from '../../behaviour';
-import { C } from '../../../constants';
-import { Ship } from '../../../models/ship';
-import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Behaviour } from '../behaviour';
+import { C } from '../../constants';
+import { Enemy } from '../../models/enemy';
+import { CollisionHelper } from '../../helpers/CollisionHelper';
 
 export class ClosestEnemyPath extends Behaviour {
 

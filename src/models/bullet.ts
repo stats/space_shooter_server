@@ -28,6 +28,9 @@ export class Bullet extends Entity {
   /* Tracks who fired this entity */
   fired_by:Entity;
 
+  /** If there is a splash effect **/
+  explodes:boolean = false;
+
   /* The mesh to display for the bullet */
   @type("int32")
   bullet_mesh:number;
