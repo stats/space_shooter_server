@@ -36,13 +36,13 @@ export class Entity extends Schema {
     if(!this.uuid) this.uuid = uuid();
   }
 
-  protected registerBehaviours(list:any[]) {
+  public registerBehaviours(list:any[]) {
     for(var item of list) {
       this.registerBehaviour(item);
     }
   }
 
-  protected registerBehaviour(behaviour:any) {
+  public registerBehaviour(behaviour:any) {
     this.$behaviours.push(behaviour);
   }
 

@@ -2,6 +2,7 @@ import { Behaviour } from '../behaviour';
 import { C } from '../../constants';
 import { PRIMARY } from '../../Primary';
 import { Bounds } from '../../helpers/Bounds';
+import { Bullet } from '../../models/bullet';
 
 
 export class PrimaryAttackBehaviour extends Behaviour {
@@ -19,9 +20,11 @@ export class PrimaryAttackBehaviour extends Behaviour {
     if(!this.canFire()) return;
     this.target.primary_cooldown = 0;
     let spawn_location = this.target.getBulletSpawnLocation();
-    let bullet = this.system.getBullet(spawn_location.x, spawn_location.y);
-    bullet.fired_by = this.target;
-    this.target.$state.addBullet(bullet);
+    let bullets:Bullet[] = this.system.getBullets(spawn_location.x, spawn_location.y);
+    for(var i = 0; i < bullets.length; i++) {
+      bullets[i].fired_by = this.target;
+      this.target.$state.addBullet(bullets[i]);
+    }
   }
 
   public onUpdate(deltaTime:number) {
@@ -32,17 +35,10 @@ export class PrimaryAttackBehaviour extends Behaviour {
 
   setWeaponSystem() {
     let system_type = PRIMARY.TYPE[this.target.primary_weapon]["system_type"];
-    this.system = new system_type({
-      entity: this.target,
-      damage: PRIMARY.TYPE[this.target.primary_weapon]["damage"],
-      range: PRIMARY.TYPE[this.target.primary_weapon]["range"],
-      speed: PRIMARY.TYPE[this.target.primary_weapon]["speed"],
-      radius: PRIMARY.TYPE[this.target.primary_weapon]["radius"],
-      fire_rate: PRIMARY.TYPE[this.target.primary_weapon]["fire_rate"]
-    });
+    this.system = new system_type( this.target, PRIMARY.TYPE[this.target.primary_weapon]);
     console.log(this.system);
   }
-das
+
   canFire():boolean {
     return this.target.primary_cooldown >= this.target.primary_cooldown_max;
   }

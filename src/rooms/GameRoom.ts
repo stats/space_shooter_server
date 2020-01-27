@@ -77,7 +77,7 @@ export class GameRoom extends Room<GameState> {
   }
 
   onLeave(client) {
-    console.log("[GameRoom]", this.roomId, "Client Leave", client.auth, "Client", client);
+    console.log("[GameRoom]", this.roomId, "Client Leave");
     let ship = this.clientShipHash[client.id];
     ship.checkLevelUp();
     ship.updateWaveRank(this.state.current_wave);

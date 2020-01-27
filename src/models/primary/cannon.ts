@@ -7,6 +7,7 @@ import { C, CT } from '../../constants';
 import { GameState } from '../GameState';
 import { Entity } from '../entity';
 import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
+import { StraightAnglePath } from '../../behaviours/bullet/StraightAnglePath';
 
 export class Cannon {
 
@@ -15,17 +16,24 @@ export class Cannon {
   range:number;
   radius:number;
   fire_rate:number;
+  bullet_count:number;
+  bullet_angle:number;
+  bullet_offset:number;
 
-  constructor(options) {
-    let entity = options.entity;
+
+  constructor(entity, options) {
     this.damage = entity.getDamage() * options.damage;
     this.speed =  options.speed;
     this.range = entity.getRange() * options.range;
     this.radius = options.radius;
     this.fire_rate = entity.getFireRate() * options.fire_rate;
+    this.bullet_count = options.bullet_count;
+    this.bullet_angle = options.bullet_angle;
+    this.bullet_offset = options.bullet_offset;
   }
 
-  getBullet(x, y) {
+  getBullets(x, y):Bullet[] {
+    let bullets:Bullet[] = [];
     let options = {
       damage: this.damage,
       speed: this.speed,
@@ -35,9 +43,37 @@ export class Cannon {
       bullet_mesh: 0,
       x: x,
       y: y,
-      behaviours: [StraightLineUpPath],
       bullet_type: C.SHIP_BULLET
     }
-    return new Bullet(options);
+
+    if(this.bullet_count == 1){
+      let bullet = new Bullet(options);
+      bullet.registerBehaviour(new StraightLineUpPath(bullet));
+      bullets.push( bullet );
+    } else if (this.bullet_count == 2){
+      let bullet = new Bullet(options);
+      bullet.registerBehaviour(new StraightAnglePath(bullet, {angle: Math.PI/2 - this.bullet_angle}));
+      bullets.push(bullet);
+
+      bullet = new Bullet(options);
+      bullet.registerBehaviour(new StraightAnglePath(bullet, {angle: Math.PI/2 + this.bullet_angle}));
+      bullets.push(bullet);
+    } else if (this.bullet_count == 3){
+
+      let bullet = new Bullet(options);
+      bullet.registerBehaviour(new StraightAnglePath(bullet, {angle: Math.PI/2 -this.bullet_angle}));
+      bullets.push(bullet);
+
+      bullet = new Bullet(options);
+      bullet.registerBehaviour(new StraightAnglePath(bullet, {angle: Math.PI/2 +this.bullet_angle}));
+      bullets.push(bullet);
+
+      bullet = new Bullet(options);
+      bullet.registerBehaviour(new StraightLineUpPath(bullet));
+      bullets.push(bullet);
+
+    }
+
+    return bullets;
   }
 }
