@@ -1,6 +1,6 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
-import { StraightLinePath } from '../../behaviours/enemy/movement/StraightLinePath';
+import { StraightAnglePath } from '../../behaviours/enemy/movement/StraightAnglePath';
 import { CT } from '../../constants';
 
 
@@ -26,7 +26,7 @@ export class Blimp extends Enemy {
 
   onInitGame(state:GameState) {
     super.onInitGame(state);
-    this.registerBehaviours([new StraightLinePath(this)]);
+    this.registerBehaviours([new StraightAnglePath(this)]);
   }
 
 }

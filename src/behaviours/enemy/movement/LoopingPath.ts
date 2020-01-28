@@ -2,7 +2,7 @@ import { Behaviour } from '../../behaviour';
 import { C } from '../../../constants';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 
-export class StraightLinePath extends Behaviour {
+export class LoopingPath extends Behaviour {
 
   xDir:number = 0;
   yDir:number = 0;
@@ -17,7 +17,7 @@ export class StraightLinePath extends Behaviour {
   entered_screen:boolean = false;
 
   constructor(target:any, radius:number = 500) {
-    super('StraightLinePath', target);
+    super('LoopingPath', target);
     this.radius = radius;
     this.start_radius = radius;
 
@@ -46,18 +46,18 @@ export class StraightLinePath extends Behaviour {
   }
 
   onUpdate(deltaTime) {
-    this.target.position.x = this.origin_x + cos(this.theta) * this.radius;
-    this.target.position.y = this.origin_y + sin(this.theta) * this.radius;
+    this.target.position.x = this.origin_x + Math.cos(this.theta) * this.radius;
+    this.target.position.y = this.origin_y + Math.sin(this.theta) * this.radius;
 
     /** TODO: Change these numbers to make a good loop **/
-    theta += this.target.speed * (deltaTime/1000);
+    this.theta += this.target.speed * (deltaTime/1000);
     if(this.descending) {
-      this.radius -= this.speed * (deltaTime/1000);
+      this.radius -= this.target.speed * (deltaTime/1000);
       if(this.radius < this.start_radius / 2) {
         this.descending = false;
       }
     } else {
-      this.radius += this.speed * (deltaTime/1000);
+      this.radius += this.target.speed * (deltaTime/1000);
     }
 
 
