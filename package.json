@@ -18,7 +18,7 @@
   "author": "Dan Curran",
   "license": "MIT",
   "dependencies": {
-    "@colyseus/monitor": "^0.11.12",
+    "@colyseus/monitor": "^0.11.17",
     "body-parser": "^1.19.0",
     "colyseus": "^0.12.0",
     "cors": "^2.8.5",

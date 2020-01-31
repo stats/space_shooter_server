@@ -1,4 +1,4 @@
-limport { Ship } from '../ship';
+import { Ship } from '../ship';
 
 export class ForceShield {
 
