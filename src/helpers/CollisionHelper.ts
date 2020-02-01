@@ -42,6 +42,16 @@ export class CollisionHelper {
     return false;
   }
 
+  static tooFar(e:Entity):boolean {
+    if(e.position.x > C.BOUNDS.maxX + (C.SPAWN_OFFSET * 3) ||
+       e.position.x < C.BOUNDS.minX - (C.SPAWN_OFFSET * 3) ||
+       e.position.y > C.BOUNDS.maxY + (C.SPAWN_OFFSET * 3) ||
+       e.position.y < C.BOUNDS.minY - (C.SPAWN_OFFSET * 3) ) {
+      return true;
+    }
+    return false;
+  }
+
   static outsideBounds(e:Entity):boolean {
     if( e.position.x < C.BOUNDS.minX - (C.SPAWN_OFFSET * 2) ||
         e.position.x > C.BOUNDS.maxX + (C.SPAWN_OFFSET * 2) ||
