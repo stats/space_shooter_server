@@ -6,16 +6,12 @@ export class LoopingPath extends Behaviour {
 
   dir:number = 0;
 
-  radius:number = 500;
-  start_radius:number = 500;
   theta:number = 0;
 
   entered_screen:boolean = false;
 
-  constructor(target:any, radius:number = 500) {
+  constructor(target:any) {
     super('LoopingPath', target);
-    this.radius = radius;
-    this.start_radius = radius;
 
     let dx = 800 - this.target.position.x;
     let dy = 450 - this.target.position.y;

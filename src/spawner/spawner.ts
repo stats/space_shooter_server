@@ -28,8 +28,8 @@ export class Spawner {
 
   private enemy_types:any = [
     //[1, Scout],
-    //[1, Blimp],
-    [1, Bomber],
+    [1, Blimp],
+    //[1, Bomber],
     //[1, Hunter],
     //[1, Speeder],
     //[1, Blaster],
