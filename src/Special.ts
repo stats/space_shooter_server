@@ -48,7 +48,7 @@ export class SPECIAL {
       system_type: MegaBomb,
       fire_rate: 10000
     },
-    "ShieldRecharge": {
+    "Shield Recharge": {
       system_type: ShieldRecharge,
       fire_rate: 15000
     },
