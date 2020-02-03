@@ -13,6 +13,12 @@ export class Entity extends Schema {
   @type(Position)
   position:Position = new Position(0, 0);
 
+  @type('boolean')
+  override_angle:boolean = false;
+
+  @type('number')
+  angle:number = 0;
+
   bullet_offset_x:number = 0;
   bullet_offset_y:number = 0;
 

@@ -23,10 +23,9 @@ export class Shotgun {
         bullet_mesh: 0,
         x: spawn_location.x,
         y: spawn_location.y,
-        angle: ((i * 10) + 70) * (Math.PI/180),
-        behaviours: [StraightAnglePath],
         bullet_type: C.SHIP_BULLET
       });
+      bullet.registerBehaviour(new StraightAnglePath(bullet, {angle: ((i * 10) + 70) * (Math.PI/180)}));
       bullet.fired_by = this.target;
       this.target.$state.addBullet(bullet);
     }

@@ -2,7 +2,7 @@ import { Bullet } from '../bullet';
 import { C, CT } from '../../constants';
 import { GameState } from '../GameState';
 import { Entity } from '../entity';
-import { ClosestEnemyPath } from '../../behaviours/bullet/ClosestEnemyPath';
+import { ClosestEnemyPath } from '../../behaviours/bullet/MissilePath';
 
 export class Missile {
 
@@ -46,7 +46,7 @@ export class Missile {
     for(var i = 0; i < this.bullet_count; i++){
       let bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offset_start + (i * this.bullet_offset);
-      bullet.registerBehaviour(new ClosestEnemyPath(bullet));
+      bullet.registerBehaviour(new MissilePath(bullet));
       bullets.push(bullet);
     }
 
