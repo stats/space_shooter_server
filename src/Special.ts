@@ -1,13 +1,13 @@
-import {ScatterShot } from './models/special/scatter_shot';
-import {EmergencyBrake } from './models/special/emergency_brake';
-import { Shotgun } from './models/special/shotgun';
+import { WeaponCharge, EmergencyBrake, Thrusters,
+RammingShield, Shotgun, ScatterShot, HyperSpeed, Invisibility,
+Bomb, MissileBarage, MegaBomb, ShieldRecharge, ForceShield } from './models/special';
 
 export class SPECIAL {
   public static TYPE = {
     "Weapon Charge": {
       system_type: WeaponCharge,
       fire_rate: 3000
-    }
+    },
     "Emergency Brake": {
       system_type: EmergencyBrake,
       fire_rate: 2000
@@ -48,8 +48,8 @@ export class SPECIAL {
       system_type: MegaBomb,
       fire_rate: 10000
     },
-    "ShieldCharge": {
-      system_type: ShieldCharge,
+    "Shield Recharge": {
+      system_type: ShieldRecharge,
       fire_rate: 15000
     },
     "Force Shield": {

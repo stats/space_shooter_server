@@ -34,8 +34,8 @@ export class StraightAnglePath extends Behaviour {
         to_y = -C.SPAWN_OFFSET;
     }
 
-    let dx = this.target.position.x - to_x;
-    let dy = this.target.position.y - to_y;
+    let dx = to_x - this.target.position.x;
+    let dy = to_y - this.target.position.y;
 
     this.angle = Math.atan2(dy, dx);
   }

@@ -30,10 +30,10 @@ export class PRIMARY {
     },
     "Rapid": {
       system_type: Cannon,
-      damage: 0.5,
+      damage: 0.15,
       range: 0.8,
       speed: 400,
-      fire_rate: 0.5,
+      fire_rate: 0.2,
       radius: 15,
       bullet_count: 1,
       bullet_angle: 0,

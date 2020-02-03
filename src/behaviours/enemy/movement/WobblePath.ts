@@ -8,15 +8,17 @@ export class WobblePath extends Behaviour {
   yDir:number = 0;
 
   wobble_percent:number = 1;
-  wobble_duration:number = 0;
+  wobble_duration:number = 3;
   private wobble_timer:number = 0;
 
   entered_screen:boolean = false;
 
-  constructor(target:any, wobble_percent:number, wobble_duration:number = 1) {
+  constructor(target:any, args?:{wobble_percent:number, wobble_duration:number}) {
     super('WobblePath', target);
-    this.wobble_percent = wobble_percent;
-    this.wobble_duration = wobble_duration;
+    if(args) {
+      this.wobble_percent = args.wobble_percent || 1;
+      this.wobble_duration = args.wobble_duration || 3;
+    }
     if(this.target.position.x < C.BOUNDS.minX) this.xDir = 1;
     if(this.target.position.x > C.BOUNDS.maxX) this.xDir = -1;
     if(this.target.position.y < C.BOUNDS.minY) this.yDir = 1;
@@ -36,7 +38,7 @@ export class WobblePath extends Behaviour {
     this.wobble_timer += deltaTime / 1000;
     if(this.wobble_timer > this.wobble_duration) {
       this.wobble_timer = 0;
-      this.wobble_percentage = -this.wobble_percentage;
+      this.wobble_percent = -this.wobble_percent;
     }
 
     if(!this.entered_screen && CollisionHelper.insideBounds(this.target)){

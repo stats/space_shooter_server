@@ -4,67 +4,33 @@ import { CollisionHelper } from '../../../helpers/CollisionHelper';
 
 export class LoopingPath extends Behaviour {
 
-  xDir:number = 0;
-  yDir:number = 0;
+  dir:number = 0;
 
-  radius:number = 500;
-  start_radius:number = 500;
-  origin_x:number = 0;
-  origin_y:number = 0;
   theta:number = 0;
-  descending:boolean = true;
 
   entered_screen:boolean = false;
 
-  constructor(target:any, radius:number = 500) {
+  constructor(target:any) {
     super('LoopingPath', target);
-    this.radius = radius;
-    this.start_radius = radius;
 
-    /** TODO: MAY WANT TO ALWAYS LERP THE POINT TOWARDS THE CENTER **/
-    if(this.target.position.x < C.BOUNDS.minX) {
-      this.xDir = 1;
-      this.origin_x = this.target.position.x + this.radius;
-      this.origin_y = this.target.position.y;
-    }
-    if(this.target.position.x > C.BOUNDS.maxX) {
-      this.xDir = -1;
-      this.origin_x = this.target.position.x - this.radius;
-      this.origin_y = this.target.position.y
-    }
-    if(this.target.position.y < C.BOUNDS.minY){
-      this.yDir = 1;
-      this.origin_x = this.target.position.x;
-      this.origin_y = this.target.position.y + this.radius
-    }
-    if(this.target.position.y > C.BOUNDS.maxY) {
-      this.yDir = -1;
-      this.origin_x = this.target.position.x;
-      this.origin_y = this.target.position.y - this.radius
-    }
-    this.theta = 0;
+    let dx = 800 - this.target.position.x;
+    let dy = 450 - this.target.position.y;
+
+    this.theta = Math.atan2(dy,dx);
+    this.dir = Math.random() < 0.5 ? 1 : -1;
   }
 
   onUpdate(deltaTime) {
-    this.target.position.x = this.origin_x + Math.cos(this.theta) * this.radius;
-    this.target.position.y = this.origin_y + Math.sin(this.theta) * this.radius;
 
-    /** TODO: Change these numbers to make a good loop **/
-    this.theta += this.target.speed * (deltaTime/1000);
-    if(this.descending) {
-      this.radius -= this.target.speed * (deltaTime/1000);
-      if(this.radius < this.start_radius / 2) {
-        this.descending = false;
-      }
-    } else {
-      this.radius += this.target.speed * (deltaTime/1000);
-    }
+    this.theta += this.dir * Math.PI / 20 * (deltaTime/1000);
 
+    this.target.position.x += this.target.speed * Math.cos(this.theta) * (deltaTime/1000);
+    this.target.position.y += this.target.speed * Math.sin(this.theta) * (deltaTime/1000);
 
     if(!this.entered_screen && CollisionHelper.insideBounds(this.target)){
       this.entered_screen = true;
     }
-    if(this.entered_screen && CollisionHelper.outsideBounds(this.target)) {
+    if(this.entered_screen && CollisionHelper.outsideBounds(this.target) || CollisionHelper.tooFar(this.target)) {
       this.target.handleEvent('destroyed');
     }
   }
