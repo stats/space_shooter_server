@@ -1,12 +1,6 @@
-import { Ship } from '../ship';
+import { SpecialSystem } from './SpecialSystem';
 
-export class WeaponCharge {
-
-  private target:Ship;
-
-  constructor(target:Ship) {
-    this.target = target;
-  }
+export class WeaponCharge extends SpecialSystem {
 
   handleEvent() {
 

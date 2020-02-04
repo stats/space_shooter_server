@@ -107,6 +107,8 @@ export class Ship extends Entity {
 
   createdAt:number;
 
+  weaponCharge:number = 1;
+
   inGame:number;
 
   //upgrades
@@ -156,7 +158,7 @@ export class Ship extends Entity {
   shield_recharge_growth:number = 750;
 
   getDamage() {
-    return this.damage_base + (this.upgrade_damage * this.damage_growth);
+    return ( this.damage_base + (this.upgrade_damage * this.damage_growth) ) * this.weaponCharge;
   }
 
   getRange() {

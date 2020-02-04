@@ -1,16 +1,10 @@
 /* Fires a spread of bullets from the ship */
-import { Ship } from '../ship';
+import { SpecialSystem } from './SpecialSystem';
 import { C, CT } from '../../constants';
 import { StraightAnglePath} from '../../behaviours/bullet/StraightAnglePath';
 import { Bullet } from '../bullet';
 
-export class ScatterShot {
-
-  private target:Ship;
-
-  constructor(target:Ship) {
-    this.target = target;
-  }
+export class ScatterShot extends SpecialSystem {
 
   handleEvent() {
     for(let i = 0; i < 18; i++) {

@@ -1,15 +1,13 @@
-import { Ship } from '../ship';
+import { SpecialSystem } from './SpecialSystem';
 
-export class Invisibility {
-
-  private target:Ship;
-
-  constructor(target:Ship) {
-    this.target = target;
-  }
+export class Invisibility extends SpecialSystem {
 
   handleEvent() {
 
+  }
+
+  handleUpdate() {
+    
   }
 
 }

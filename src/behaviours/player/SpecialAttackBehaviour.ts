@@ -26,6 +26,7 @@ export class SpecialAttackBehaviour extends Behaviour {
     if(this.target.special_cooldown <= this.target.special_cooldown_max) {
       this.target.special_cooldown += deltaTime;
     }
+    this.system.handleUpdate();
   }
 
   canFire():boolean {

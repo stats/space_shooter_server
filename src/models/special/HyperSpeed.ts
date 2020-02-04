@@ -1,12 +1,6 @@
-import { Ship } from '../ship';
+import { SpecialSystem } from './SpecialSystem';
 
-export class HyperSpeed {
-
-  private target:Ship;
-
-  constructor(target:Ship) {
-    this.target = target;
-  }
+export class HyperSpeed extends SpecialSystem {
 
   handleEvent() {
 

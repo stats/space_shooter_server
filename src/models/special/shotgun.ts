@@ -1,15 +1,9 @@
-import { Ship } from '../ship';
+import { SpecialSystem } from './SpecialSystem';
 import { C, CT } from '../../constants';
 import { StraightAnglePath} from '../../behaviours/bullet/StraightAnglePath';
 import { Bullet } from '../bullet';
 
-export class Shotgun {
-
-  private target:Ship;
-
-  constructor(target:Ship) {
-    this.target = target;
-  }
+export class Shotgun extends SpecialSystem {
 
   handleEvent() {
     for(let i = 0; i < 5; i++) {
@@ -30,4 +24,5 @@ export class Shotgun {
       this.target.$state.addBullet(bullet);
     }
   }
+
 }

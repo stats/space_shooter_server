@@ -1,17 +1,9 @@
-import { Ship } from '../ship';
+import { SpecialSystem } from './SpecialSystem';
 
-export class EmergencyBrake {
-
-  private target:Ship;
-
-  constructor(target:Ship) {
-    this.target = target;
-  }
+export class EmergencyBrake extends SpecialSystem {
 
   handleEvent() {
     this.target.vertical_accelleration = 0;
     this.target.horizontal_accelleration = 0;
   }
-
-  //TODO: ADD COOLDOWN
 }

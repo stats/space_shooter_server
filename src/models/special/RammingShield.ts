@@ -1,15 +1,12 @@
-import { Ship } from '../ship';
-
-export class RammingShield {
-
-  private target:Ship;
-
-  constructor(target:Ship) {
-    this.target = target;
-  }
+import { Ship } from '../ship';import { SpecialSystem } from './SpecialSystem';
+export class RammingShield extends SpecialSystem {
 
   handleEvent() {
 
+  }
+
+  handleUpdate() {
+    
   }
 
 }
