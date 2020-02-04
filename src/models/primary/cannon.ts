@@ -19,6 +19,7 @@ export class Cannon {
   bullet_count:number;
   bullet_angle:number;
   bullet_offset:number;
+  bullet_mesh:number;
 
   constructor(entity, options) {
     this.damage = entity.getDamage() * options.damage;
@@ -39,7 +40,7 @@ export class Cannon {
       range: this.range,
       collision_type: CT.CIRCLE,
       radius: this.radius,
-      bullet_mesh: 0,
+      bullet_mesh: this.bullet_mesh,
       x: x,
       y: y,
       bullet_type: C.SHIP_BULLET

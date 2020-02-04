@@ -6,6 +6,7 @@ export class SPECIAL {
   public static TYPE = {
     "Weapon Charge": {
       system_type: WeaponCharge,
+      amount: 2,
       fire_rate: 3000
     },
     "Emergency Brake": {
@@ -14,10 +15,13 @@ export class SPECIAL {
     },
     "Thrusters": {
       system_type: Thrusters,
-      fire_rate: 2000
+      amount: 2,
+      duration: 2000,
+      fire_rate: 4000
     },
     "Ramming Shield": {
       system_type: RammingShield,
+      duration: 1000,
       fire_rate: 10000
     },
     "Shotgun": {
@@ -30,10 +34,12 @@ export class SPECIAL {
     },
     "Hyper Speed": {
       system_type: HyperSpeed,
+      amount: 1,
       fire_rate: 5000
     },
     "Invisibility": {
       system_type: Invisibility,
+      duration: 2000,
       fire_rate: 10000
     },
     "Bomb": {
@@ -50,10 +56,12 @@ export class SPECIAL {
     },
     "Shield Recharge": {
       system_type: ShieldRecharge,
+      amount: 1,
       fire_rate: 15000
     },
     "Force Shield": {
       system_type: ForceShield,
+      duration: 2000,
       fire_rate: 15000
     }
   };

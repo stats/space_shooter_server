@@ -94,7 +94,7 @@ export class GameState extends Schema {
     return Object.keys(this.ships).length > 0;
   }
 
-  getClosestEnemy(x:number, y:number, ignoreInvisible?:number = false):Ship {
+  getClosestEnemy(x:number, y:number, ignoreInvisible:boolean= false):Ship {
     let return_enemy:Ship = null;
     let distance:number = 99999;
     for(let key in this.enemies) {
@@ -109,7 +109,7 @@ export class GameState extends Schema {
     return return_enemy;
   }
 
-  getEnemyInRange(x:number, y:number, radius:number, ignoreInvisible?:number = false) {
+  getEnemyInRange(x:number, y:number, radius:number, ignoreInvisible:boolean = false) {
     let enemies:Enemy[] = [];
     for(let key in this.enemies) {
       let enemy = this.enemies[key];
@@ -122,7 +122,20 @@ export class GameState extends Schema {
     return enemies;
   }
 
-  getClosestShip(x:number, y:number, ignoreInvisible?:number = false):Ship {
+  getShipInRange(x:number, y:number, radius:number, ignoreInvisible:boolean = false) {
+    let ships:Ship[] = [];
+    for(let key in this.ships) {
+      let ship = this.ships[key];
+      if(ship.invisible && ignoreInvisible == false) continue;
+      let d:number = CollisionHelper.distance(x, y, ship.position.x, ship.position.y);
+      if(d <= radius){
+        ships.push(ship);
+      }
+    }
+    return ships;
+  }
+
+  getClosestShip(x:number, y:number, ignoreInvisible:boolean = false):Ship {
     let return_ship:Ship = null;
     let distance:number = 99999;
     for(let key in this.ships) {

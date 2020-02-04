@@ -13,6 +13,7 @@ export class Blaster {
   fire_rate:number;
   bullet_count:number;
   bullet_offset:number;
+  bullet_mesh:number;
 
   constructor(entity, options) {
     this.damage = entity.getDamage() * options.damage;

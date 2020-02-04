@@ -8,6 +8,8 @@ import { PrimaryAttackBehaviour } from '../behaviours/player/PrimaryAttackBehavi
 import { SpecialAttackBehaviour } from '../behaviours/player/SpecialAttackBehaviour';
 import { ShieldRechargeBehaviour } from '../behaviours/player/ShieldRechargeBehaviour';
 
+import { C } from '../constants';
+
 import { GameState } from './GameState';
 
 import { Entity } from './entity';
@@ -108,6 +110,7 @@ export class Ship extends Entity {
   createdAt:number;
 
   weaponCharge:number = 1;
+  thrusters:number = 1;
 
   inGame:number;
 
@@ -178,11 +181,11 @@ export class Ship extends Entity {
   }
 
   getSpeed() {
-    return this.speed_base + (this.upgrade_speed * this.speed_growth);
+    return this.speed_base + (this.upgrade_speed * this.speed_growth) * this.thrusters;
   }
 
   getAccelleration() {
-    return this.accelleration_base + (this.upgrade_accelleration * this.accelleration_growth);
+    return this.accelleration_base + (this.upgrade_accelleration * this.accelleration_growth) * this.thrusters;
   }
 
   updateWaveRank(wave:number) {
@@ -234,12 +237,30 @@ export class Ship extends Entity {
     this.setupShip()
   }
 
+  setWeaponCharge(n:number) {
+    this.weaponCharge = n;
+    this.damage = this.getDamage();
+  }
+
+  setThrusters(n:number) {
+    this.thrusters = n;
+    this.speed = this.getSpeed();
+    this.accelleration = this.getAccelleration();
+  }
+
   checkLevelUp() {
     while( this.kills > this.next_level ) {
       this.level += 1;
       this.upgrade_points += 1;
       this.updateNextLevel();
     }
+  }
+
+  clampToBounds() {
+    if(this.position.x < C.BOUNDS.minX) this.position.x = C.BOUNDS.minX;
+    if(this.position.x > C.BOUNDS.maxX) this.position.x = C.BOUNDS.maxX;
+    if(this.position.y < C.BOUNDS.minY) this.position.y = C.BOUNDS.minY;
+    if(this.position.y > C.BOUNDS.maxY) this.position.y = C.BOUNDS.maxY;
   }
 
   addKill(current_wave) {

@@ -4,14 +4,11 @@ import { Bounds } from '../../helpers/Bounds';
 
 export class InputBehaviour extends Behaviour {
 
-  bounds:Bounds;
-
   horizontal_vector:number = 0;
   vertical_vector:number = 0;
 
   constructor(target) {
     super('input', target);
-    this.bounds = C.BOUNDS;
   }
 
   public onEvent(args: {horizontal?:number, vertical?:number, primary_attack?:number, special_attack?:number}) {
@@ -51,10 +48,7 @@ export class InputBehaviour extends Behaviour {
     if(this.target.horizontal_accelleration != 0 || this.target.vertical_accelleration != 0){
       this.target.position.x += this.target.horizontal_accelleration * (deltaTime/1000);
       this.target.position.y += this.target.vertical_accelleration * (deltaTime/1000);
-      if(this.target.position.x < this.bounds.minX) this.target.position.x = this.bounds.minX;
-      if(this.target.position.x > this.bounds.maxX) this.target.position.x = this.bounds.maxX;
-      if(this.target.position.y < this.bounds.minY) this.target.position.y = this.bounds.minY;
-      if(this.target.position.y > this.bounds.maxY) this.target.position.y = this.bounds.maxY;
+      this.target.clampToBounds();
     }
   }
 }

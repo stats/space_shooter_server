@@ -1,5 +1,6 @@
 import { Behaviour } from '../behaviour';
 import { C } from '../../constants';
+import { Entity } from '../../models/entity';
 
 export class ExplodeBehaviour extends Behaviour {
 
@@ -12,9 +13,14 @@ export class ExplodeBehaviour extends Behaviour {
 
   onEvent() {
     if(this.blast_radius == null || this.blast_radius == 0) return;
-    let enemies = this.target.$state.getEnemyInRange(this.target.x, this.target.y, this.blast_radius);
-    for(let enemy of enemies) {
-      enemy.handleEvent('take_damage', { damage: this.target.damage, fired_by: this.target.fired_by });
+    let entities:Entity[];
+    if(this.target.bullet_type == C.SHIP_BULLET) {
+      entities = this.target.$state.getEnemyInRange(this.target.x, this.target.y, this.blast_radius, true);
+    } else {
+      entities = this.target.$state.getShipInRange(this.target.x, this.target.y, this.blast_radius, true);
+    }
+    for(let entity of entities) {
+      entity.handleEvent('take_damage', { damage: this.target.damage, fired_by: this.target.fired_by });
     }
   }
 }

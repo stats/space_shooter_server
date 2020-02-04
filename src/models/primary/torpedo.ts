@@ -37,7 +37,7 @@ export class Torpedo {
       range: this.range,
       collision_type: CT.CIRCLE,
       radius: this.radius,
-      bullet_mesh: 1,
+      bullet_mesh: 4,
       x: x,
       y: y,
       bullet_type: C.SHIP_BULLET,

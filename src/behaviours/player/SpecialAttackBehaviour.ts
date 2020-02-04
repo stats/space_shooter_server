@@ -12,6 +12,8 @@ export class SpecialAttackBehaviour extends Behaviour {
     super('special_attack', target);
     let system_type = SPECIAL.TYPE[this.target.special_weapon]["system_type"];
     this.system = new system_type(this.target);
+    this.system.duration = SPECIAL.TYPE[this.target.special_weapon]["duration"] || 0;
+    this.system.amount = SPECIAL.TYPE[this.target.special_weapon]["amount"] || 0;
     this.target.special_cooldown_max = SPECIAL.TYPE[this.target.special_weapon]["fire_rate"];
     this.target.special_cooldown = this.target.special_cooldown_max;
   }
@@ -26,7 +28,7 @@ export class SpecialAttackBehaviour extends Behaviour {
     if(this.target.special_cooldown <= this.target.special_cooldown_max) {
       this.target.special_cooldown += deltaTime;
     }
-    this.system.handleUpdate();
+    this.system.handleUpdate(deltaTime);
   }
 
   canFire():boolean {

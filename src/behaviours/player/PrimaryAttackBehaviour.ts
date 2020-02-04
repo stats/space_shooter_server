@@ -25,6 +25,9 @@ export class PrimaryAttackBehaviour extends Behaviour {
       bullets[i].fired_by = this.target;
       this.target.$state.addBullet(bullets[i]);
     }
+    if(this.target.weaponCharge != 1) {
+      this.target.setWeaponCharge(1);
+    }
   }
 
   public onUpdate(deltaTime:number) {

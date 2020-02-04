@@ -2,7 +2,7 @@ import { Bullet } from '../bullet';
 import { C, CT } from '../../constants';
 import { GameState } from '../GameState';
 import { Entity } from '../entity';
-import { ClosestEnemyPath } from '../../behaviours/bullet/MissilePath';
+import { MissilePath } from '../../behaviours/bullet/MissilePath';
 
 export class Missile {
 
@@ -32,7 +32,7 @@ export class Missile {
       range: this.range,
       collision_type: CT.CIRCLE,
       radius: this.radius,
-      bullet_mesh: 1,
+      bullet_mesh: 3,
       x: x,
       y: y,
       bullet_type: C.SHIP_BULLET

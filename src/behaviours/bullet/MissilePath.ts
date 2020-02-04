@@ -1,8 +1,11 @@
 import { Behaviour } from '../behaviour';
 import { C } from '../../constants';
 import { Position } from '../../models/position';
+import { Entity } from '../../models/entity';
 
 export class MissilePath extends Behaviour {
+
+  private entity:Entity;
 
   private x_loc:number = -999;
   private y_loc:number = -999;
@@ -18,20 +21,29 @@ export class MissilePath extends Behaviour {
 
   constructor(target:any) {
     super('MissilePath', target);
-    this.enemy = this.target.$state.getClosestEnemy(this.target.position.x, this.target.position.y);
-    if(this.enemy == null) {
+    if(this.target.bullet_type == C.SHIP_BULLET) {
+      this.entity = this.target.$state.getClosestEnemy(this.target.position.x, this.target.position.y);
+    } else {
+      this.entity = this.target.$state.getClosestShip(this.target.position.x, this.target.position.y);
+    }
+    if(this.entity == null) {
       this.x_loc = this.target.position.x;
       this.y_loc = this.target.position.y + this.target.range;
     }
   }
 
   onUpdate(deltaTime) {
-    if(this.getX() == null) {
+    if(this.getEntityX() == null) {
       this.target.handleEvent('destroyed');
       return;
     }
-    this.acc_x = this.sgn(this.getEnemyX() - this.target.position.x) * this.engine() * deltaTime / 1000;
-    this.acc_y = this.sgn(this.getEnemyY() - this.target.position.y) * this.engine() * deltaTime / 1000;
+    if(this.entity.invisible) {
+      this.x_loc = this.entity.position.x;
+      this.y_loc = this.entity.position.y;
+      this.entity = null;
+    }
+    this.acc_x = this.sgn(this.getEntityX() - this.target.position.x) * this.engine() * deltaTime / 1000;
+    this.acc_y = this.sgn(this.getEntityY() - this.target.position.y) * this.engine() * deltaTime / 1000;
 
     this.speed_x = Math.min(this.target.speed, Math.abs(this.speed_x + this.acc_x)) * this.sgn(this.speed_x + this.acc_x) * this.drag();
     this.speed_y = Math.min(this.target.speed, Math.abs(this.speed_y + this.acc_y)) * this.sgn(this.speed_y + this.acc_y) * this.drag();
@@ -56,15 +68,15 @@ export class MissilePath extends Behaviour {
     return n < 0 ? -1 : 1;
   }
 
-  getEnemyX() {
-    if( this.enemy == null && this.x_loc == -999) return null;
-    if( this.enemy == null ) return x_loc;
-    return this.enemy.position.x;
+  getEntityX() {
+    if( this.entity == null && this.x_loc == -999) return null;
+    if( this.entity == null ) return this.x_loc;
+    return this.entity.position.x;
   }
 
-  getEnemyY() {
-    if( this.enemy == null && this.y_loc == -999) return null;
-    if( this.enemy == null ) return y_loc;
-    return this.enemy.position.y;
+  getEntityY() {
+    if( this.entity == null && this.y_loc == -999) return null;
+    if( this.entity == null ) return this.y_loc;
+    return this.entity.position.y;
   }
 }
