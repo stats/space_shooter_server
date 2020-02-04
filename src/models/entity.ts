@@ -23,11 +23,20 @@ export class Entity extends Schema {
   bullet_offset_y:number = 0;
 
   collision_type:number = CT.CIRCLE;
-  radius:number;
+  radius:number = 25;
   width:number;
   height:number;
   radiusX:number;
   radiusY:number;
+
+  @type('boolean')
+  bullet_invulnerable:boolean = false;
+
+  @type('boolean')
+  collision_invulnerable:boolean = false;
+
+  @type('boolean')
+  invisible:boolean = false;
 
   public $state:GameState;
 

@@ -105,8 +105,6 @@ export class Ship extends Entity {
   @type("number")
   next_level:number = 0;
 
-  radius:number;
-
   createdAt:number;
 
   inGame:number;

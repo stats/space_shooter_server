@@ -12,13 +12,14 @@ export class ClosestPlayerAtStartPath extends Behaviour {
   constructor(target:any) {
     super('ClosestPlayerAtStartPath', target);
     this.target_player = this.target.$state.getClosestShip(this.target.x, this.target.y);
+    let dx:number, dy:number;
     if(this.target_player == null){
-      console.log("Error: Ship is null in TargetPlayerStartPath");
-      this.target.handleEvent('destroyed');
-      return;
+      dx = ( C.BOUNDS.maxX / 2 ) - this.target.position.x;
+      dy = ( C.BOUNDS.maxY / 2 ) - this.target.position.y;
+    } else {
+      dx = this.target.position.x - this.target_player.position.x;
+      dy = this.target.position.y - this.target_player.position.y;
     }
-    let dx = this.target.position.x - this.target_player.position.x;
-    let dy = this.target.position.y - this.target_player.position.y;
     this.theta = Math.atan2(dy, dx);
   }
 
