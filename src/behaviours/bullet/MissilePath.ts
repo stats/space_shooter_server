@@ -2,6 +2,7 @@ import { Behaviour } from '../behaviour';
 import { C } from '../../constants';
 import { Position } from '../../models/position';
 import { Entity } from '../../models/entity';
+import { GameState } from '../../models/GameState';
 
 export class MissilePath extends Behaviour {
 
@@ -18,9 +19,19 @@ export class MissilePath extends Behaviour {
 
   private traveled:number = 0;
 
+  private gotGameState:boolean = false;
 
-  constructor(target:any) {
+  private theta:number = 0;
+  private t1:number = 0.01;
+  private t2:number = 0.001;
+
+
+  constructor(target:any, args:{ angle:number }) {
     super('MissilePath', target);
+    this.theta = args.angle || Math.PI/2;
+  }
+
+  handleGameState() {
     if(this.target.bullet_type == C.SHIP_BULLET) {
       this.entity = this.target.$state.getClosestEnemy(this.target.position.x, this.target.position.y);
     } else {
@@ -30,38 +41,52 @@ export class MissilePath extends Behaviour {
       this.x_loc = this.target.position.x;
       this.y_loc = this.target.position.y + this.target.range;
     }
+    this.gotGameState = true;
   }
 
   onUpdate(deltaTime) {
+    if(this.gotGameState == false && this.target.$state == null) {
+      return;
+    } else if (this.gotGameState == false && this.target.$state != null) {
+      this.handleGameState();
+    }
     if(this.getEntityX() == null) {
       this.target.handleEvent('destroyed');
       return;
     }
-    if(this.entity.invisible) {
+    if(this.entity && this.entity.invisible) {
       this.x_loc = this.entity.position.x;
       this.y_loc = this.entity.position.y;
       this.entity = null;
     }
-    this.acc_x = this.sgn(this.getEntityX() - this.target.position.x) * this.engine() * deltaTime / 1000;
-    this.acc_y = this.sgn(this.getEntityY() - this.target.position.y) * this.engine() * deltaTime / 1000;
 
-    this.speed_x = Math.min(this.target.speed, Math.abs(this.speed_x + this.acc_x)) * this.sgn(this.speed_x + this.acc_x) * this.drag();
-    this.speed_y = Math.min(this.target.speed, Math.abs(this.speed_y + this.acc_y)) * this.sgn(this.speed_y + this.acc_y) * this.drag();
+    let dx = this.getEntityX() - this.target.position.x;
+    let dy = this.getEntityY() - this.target.position.y;
+    let ct = Math.atan2(dy, dx);
+    if(ct - this.theta > this.t1) {
+      this.theta += this.t1;
+    } else if(ct - this.theta < this.t1) {
+      this.theta -= this.t1;
+    } else {
+      this.theta = ct;
+    }
 
-    this.target.position.x += this.speed_x;
-    this.target.position.y += this.speed_y;
+    this.t1 += this.t2;
 
-    this.traveled += Math.abs(this.speed_x) + Math.abs(this.speed_y);
+    this.target.position.x += Math.cos(this.theta) * this.target.speed * deltaTime / 1000;
+    this.target.position.y += Math.sin(this.theta) * this.target.speed * deltaTime / 1000;
+
+    this.traveled += this.target.speed * deltaTime / 1000;
 
     if(this.traveled > this.target.range) this.target.handleEvent('destroyed');
   }
 
   engine() {
-    return Math.random() * 0.1 + 0.05;
+    return 5 * Math.random() * 0.1 + 0.05;
   }
 
   drag() {
-    return Math.random() * 0.05 + 0.94;
+    return 5 * Math.random() * 0.05 + 0.94;
   }
 
   sgn(n:Number) {

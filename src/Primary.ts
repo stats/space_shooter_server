@@ -75,7 +75,7 @@ export class PRIMARY {
     "Missile": {
       system_type: Missile,
       damage: 1.2,
-      range: 1,
+      range: 1.5,
       speed: 350,
       fire_rate: 0.9,
       radius: 15,
@@ -120,12 +120,12 @@ export class PRIMARY {
     "Double Missile": {
       system_type: Missile,
       damage: 1.2,
-      range: 1,
+      range: 1.5,
       speed: 350,
       fire_rate: 0.9,
       radius: 15,
       bullet_count: 2,
-      bullet_angle: 0,
+      bullet_angle: Math.PI/6,
       bullet_offset: 15
     },
     "Blaster 3.0": {
@@ -165,12 +165,12 @@ export class PRIMARY {
     "Triple Missile": {
       system_type: Missile,
       damage: 1.2,
-      range: 1,
+      range: 1.5,
       speed: 350,
       fire_rate: 0.9,
       radius: 15,
       bullet_count: 3,
-      bullet_angle: 0,
+      bullet_angle: Math.PI/4,
       bullet_offset: 15
     },
     "Triple Torpedo": {

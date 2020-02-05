@@ -48,7 +48,7 @@ export class SPECIAL {
     },
     "Missile Barrage": {
       system_type: MissileBarage,
-      fire_rate: 15000
+      fire_rate: 5000
     },
     "Mega Bomb": {
       system_type: MegaBomb,

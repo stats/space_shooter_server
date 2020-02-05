@@ -20,7 +20,7 @@
   "dependencies": {
     "@colyseus/monitor": "^0.11.17",
     "body-parser": "^1.19.0",
-    "colyseus": "^0.12.0",
+    "colyseus": "^0.12.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "intersects": "^2.7.1",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^5.2.7",
-    "@types/node": "^13.5.0",
+    "@types/node": "^13.7.0",
     "assert": "^2.0.0",
     "httpie": "^1.1.2",
     "mocha": "^7.0.1",

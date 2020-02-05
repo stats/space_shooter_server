@@ -10,8 +10,8 @@ export class MissileBarage extends SpecialSystem {
       let spawn_location = this.target.getBulletSpawnLocation();
       let bullet:Bullet = new Bullet({
         damage: this.target.getDamage() / 3,
-        speed: 500,
-        range: 250,
+        speed: 350,
+        range: 600,
         collision_type: CT.CIRCLE,
         radius: 15,
         bullet_mesh: 0,
@@ -20,7 +20,7 @@ export class MissileBarage extends SpecialSystem {
         bullet_type: C.SHIP_BULLET
       });
 
-      bullet.registerBehaviour(new MissilePath(bullet));
+      bullet.registerBehaviour(new MissilePath(bullet, {angle: (i * Math.PI/6)}));
       bullet.fired_by = this.target;
       this.target.$state.addBullet(bullet);
     }
