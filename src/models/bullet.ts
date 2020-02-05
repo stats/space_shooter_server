@@ -32,12 +32,8 @@ export class Bullet extends Entity {
   explodes:boolean = false;
 
   /* The mesh to display for the bullet */
-  @type("int32")
-  bullet_mesh:number;
-
-  /* The material to color the bullet with */
-  @type("int32")
-  bullet_mat:number;
+  @type("string")
+  bullet_mesh:string;
 
   collision_tpe = CT.CIRCLE;
   radius:number = 15;

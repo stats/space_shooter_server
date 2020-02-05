@@ -6,27 +6,13 @@ import { GameState } from '../GameState';
 import { Entity } from '../entity';
 import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
 import { ExplodeBehaviour } from '../../behaviours/bullet/ExplodeBehaviour';
+import { Primary } from './Primary';
 
-export class Torpedo {
-
-  damage:number;
-  speed:number;
-  range:number;
-  radius:number;
-  fire_rate:number;
-  bullet_count:number;
-  bullet_offset:number;
-  blast_radius:number;
+export class Torpedo extends Primary {
 
   constructor(entity, options) {
-    this.damage = entity.getDamage() * options.damage;
-    this.speed =  options.speed;
-    this.range = entity.getRange() * options.range;
-    this.radius = options.radius;
-    this.fire_rate = entity.getFireRate() * options.fire_rate;
-    this.bullet_count = options.bullet_count;
-    this.bullet_offset = options.bullet_offset;
-    this.blast_radius = options.blast_radius;
+    super(entity, options);
+    this.bullet_mesh = "Torpedo";
   }
 
   getBullets(x, y):Bullet[] {
@@ -37,7 +23,7 @@ export class Torpedo {
       range: this.range,
       collision_type: CT.CIRCLE,
       radius: this.radius,
-      bullet_mesh: 4,
+      bullet_mesh: this.bullet_mesh,
       x: x,
       y: y,
       bullet_type: C.SHIP_BULLET,

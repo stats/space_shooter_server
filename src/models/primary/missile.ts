@@ -2,27 +2,13 @@ import { Bullet } from '../bullet';
 import { C, CT } from '../../constants';
 import { Entity } from '../entity';
 import { MissilePath } from '../../behaviours/bullet/MissilePath';
+import { Primary } from './Primary';
 
-export class Missile {
-
-  damage:number;
-  speed:number;
-  range:number;
-  radius:number;
-  fire_rate:number;
-  bullet_count:number;
-  bullet_offset:number;
-  bullet_angle:number;
+export class Missile extends Primary {
 
   constructor(entity, options) {
-    this.damage = entity.getDamage() * options.damage;
-    this.speed =  options.speed;
-    this.range = entity.getRange() * options.range;
-    this.radius = options.radius;
-    this.fire_rate = entity.getFireRate() * options.fire_rate;
-    this.bullet_count = options.bullet_count;
-    this.bullet_offset = options.bullet_offset;
-    this.bullet_angle = options.bullet_angle;
+    super(entity, options);
+    this.bullet_mesh = "Missile";
   }
 
   getBullets(x:number, y:number):Bullet[] {
@@ -33,7 +19,7 @@ export class Missile {
       range: this.range,
       collision_type: CT.CIRCLE,
       radius: this.radius,
-      bullet_mesh: 3,
+      bullet_mesh: this.bullet_mesh,
       x: x,
       y: y,
       bullet_type: C.SHIP_BULLET

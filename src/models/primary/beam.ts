@@ -4,7 +4,7 @@ export class Beam extends Blaster {
 
   constructor(entity, options) {
     super(entity, options);
-    this.bullet_mesh = 2;
+    this.bullet_mesh = "Beam";
   }
 
 }

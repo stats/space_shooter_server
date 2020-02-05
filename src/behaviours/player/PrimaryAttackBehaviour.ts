@@ -39,7 +39,6 @@ export class PrimaryAttackBehaviour extends Behaviour {
   setWeaponSystem() {
     let system_type = PRIMARY.TYPE[this.target.primary_weapon]["system_type"];
     this.system = new system_type( this.target, PRIMARY.TYPE[this.target.primary_weapon]);
-    console.log(this.system);
   }
 
   canFire():boolean {

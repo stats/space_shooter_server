@@ -3,27 +3,13 @@ import { C, CT } from '../../constants';
 import { GameState } from '../GameState';
 import { Entity } from '../entity';
 import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
+import { Primary } from './Primary';
 
-export class Blaster {
-
-  damage:number;
-  speed:number;
-  range:number;
-  radius:number;
-  fire_rate:number;
-  bullet_count:number;
-  bullet_offset:number;
-  bullet_mesh:number;
+export class Blaster extends Primary{
 
   constructor(entity, options) {
-    this.damage = entity.getDamage() * options.damage;
-    this.speed =  options.speed;
-    this.range = entity.getRange() * options.range;
-    this.radius = options.radius;
-    this.fire_rate = entity.getFireRate() * options.fire_rate;
-    this.bullet_count = options.bullet_count;
-    this.bullet_offset = options.bullet_offset;
-    this.bullet_mesh = 1;
+    super(entity, options);
+    this.bullet_mesh = "Blaster";
   }
 
   getBullets(x, y):Bullet[] {
