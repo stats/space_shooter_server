@@ -93,7 +93,7 @@ export class PRIMARY {
       bullet_count: 1,
       bullet_angle: 0,
       bullet_offset: 0,
-      blast_radius: 30
+      blast_radius: 250
     },
     "Double Beam": {
       system_type: Beam,
@@ -149,7 +149,7 @@ export class PRIMARY {
       bullet_count: 2,
       bullet_angle: 0,
       bullet_offset: 15,
-      blast_radius: 30
+      blast_radius: 250
     },
     "Triple Beam": {
       system_type: Beam,
@@ -183,7 +183,7 @@ export class PRIMARY {
       bullet_count: 3,
       bullet_angle: 0,
       bullet_offset: 15,
-      blast_radius: 30
+      blast_radius: 250
     },
   };
 }

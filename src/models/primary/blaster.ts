@@ -23,6 +23,7 @@ export class Blaster {
     this.fire_rate = entity.getFireRate() * options.fire_rate;
     this.bullet_count = options.bullet_count;
     this.bullet_offset = options.bullet_offset;
+    this.bullet_mesh = 1;
   }
 
   getBullets(x, y):Bullet[] {
@@ -33,7 +34,7 @@ export class Blaster {
       range: this.range,
       collision_type: CT.CIRCLE,
       radius: this.radius,
-      bullet_mesh: 1,
+      bullet_mesh: this.bullet_mesh,
       x: x,
       y: y,
       bullet_type: C.SHIP_BULLET

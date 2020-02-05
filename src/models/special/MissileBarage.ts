@@ -14,7 +14,7 @@ export class MissileBarage extends SpecialSystem {
         range: 600,
         collision_type: CT.CIRCLE,
         radius: 15,
-        bullet_mesh: 0,
+        bullet_mesh: 3,
         x: spawn_location.x - 45 + (i * 15),
         y: spawn_location.y,
         bullet_type: C.SHIP_BULLET

@@ -95,13 +95,13 @@ export class MissilePath extends Behaviour {
 
   getEntityX() {
     if( this.entity == null && this.x_loc == -999) return null;
-    if( this.entity == null ) return this.x_loc;
-    return this.entity.position.x;
+    if( this.entity != null ) this.x_loc = this.entity.position.x;
+    return this.x_loc;
   }
 
   getEntityY() {
     if( this.entity == null && this.y_loc == -999) return null;
-    if( this.entity == null ) return this.y_loc;
-    return this.entity.position.y;
+    if( this.entity != null ) this.y_loc = this.entity.position.y;
+    return this.y_loc;
   }
 }
