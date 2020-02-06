@@ -14,7 +14,7 @@ export class MegaBomb extends SpecialSystem {
       range: 500,
       collision_type: CT.CIRCLE,
       radius: 25,
-      bullet_mesh: 6,
+      bullet_mesh: "MegaBomb",
       x: spawn_location.x,
       y: spawn_location.y,
       bullet_type: C.SHIP_BULLET,

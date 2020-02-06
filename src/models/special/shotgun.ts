@@ -14,7 +14,7 @@ export class Shotgun extends SpecialSystem {
         range: 250,
         collision_type: CT.CIRCLE,
         radius: 15,
-        bullet_mesh: 0,
+        bullet_mesh: "Cannon",
         x: spawn_location.x,
         y: spawn_location.y,
         bullet_type: C.SHIP_BULLET

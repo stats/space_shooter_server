@@ -9,7 +9,6 @@ export class Blaster extends Primary{
 
   constructor(entity, options) {
     super(entity, options);
-    this.bullet_mesh = "Blaster";
   }
 
   getBullets():Bullet[] {

@@ -18,7 +18,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 1,
       bullet_angle: 0,
-      bullet_offset: 0
+      bullet_offset: 0,
+      bullet_mesh: "Cannon"
     },
     "Blaster": {
       system_type: Blaster,
@@ -29,7 +30,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 1,
       bullet_angle: 0,
-      bullet_offset: 0
+      bullet_offset: 0,
+      bullet_mesh: "Blaster"
     },
     "Rapid": {
       system_type: Cannon,
@@ -40,7 +42,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 1,
       bullet_angle: 0,
-      bullet_offset: 0
+      bullet_offset: 0,
+      bullet_mesh: "Cannon"
     },
     "Cannon 2.0": {
       system_type: Cannon,
@@ -51,7 +54,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 2,
       bullet_angle: Math.PI/6,
-      bullet_offset: 0
+      bullet_offset: 0,
+      bullet_mesh: "Cannon"
     },
     "Beam": {
       system_type: Beam,
@@ -62,7 +66,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 1,
       bullet_angle: 0,
-      bullet_offset: 0
+      bullet_offset: 0,
+      bullet_mesh: "Beam"
     },
     "Blaster 2.0": {
       system_type: Blaster,
@@ -73,7 +78,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 2,
       bullet_angle: 0,
-      bullet_offset: 30
+      bullet_offset: 30,
+      bullet_mesh: "Blaster"
     },
     "Missile": {
       system_type: Missile,
@@ -84,7 +90,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 1,
       bullet_angle: 0,
-      bullet_offset: 0
+      bullet_offset: 0,
+      bullet_mesh: "Missile"
     },
     "Torpedo": {
       system_type: Torpedo,
@@ -96,7 +103,8 @@ export class PRIMARY {
       bullet_count: 1,
       bullet_angle: 0,
       bullet_offset: 0,
-      blast_radius: 250
+      blast_radius: 250,
+      bullet_mesh: "Torpedo"
     },
     "Double Beam": {
       system_type: Beam,
@@ -107,7 +115,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 2,
       bullet_angle: 0,
-      bullet_offset: 15
+      bullet_offset: 15,
+      bullet_mesh: "Beam"
     },
     "Cannon 3.0": {
       system_type: Cannon,
@@ -118,7 +127,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 3,
       bullet_angle: Math.PI/4,
-      bullet_offset: 0
+      bullet_offset: 0,
+      bullet_mesh: "Cannon"
     },
     "Double Missile": {
       system_type: Missile,
@@ -129,7 +139,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 2,
       bullet_angle: Math.PI/6,
-      bullet_offset: 15
+      bullet_offset: 15,
+      bullet_mesh: "Missile"
     },
     "Blaster 3.0": {
       system_type: Blaster,
@@ -140,7 +151,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 3,
       bullet_angle: 0,
-      bullet_offset: 30
+      bullet_offset: 30,
+      bullet_mesh: "Blaster"
     },
     "Double Torpedo": {
       system_type: Torpedo,
@@ -152,7 +164,8 @@ export class PRIMARY {
       bullet_count: 2,
       bullet_angle: 0,
       bullet_offset: 15,
-      blast_radius: 250
+      blast_radius: 250,
+      bullet_mesh: "Torpedo"
     },
     "Triple Beam": {
       system_type: Beam,
@@ -163,7 +176,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 3,
       bullet_angle: 0,
-      bullet_offset: 15
+      bullet_offset: 15,
+      bullet_mesh: "Beam"
     },
     "Triple Missile": {
       system_type: Missile,
@@ -174,7 +188,8 @@ export class PRIMARY {
       radius: 15,
       bullet_count: 3,
       bullet_angle: Math.PI/4,
-      bullet_offset: 15
+      bullet_offset: 15,
+      bullet_mesh: "Missile"
     },
     "Triple Torpedo": {
       system_type: Torpedo,
@@ -186,7 +201,8 @@ export class PRIMARY {
       bullet_count: 3,
       bullet_angle: 0,
       bullet_offset: 15,
-      blast_radius: 250
+      blast_radius: 250,
+      bullet_mesh: "Torpedo"
     },
   };
 }

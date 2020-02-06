@@ -11,17 +11,10 @@ export class FiresBulletBehaviour extends Behaviour {
     this.system = Primary.getSystem(args.bullet_options.system, this.target, args.bullet_options);
   }
 
-  fire() {
-    let bullets = this.system.getBullets();
-    for(var i = 0; i < this.bullets.length; i++) {
-      
-    }
-  }
-
   onUpdate(deltaTime) {
     this.timer += deltaTime;
     if(this.timer >= this.options.cooldown) {
-      this.fire();
+      this.system.spawnBullets(this.target);
       this.timer = 0;
     }
   }

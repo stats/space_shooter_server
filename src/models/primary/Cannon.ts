@@ -12,7 +12,6 @@ export class Cannon extends Primary {
 
   constructor(entity, options) {
     super(entity, options);
-    this.bullet_mesh = "Cannon";
   }
 
   getBullets():Bullet[] {

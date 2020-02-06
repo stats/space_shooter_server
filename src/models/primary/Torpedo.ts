@@ -12,7 +12,6 @@ export class Torpedo extends Primary {
 
   constructor(entity, options) {
     super(entity, options);
-    this.bullet_mesh = "Torpedo";
   }
 
   getBullets():Bullet[] {

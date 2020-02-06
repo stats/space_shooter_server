@@ -8,7 +8,6 @@ export class Missile extends Primary {
 
   constructor(entity, options) {
     super(entity, options);
-    this.bullet_mesh = "Missile";
   }
 
   getBullets():Bullet[] {

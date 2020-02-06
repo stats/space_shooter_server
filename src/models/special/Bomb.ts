@@ -14,10 +14,10 @@ export class Bomb extends SpecialSystem {
       range: 500,
       collision_type: CT.CIRCLE,
       radius: 20,
-      bullet_mesh: 5,
       x: spawn_location.x,
       y: spawn_location.y,
       bullet_type: C.SHIP_BULLET,
+      bullet_mesh: "Bomb",
       explodes: true
     });
     bullet.registerBehaviour(new StraightLineUpPath(bullet));
