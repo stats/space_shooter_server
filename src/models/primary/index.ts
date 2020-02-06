@@ -1,4 +1,3 @@
-export { Beam } from './Beam';
 export { Blaster } from './Blaster';
 export { Cannon } from './Cannon';
 export { Missile } from './Missile';

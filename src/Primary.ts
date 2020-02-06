@@ -1,4 +1,4 @@
-import { Cannon, Blaster, Torpedo, Missile, Beam, Primary} from './models/primary';
+import { Cannon, Blaster, Torpedo, Missile, Primary} from './models/primary';
 import { Entity } from './models/Entity';
 
 export class PRIMARY {
@@ -58,7 +58,7 @@ export class PRIMARY {
       bullet_mesh: "Cannon"
     },
     "Beam": {
-      system_type: Beam,
+      system_type: Blaster,
       damage: 1,
       range: 1.1,
       speed: 600,
@@ -107,7 +107,7 @@ export class PRIMARY {
       bullet_mesh: "Torpedo"
     },
     "Double Beam": {
-      system_type: Beam,
+      system_type: Blaster,
       damage: 1,
       range: 1.1,
       speed: 600,
@@ -168,7 +168,7 @@ export class PRIMARY {
       bullet_mesh: "Torpedo"
     },
     "Triple Beam": {
-      system_type: Beam,
+      system_type: Blaster,
       damage: 1,
       range: 1.1,
       speed: 600,

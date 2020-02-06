@@ -1,7 +1,9 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
 import { LoopingPath } from '../../behaviours/enemy/movement/LoopingPath';
-import { CT } from '../../constants';
+import { FiresBulletBehaviour } from '../../behaviours/enemy/FiresBulletBehaviour';
+import { EnemyBullet } from '../../models/primary/EnemyBullet';
+import { C, CT } from '../../constants';
 
 
 export class Bomber extends Enemy {
@@ -27,6 +29,21 @@ export class Bomber extends Enemy {
   onInitGame(state:GameState) {
     super.onInitGame(state);
     this.registerBehaviours([new LoopingPath(this)]);
+
+    let bullet_options = {
+      system: EnemyBullet,
+      damage: 1,
+      speed: 500,
+      range: 500,
+      collision_type: CT.CIRCLE,
+      radius: 15,
+      bullet_mesh: "Cannon",
+      x: this.position.x,
+      y: this.position.y,
+      bullet_type: C.ENEMY_BULLET,
+      cooldown: 3000
+    }
+    this.registerBehaviour(new FiresBulletBehaviour(this, {bullet_options: bullet_options}))
   }
 
 }
