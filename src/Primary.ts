@@ -1,10 +1,13 @@
-import { Cannon } from './models/primary/cannon';
-import { Blaster } from './models/primary/blaster';
-import { Torpedo } from './models/primary/torpedo';
-import { Missile } from './models/primary/missile';
-import { Beam } from './models/primary/beam';
+import { Cannon, Blaster, Torpedo, Missile, Beam, Primary} from './models/primary';
+import { Entity } from './models/Entity';
 
 export class PRIMARY {
+
+  static getSystem(type:string, entity:Entity):Primary {
+    let system_type = PRIMARY.TYPE[type]["system_type"];
+    return new system_type( entity, PRIMARY.TYPE[type]);
+  }
+
   public static TYPE = {
     "Cannon": {
       system_type: Cannon,

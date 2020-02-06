@@ -2,7 +2,6 @@ import { merge } from 'lodash';
 import { Entity } from '../entity';
 import { Ship } from '../ship';
 import { Bullet } from '../bullet';
-import { PRIMARY } from '../../Primary';
 
 export class Primary {
 
@@ -43,11 +42,6 @@ export class Primary {
       }
     }
     this.entity.$state.addBullets(bullets);
-  }
-
-  static getSystem(type:string, entity:Entity) {
-    let system_type = PRIMARY.TYPE[type]["system_type"];
-    return new system_type( entity, PRIMARY.TYPE[type]);
   }
 
 }

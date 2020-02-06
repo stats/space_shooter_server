@@ -3,7 +3,6 @@ import { C } from '../../constants';
 import { PRIMARY } from '../../Primary';
 import { Bounds } from '../../helpers/Bounds';
 import { Bullet } from '../../models/bullet';
-import { Primary } from '../../models/primary/Primary';
 
 
 export class PrimaryAttackBehaviour extends Behaviour {
@@ -13,7 +12,7 @@ export class PrimaryAttackBehaviour extends Behaviour {
   constructor(target) {
     super('primary_attack', target);
 
-    this.system = Primary.getSystem(this.target.primary_weapon, this.target)
+    this.system = PRIMARY.getSystem(this.target.primary_weapon, this.target)
     this.target.primary_cooldown_max = this.system.fire_rate;
     this.target.primary_cooldown = this.system.fire_rate;
   }

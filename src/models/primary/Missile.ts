@@ -12,7 +12,7 @@ export class Missile extends Primary {
   }
 
   getBullets():Bullet[] {
-    let spawn_location = this.target.getBulletSpawnLocation();
+    let spawn_location = this.entity.getBulletSpawnLocation();
 
     let bullets:Bullet[] = [];
     let options = {
