@@ -31,12 +31,21 @@ export class Primary {
       this.range     = (this.entity as Ship).getRange() * this.range;
       this.fire_rate = (this.entity as Ship).getFireRate() * this.fire_rate;
     }
-
   }
 
-  getBullets(x, y):Bullet[] { return []; }
+  getBullets():Bullet[] { return []; }
 
-  static getSystem(type:string, entity:Entity, options:any):Primary {
+  spawnBullets(fired_by?:Entity):void {
+    let bullets = this.getBullets();
+    if(fired_by) {
+      for(var i = 0, l = bullets.length; i < l; i++) {
+        bullets[i].fired_by = fired_by;
+      }
+    }
+    this.entity.$state.addBullets(bullets);
+  }
+
+  static getSystem(type:string, entity:Entity) {
     let system_type = PRIMARY.TYPE[type]["system_type"];
     return new system_type( entity, PRIMARY.TYPE[type]);
   }

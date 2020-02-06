@@ -54,6 +54,12 @@ export class GameState extends Schema {
     bullet.onInitGame(this);
   }
 
+  addBullets(bullets:Bullet[]) {
+    for(var i = 0; i < bullets.length; i++){
+      this.addBullet(bullets[i]);
+    }
+  }
+
   removeBullet(bullet:Bullet) {
     delete this.bullets[bullet.uuid];
   }

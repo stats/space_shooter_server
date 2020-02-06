@@ -12,7 +12,9 @@ export class Blaster extends Primary{
     this.bullet_mesh = "Blaster";
   }
 
-  getBullets(x, y):Bullet[] {
+  getBullets():Bullet[] {
+    let spawn_location = this.entity.getBulletSpawnLocation();
+
     let bullets:Bullet[] = [];
     let options = {
       damage: this.damage,
@@ -21,8 +23,8 @@ export class Blaster extends Primary{
       collision_type: CT.CIRCLE,
       radius: this.radius,
       bullet_mesh: this.bullet_mesh,
-      x: x,
-      y: y,
+      x: spawn_location.x,
+      y: spawn_location.y,
       bullet_type: C.SHIP_BULLET
     }
 

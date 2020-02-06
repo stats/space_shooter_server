@@ -4,24 +4,25 @@ import { C } from '../../constants';
 export class FiresBulletBehaviour extends Behaviour {
 
   timer:number = 0;
-  options:any;
-  system:any;
+  system:Primary;
 
-  constructor(target:any, args: {system:any, bullet_options:any}) {
+  constructor(target:any, args: {bullet_options:any}) {
     super('fires_bullet', target);
-    this.options = args.bullet_options;
-    this.system = new args.system();
+    this.system = Primary.getSystem(args.bullet_options.system, this.target, args.bullet_options);
+  }
+
+  fire() {
+    let bullets = this.system.getBullets();
+    for(var i = 0; i < this.bullets.length; i++) {
+      
+    }
   }
 
   onUpdate(deltaTime) {
     this.timer += deltaTime;
     if(this.timer >= this.options.cooldown) {
-      this.fireBullet();
+      this.fire();
       this.timer = 0;
     }
-  }
-
-  fireBullet() {
-
   }
 }

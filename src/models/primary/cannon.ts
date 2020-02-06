@@ -4,8 +4,6 @@
 
 import { Bullet } from '../bullet';
 import { C, CT } from '../../constants';
-import { GameState } from '../GameState';
-import { Entity } from '../entity';
 import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
 import { StraightAnglePath } from '../../behaviours/bullet/StraightAnglePath';
 import { Primary } from './Primary';
@@ -17,7 +15,9 @@ export class Cannon extends Primary {
     this.bullet_mesh = "Cannon";
   }
 
-  getBullets(x, y):Bullet[] {
+  getBullets():Bullet[] {
+    let spawn_location = this.entity.getBulletSpawnLocation();
+
     let bullets:Bullet[] = [];
     let options = {
       damage: this.damage,
@@ -26,8 +26,8 @@ export class Cannon extends Primary {
       collision_type: CT.CIRCLE,
       radius: this.radius,
       bullet_mesh: this.bullet_mesh,
-      x: x,
-      y: y,
+      x: spawn_location.x,
+      y: spawn_location.y,
       bullet_type: C.SHIP_BULLET
     }
 
