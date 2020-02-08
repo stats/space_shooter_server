@@ -11,7 +11,7 @@ export class FiresBulletBehaviour extends Behaviour {
 
   constructor(target:any, args: {bullet_options:any}) {
     super('fires_bullet', target);
-    this.system = PRIMARY.getSystem(args.bullet_options.system, this.target);
+    this.system = new args.bullet_options.system(this.target, args.bullet_options);
     this.cooldown = args.bullet_options.cooldown;
   }
 
