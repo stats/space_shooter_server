@@ -1,5 +1,6 @@
 import { Room, Client, Delayed, matchMaker } from 'colyseus';
 import { JWTHelper } from '../helpers/JWTHelper';
+import { ShipHelper } from '../helpers/ShipHelper';
 
 interface MatchmakingGroup {
   averageRank: number;
@@ -28,13 +29,15 @@ export class MatchMakerRoom extends Room {
 
   roomToCreate = 'GameRoom';
 
-  maxWaitingTime:number = 2 * 1000;
+  maxWaitingTime:number = 60 * 1000;
 
-  maxWaitingTimeForPriority?:number = 1 * 1000;
+  maxWaitingTimeForPriority?:number = 30 * 1000;
 
   numClientsToMatch = 4;
 
   stats: ClientStat[] = [];
+
+  clientShipHash:any = {};
 
   onCreate(options: any) {
     if(options.maxWaitingTime) {
@@ -63,13 +66,21 @@ export class MatchMakerRoom extends Room {
     return username;
   }
 
-  onJoin(client:Client, options: any, username: string) {
+  async onJoin(client:Client, options: any, username: string) {
     this.stats.push({
       client: client,
       rank: options.rank,
       waitingTime: 0,
       options
     });
+
+    let ship = await ShipHelper.getShipInGame(username);
+    if(!ship) {
+      this.send(client, { error: 'no_ship_in_game'});
+      return;
+    }
+    this.clientShipHash[client.id] = ship;
+
     this.send(client, 1);
   }
 
@@ -169,7 +180,12 @@ export class MatchMakerRoom extends Room {
               this.send(client.client, matchData);
             }));
           } else {
-            group.clients.forEach(client => this.send(client.client, group.clients.length));
+            let ships = [];
+            for(let i = 0; i < group.clients.length; i++) {
+              let ship = this.clientShipHash[group.clients[i].client.id];
+              ships.push(ship)
+            }
+            group.clients.forEach(client => this.send(client.client, { ships: ships }));
           }
         })
     );
@@ -178,6 +194,7 @@ export class MatchMakerRoom extends Room {
   onLeave(client:Client, consented: boolean) {
     const index = this.stats.findIndex(stat => stat.client === client);
     this.stats.splice(index, 1);
+    delete this.clientShipHash[client.id];
   }
 
   onDispose() {

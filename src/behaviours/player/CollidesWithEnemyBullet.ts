@@ -15,7 +15,6 @@ export class CollidesWithEnemyBullet extends Behaviour {
       let bullet:Bullet = this.target.$state.bullets[uuid];
       if(bullet.bullet_type == C.ENEMY_BULLET && CollisionHelper.collisionBetween(this.target, bullet)) {
         if(this.target.bullet_invulnerable == false) {
-          console.log(bullet.damage);
           this.target.handleEvent('take_damage', {damage: bullet.damage});
         }
         bullet.handleEvent('destroyed');

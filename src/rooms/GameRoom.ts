@@ -83,7 +83,7 @@ export class GameRoom extends Room<GameState> {
     ship.updateWaveRank(this.state.current_wave);
     ShipHelper.saveShip(ship);
     this.state.removeShip(ship);
-    ShipHelper.removeInGame(ship.uuid)
+    ShipHelper.removeInGame(ship.uuid);
     delete this.clientShipHash[client.id];
   }
 

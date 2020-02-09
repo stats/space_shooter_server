@@ -21,7 +21,7 @@ export class SPECIAL {
     },
     "Ramming Shield": {
       system_type: RammingShield,
-      duration: 1000,
+      duration: 4000,
       fire_rate: 10000
     },
     "Shotgun": {
@@ -61,7 +61,7 @@ export class SPECIAL {
     },
     "Force Shield": {
       system_type: ForceShield,
-      duration: 2000,
+      duration: 3000,
       fire_rate: 15000
     }
   };

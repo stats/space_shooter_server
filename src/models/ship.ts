@@ -257,10 +257,22 @@ export class Ship extends Entity {
   }
 
   clampToBounds() {
-    if(this.position.x < C.BOUNDS.minX) this.position.x = C.BOUNDS.minX;
-    if(this.position.x > C.BOUNDS.maxX) this.position.x = C.BOUNDS.maxX;
-    if(this.position.y < C.BOUNDS.minY) this.position.y = C.BOUNDS.minY;
-    if(this.position.y > C.BOUNDS.maxY) this.position.y = C.BOUNDS.maxY;
+    if(this.position.x < C.BOUNDS.minX) {
+      this.position.x = C.BOUNDS.minX;
+      this.horizontal_accelleration = 0;
+    }
+    if(this.position.x > C.BOUNDS.maxX) {
+       this.position.x = C.BOUNDS.maxX;
+       this.horizontal_accelleration = 0;
+    }
+    if(this.position.y < C.BOUNDS.minY) {
+       this.position.y = C.BOUNDS.minY;
+       this.vertical_accelleration = 0;
+    }
+    if(this.position.y > C.BOUNDS.maxY) {
+       this.position.y = C.BOUNDS.maxY;
+       this.vertical_accelleration = 0;
+    }
   }
 
   addKill(current_wave) {

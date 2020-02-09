@@ -29,7 +29,7 @@ export class Blaster extends Primary{
 
     let offset_start = 0;
     if(this.bullet_offset != 0) {
-      offset_start = -(this.bullet_count * this.bullet_offset) / 2;
+      offset_start = 10 - ((this.bullet_count * this.bullet_offset) / 2);
     }
 
     for(var i = 0; i < this.bullet_count; i++){
