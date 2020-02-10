@@ -31,6 +31,9 @@ export class Bullet extends Entity {
   /** If there is a splash effect **/
   explodes:boolean = false;
 
+  @type("number")
+  blast_radius:number = 0;
+
   /* The mesh to display for the bullet */
   @type("string")
   bullet_mesh:string;

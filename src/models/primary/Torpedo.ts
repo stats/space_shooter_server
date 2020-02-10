@@ -28,7 +28,8 @@ export class Torpedo extends Primary {
       x: spawn_location.x,
       y: spawn_location.y,
       bullet_type: C.SHIP_BULLET,
-      explodes: true
+      explodes: true,
+      blast_radius: this.blast_radius
     }
 
     let offset_start = 0;
