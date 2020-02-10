@@ -39,8 +39,8 @@ export class SPECIAL {
     },
     "Invisibility": {
       system_type: Invisibility,
-      duration: 2000,
-      fire_rate: 10000
+      duration: 5000,
+      fire_rate: 12000
     },
     "Bomb": {
       system_type: Bomb,

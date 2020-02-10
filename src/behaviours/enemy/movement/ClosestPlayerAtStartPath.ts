@@ -24,7 +24,7 @@ export class ClosestPlayerAtStartPath extends Behaviour {
   }
 
   onUpdate(deltaTime) {
-    if(this.target_player != null) {
+    if(this.target_player != null && this.target_player.invisible == false) {
       let dx = this.target.position.x - this.target_player.position.x;
       let dy = this.target.position.y - this.target_player.position.y;
       this.theta = Math.atan2(dy, dx);
