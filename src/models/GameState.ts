@@ -115,7 +115,7 @@ export class GameState extends Schema {
     return return_enemy;
   }
 
-  getEnemyInRange(x:number, y:number, radius:number, ignoreInvisible:boolean = false) {
+  getEnemiesInRange(x:number, y:number, radius:number, ignoreInvisible:boolean = false) {
     let enemies:Enemy[] = [];
     for(let key in this.enemies) {
       let enemy = this.enemies[key];
@@ -128,7 +128,7 @@ export class GameState extends Schema {
     return enemies;
   }
 
-  getShipInRange(x:number, y:number, radius:number, ignoreInvisible:boolean = false) {
+  getShipsInRange(x:number, y:number, radius:number, ignoreInvisible:boolean = false) {
     let ships:Ship[] = [];
     for(let key in this.ships) {
       let ship = this.ships[key];

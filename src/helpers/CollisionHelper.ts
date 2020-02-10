@@ -26,7 +26,7 @@ export class CollisionHelper {
     console.log("[CollisionHelper] Could not resolve collision.", e1, e2);
   }
 
-  static distance(x1:number, y1:number, x2:number, y2:number) {
+  static distance(x1:number, y1:number, x2:number, y2:number):number {
     let dx:number = x1 - x2;
     let dy:number = y1 - y2;
     return Math.sqrt(dx*dx + dy*dy);

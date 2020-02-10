@@ -11,6 +11,7 @@
     "start:server:debug": "nodemon --ignore \"test/\" --exec node --inspect -r ts-node/register src/index.ts",
     "start:mongo": "mongod --dbpath ./db/development",
     "test:server": "mocha --require ts-node/register test/ServerTest.ts --exit --timeout 15000",
+    "test:explosion": "mocha --require ts-node/register test/TestExplosionDistance.ts --exit --timeout 15000",
     "test:username": "ts-node test/UsernameTest.ts",
     "codegen": "npx schema-codegen src/models/Account.ts src/models/GameState.ts --output build/codegen --csharp",
     "parseStats": "node scripts/stat_parser.js > ship_stats.json"
