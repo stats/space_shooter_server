@@ -13,16 +13,24 @@ export class Account extends Schema {
   @type("string")
   username:string;
 
+  @type({map: "boolean" })
+  unlocked:MapSchema;
+
   constructor(options) {
     super();
     merge(this, options);
+    if(!this.unlocked) this.unlocked = new MapSchema(options.unlocked);
     if(!this.createdAt) this.createdAt = Date.now();
     if(!this.username) this.username = UsernameGenerator.getUsername();
   }
 
+  checkUnlocks() {
+    
+  }
+
   public toSaveObject(): any {
     const baseObj:any = pick(this, [
-      'createdAt', 'email', 'password', 'system_id', 'username'
+      'createdAt', 'email', 'password', 'system_id', 'username', 'unlocked'
     ]);
     return baseObj;
   }

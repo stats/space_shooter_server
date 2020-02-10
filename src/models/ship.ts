@@ -160,6 +160,9 @@ export class Ship extends Entity {
   shield_recharge_base:number = 30000;
   shield_recharge_growth:number = 750;
 
+  @type({map: "number"})
+  tracker:MapSchema = new MapSchema();
+
   getDamage() {
     return ( this.damage_base + (this.upgrade_damage * this.damage_growth) ) * this.weaponCharge;
   }
@@ -200,10 +203,10 @@ export class Ship extends Entity {
     this.rank = Math.max(this.rank, 1);
   }
 
-
   constructor(opts) {
     super(opts);
     merge(this, opts);
+    if(!this.tracker) this.tracker = new MapSchema(opts.tracker);
     if(this.uuid == null) this.uuid = uuid();
     this.radius = 27;
     this.bullet_offset_y = 50;
@@ -275,11 +278,13 @@ export class Ship extends Entity {
     }
   }
 
-  addKill(current_wave) {
+  addKill(current_wave, model_type) {
     this.current_kills += 1;
     this.kills += 1;
     this.kill_score += current_wave;
     this.$state.enemies_killed++;
+    if(!this.tracker.has(model_type)) this.tracker[model_type] = 1;
+    else this.tracker[model_type] += 1;
     this.checkLevelUp();
   }
 
@@ -325,7 +330,8 @@ export class Ship extends Entity {
       'shields_base',
       'shields_growth',
       'shield_recharge_base',
-      'shield_recharge_growth'
+      'shield_recharge_growth',
+      'tracker'
     ]);
     return baseObj;
   }

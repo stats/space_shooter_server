@@ -12,13 +12,12 @@ export class TakesDamageBehaviour extends Behaviour {
     super('take_damage', target);
   }
 
-  public onEvent(args: {damage:number, fired_by?:Entity}) {    
+  public onEvent(args: {damage:number, fired_by?:Entity}) {
     this.target.health = Math.max(this.target.health - args.damage, 0);
     if(this.target.health <= 0 && !this._destroyed) {
       if(args.fired_by && args.fired_by instanceof Ship) {
         let ship = args.fired_by as Ship;
-        ship.addKill(this.target.$state.current_wave);
-
+        ship.addKill(this.target.$state.current_wave, this.target.model_type);
       }
       this._destroyed = true;
       this.target.handleEvent('destroyed');
