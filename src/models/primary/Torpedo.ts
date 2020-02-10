@@ -41,7 +41,7 @@ export class Torpedo extends Primary {
       let bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offset_start + (i * this.bullet_offset);
       bullet.registerBehaviour(new StraightLineUpPath(bullet));
-      bullet.registerBehaviour(new ExplodeBehaviour(bullet, {blast_radius: this.blast_radius}));
+      bullet.registerBehaviour(new ExplodeBehaviour(bullet));
       bullets.push(bullet);
     }
 

@@ -10,7 +10,7 @@ export class MegaBomb extends SpecialSystem {
     let spawn_location = this.target.getBulletSpawnLocation();
     let bullet:Bullet = new Bullet({
       damage: this.target.getDamage() / 3,
-      speed: 300,
+      speed: 250,
       range: 500,
       collision_type: CT.CIRCLE,
       radius: 25,
@@ -18,10 +18,11 @@ export class MegaBomb extends SpecialSystem {
       x: spawn_location.x,
       y: spawn_location.y,
       bullet_type: C.SHIP_BULLET,
-      explodes: true
+      explodes: true,
+      blast_radius: 400
     });
     bullet.registerBehaviour(new StraightLineUpPath(bullet));
-    bullet.registerBehaviour(new ExplodeBehaviour(bullet, {blast_radius: 200}));
+    bullet.registerBehaviour(new ExplodeBehaviour(bullet));
     bullet.fired_by = this.target;
     this.target.$state.addBullet(bullet);
   }

@@ -103,7 +103,7 @@ export class PRIMARY {
       bullet_count: 1,
       bullet_angle: 0,
       bullet_offset: 0,
-      blast_radius: 250,
+      blast_radius: 200,
       bullet_mesh: "Torpedo"
     },
     "Double Beam": {
@@ -164,7 +164,7 @@ export class PRIMARY {
       bullet_count: 2,
       bullet_angle: 0,
       bullet_offset: 15,
-      blast_radius: 250,
+      blast_radius: 200,
       bullet_mesh: "Torpedo"
     },
     "Triple Beam": {
@@ -201,7 +201,7 @@ export class PRIMARY {
       bullet_count: 3,
       bullet_angle: 0,
       bullet_offset: 15,
-      blast_radius: 250,
+      blast_radius: 200,
       bullet_mesh: "Torpedo"
     },
   };
