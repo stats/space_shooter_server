@@ -42,4 +42,9 @@ export class AccountHelper {
     return DB.$ships.updateMany({username}, {$set: {inGame: -1}});
   }
 
+  static async maxShipLevel(username:string, ship_type?:string) {
+    if(ship_type !== undefined) return DB.$ships.find({username, ship_type}).sort({level:-1}).limit(1);
+    return DB.$ships.find({username}).sort({level:-1}).limit(1);
+  }
+
 }

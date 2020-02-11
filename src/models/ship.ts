@@ -1,4 +1,4 @@
-import { Schema, type } from "@colyseus/schema";
+import { Schema, MapSchema, type } from "@colyseus/schema";
 import { InputBehaviour } from '../behaviours/player/InputBehaviour';
 import { CollidesWithEnemy } from '../behaviours/player/CollidesWithEnemy';
 import { CollidesWithEnemyBullet } from '../behaviours/player/CollidesWithEnemyBullet';
@@ -9,6 +9,8 @@ import { SpecialAttackBehaviour } from '../behaviours/player/SpecialAttackBehavi
 import { ShieldRechargeBehaviour } from '../behaviours/player/ShieldRechargeBehaviour';
 
 import { C } from '../constants';
+
+import { AccountHelper } from '../helpers/AccountHelper';
 
 import { GameState } from './GameState';
 
@@ -191,7 +193,7 @@ export class Ship extends Entity {
     return this.accelleration_base + (this.upgrade_accelleration * this.accelleration_growth) * this.thrusters;
   }
 
-  updateWaveRank(wave:number) {
+  async updateWaveRank(wave:number) {
     if(wave > this.highest_wave) {
       this.highest_wave = wave;
     }
@@ -201,6 +203,9 @@ export class Ship extends Entity {
       this.rank -= Math.ceil((this.rank - wave) / 4);
     }
     this.rank = Math.max(this.rank, 1);
+    let account = await AccountHelper.getAccountByUsername(this.username);
+    account.updateStatsWithShip(this);
+    await AccountHelper.saveAccount(account);
   }
 
   constructor(opts) {
