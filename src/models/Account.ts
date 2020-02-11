@@ -1,4 +1,4 @@
-import { Schema, MapSchema, type } from "@colyseus/schema";
+import { Schema, type } from "@colyseus/schema";
 import { pick, merge } from 'lodash';
 import { UsernameGenerator } from '../helpers/UsernameGenerator';
 import { ShipHelper } from '../helpers/ShipHelper';
@@ -15,17 +15,14 @@ export class Account extends Schema {
   @type("string")
   username:string;
 
-  @type({map: "boolean" })
-  unlocked:MapSchema;
-
-  @type({map: "number"})
-  stats:MapSchema;
+  unlocked:any;
+  stats:any;
 
   constructor(options) {
     super();
     merge(this, options);
-    if(!this.unlocked) this.unlocked = new MapSchema(options.unlocked);
-    if(!this.stats) this.stats = new MapSchema(options.stats);
+    if(!this.unlocked) this.unlocked = options.unlocked || {};
+    if(!this.stats) this.stats = new options.stats || {};
     if(!this.createdAt) this.createdAt = Date.now();
     if(!this.username) this.username = UsernameGenerator.getUsername();
   }

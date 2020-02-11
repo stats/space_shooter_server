@@ -1,4 +1,4 @@
-import { Schema, MapSchema, type } from "@colyseus/schema";
+import { Schema, type } from "@colyseus/schema";
 import { InputBehaviour } from '../behaviours/player/InputBehaviour';
 import { CollidesWithEnemy } from '../behaviours/player/CollidesWithEnemy';
 import { CollidesWithEnemyBullet } from '../behaviours/player/CollidesWithEnemyBullet';
@@ -162,8 +162,7 @@ export class Ship extends Entity {
   shield_recharge_base:number = 30000;
   shield_recharge_growth:number = 750;
 
-  @type({map: "number"})
-  tracker:MapSchema = new MapSchema();
+  tracker:any = {};
 
   getDamage() {
     return ( this.damage_base + (this.upgrade_damage * this.damage_growth) ) * this.weaponCharge;
