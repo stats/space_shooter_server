@@ -210,7 +210,7 @@ export class Ship extends Entity {
   constructor(opts) {
     super(opts);
     merge(this, opts);
-    if(!this.tracker) this.tracker = new MapSchema(opts.tracker);
+    if(!this.tracker) this.tracker = opts.tracker || {};
     if(this.uuid == null) this.uuid = uuid();
     this.radius = 27;
     this.bullet_offset_y = 50;

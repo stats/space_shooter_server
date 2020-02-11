@@ -148,7 +148,7 @@ export class Account extends Schema {
 
   public toSaveObject(): any {
     const baseObj:any = pick(this, [
-      'createdAt', 'email', 'password', 'system_id', 'username', 'unlocked'
+      'createdAt', 'email', 'password', 'system_id', 'username', 'unlocked', 'stats'
     ]);
     return baseObj;
   }

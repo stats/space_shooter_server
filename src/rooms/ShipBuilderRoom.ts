@@ -38,6 +38,8 @@ export class ShipBuilderRoom extends Room {
     if(data.action === 'create') return this.createShip(client, data.ship);
     if(data.action === 'upgrade') return this.upgradeShip(client, data.uuid, data.upgrades);
     if(data.action === 'delete') return this.deleteShip(client, data.uuid);
+    if(data.action === 'unlocked') return this.unlockedData(client);
+    if(data.action === 'stats') return this.statsData(client);
   }
 
   onLeave(client) {
@@ -46,6 +48,24 @@ export class ShipBuilderRoom extends Room {
 
   onDispose() {
 
+  }
+
+  private async unlockedData(client) {
+    let account = await AccountHelper.getAccountByUsername(client.username);
+    if(!account) {
+      this.send(client, { action: "error", message: 'invalid_account'});
+      return;
+    }
+    this.send(client, { actions: "unlocks", message: account.unlocked });
+  }
+
+  private async statsData(client) {
+    let account = await AccountHelper.getAccountByUsername(client.username);
+    if(!account) {
+      this.send(client, { action: "error", message: 'invalid_account'});
+      return;
+    }
+    this.send(client, { actions: "stats", message: account.stats });
   }
 
   private async upgradeShip(client, uuid, upgrades) {
