@@ -8,6 +8,14 @@ export class C {
   public static RECTANGLE:number = 1;
   public static SHIP_BULLET:number = 0;
   public static ENEMY_BULLET:number = 1;
+
+  public static get RANDOM_X_ON_SCREEN():number {
+    return Math.random() * ( BOUNDS.maxX - BOUNDS.minX - SPAWN_OFFSET*2 ) + SPAWN_OFFSET;
+  }
+
+  public static get RANDOM_Y_ON_SCREEN():number {
+    return Math.random() * ( BOUNDS.maxY - BOUNDS.minY - SPAWN_OFFSET*2 ) + SPAWN_OFFSET;
+  }
 }
 
 /* collision layers used by rbush */
