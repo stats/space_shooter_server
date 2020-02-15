@@ -22,7 +22,7 @@ export class Account extends Schema {
     super();
     merge(this, options);
     if(!this.unlocked) this.unlocked = options.unlocked || {};
-    if(!this.stats) this.stats = new options.stats || {};
+    if(!this.stats) this.stats = options.stats || {};
     if(!this.createdAt) this.createdAt = Date.now();
     if(!this.username) this.username = UsernameGenerator.getUsername();
   }
@@ -129,7 +129,7 @@ export class Account extends Schema {
   }
 
   getStat(type) {
-    if(this.stats.has(type)) return this.stats[type];
+    if(type in this.stats) return this.stats[type];
     return 0;
   }
 
@@ -138,7 +138,7 @@ export class Account extends Schema {
   }
 
   isUnlocked(type:string) {
-    if(this.unlocked.has(type) && this.unlocked[type] == true) return true;
+    if(type in this.unlocked && this.unlocked[type] == true) return true;
     return false;
   }
 

@@ -18,10 +18,7 @@ export class Scout extends Enemy {
 
     this.model_type = "scout";
 
-    this.collision_type = CT.ELLIPSE;
-    //TODO: Need to figure out the rotation of the ship to figure out the ellipse
-    this.radiusX = 30;
-    this.radiusY = 15;
+    this.radius = 30;
   }
 
   onInitGame(state:GameState) {

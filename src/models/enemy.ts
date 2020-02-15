@@ -1,5 +1,6 @@
 import { Schema, type } from "@colyseus/schema";
 import { GameState } from './GameState';
+import { Position } from './position';
 
 import { CollidesWithShipBullet } from '../behaviours/enemy/CollidesWithShipBullet';
 import { DestroyedBehaviour } from '../behaviours/enemy/DestroyedBehaviour';
@@ -19,6 +20,10 @@ export class Enemy extends Entity {
   collision_damage:number = 1;
   collision_damage_base:number = 1;
   collision_damage_growth:number = 0.1;
+
+  flock:Enemy[];
+  destination:Position;
+  velocity:Position;
 
   @type("string")
   model_type:string = "";

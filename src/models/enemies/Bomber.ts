@@ -21,9 +21,7 @@ export class Bomber extends Enemy {
 
     this.model_type = "bomber";
 
-    this.collision_type = CT.ELLIPSE;
-    this.radiusX = 30;
-    this.radiusY = 15;
+    this.radius = 30;
   }
 
   onInitGame(state:GameState) {

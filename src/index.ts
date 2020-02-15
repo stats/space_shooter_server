@@ -49,10 +49,12 @@ DB.init().then(() => {
 
   app.post('/quick_login', asyncMiddleware( async function(req, res, next) {
     let { system_id } = req.body;
+    console.log("System_ID", system_id)
     let account = null;
     try {
       account = await AccountHelper.getAccountBySystemID(system_id);
     } catch (err) {
+      console.log("[QuickLogin] (error)", err);
       res.status(401).json({
         message: "Unable to sign in.",
         error: err

@@ -10,11 +10,11 @@ export class C {
   public static ENEMY_BULLET:number = 1;
 
   public static get RANDOM_X_ON_SCREEN():number {
-    return Math.random() * ( BOUNDS.maxX - BOUNDS.minX - SPAWN_OFFSET*2 ) + SPAWN_OFFSET;
+    return Math.random() * ( C.BOUNDS.maxX - C.BOUNDS.minX - C.SPAWN_OFFSET*2 ) + C.SPAWN_OFFSET;
   }
 
   public static get RANDOM_Y_ON_SCREEN():number {
-    return Math.random() * ( BOUNDS.maxY - BOUNDS.minY - SPAWN_OFFSET*2 ) + SPAWN_OFFSET;
+    return Math.random() * ( C.BOUNDS.maxY - C.BOUNDS.minY - C.SPAWN_OFFSET*2 ) + C.SPAWN_OFFSET;
   }
 }
 

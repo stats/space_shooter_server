@@ -16,6 +16,7 @@ import { RandomFormation } from './formations/RandomFormation';
 import { SquareFormation } from './formations/SquareFormation';
 import { TriangleFormation } from './formations/TriangleFormation';
 import { DiagonalFormation } from './formations/DiagonalFormation';
+import { SimpleFlock } from './formations/SimpleFlock';
 
 import { sample } from 'lodash';
 
@@ -27,13 +28,13 @@ export class Spawner {
   private number_of_formations:number = 0;
 
   private enemy_types:any = [
-    [1, Scout],
+    // [1, Scout],
     [1, Blimp],
-    [1, Bomber],
-    [1, Hunter],
-    [1, Speeder],
-    [1, Blaster],
-    [1, Tracker]
+    // [1, Bomber],
+    // [1, Hunter],
+    // [1, Speeder],
+    // [1, Blaster],
+    // [1, Tracker]
   ];
 
   private formations:any = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];
@@ -70,9 +71,15 @@ export class Spawner {
   spawnFormation() {
     let formations = Math.min((Math.random() * (this.max_formations - this.min_formations)) + this.min_formations, this.number_of_formations);
     for(let i = 0; i < formations; i++) {
-      let formation = new (sample(this.formations))(this.state);
+      let enemy = sample(this.possible_enemies);
+      let formation;
+      if(enemy === Blimp) {
+        formation = new SimpleFlock(this.state);
+      } else {
+        formation = new (sample(this.formations))(this.state);
+      }
       console.log('Spawned Formation:', formation.constructor.name);
-      formation.onSpawnEnemies(sample(this.possible_enemies));
+      formation.onSpawnEnemies(enemy);
       this.number_of_formations--;
     }
     if(this.number_of_formations > 0) {

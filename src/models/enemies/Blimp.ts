@@ -1,8 +1,7 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
-import { StraightAnglePath } from '../../behaviours/enemy/movement/StraightAnglePath';
+import { SimpleFlockingPath } from '../../behaviours/enemy/movement/SimpleFlockingPath';
 import { CT } from '../../constants';
-
 
 export class Blimp extends Enemy {
 
@@ -19,14 +18,12 @@ export class Blimp extends Enemy {
 
     this.model_type = "blimp";
 
-    this.collision_type = CT.ELLIPSE;
-    this.radiusX = 30;
-    this.radiusY = 15;
+    this.radius = 30;
   }
 
   onInitGame(state:GameState) {
     super.onInitGame(state);
-    this.registerBehaviours([new StraightAnglePath(this)]);
+    this.registerBehaviours([new SimpleFlockingPath(this, {destination:this.destination, flock:this.flock})]);
   }
 
 }

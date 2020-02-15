@@ -47,6 +47,16 @@ export class GameState extends Schema {
 
   removeEnemy(enemy:Enemy) {
     delete this.enemies[enemy.uuid];
+
+    /** Cleanup flocking **/
+    if(enemy.flock !== undefined) {
+      for(var i = 0, l = enemy.flock.length; i < l; i++) {
+        if(enemy.flock[i].uuid == enemy.uuid) {
+          enemy.flock.splice(i,1);
+          break;
+        }
+      }
+    }
   }
 
   addBullet(bullet:Bullet) {

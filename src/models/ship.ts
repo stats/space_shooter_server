@@ -287,7 +287,7 @@ export class Ship extends Entity {
     this.kills += 1;
     this.kill_score += current_wave;
     this.$state.enemies_killed++;
-    if(!this.tracker.has(model_type)) this.tracker[model_type] = 1;
+    if( !(model_type in this.tracker) ) this.tracker[model_type] = 1;
     else this.tracker[model_type] += 1;
     this.checkLevelUp();
   }
