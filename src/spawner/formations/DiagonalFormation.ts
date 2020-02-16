@@ -1,6 +1,5 @@
 import { Formation } from './formation';
 import { C } from '../../constants';
-import { Scout } from '../../models/enemies/scout';
 
 export class DiagonalFormation extends Formation {
 
