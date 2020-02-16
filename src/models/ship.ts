@@ -202,8 +202,12 @@ export class Ship extends Entity {
       this.rank -= Math.ceil((this.rank - wave) / 4);
     }
     this.rank = Math.max(this.rank, 1);
+    console.log("[Ship] (username)", this.username);
     let account = await AccountHelper.getAccountByUsername(this.username);
-    account.updateStatsWithShip(this);
+    /** This could fail **/
+    if(account) {
+      account.updateStatsWithShip(this);
+    }
     await AccountHelper.saveAccount(account);
   }
 

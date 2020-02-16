@@ -75,7 +75,7 @@ export class ShipBuilderRoom extends Room {
       return;
     }
     const return_ship = await ShipHelper.upgradeShip(ship, upgrades);
-    console.log("Return Ship", return_ship);
+    //console.log("Return Ship", return_ship);
     if(return_ship) {
       this.send(client, { action: 'ship_upgrade_success'});
       this.sendShips(client);
@@ -109,7 +109,7 @@ export class ShipBuilderRoom extends Room {
   }
 
   private async createShip(client, ship) {
-    console.log('[ShipBuilderRoom] creating a ship', ship);
+    //console.log('[ShipBuilderRoom] creating a ship', ship);
     let success = await ShipHelper.createShip(client.username, ship);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully created.'});
