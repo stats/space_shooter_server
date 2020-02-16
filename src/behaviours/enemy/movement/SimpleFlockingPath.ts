@@ -1,7 +1,7 @@
 import { Behaviour } from '../../behaviour';
 import { C } from '../../../constants';
 import { Position } from '../../../models/position';
-import { Enemy } from '../../../models/Enemy';
+import { Enemy } from '../../../models/enemy';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 
 export class SimpleFlockingPath extends Behaviour {
