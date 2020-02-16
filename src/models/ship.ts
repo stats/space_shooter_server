@@ -207,8 +207,10 @@ export class Ship extends Entity {
     /** This could fail **/
     if(account) {
       account.updateStatsWithShip(this);
+      await AccountHelper.saveAccount(account);
+    } else {
+      console.log("[Ship] Get AccountByUsername FAILED");
     }
-    await AccountHelper.saveAccount(account);
   }
 
   constructor(opts) {
