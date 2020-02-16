@@ -1,5 +1,5 @@
 import { DB } from '../database';
-import { Account } from '../models/account';
+import { Account } from '../models/Account';
 import { Ship } from '../models/ship';
 import { SHIP } from '../Ship';
 

@@ -1,5 +1,5 @@
 import { DB } from '../database';
-import { Account } from '../models/account';
+import { Account } from '../models/Account';
 
 export class AccountHelper {
   static async getAccountById(userId: string): Promise<Account> {

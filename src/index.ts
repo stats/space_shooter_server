@@ -10,7 +10,7 @@ import { ShipBuilderRoom } from "./rooms/ShipBuilderRoom";
 import { MatchMakerRoom } from "./rooms/MatchMakerRoom";
 import { GameRoom } from "./rooms/GameRoom";
 
-import { Account } from "./models/account";
+import { Account } from "./models/Account";
 
 import { AccountHelper } from './helpers/AccountHelper';
 import { JWTHelper } from './helpers/JWTHelper';
