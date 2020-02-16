@@ -1,6 +1,6 @@
 import { Room } from 'colyseus';
 
-import { JWTHelper } from '../helpers/jwthelper';
+import { JWTHelper } from '../helpers/JWTHelper';
 import { AccountHelper } from '../helpers/AccountHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
