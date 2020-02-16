@@ -1,12 +1,10 @@
 import { Room, Delayed } from 'colyseus';
-import { GameState } from '../models/gamestate';
+import { GameState } from '../models/GameState';
 
 import { JWTHelper } from '../helpers/JWTHelper';
 import { CollisionHelper } from '../helpers/CollisionHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
-import { Scout } from '../models/enemies/scout';
-import { Hunter } from '../models/enemies/hunter';
 import { Enemy } from '../models/enemy';
 import { Ship } from '../models/ship';
 import { Bullet } from '../models/bullet';
