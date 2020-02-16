@@ -22,7 +22,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'https://github.com/stats/space_shooter_server.git',
       path : '/var/www/cindertron7.com/production',
-      'post-deploy' : 'export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && "$NVM_DIR/nvm.sh"  [ -s "$NVM_DIR/bash_completion" ] && "$NVM_DIR/bash_completion"; npm install',
+      'post-deploy' : 'export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && "$NVM_DIR/nvm.sh"  [ -s "$NVM_DIR/bash_completion" ] && "$NVM_DIR/bash_completion" && npm install && pm2 startOrRestart ecosystem.config.js --env production ',
       "env"  : {
         "NODE_ENV": "production"
       }
