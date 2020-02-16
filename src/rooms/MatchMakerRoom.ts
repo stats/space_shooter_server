@@ -67,6 +67,7 @@ export class MatchMakerRoom extends Room {
   }
 
   async onJoin(client:Client, options: any, username: string) {
+    console.log('[MatchMakerRoom] (onJoin)', username);
     this.stats.push({
       client: client,
       rank: options.rank,
