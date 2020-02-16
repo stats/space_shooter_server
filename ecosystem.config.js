@@ -21,7 +21,8 @@ module.exports = {
       key : "~/ssh/digital_ocean_private.pem",
       ref  : 'origin/master',
       repo : 'https://github.com/stats/space_shooter_server.git',
-      path : '/var/www/cindertron7.com/production'
+      path : '/var/www/cindertron7.com/production',
+      'post-deploy' : "echo 'Post Deploy Phase'; npm install"
     }
   }
 };
