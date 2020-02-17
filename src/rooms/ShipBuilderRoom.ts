@@ -10,9 +10,13 @@ import { Ship } from '../models/ship'
 import { DB } from '../database';
 
 import { Statistics } from '../models/Statistics';
-import { Account } from '../models/Account'
+import { ShipBuilderState } from '../models/ShipBuilderState'
 
-export class ShipBuilderRoom extends Room {
+export class ShipBuilderRoom extends Room<ShipBuilderState> {
+
+  onCreate(options) {
+    this.setState(new ShipBuilderState());
+  }
 
   async onAuth(client, options) {
     console.log("[ShipBuilderRoom] Client auth attempt");

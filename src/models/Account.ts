@@ -18,10 +18,7 @@ export class Account extends Schema {
 
   unlocked:any;
   stats:any;
-
-  @type(Statistics)
-  statistics:Statistics; //Dummy variable to trick the handshake.
-
+  
   constructor(options) {
     super();
     merge(this, options);
@@ -33,7 +30,6 @@ export class Account extends Schema {
 
   getStatistics():Statistics {
     return new Statistics(this.stats);
-
   }
 
   updateUnlocks() {
