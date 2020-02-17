@@ -46,7 +46,6 @@ export class SimpleFlock extends Formation {
         destination.y = this.randomY();
         break;
     }
-    console.log(start.x, ",", start.y, " :", destination.x, ",", destination.y);
 
     let flock:Enemy[] = [];
     for(i = 0; i < spawns; i++) {
