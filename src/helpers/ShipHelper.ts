@@ -2,6 +2,7 @@ import { DB } from '../database';
 import { Account } from '../models/Account';
 import { Ship } from '../models/ship';
 import { SHIP } from '../Ship';
+import { AccountHelper } from './AccountHelper';
 
 export class ShipHelper {
 
@@ -62,6 +63,10 @@ export class ShipHelper {
     ship_data['created_at'] = Date.now();
     ship_data = ShipHelper.setShipValues(ship_data);
 
+    let account = await AccountHelper.getAccountByUsername(username);
+    account.increaseStat("ships_created", 1);
+    AccountHelper.saveAccount(account);
+
     let ship = new Ship(ship_data);
     return DB.$ships.insertOne(ship.toSaveObject());
   }
@@ -71,6 +76,9 @@ export class ShipHelper {
   }
 
   static async deleteShip(username:string, uuid:string) {
+    let account = await AccountHelper.getAccountByUsername(username);
+    account.increaseStat("ships_destroyed", 1);
+    AccountHelper.saveAccount(account);
     return await DB.$ships.deleteOne({username: username, uuid: uuid});
   }
 

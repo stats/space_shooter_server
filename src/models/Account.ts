@@ -1,8 +1,9 @@
-import { Schema, type } from "@colyseus/schema";
+import { MapSchema, Schema, type } from "@colyseus/schema";
 import { pick, merge } from 'lodash';
 import { UsernameGenerator } from '../helpers/UsernameGenerator';
 import { ShipHelper } from '../helpers/ShipHelper';
 import { Ship } from './ship';
+import { Statistics } from './Statistics';
 
 export class Account extends Schema {
 
@@ -18,6 +19,9 @@ export class Account extends Schema {
   unlocked:any;
   stats:any;
 
+  @type(Statistics)
+  statistics:Statistics; //Dummy variable to trick the handshake.
+
   constructor(options) {
     super();
     merge(this, options);
@@ -25,6 +29,11 @@ export class Account extends Schema {
     if(!this.stats) this.stats = options.stats || {};
     if(!this.createdAt) this.createdAt = Date.now();
     if(!this.username) this.username = UsernameGenerator.getUsername();
+  }
+
+  getStatistics():Statistics {
+    return new Statistics(this.stats);
+
   }
 
   updateUnlocks() {
@@ -115,6 +124,7 @@ export class Account extends Schema {
   }
 
   updateStatsWithShip(ship:Ship) {
+    console.log("[UpdateStatsWithShip]", ship);
     this.updateStat("max_level", ship.level);
     this.updateStat(`max_level_${ship.ship_type}`, ship.level);
 
@@ -126,6 +136,7 @@ export class Account extends Schema {
     for(let key in ship.tracker) {
       this.updateStat(`max_kills_${key}`, ship.tracker[key]);
     }
+    this.updateUnlocks();
   }
 
   getStat(type) {
@@ -134,7 +145,12 @@ export class Account extends Schema {
   }
 
   updateStat(type, count) {
-    if(count > this.stats[type]) this.stats[type] = count;
+    if(!(type in this.stats) || count > this.stats[type]) this.stats[type] = count;
+  }
+
+  increaseStat(type, amount) {
+    if(!(type in this.stats)) this.stats[type] = amount;
+    else this.stats[type] += amount;
   }
 
   isUnlocked(type:string) {

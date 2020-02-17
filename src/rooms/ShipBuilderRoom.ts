@@ -1,4 +1,5 @@
 import { Room } from 'colyseus';
+import { MapSchema } from "@colyseus/schema";
 
 import { JWTHelper } from '../helpers/JWTHelper';
 import { AccountHelper } from '../helpers/AccountHelper';
@@ -7,6 +8,9 @@ import { ShipHelper } from '../helpers/ShipHelper';
 import { Ship } from '../models/ship'
 
 import { DB } from '../database';
+
+import { Statistics } from '../models/Statistics';
+import { Account } from '../models/Account'
 
 export class ShipBuilderRoom extends Room {
 
@@ -56,7 +60,7 @@ export class ShipBuilderRoom extends Room {
       this.send(client, { action: "error", message: 'invalid_account'});
       return;
     }
-    this.send(client, { actions: "unlocks", message: account.unlocked });
+    this.send(client, { action: "unlocks", message: account.unlocked });
   }
 
   private async statsData(client) {
@@ -65,7 +69,10 @@ export class ShipBuilderRoom extends Room {
       this.send(client, { action: "error", message: 'invalid_account'});
       return;
     }
-    this.send(client, { actions: "stats", message: account.stats });
+
+    this.send(client, account.getStatistics() as Statistics);
+
+    //this.send(client, { action: "stats", message: new MapSchema(account.stats) });
   }
 
   private async upgradeShip(client, uuid, upgrades) {

@@ -68,8 +68,8 @@ export class InputBehaviour extends Behaviour {
       this.clampHorizontal();
       this.horizontal_vector = 0;
     } else if( this.horizontal_vector == 0 && this.target.horizontal_accelleration != 0){
-      this.decellerateHorizontal(deltaTime);
-      this.clampHorizontal();
+      //this.decellerateHorizontal(deltaTime);
+      //this.clampHorizontal();
     }
 
     if(this.vertical_vector != 0) {
@@ -80,10 +80,10 @@ export class InputBehaviour extends Behaviour {
       this.clampVertical();
       this.vertical_vector = 0;
     } else if( this.vertical_vector == 0 && this.target.vertical_accelleration != 0){
-      this.decellerateVertical(deltaTime);
-      this.clampVertical();
+      //this.decellerateVertical(deltaTime);
+      //this.clampVertical();
     }
-    
+
     if(this.target.horizontal_accelleration != 0 || this.target.vertical_accelleration != 0){
       this.target.position.x += this.target.horizontal_accelleration * (deltaTime/1000);
       this.target.position.y += this.target.vertical_accelleration * (deltaTime/1000);

@@ -2,11 +2,6 @@ import { DB } from '../database';
 import { Account } from '../models/Account';
 
 export class AccountHelper {
-  static async getAccountById(userId: string): Promise<Account> {
-    const account = await DB.$accounts.findOne({userId});
-    if(account) return new Account(account);
-    return null;
-  }
 
   static async getAccountByEmail(email: string): Promise<Account> {
     const account = await DB.$accounts.findOne({ email: email });
@@ -15,7 +10,7 @@ export class AccountHelper {
   }
 
   static async getAccountByUsername(username: string): Promise<Account> {
-    const account = await DB.$accounts.findOne({ username });
+    const account = await DB.$accounts.findOne({ username: username });
     if(account) return new Account(account);
     return null;
   }
@@ -41,10 +36,4 @@ export class AccountHelper {
   static async clearInGame(username: string) {
     return DB.$ships.updateMany({username}, {$set: {inGame: -1}});
   }
-
-  static async maxShipLevel(username:string, ship_type?:string) {
-    if(ship_type !== undefined) return DB.$ships.find({username, ship_type}).sort({level:-1}).limit(1);
-    return DB.$ships.find({username}).sort({level:-1}).limit(1);
-  }
-
 }
