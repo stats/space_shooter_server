@@ -1,4 +1,5 @@
 import { Schema, type} from '@colyseus/schema';
+import { C } from '../constants';
 
 export class Position  extends Schema {
   @type("number")
@@ -59,5 +60,9 @@ export class Position  extends Schema {
       this.x *= reduction;
       this.y *= reduction;
     }
+  }
+
+  public static randomOnScreen():Position {
+    return new Position(C.RANDOM_X_ON_SCREEN, C.RANDOM_Y_ON_SCREEN);
   }
 }

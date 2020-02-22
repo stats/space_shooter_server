@@ -17,12 +17,14 @@ export class LoopingPath extends Behaviour {
     let dy = 450 - this.target.position.y;
 
     this.theta = Math.atan2(dy,dx);
+    this.target.angle = this.theta;
     this.dir = Math.random() < 0.5 ? 1 : -1;
   }
 
   onUpdate(deltaTime) {
 
     this.theta += this.dir * Math.PI / 20 * (deltaTime/1000);
+    this.target.angle = this.theta;
 
     this.target.position.x += this.target.speed * Math.cos(this.theta) * (deltaTime/1000);
     this.target.position.y += this.target.speed * Math.sin(this.theta) * (deltaTime/1000);

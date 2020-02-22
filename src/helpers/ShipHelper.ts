@@ -16,9 +16,12 @@ export class ShipHelper {
     return await DB.$ships.find({username}).toArray();
   }
 
-  static async validateShipParameters(username:string, data:{ name:string, ship_type:string, ship_material:string, primary_weapon:number, special_weapon:number }) {
-    /** TODO Check that the account has access to the items trying to be created **/
-    return true;
+  static async validateShipParameters(username:string, data:{ name:string, ship_type:string, ship_material:string, primary_weapon:string, special_weapon:string }) {
+    let account = await AccountHelper.getAccountByUsername(username);
+    if (data['name'].length > 3 && account.isUnlocked(data['ship_type']) && account.isUnlocked(data['ship_material']) && account.isUnlocked(data['primary_weapon']) && account.isUnlocked(data['special_weapon'])) {
+      return true;
+    }
+    return false;
   }
 
   static setShipValues(ship_data:any) {
@@ -48,7 +51,7 @@ export class ShipHelper {
     return ship_data;
   }
 
-  static async createShip(username:string, data:{ name:string, ship_type:string, ship_material:string, primary_weapon:number, special_weapon:number }) {
+  static async createShip(username:string, data:{ name:string, ship_type:string, ship_material:string, primary_weapon:string, special_weapon:string }) {
     let can_create = ShipHelper.validateShipParameters(username, data);
     if(!can_create) return false;
 

@@ -19,6 +19,7 @@ export class TargetPlayerStartPath extends Behaviour {
     let dx = this.target.position.x - ship.position.x;
     let dy = this.target.position.y - ship.position.y;
     this.theta = Math.atan2(dy, dx);
+    this.target.angle = this.theta;
   }
 
   onUpdate(deltaTime) {

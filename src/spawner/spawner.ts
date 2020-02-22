@@ -2,21 +2,12 @@ import { Delayed } from 'colyseus';
 import Clock from '@gamestdio/timer';
 
 import { Enemy } from '../models/enemy';
-import { Scout } from '../models/enemies/Scout';
-import { Hunter } from '../models/enemies/Hunter';
-import { Blaster } from '../models/enemies/Blaster';
-import { Blimp } from '../models/enemies/Blimp';
-import { Bomber } from '../models/enemies/Bomber';
-import { Speeder } from '../models/enemies/Speeder';
-import { Tracker } from '../models/enemies/Tracker';
+import { Asteroid, Blaster, Blimp, Bomber, Hunter, Scout, Speeder, Tracker } from '../models/enemies';
+import { AsteroidFormation, LineFormation, RandomFormation, SquareFormation,
+         TriangleFormation, DiagonalFormation, SimpleFlock } from './formations/';
+
 import { GameState} from '../models/GameState';
 import { Position } from '../models/position';
-import { LineFormation } from './formations/LineFormation';
-import { RandomFormation } from './formations/RandomFormation';
-import { SquareFormation } from './formations/SquareFormation';
-import { TriangleFormation } from './formations/TriangleFormation';
-import { DiagonalFormation } from './formations/DiagonalFormation';
-import { SimpleFlock } from './formations/SimpleFlock';
 
 import { sample } from 'lodash';
 
@@ -28,6 +19,7 @@ export class Spawner {
   private number_of_formations:number = 0;
 
   private enemy_types:any = [
+    [1, Asteroid],
     [1, Scout],
     [1, Blimp],
     [1, Bomber],
@@ -73,10 +65,16 @@ export class Spawner {
     for(let i = 0; i < formations; i++) {
       let enemy = sample(this.possible_enemies);
       let formation;
-      if(enemy === Blimp) {
-        formation = new SimpleFlock(this.state);
-      } else {
-        formation = new (sample(this.formations))(this.state);
+      switch(enemy) {
+        case Asteroid:
+          formation = new AsteroidFormation(this.state);
+        break;
+        case Blimp:
+          formation = new SimpleFlock(this.state);
+        break;
+        default:
+          formation = new (sample(this.formations))(this.state);
+        break;
       }
       console.log('Spawned Formation:', formation.constructor.name);
       formation.onSpawnEnemies(enemy);

@@ -1,12 +1,12 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
-import { StraightLinePath } from '../../behaviours/enemy/movement/StraightLinePath';
+import { TargetPlayerStartPath } from '../../behaviours/enemy/movement/TargetPlayerStartPath';
 import { FiresBulletBehaviour } from '../../behaviours/enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
 import { C, CT } from '../../constants';
 
 
-export class Blaster extends Enemy {
+export class Fang extends Enemy {
 
   constructor(options) {
     super(options);
@@ -19,14 +19,14 @@ export class Blaster extends Enemy {
     this.collision_damage_base = 1;
     this.collision_damage_growth = 0.1;
 
-    this.model_type = "blaster";
+    this.model_type = "fang";
 
     this.radius = 30;
   }
 
   onInitGame(state:GameState) {
     super.onInitGame(state);
-    this.registerBehaviours([new StraightLinePath(this)]);
+    this.registerBehaviours([new ClosestPlayerPath(this)]);
 
     let bullet_options = {
       system: EnemyBullet,

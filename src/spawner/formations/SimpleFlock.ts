@@ -8,7 +8,7 @@ export class SimpleFlock extends Formation {
   onSpawnEnemies(spawn_type:any, allowed_sides?:number[]) {
 
     let i:number, spawns:number;
-    spawns = 7;
+    spawns = 3;
     if(this.state.current_wave > 5) {
       spawns = 4;
     } else if (this.state.current_wave > 10 ) {

@@ -18,7 +18,7 @@ export class Account extends Schema {
 
   unlocked:any;
   stats:any;
-  
+
   constructor(options) {
     super();
     merge(this, options);
@@ -97,6 +97,24 @@ export class Account extends Schema {
 
      if( this.getStat("max_kills_Torpedo") >= 750 ) this.unlock("Double Torpedo");
      if( this.getStat("max_kills_Double Torpedo") >= 1000 ) this.unlock("Triple Torpedo");
+
+     /**
+      * Material based unlocks
+      **/
+
+      this.unlock("cindertron_recruit1");
+      this.unlock("cindertron_recruit2");
+      this.unlock("cindertron_recruit3");
+
+      if(this.getStat("max_kills") >= 100 ) this.unlock("bone_brigade1");
+      if(this.getStat("max_kills") >= 200 ) this.unlock("royal_fleet1");
+      if(this.getStat("max_kills") >= 300 ) this.unlock("camo1");
+      if(this.getStat("max_kills") >= 400 ) this.unlock("earth_defense1");
+      if(this.getStat("max_kills") >= 500 ) this.unlock("bone_brigade2");
+      if(this.getStat("max_kills") >= 600 ) this.unlock("royal_fleet2");
+      if(this.getStat("max_kills") >= 700 ) this.unlock("bone_brigade2");
+      if(this.getStat("max_kills") >= 800 ) this.unlock("camo2");
+      if(this.getStat("max_kills") >= 900 ) this.unlock("royal_fleet3");
   }
 
   updateShipTypeLevelUnlock(ship_type) {

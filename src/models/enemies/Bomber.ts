@@ -1,7 +1,7 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
 import { LoopingPath } from '../../behaviours/enemy/movement/LoopingPath';
-import { FiresBulletBehaviour } from '../../behaviours/enemy/FiresBulletBehaviour';
+import { DropsBulletBehaviour } from '../../behaviours/enemy/DropsBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
 import { C, CT } from '../../constants';
 
@@ -39,9 +39,10 @@ export class Bomber extends Enemy {
       x: this.position.x,
       y: this.position.y,
       bullet_type: C.ENEMY_BULLET,
-      cooldown: 3000
+      cooldown: 3000,
+      behaviour: 'drops'
     }
-    this.registerBehaviour(new FiresBulletBehaviour(this, {bullet_options: bullet_options}))
+    this.registerBehaviour(new DropsBulletBehaviour(this, {bullet_options: bullet_options}));
   }
 
 }

@@ -3,6 +3,7 @@ import { C, CT } from '../../constants';
 import { GameState } from '../GameState';
 import { Entity } from '../entity';
 import { StraightLineDownPath } from '../../behaviours/bullet/StraightLineDownPath';
+import { StraightAnglePath } from '../../behaviours/bullet/StraightAnglePath';
 import { Primary } from './Primary';
 
 export class EnemyBullet extends Primary{
@@ -22,7 +23,13 @@ export class EnemyBullet extends Primary{
     }
 
     let bullet = new Bullet(options);
-    bullet.registerBehaviour(new StraightLineDownPath(bullet));
+    switch(this.behaviour) {
+      case 'drops':
+        bullet.registerBehaviour(new StraightAnglePath(bullet, {angle: this.entity.angle}));
+      case 'fires':
+        bullet.registerBehaviour(new StraightLineDownPath(bullet));
+      break;
+    }
     bullets.push(bullet);
 
     return bullets;

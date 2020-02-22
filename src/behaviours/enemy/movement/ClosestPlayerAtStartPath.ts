@@ -21,6 +21,7 @@ export class ClosestPlayerAtStartPath extends Behaviour {
       dy = this.target.position.y - this.target_player.position.y;
     }
     this.theta = Math.atan2(dy, dx);
+    this.target.angle = this.theta;
   }
 
   onUpdate(deltaTime) {
@@ -28,6 +29,7 @@ export class ClosestPlayerAtStartPath extends Behaviour {
       let dx = this.target.position.x - this.target_player.position.x;
       let dy = this.target.position.y - this.target_player.position.y;
       this.theta = Math.atan2(dy, dx);
+      this.target.angle = this.theta;
     }
 
     this.target.position.x += -Math.cos(this.theta) * this.target.speed * deltaTime/1000;

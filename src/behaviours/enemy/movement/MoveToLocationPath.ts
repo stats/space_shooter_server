@@ -22,6 +22,7 @@ export class MoveToLocationPath extends Behaviour {
     let dy = this.moveTo.y - this.target.position.y;
 
     this.theta = Math.atan2(dy, dx);
+    this.target.angle = this.theta;
   }
 
   onUpdate(deltaTime) {

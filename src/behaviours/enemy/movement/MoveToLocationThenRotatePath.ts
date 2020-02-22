@@ -15,7 +15,7 @@ export class MoveToLocationThenRotatePath extends Behaviour {
 
   constructor(target:any, args:{moveTo:Position}) {
     super('MoveToLocationThenRotate', target);
-    this.moveTo = args.moveTo;
+    this.moveTo = args.moveTo || Position.randomOnScreen();
     if(this.moveTo == null) {
       this.moveTo = new Position( C.RANDOM_X_ON_SCREEN,  C.RANDOM_Y_ON_SCREEN)
     }

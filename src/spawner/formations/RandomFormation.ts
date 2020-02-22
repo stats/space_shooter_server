@@ -27,14 +27,14 @@ export class RandomFormation extends Formation {
       switch(side) {
         case S.TOP:
           start_x = this.randomX();
-          start_y = this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 10);
+          start_y = this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 5);
           break;
         case S.LEFT:
-          start_x = this.leftOffset() - (Math.random() * C.SPAWN_OFFSET * 10);
+          start_x = this.leftOffset() - (Math.random() * C.SPAWN_OFFSET * 5);
           start_y = this.randomY();
           break;
         case S.RIGHT:
-          start_x = this.rightOffset() + (Math.random() * C.SPAWN_OFFSET * 10);
+          start_x = this.rightOffset() + (Math.random() * C.SPAWN_OFFSET * 5);
           start_y = this.randomY();
           break;
       }

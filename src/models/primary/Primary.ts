@@ -21,6 +21,8 @@ export class Primary {
 
   entity:Entity;
 
+  behaviour:string;
+
   constructor(entity:Entity, options:any) {
     merge(this, options);
     this.entity = entity;

@@ -38,6 +38,7 @@ export class StraightAnglePath extends Behaviour {
     let dy = to_y - this.target.position.y;
 
     this.angle = Math.atan2(dy, dx);
+    this.target.angle = this.angle;
   }
 
   onUpdate(deltaTime) {
