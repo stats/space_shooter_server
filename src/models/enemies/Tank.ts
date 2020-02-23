@@ -1,13 +1,13 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
-import { ClosestPlayerPath } from '../../behaviours/enemy/movement/MoveToLocationThenRotatePath';
+import { MoveToLocationThenRotatePath } from '../../behaviours/enemy/movement/MoveToLocationThenRotatePath';
 import { CT } from '../../constants';
-import { Position } from '../../models/Position';
+import { Position } from '../../models/position';
 
 
 export class Tank extends Enemy {
 
-  moveTo:Postiion;
+  moveTo:Position;
 
   constructor(options) {
     super(options);
@@ -29,7 +29,7 @@ export class Tank extends Enemy {
 
   onInitGame(state:GameState) {
     super.onInitGame(state);
-    this.registerBehaviours([new MoveToLocationThenPath(this, args: { moveTo: this.moveTo })]);
+    this.registerBehaviours([new MoveToLocationThenRotatePath(this, { moveTo: this.moveTo })]);
   }
 
 }

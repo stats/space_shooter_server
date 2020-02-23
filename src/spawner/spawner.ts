@@ -2,7 +2,7 @@ import { Delayed } from 'colyseus';
 import Clock from '@gamestdio/timer';
 
 import { Enemy } from '../models/enemy';
-import { Asteroid, Blaster, Blimp, Bomber, Hunter, Scout, Speeder, Tracker } from '../models/enemies';
+import { Asteroid, Blaster, Blimp, Bomber, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
 import { AsteroidFormation, LineFormation, RandomFormation, SquareFormation,
          TriangleFormation, DiagonalFormation, SimpleFlock } from './formations/';
 
@@ -20,13 +20,14 @@ export class Spawner {
 
   private enemy_types:any = [
     [1, Asteroid],
-    [1, Scout],
-    [1, Blimp],
-    [1, Bomber],
-    [1, Hunter],
-    [1, Speeder],
-    [1, Blaster],
-    [1, Tracker]
+    // [1, Blaster],
+    // [1, Blimp],
+    // [1, Bomber],
+    // [1, Hunter],
+    // [1, Scout],
+    // [1, Speeder],
+    [1, Tank],
+    // [1, Tracker]
   ];
 
   private formations:any = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];

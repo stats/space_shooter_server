@@ -9,7 +9,7 @@ export class MoveToLocationThenRotatePath extends Behaviour {
   theta:number;
   moveComplete:boolean = false;
 
-  rotationDirection:Number = 1;
+  rotationDirection:number = 1;
 
   entered_screen:boolean = false;
 
@@ -46,7 +46,7 @@ export class MoveToLocationThenRotatePath extends Behaviour {
   }
 
   private handleMovement(deltaTime) {
-    if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * detaTime/1000) {
+    if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * deltaTime/1000) {
       this.target.position.x = this.moveTo.x;
       this.target.position.y = this.moveTo.y;
       this.moveComplete = true;

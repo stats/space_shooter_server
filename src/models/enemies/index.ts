@@ -5,4 +5,5 @@ export { Bomber } from './Bomber';
 export { Hunter } from './Hunter';
 export { Scout } from './Scout';
 export { Speeder } from './Speeder';
+export { Tank } from './Tank';
 export { Tracker } from './Tracker';
