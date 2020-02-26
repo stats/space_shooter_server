@@ -6,10 +6,13 @@ import { AccountHelper } from '../helpers/AccountHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
 import { Ship } from '../models/ship'
+import { ErrorMessage } from '../models/ErrorMessage';
+import { ShipList } from '../models/ShipList';
 
 import { DB } from '../database';
 
 import { ShipBuilderState } from '../models/ShipBuilderState'
+
 
 export class ShipBuilderRoom extends Room<ShipBuilderState> {
 
@@ -60,7 +63,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   private async unlockedData(client) {
     let account = await AccountHelper.getAccountByUsername(client.username);
     if(!account) {
-      this.send(client, { action: "error", message: 'invalid_account'});
+      this.send(client, new ErrorMessage('Your account could not be found', 'invalid_account'));
       return;
     }
     console.log("[ShipBuilderRoom] Sending UnlockMessage");
@@ -70,7 +73,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   private async statsData(client) {
     let account = await AccountHelper.getAccountByUsername(client.username);
     if(!account) {
-      this.send(client, { action: "error", message: 'invalid_account'});
+      this.send(client, new ErrorMessage('Your account could not be found', 'invalid_account'));
       return;
     }
 
@@ -82,7 +85,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   private async upgradeShip(client, uuid, upgrades) {
     const ship = await ShipHelper.getShip(client.username, uuid);
     if(!ship) {
-      this.send(client, { action: "error", message: 'invalid_ship_to_upgrade'});
+      this.send(client, new ErrorMessage('The ship requested could not be found', 'invalid_ship'));
       return;
     }
     const return_ship = await ShipHelper.upgradeShip(ship, upgrades);
@@ -92,7 +95,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
       this.sendShips(client);
       return;
     } else {
-      this.send(client, { action: "error", message: 'error_could_not_upgrade'});
+      this.send(client, new ErrorMessage('The ship could not be upgraded', 'error_could_not_upgrade'));
       return;
     }
   }
@@ -102,7 +105,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
     const ship = await ShipHelper.getShip(client.username, uuid);
 
     if(!ship) {
-      this.send(client, { action: "error", message: 'error_invalid_ship' });
+      this.send(client, new ErrorMessage('The ship requested could not be found', 'invalid_ship'));
       return;
     }
     ShipHelper.addInGame(uuid);
@@ -116,7 +119,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
     for(let ship of ships) {
       ship_list.push(new Ship(ship));
     }
-    this.send(client, { action: 'ships', ships: ship_list});
+    this.send(client, new ShipList(ship_list));
   }
 
   private async createShip(client, ship) {
@@ -125,7 +128,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully created.'});
     } else {
-        this.send(client, { action: 'message', message: 'Unable to create the ship.'});
+        this.send(client, new ErrorMessage('The ship could not be created', 'create_ship_failure'));
         return;
     }
     this.sendShips(client);
@@ -136,7 +139,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully destroyed.'});
     } else {
-      this.send(client, { action: 'message', message: 'Unable to destroy the ship.'});
+      this.send(client, new ErrorMessage('The ship requested could not be deleted', 'delete_ship_failure'));
     }
     this.sendShips(client);
   }
