@@ -1,5 +1,5 @@
 export class SHIP {
-  public static TYPES = {
+  public static TYPE = {
     "explorer1": {
       "damage_base": 4,
       "damage_growth": 1,
@@ -34,7 +34,10 @@ export class SHIP {
       "shield_recharge_base": 27500,
       "shield_recharge_growth": 500,
       "special_base": 0.05,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills_explorer1",
+      unlock_count: 500
+
     },
     "explorer3": {
       "damage_base": 6,
@@ -52,7 +55,9 @@ export class SHIP {
       "shield_recharge_base": 27000,
       "shield_recharge_growth": 500,
       "special_base": 0.05,
-      "special_growth": 0.01
+      "special_growth": 0.01,
+      unlock_key: "max_kills_explorer2",
+      unlock_count: 600
     },
     "explorer4": {
       "damage_base": 8,
@@ -70,7 +75,9 @@ export class SHIP {
       "shield_recharge_base": 26500,
       "shield_recharge_growth": 500,
       "special_base": 0.05,
-      "special_growth": 0.01
+      "special_growth": 0.01,
+      unlock_key: "max_kills_explorer3",
+      unlock_count: 700
     },
     "explorer5": {
       "damage_base": 10,
@@ -88,7 +95,9 @@ export class SHIP {
       "shield_recharge_base": 26000,
       "shield_recharge_growth": 500,
       "special_base": 0.05,
-      "special_growth": 0.015
+      "special_growth": 0.015,
+      unlock_key: "max_kills_explorer4",
+      unlock_count: 800
     },
     "scout1": {
       "damage_base": 4,
@@ -124,7 +133,9 @@ export class SHIP {
       "shield_recharge_base": 29500,
       "shield_recharge_growth": 500,
       "special_base": 0.01,
-      "special_growth": 0.01
+      "special_growth": 0.01,
+      unlock_key: "max_kills_scout1",
+      unlock_count: 500
     },
     "scout3": {
       "damage_base": 6,
@@ -142,7 +153,9 @@ export class SHIP {
       "shield_recharge_base": 29000,
       "shield_recharge_growth": 500,
       "special_base": 0.015,
-      "special_growth": 0.015
+      "special_growth": 0.015,
+      unlock_key: "max_kills_scout2",
+      unlock_count: 600
     },
     "scout4": {
       "damage_base": 8,
@@ -160,7 +173,9 @@ export class SHIP {
       "shield_recharge_base": 28500,
       "shield_recharge_growth": 500,
       "special_base": 0.02,
-      "special_growth": 0.015
+      "special_growth": 0.015,
+      unlock_key: "max_kills_scout3",
+      unlock_count: 700
     },
     "scout5": {
       "damage_base": 10,
@@ -178,7 +193,9 @@ export class SHIP {
       "shield_recharge_base": 28000,
       "shield_recharge_growth": 500,
       "special_base": 0.025,
-      "special_growth": 0.02
+      "special_growth": 0.02,
+      unlock_key: "max_kills_scout4",
+      unlock_count: 800
     },
     "gunship1": {
       "damage_base": 6,
@@ -196,7 +213,9 @@ export class SHIP {
       "shield_recharge_base": 30000,
       "shield_recharge_growth": 500,
       "special_base": 0,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills",
+      unlock_count: 1000
     },
     "gunship2": {
       "damage_base": 8,
@@ -214,7 +233,9 @@ export class SHIP {
       "shield_recharge_base": 29500,
       "shield_recharge_growth": 500,
       "special_base": 0,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills_gunship1",
+      unlock_count: 600
     },
     "gunship3": {
       "damage_base": 12,
@@ -232,7 +253,9 @@ export class SHIP {
       "shield_recharge_base": 29000,
       "shield_recharge_growth": 500,
       "special_base": 0,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills_gunship2",
+      unlock_count: 700
     },
     "gunship4": {
       "damage_base": 16,
@@ -250,7 +273,9 @@ export class SHIP {
       "shield_recharge_base": 28500,
       "shield_recharge_growth": 500,
       "special_base": 0,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills_gunship3",
+      unlock_count: 800
     },
     "gunship5": {
       "damage_base": 20,
@@ -268,7 +293,9 @@ export class SHIP {
       "shield_recharge_base": 28000,
       "shield_recharge_growth": 500,
       "special_base": 0,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills_gunship4",
+      unlock_count: 900
     },
     "defender1": {
       "damage_base": 4,
@@ -286,7 +313,9 @@ export class SHIP {
       "shield_recharge_base": 26000,
       "shield_recharge_growth": 600,
       "special_base": 0,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_level",
+      unlock_count: 5
     },
     "defender2": {
       "damage_base": 5,
@@ -304,7 +333,9 @@ export class SHIP {
       "shield_recharge_base": 25000,
       "shield_recharge_growth": 650,
       "special_base": 0.01,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills_defender1",
+      unlock_count: 600
     },
     "defender3": {
       "damage_base": 6,
@@ -322,7 +353,9 @@ export class SHIP {
       "shield_recharge_base": 24000,
       "shield_recharge_growth": 700,
       "special_base": 0.01,
-      "special_growth": 0.01
+      "special_growth": 0.01,
+      unlock_key: "max_kills_defender2",
+      unlock_count: 700
     },
     "defender4": {
       "damage_base": 8,
@@ -340,7 +373,9 @@ export class SHIP {
       "shield_recharge_base": 23000,
       "shield_recharge_growth": 750,
       "special_base": 0.015,
-      "special_growth": 0.01
+      "special_growth": 0.01,
+      unlock_key: "max_kills_defender3",
+      unlock_count: 800
     },
     "defender5": {
       "damage_base": 10,
@@ -358,7 +393,9 @@ export class SHIP {
       "shield_recharge_base": 22000,
       "shield_recharge_growth": 800,
       "special_base": 0.02,
-      "special_growth": 0.015
+      "special_growth": 0.015,
+      unlock_key: "max_kills_defender4",
+      unlock_count: 900
     },
     "fighter1": {
       "damage_base": 5,
@@ -394,7 +431,9 @@ export class SHIP {
       "shield_recharge_base": 28000,
       "shield_recharge_growth": 525,
       "special_base": 0.01,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills_fighter1",
+      unlock_count: 500
     },
     "fighter3": {
       "damage_base": 9,
@@ -412,7 +451,9 @@ export class SHIP {
       "shield_recharge_base": 27000,
       "shield_recharge_growth": 550,
       "special_base": 0.015,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills_fighter2",
+      unlock_count: 600
     },
     "fighter4": {
       "damage_base": 13,
@@ -430,7 +471,9 @@ export class SHIP {
       "shield_recharge_base": 26000,
       "shield_recharge_growth": 575,
       "special_base": 0.015,
-      "special_growth": 0.005
+      "special_growth": 0.005,
+      unlock_key: "max_kills_fighter3",
+      unlock_count: 700
     },
     "fighter5": {
       "damage_base": 16,
@@ -448,7 +491,9 @@ export class SHIP {
       "shield_recharge_base": 25000,
       "shield_recharge_growth": 600,
       "special_base": 0.02,
-      "special_growth": 0.01
+      "special_growth": 0.01,
+      unlock_key: "max_kills_fighter4",
+      unlock_count: 800
     }
   }
 }

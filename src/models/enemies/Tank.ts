@@ -1,7 +1,9 @@
 import { Enemy } from '../enemy';
 import { GameState} from '../../models/GameState';
 import { MoveToLocationThenRotatePath } from '../../behaviours/enemy/movement/MoveToLocationThenRotatePath';
-import { CT } from '../../constants';
+import { FiresBulletBehaviour } from '../../behaviours/enemy/FiresBulletBehaviour';
+import { EnemyBullet } from '../../models/primary/EnemyBullet';
+import { C, CT } from '../../constants';
 import { Position } from '../../models/position';
 
 
@@ -30,6 +32,22 @@ export class Tank extends Enemy {
   onInitGame(state:GameState) {
     super.onInitGame(state);
     this.registerBehaviours([new MoveToLocationThenRotatePath(this, { moveTo: this.moveTo })]);
+
+    let bullet_options = {
+      system: EnemyBullet,
+      damage: 1,
+      speed: 300,
+      range: 500,
+      collision_type: CT.CIRCLE,
+      radius: 25,
+      bullet_mesh: "Enemy1",
+      x: this.position.x,
+      y: this.position.y,
+      bullet_type: C.ENEMY_BULLET,
+      cooldown: 5000,
+      behaviour: 'fires'
+    }
+    this.registerBehaviour(new FiresBulletBehaviour(this, {bullet_options: bullet_options}));
   }
 
 }

@@ -4,6 +4,12 @@ import { UsernameGenerator } from '../helpers/UsernameGenerator';
 import { ShipHelper } from '../helpers/ShipHelper';
 import { Ship } from './ship';
 import { Statistics } from './Statistics';
+import { UnlockMessage } from './UnlockMessage';
+import { UnlockItem } from './UnlockItem';
+import { SHIP } from '../Ship';
+import { PRIMARY } from '../Primary';
+import { SPECIAL } from '../Special';
+import { MATERIAL } from '../Material';
 
 export class Account extends Schema {
 
@@ -32,113 +38,102 @@ export class Account extends Schema {
     return new Statistics(this.stats);
   }
 
+  getUnlockMessage():UnlockMessage {
+    let item:UnlockItem;
+    let message:UnlockMessage = new UnlockMessage({});
+
+    for(let key in SHIP.TYPE) {
+      let t = SHIP.TYPE[key];
+      if( !("unlock_key" in t) ) {
+        item = new UnlockItem("", true, 0)
+      } else {
+        item = new UnlockItem(t.unlock_key, (key in this.unlocked), t.unlock_count)
+      }
+      message.unlocks[key] = item;
+    }
+
+    for(let key in PRIMARY.TYPE) {
+      let t = PRIMARY.TYPE[key];
+      if( !("unlock_key" in t) ) {
+        item = new UnlockItem("", true, 0)
+      } else {
+        item = new UnlockItem(t.unlock_key, (key in this.unlocked), t.unlock_count)
+      }
+      message.unlocks[key] = item;
+    }
+
+    for(let key in SPECIAL.TYPE) {
+      let t = SPECIAL.TYPE[key];
+      if( !("unlock_key" in t) ) {
+        item = new UnlockItem("", true, 0)
+      } else {
+        item = new UnlockItem(t.unlock_key, (key in this.unlocked), t.unlock_count)
+      }
+      message.unlocks[key] = item;
+    }
+
+    for(let key in MATERIAL.TYPE) {
+      let t = MATERIAL.TYPE[key];
+      if( !("unlock_key" in t) ) {
+        item = new UnlockItem("", true, 0)
+      } else {
+        item = new UnlockItem(t.unlock_key, (key in this.unlocked), t.unlock_count)
+      }
+      message.unlocks[key] = item;
+    }
+
+    return message;
+  }
+
   updateUnlocks() {
-    /**
-     * Ship based Unlocks
-     **/
-    this.unlock("explorer1");
-    this.updateShipTypeLevelUnlock("explorer");
 
-    this.unlock("scout1");
-    this.updateShipTypeLevelUnlock("scout");
-
-    this.unlock("fighter1");
-    this.updateShipTypeKillsUnlock("fighter");
-
-    if( this.getStat("max_level") >= 5 ) {
-      this.unlock("defender1");
-      this.updateShipTypeLevelUnlock("defender");
-    }
-
-    if( this.getStat("max_kills") >= 500) {
-      this.unlock("gunship1");
-      this.updateShipTypeKillsUnlock("kills")
-    }
-
-    /**
-     * Special based unlocks
-     **/
-
-    this.unlock("Weapon Charge");
-    this.unlock("Emergency Brake");
-    this.unlock("Thrusters");
-
-    if( this.getStat("max_level_Emergency Brake") >= 5) this.unlock("Shield Recharge");
-    if( this.getStat("max_level_Shield Recharge") >= 6) this.unlock("Ramming Shield");
-    if( this.getStat("max_level_Ramming Shield") >= 8) this.unlock("Force Shield");
-
-    if( this.getStat("max_kills_Weapon_Charge") >= 200) this.unlock("Shotgun");
-    if( this.getStat("max_kills_Shotgun") >= 300 ) this.unlock("Bomb");
-    if( this.getStat("max_kills_Bomb") > 400 ) this.unlock("Mega Bomb");
-    if( this.getStat("max_kills_Mega Bomb") > 500 ) this.unlock("Scatter Shot");
-    if( this.getStat("max_kills_Scatter Shot") > 500 ) this.unlock("Missile Barrage");
-
-    if( this.getStat("max_level_Thrusters") >= 5) this.unlock("Hyper Speed");
-    if( this.getStat("max_level_Hyper Speed") >= 5) this.unlock("Invisibility");
-
-    /**
-     * Primary based unlocks
-     **/
-     this.unlock("Cannon");
-     if( this.getStat("max_kills_Cannon") >= 200 ) this.unlock("Cannon 2.0");
-     if( this.getStat("max_kills_Cannon") >= 750 ) this.unlock("Rapid");
-     if( this.getStat("max_kills_Cannon 2.0") >= 300 ) this.unlock("Cannon 3.0");
-     if( this.getStat("max_kills_Cannon 3.0") >= 750 ) this.unlock("Missile");
-     if( this.getStat("max_kills_Missile") >= 750 ) this.unlock("Double Missile");
-     if( this.getStat("max_kills_Double Missile") >= 1000 ) this.unlock("Triple Missile");
-
-     this.unlock("Blaster");
-     if( this.getStat("max_kills_Blaster") >= 200 ) this.unlock("Blaster 2.0");
-     if( this.getStat("max_kills_Blaster 2.0") >= 200 ) this.unlock("Beam");
-     if( this.getStat("max_kills_Beam") >= 500 ) this.unlock("Double Beam");
-     if( this.getStat("max_kills_Double Beam") >= 500 ) this.unlock("Triple Beam");
-     if( this.getStat("max_kills_Blaster 2.0") >= 500 ) this.unlock("Blaster 3.0");
-     if( this.getStat("max_kills_Blaster 3.0") >= 750 ) this.unlock("Torpedo");
-
-     if( this.getStat("max_kills_Torpedo") >= 750 ) this.unlock("Double Torpedo");
-     if( this.getStat("max_kills_Double Torpedo") >= 1000 ) this.unlock("Triple Torpedo");
-
-     /**
-      * Material based unlocks
-      **/
-
-      this.unlock("cindertron_recruit1");
-      this.unlock("cindertron_recruit2");
-      this.unlock("cindertron_recruit3");
-
-      if(this.getStat("max_kills") >= 100 ) this.unlock("bone_brigade1");
-      if(this.getStat("max_kills") >= 200 ) this.unlock("royal_fleet1");
-      if(this.getStat("max_kills") >= 300 ) this.unlock("camo1");
-      if(this.getStat("max_kills") >= 400 ) this.unlock("earth_defense1");
-      if(this.getStat("max_kills") >= 500 ) this.unlock("bone_brigade2");
-      if(this.getStat("max_kills") >= 600 ) this.unlock("royal_fleet2");
-      if(this.getStat("max_kills") >= 700 ) this.unlock("bone_brigade2");
-      if(this.getStat("max_kills") >= 800 ) this.unlock("camo2");
-      if(this.getStat("max_kills") >= 900 ) this.unlock("royal_fleet3");
-  }
-
-  updateShipTypeLevelUnlock(ship_type) {
-    for(var i = 1; i < 4; i++) {
-      if(this.getStat(`max_level_${ship_type}${i}`) >= 3 + i ) {
-        this.unlock(`${type}${i+1}`);
+    for(let key in SHIP.TYPE) {
+      /** We need do no tests if already unlocked. **/
+      if(this.isUnlocked(key)) continue;
+      let t = SHIP.TYPE[key];
+      if( !("unlock_key" in t) ) {
+        this.unlock(key);
       } else {
-        return;
+        if(this.getStat(t["unlock_key"]) >= t["unlock_count"]) this.unlock(key);
       }
     }
-  }
 
-  updateShipTypeKillsUnlock(ship_type) {
-    for(var i = 1; i < 4; i++) {
-      if(this.getStat(`max_kills_${ship_type}${i}`) >= 500 + (i * 100) ) {
-        this.unlock(`${type}${i+1}`);
+    for(let key in SPECIAL.TYPE) {
+      /** We need do no tests if already unlocked. **/
+      if(this.isUnlocked(key)) continue;
+      let t = SPECIAL.TYPE[key];
+      if( !("unlock_key" in t) ) {
+        this.unlock(key);
       } else {
-        return;
+        if(this.getStat(t["unlock_key"]) >= t["unlock_count"]) this.unlock(key);
       }
     }
+
+    for(let key in PRIMARY.TYPE) {
+     /** We need do no tests if already unlocked. **/
+     if(this.isUnlocked(key)) continue;
+     let t = PRIMARY.TYPE[key];
+     if( !("unlock_key" in t) ) {
+       this.unlock(key);
+     } else {
+       if(this.getStat(t["unlock_key"]) >= t["unlock_count"]) this.unlock(key);
+     }
+    }
+
+    for(let key in MATERIAL.TYPE) {
+     /** We need do no tests if already unlocked. **/
+     if(this.isUnlocked(key)) continue;
+     let t = MATERIAL.TYPE[key];
+     if( !("unlock_key" in t) ) {
+       this.unlock(key);
+     } else {
+       if(this.getStat(t["unlock_key"]) >= t["unlock_count"]) this.unlock(key);
+     }
+    }
+
   }
 
   updateStatsWithShip(ship:Ship) {
-    console.log("[UpdateStatsWithShip]", ship);
     this.updateStat("max_level", ship.level);
     this.updateStat(`max_level_${ship.ship_type}`, ship.level);
 

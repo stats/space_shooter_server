@@ -1,5 +1,6 @@
 import {Schema, type} from '@colyseus/schema';
 import { Statistics } from './Statistics';
+import { UnlockMessage } from './UnlockMessage';
 
 export class ShipBuilderState extends Schema {
 
@@ -9,4 +10,7 @@ export class ShipBuilderState extends Schema {
    **/
   @type(Statistics)
   stats:Statistics = new Statistics({});
+
+  @type(UnlockMessage)
+  unlockMessage:UnlockMessage = new UnlockMessage({});
 }

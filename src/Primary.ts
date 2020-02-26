@@ -19,7 +19,35 @@ export class PRIMARY {
       bullet_count: 1,
       bullet_angle: 0,
       bullet_offset: 0,
-      bullet_mesh: "Cannon"
+      bullet_mesh: "Cannon",
+    },
+    "Cannon 2.0": {
+      system_type: Cannon,
+      damage: 1,
+      range: 1,
+      speed: 400,
+      fire_rate: 1,
+      radius: 15,
+      bullet_count: 2,
+      bullet_angle: Math.PI/6,
+      bullet_offset: 0,
+      bullet_mesh: "Cannon",
+      unlock_key: "max_kills_Cannon",
+      unlock_count: 200,
+    },
+    "Cannon 3.0": {
+      system_type: Cannon,
+      damage: 1,
+      range: 1,
+      speed: 400,
+      fire_rate: 1,
+      radius: 15,
+      bullet_count: 3,
+      bullet_angle: Math.PI/4,
+      bullet_offset: 0,
+      bullet_mesh: "Cannon",
+      unlock_key: "max_kills_Cannon 2.0",
+      unlock_count: 300
     },
     "Blaster": {
       system_type: Blaster,
@@ -33,6 +61,34 @@ export class PRIMARY {
       bullet_offset: 0,
       bullet_mesh: "Blaster"
     },
+    "Blaster 2.0": {
+      system_type: Blaster,
+      damage: 1.2,
+      range: 1.2,
+      speed: 350,
+      fire_rate: 0.8,
+      radius: 15,
+      bullet_count: 2,
+      bullet_angle: 0,
+      bullet_offset: 30,
+      bullet_mesh: "Blaster",
+      unlock_key: "max_kills_Blaster",
+      unlock_count: 200
+    },
+    "Blaster 3.0": {
+      system_type: Blaster,
+      damage: 1.2,
+      range: 1.2,
+      speed: 350,
+      fire_rate: 0.8,
+      radius: 15,
+      bullet_count: 3,
+      bullet_angle: 0,
+      bullet_offset: 30,
+      bullet_mesh: "Blaster",
+      unlock_key: "max_kills_Blaster 2.0",
+      unlock_count: 200
+    },
     "Rapid": {
       system_type: Cannon,
       damage: 0.15,
@@ -43,19 +99,9 @@ export class PRIMARY {
       bullet_count: 1,
       bullet_angle: 0,
       bullet_offset: 0,
-      bullet_mesh: "Cannon"
-    },
-    "Cannon 2.0": {
-      system_type: Cannon,
-      damage: 1,
-      range: 1,
-      speed: 400,
-      fire_rate: 1,
-      radius: 15,
-      bullet_count: 2,
-      bullet_angle: Math.PI/6,
-      bullet_offset: 0,
-      bullet_mesh: "Cannon"
+      bullet_mesh: "Cannon",
+      unlock_key: "max_kills_Cannon",
+      unlock_count: 750
     },
     "Beam": {
       system_type: Blaster,
@@ -67,19 +113,37 @@ export class PRIMARY {
       bullet_count: 1,
       bullet_angle: 0,
       bullet_offset: 0,
-      bullet_mesh: "Beam"
+      bullet_mesh: "Beam",
+      unlock_key: "max_kills_Blaster 2.0",
+      unlock_count: 400
     },
-    "Blaster 2.0": {
+    "Double Beam": {
       system_type: Blaster,
-      damage: 1.2,
-      range: 1.2,
-      speed: 350,
-      fire_rate: 0.8,
+      damage: 1,
+      range: 1.1,
+      speed: 600,
+      fire_rate: 1,
       radius: 15,
       bullet_count: 2,
       bullet_angle: 0,
-      bullet_offset: 30,
-      bullet_mesh: "Blaster"
+      bullet_offset: 15,
+      bullet_mesh: "Beam",
+      unlock_key: "max_kills_Beam",
+      unlock_count: 200
+    },
+    "Triple Beam": {
+      system_type: Blaster,
+      damage: 1,
+      range: 1.1,
+      speed: 600,
+      fire_rate: 1,
+      radius: 15,
+      bullet_count: 3,
+      bullet_angle: 0,
+      bullet_offset: 15,
+      bullet_mesh: "Beam",
+      unlock_key: "max_kills_Double Beam",
+      unlock_count: 400
     },
     "Missile": {
       system_type: Missile,
@@ -91,7 +155,37 @@ export class PRIMARY {
       bullet_count: 1,
       bullet_angle: 0,
       bullet_offset: 0,
-      bullet_mesh: "Missile"
+      bullet_mesh: "Missile",
+      unlock_key: "max_kills_Cannon",
+      unlock_count: 750
+    },
+    "Double Missile": {
+      system_type: Missile,
+      damage: 1.2,
+      range: 1.5,
+      speed: 350,
+      fire_rate: 0.9,
+      radius: 15,
+      bullet_count: 2,
+      bullet_angle: Math.PI/6,
+      bullet_offset: 15,
+      bullet_mesh: "Missile",
+      unlock_key: "max_kills_Missile",
+      unlock_count: 750
+    },
+    "Triple Missile": {
+      system_type: Missile,
+      damage: 1.2,
+      range: 1.5,
+      speed: 350,
+      fire_rate: 0.9,
+      radius: 15,
+      bullet_count: 3,
+      bullet_angle: Math.PI/4,
+      bullet_offset: 15,
+      bullet_mesh: "Missile",
+      unlock_key: "max_kills_Double Missile",
+      unlock_count: 750
     },
     "Torpedo": {
       system_type: Torpedo,
@@ -104,55 +198,9 @@ export class PRIMARY {
       bullet_angle: 0,
       bullet_offset: 0,
       blast_radius: 200,
-      bullet_mesh: "Torpedo"
-    },
-    "Double Beam": {
-      system_type: Blaster,
-      damage: 1,
-      range: 1.1,
-      speed: 600,
-      fire_rate: 1,
-      radius: 15,
-      bullet_count: 2,
-      bullet_angle: 0,
-      bullet_offset: 15,
-      bullet_mesh: "Beam"
-    },
-    "Cannon 3.0": {
-      system_type: Cannon,
-      damage: 1,
-      range: 1,
-      speed: 400,
-      fire_rate: 1,
-      radius: 15,
-      bullet_count: 3,
-      bullet_angle: Math.PI/4,
-      bullet_offset: 0,
-      bullet_mesh: "Cannon"
-    },
-    "Double Missile": {
-      system_type: Missile,
-      damage: 1.2,
-      range: 1.5,
-      speed: 350,
-      fire_rate: 0.9,
-      radius: 15,
-      bullet_count: 2,
-      bullet_angle: Math.PI/6,
-      bullet_offset: 15,
-      bullet_mesh: "Missile"
-    },
-    "Blaster 3.0": {
-      system_type: Blaster,
-      damage: 1.2,
-      range: 1.2,
-      speed: 350,
-      fire_rate: 0.8,
-      radius: 15,
-      bullet_count: 3,
-      bullet_angle: 0,
-      bullet_offset: 30,
-      bullet_mesh: "Blaster"
+      bullet_mesh: "Torpedo",
+      unlock_key: "max_kills_Blaster 2.0",
+      unlock_count: 1000
     },
     "Double Torpedo": {
       system_type: Torpedo,
@@ -165,31 +213,9 @@ export class PRIMARY {
       bullet_angle: 0,
       bullet_offset: 15,
       blast_radius: 200,
-      bullet_mesh: "Torpedo"
-    },
-    "Triple Beam": {
-      system_type: Blaster,
-      damage: 1,
-      range: 1.1,
-      speed: 600,
-      fire_rate: 1,
-      radius: 15,
-      bullet_count: 3,
-      bullet_angle: 0,
-      bullet_offset: 15,
-      bullet_mesh: "Beam"
-    },
-    "Triple Missile": {
-      system_type: Missile,
-      damage: 1.2,
-      range: 1.5,
-      speed: 350,
-      fire_rate: 0.9,
-      radius: 15,
-      bullet_count: 3,
-      bullet_angle: Math.PI/4,
-      bullet_offset: 15,
-      bullet_mesh: "Missile"
+      bullet_mesh: "Torpedo",
+      unlock_key: "max_kills_Torpedo",
+      unlock_count: 1000
     },
     "Triple Torpedo": {
       system_type: Torpedo,
@@ -202,7 +228,9 @@ export class PRIMARY {
       bullet_angle: 0,
       bullet_offset: 15,
       blast_radius: 200,
-      bullet_mesh: "Torpedo"
+      bullet_mesh: "Torpedo",
+      unlock_key: "max_kills_Double Torpedo",
+      unlock_count: 1000
     },
   };
 }

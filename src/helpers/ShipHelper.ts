@@ -26,27 +26,27 @@ export class ShipHelper {
 
   static setShipValues(ship_data:any) {
     console.log(ship_data);
-    console.log(SHIP.TYPES[ship_data.ship_type]);
-    ship_data['damage_base'] = SHIP.TYPES[ship_data.ship_type]['damage_base'];
-    ship_data['damage_growth'] = SHIP.TYPES[ship_data.ship_type]['damage_growth'];
+    console.log(SHIP.TYPE[ship_data.ship_type]);
+    ship_data['damage_base'] = SHIP.TYPE[ship_data.ship_type]['damage_base'];
+    ship_data['damage_growth'] = SHIP.TYPE[ship_data.ship_type]['damage_growth'];
 
-    ship_data['range_base'] = SHIP.TYPES[ship_data.ship_type]['range_base'];
-    ship_data['range_growth'] = SHIP.TYPES[ship_data.ship_type]['range_growth'];
+    ship_data['range_base'] = SHIP.TYPE[ship_data.ship_type]['range_base'];
+    ship_data['range_growth'] = SHIP.TYPE[ship_data.ship_type]['range_growth'];
 
-    ship_data['fire_rate_base'] = SHIP.TYPES[ship_data.ship_type]['fire_rate_base'];
-    ship_data['fire_rate_growth'] = SHIP.TYPES[ship_data.ship_type]['fire_rate_growth'];
+    ship_data['fire_rate_base'] = SHIP.TYPE[ship_data.ship_type]['fire_rate_base'];
+    ship_data['fire_rate_growth'] = SHIP.TYPE[ship_data.ship_type]['fire_rate_growth'];
 
-    ship_data['speed_base'] = SHIP.TYPES[ship_data.ship_type]['speed_base'];
-    ship_data['speed_growth'] = SHIP.TYPES[ship_data.ship_type]['speed_growth'];
+    ship_data['speed_base'] = SHIP.TYPE[ship_data.ship_type]['speed_base'];
+    ship_data['speed_growth'] = SHIP.TYPE[ship_data.ship_type]['speed_growth'];
 
-    ship_data['accelleration_base'] = SHIP.TYPES[ship_data.ship_type]['accelleration_base'];
-    ship_data['accelleration_growth'] = SHIP.TYPES[ship_data.ship_type]['accelleration_growth'];
+    ship_data['accelleration_base'] = SHIP.TYPE[ship_data.ship_type]['accelleration_base'];
+    ship_data['accelleration_growth'] = SHIP.TYPE[ship_data.ship_type]['accelleration_growth'];
 
-    ship_data['shields_base'] = SHIP.TYPES[ship_data.ship_type]['shields_base'];
-    ship_data['shields_growth'] = SHIP.TYPES[ship_data.ship_type]['shields_growth'];
+    ship_data['shields_base'] = SHIP.TYPE[ship_data.ship_type]['shields_base'];
+    ship_data['shields_growth'] = SHIP.TYPE[ship_data.ship_type]['shields_growth'];
 
-    ship_data['shield_recharge_base'] = SHIP.TYPES[ship_data.ship_type]['shield_recharge_base'];
-    ship_data['shield_recharge_growth'] = SHIP.TYPES[ship_data.ship_type]['shield_recharge_growth'];
+    ship_data['shield_recharge_base'] = SHIP.TYPE[ship_data.ship_type]['shield_recharge_base'];
+    ship_data['shield_recharge_growth'] = SHIP.TYPE[ship_data.ship_type]['shield_recharge_growth'];
 
     return ship_data;
   }

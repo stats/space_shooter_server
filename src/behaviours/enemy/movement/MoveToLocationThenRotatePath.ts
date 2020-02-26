@@ -24,6 +24,7 @@ export class MoveToLocationThenRotatePath extends Behaviour {
     let dy = this.moveTo.y - this.target.position.y;
 
     this.theta = Math.atan2(dy, dx);
+    this.rotationDirection = Math.random() > 0.5 ? 1 : -1;
   }
 
   onUpdate(deltaTime) {
@@ -35,18 +36,12 @@ export class MoveToLocationThenRotatePath extends Behaviour {
   }
 
   private handleRotation(deltaTime) {
-    if(this.target.angle > 2 * Math.PI) {
-      this.rotationDirection = -1;
-    }
-    if(this.target.angle < Math.PI) {
-      this.rotationDirection = 1;
-    }
-
-    this.target.angle += this.rotationDirection * 0.1 * deltaTime/1000;
+    this.target.angle += this.rotationDirection * 0.5 * deltaTime/1000;
   }
 
   private handleMovement(deltaTime) {
     if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * deltaTime/1000) {
+      console.log("Hit target position");
       this.target.position.x = this.moveTo.x;
       this.target.position.y = this.moveTo.y;
       this.moveComplete = true;

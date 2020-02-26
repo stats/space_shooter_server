@@ -9,7 +9,6 @@ import { Ship } from '../models/ship'
 
 import { DB } from '../database';
 
-import { Statistics } from '../models/Statistics';
 import { ShipBuilderState } from '../models/ShipBuilderState'
 
 export class ShipBuilderRoom extends Room<ShipBuilderState> {
@@ -64,7 +63,8 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
       this.send(client, { action: "error", message: 'invalid_account'});
       return;
     }
-    this.send(client, { action: "unlocks", message: account.unlocked });
+    console.log("[ShipBuilderRoom] Sending UnlockMessage");
+    this.send(client, account.getUnlockMessage());
   }
 
   private async statsData(client) {
@@ -74,7 +74,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
       return;
     }
 
-    this.send(client, account.getStatistics() as Statistics);
+    this.send(client, account.getStatistics());
 
     //this.send(client, { action: "stats", message: new MapSchema(account.stats) });
   }
