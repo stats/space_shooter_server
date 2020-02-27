@@ -115,11 +115,13 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   private async sendShips(client) {
     console.log('[ShipBuilderRoom] sending ships');
     let ships = await ShipHelper.getShips(client.username);
-    let ship_list = [];
-    for(let ship of ships) {
-      ship_list.push(new Ship(ship));
+    let sl = new ShipList();
+    for(var i = 0, l = ships.length; i < l; i++) {
+      let ship:Ship = new Ship(ships[i]);
+      sl.ships[ship.uuid] = ship;
     }
-    this.send(client, new ShipList(ship_list));
+    console.log(sl, sl.ships);
+    this.send(client, sl);
   }
 
   private async createShip(client, ship) {
