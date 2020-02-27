@@ -1,9 +1,9 @@
-import { Enemy } from '../enemy';
+import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { LoopingPath } from '../../behaviours/enemy/movement/LoopingPath';
-import { DropsBulletBehaviour } from '../../behaviours/enemy/DropsBulletBehaviour';
+import { LoopingPath } from '../../behaviours/Enemy/movement/LoopingPath';
+import { DropsBulletBehaviour } from '../../behaviours/Enemy/DropsBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
-import { C, CT } from '../../constants';
+import { C, CT } from '../../Constants';
 
 
 export class Bomber extends Enemy {

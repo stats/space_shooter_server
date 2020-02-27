@@ -1,5 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
+import { C } from '../../Constants';
 import { SPECIAL } from '../../Special';
 import { Bounds } from '../../helpers/Bounds';
 

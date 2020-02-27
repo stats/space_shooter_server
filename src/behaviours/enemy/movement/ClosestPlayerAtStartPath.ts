@@ -1,6 +1,6 @@
 import { Behaviour } from '../../behaviour';
-import { C } from '../../../constants';
-import { Ship } from '../../../models/ship';
+import { C } from '../../../Constants';
+import { Ship } from '../../../models/Ship';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 
 export class ClosestPlayerAtStartPath extends Behaviour {

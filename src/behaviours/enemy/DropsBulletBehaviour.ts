@@ -1,5 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
+import { C } from '../../Constants';
 import { PRIMARY } from '../../Primary';
 import { Primary } from '../../models/primary/Primary';
 

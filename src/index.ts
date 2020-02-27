@@ -15,7 +15,7 @@ import { Account } from "./models/Account";
 import { AccountHelper } from './helpers/AccountHelper';
 import { JWTHelper } from './helpers/JWTHelper';
 
-import { DB } from './database';
+import { DB } from './Database';
 
 const asyncMiddleware = fn =>
 (req, res, next) => {

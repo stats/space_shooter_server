@@ -1,8 +1,8 @@
 import { Schema, type } from "@colyseus/schema";
 import { merge } from 'lodash';
 import { GameState } from './GameState';
-import { Position } from './position';
-import { CT } from '../constants';
+import { Position } from './Position';
+import { CT } from '../Constants';
 const uuid = require('uuid/v4');
 
 export class Entity extends Schema {

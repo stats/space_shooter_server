@@ -1,13 +1,13 @@
 import { Delayed } from 'colyseus';
 import Clock from '@gamestdio/timer';
 
-import { Enemy } from '../models/enemy';
+import { Enemy } from '../models/Enemy';
 import { Asteroid, Blaster, Blimp, Bomber, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
 import { AsteroidFormation, LineFormation, RandomFormation, SquareFormation,
-         TriangleFormation, DiagonalFormation, SimpleFlock } from './formations/';
+         TriangleFormation, DiagonalFormation, SimpleFlock } from './Formations/';
 
 import { GameState} from '../models/GameState';
-import { Position } from '../models/position';
+import { Position } from '../models/Position';
 
 import { sample } from 'lodash';
 

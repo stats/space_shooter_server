@@ -1,5 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { Enemy } from '../../models/enemy';
+import { Enemy } from '../../models/Enemy';
 import { GameState } from '../../models/GameState';
 import { CollisionHelper } from '../../helpers/CollisionHelper';
 

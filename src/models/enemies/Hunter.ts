@@ -1,7 +1,7 @@
-import { Enemy } from '../enemy';
+import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { TargetPlayerStartPath } from '../../behaviours/enemy/movement/TargetPlayerStartPath';
-import { CT } from '../../constants';
+import { TargetPlayerStartPath } from '../../behaviours/Enemy/movement/TargetPlayerStartPath';
+import { CT } from '../../Constants';
 
 
 export class Hunter extends Enemy {

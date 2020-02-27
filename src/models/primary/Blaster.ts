@@ -1,8 +1,8 @@
-import { Bullet } from '../bullet';
-import { C, CT } from '../../constants';
+import { Bullet } from '../Bullet';
+import { C, CT } from '../../Constants';
 import { GameState } from '../GameState';
-import { Entity } from '../entity';
-import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
+import { Entity } from '../Entity';
+import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
 import { Primary } from './Primary';
 
 export class Blaster extends Primary{

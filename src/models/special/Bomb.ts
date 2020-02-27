@@ -1,8 +1,8 @@
 import { SpecialSystem } from './SpecialSystem';
-import { Bullet } from '../bullet';
-import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
-import { ExplodeBehaviour } from '../../behaviours/bullet/ExplodeBehaviour';
-import { C, CT } from '../../constants';
+import { Bullet } from '../Bullet';
+import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
+import { ExplodeBehaviour } from '../../behaviours/Bullet/ExplodeBehaviour';
+import { C, CT } from '../../Constants';
 
 export class Bomb extends SpecialSystem {
 

@@ -1,8 +1,8 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
+import { C } from '../../Constants';
 import { PRIMARY } from '../../Primary';
 import { Bounds } from '../../helpers/Bounds';
-import { Bullet } from '../../models/bullet';
+import { Bullet } from '../../models/Bullet';
 
 
 export class PrimaryAttackBehaviour extends Behaviour {

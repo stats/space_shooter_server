@@ -1,7 +1,7 @@
-import { Enemy } from '../enemy';
+import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { ClosestPlayerAtStartPath } from '../../behaviours/enemy/movement/ClosestPlayerAtStartPath';
-import { CT } from '../../constants';
+import { ClosestPlayerAtStartPath } from '../../behaviours/Enemy/movement/ClosestPlayerAtStartPath';
+import { CT } from '../../Constants';
 
 
 export class Speeder extends Enemy {

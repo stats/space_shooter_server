@@ -1,5 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
+import { C } from '../../Constants';
 import { Bounds } from '../../helpers/Bounds';
 
 export class InputBehaviour extends Behaviour {

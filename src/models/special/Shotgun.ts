@@ -1,7 +1,7 @@
 import { SpecialSystem } from './SpecialSystem';
-import { C, CT } from '../../constants';
-import { StraightAnglePath} from '../../behaviours/bullet/StraightAnglePath';
-import { Bullet } from '../bullet';
+import { C, CT } from '../../Constants';
+import { StraightAnglePath} from '../../behaviours/Bullet/StraightAnglePath';
+import { Bullet } from '../Bullet';
 
 export class Shotgun extends SpecialSystem {
 

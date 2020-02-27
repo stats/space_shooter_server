@@ -2,10 +2,10 @@
 
 /* This is also the mechanism for firing the bullet */
 
-import { Bullet } from '../bullet';
-import { C, CT } from '../../constants';
-import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
-import { StraightAnglePath } from '../../behaviours/bullet/StraightAnglePath';
+import { Bullet } from '../Bullet';
+import { C, CT } from '../../Constants';
+import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
+import { StraightAnglePath } from '../../behaviours/Bullet/StraightAnglePath';
 import { Primary } from './Primary';
 
 export class Cannon extends Primary {

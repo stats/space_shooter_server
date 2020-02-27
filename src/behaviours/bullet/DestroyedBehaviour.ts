@@ -1,5 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
+import { C } from '../../Constants';
 
 export class DestroyedBehaviour extends Behaviour {
 

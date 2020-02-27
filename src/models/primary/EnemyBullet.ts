@@ -1,9 +1,9 @@
-import { Bullet } from '../bullet';
-import { C, CT } from '../../constants';
+import { Bullet } from '../Bullet';
+import { C, CT } from '../../Constants';
 import { GameState } from '../GameState';
-import { Entity } from '../entity';
-import { StraightLineDownPath } from '../../behaviours/bullet/StraightLineDownPath';
-import { StraightAnglePath } from '../../behaviours/bullet/StraightAnglePath';
+import { Entity } from '../Entity';
+import { StraightLineDownPath } from '../../behaviours/Bullet/StraightLineDownPath';
+import { StraightAnglePath } from '../../behaviours/Bullet/StraightAnglePath';
 import { Primary } from './Primary';
 
 export class EnemyBullet extends Primary{

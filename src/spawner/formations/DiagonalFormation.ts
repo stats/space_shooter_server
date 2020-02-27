@@ -1,5 +1,5 @@
-import { Formation } from './formation';
-import { C } from '../../constants';
+import { Formation } from './Formation';
+import { C } from '../../Constants';
 
 export class DiagonalFormation extends Formation {
 

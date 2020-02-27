@@ -1,12 +1,12 @@
 import { Schema, type } from "@colyseus/schema";
 import { GameState } from './GameState';
-import { Position } from './position';
+import { Position } from './Position';
 
-import { CollidesWithShipBullet } from '../behaviours/enemy/CollidesWithShipBullet';
-import { DestroyedBehaviour } from '../behaviours/enemy/DestroyedBehaviour';
-import { TakesDamageBehaviour } from '../behaviours/enemy/TakesDamageBehaviour';
+import { CollidesWithShipBullet } from '../behaviours/Enemy/CollidesWithShipBullet';
+import { DestroyedBehaviour } from '../behaviours/Enemy/DestroyedBehaviour';
+import { TakesDamageBehaviour } from '../behaviours/Enemy/TakesDamageBehaviour';
 
-import { Entity } from './entity';
+import { Entity } from './Entity';
 
 export class Enemy extends Entity {
   health:number = 1;

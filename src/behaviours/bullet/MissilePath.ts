@@ -1,7 +1,7 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
-import { Position } from '../../models/position';
-import { Entity } from '../../models/entity';
+import { C } from '../../Constants';
+import { Position } from '../../models/Position';
+import { Entity } from '../../models/Entity';
 import { GameState } from '../../models/GameState';
 
 export class MissilePath extends Behaviour {

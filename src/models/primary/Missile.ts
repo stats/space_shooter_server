@@ -1,7 +1,7 @@
-import { Bullet } from '../bullet';
-import { C, CT } from '../../constants';
-import { Entity } from '../entity';
-import { MissilePath } from '../../behaviours/bullet/MissilePath';
+import { Bullet } from '../Bullet';
+import { C, CT } from '../../Constants';
+import { Entity } from '../Entity';
+import { MissilePath } from '../../behaviours/Bullet/MissilePath';
 import { Primary } from './Primary';
 
 export class Missile extends Primary {

@@ -1,8 +1,8 @@
 import { Behaviour } from '../behaviour';
-import { Bullet } from '../../models/bullet';
+import { Bullet } from '../../models/Bullet';
 import { GameState } from '../../models/GameState';
 import { CollisionHelper } from '../../helpers/CollisionHelper';
-import { C } from '../../constants';
+import { C } from '../../Constants';
 
 export class CollidesWithEnemyBullet extends Behaviour {
 

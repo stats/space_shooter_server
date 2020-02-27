@@ -1,5 +1,5 @@
-import { Formation } from './formation';
-import { C, S } from '../../constants';
+import { Formation } from './Formation';
+import { C, S } from '../../Constants';
 
 export class RandomFormation extends Formation {
 

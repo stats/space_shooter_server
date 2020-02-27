@@ -1,9 +1,9 @@
-import { Enemy } from '../enemy';
+import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { StraightLinePath } from '../../behaviours/enemy/movement/StraightLinePath';
-import { FiresBulletBehaviour } from '../../behaviours/enemy/FiresBulletBehaviour';
+import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePath';
+import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
-import { C, CT } from '../../constants';
+import { C, CT } from '../../Constants';
 
 
 export class Blaster extends Enemy {

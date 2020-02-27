@@ -1,11 +1,11 @@
 /* A straight shot that has an explosion on impact */
 
-import { Bullet } from '../bullet';
-import { C, CT } from '../../constants';
+import { Bullet } from '../Bullet';
+import { C, CT } from '../../Constants';
 import { GameState } from '../GameState';
-import { Entity } from '../entity';
-import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
-import { ExplodeBehaviour } from '../../behaviours/bullet/ExplodeBehaviour';
+import { Entity } from '../Entity';
+import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
+import { ExplodeBehaviour } from '../../behaviours/Bullet/ExplodeBehaviour';
 import { Primary } from './Primary';
 
 export class Torpedo extends Primary {

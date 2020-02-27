@@ -1,5 +1,5 @@
 import { Behaviour } from '../../behaviour';
-import { C } from '../../../constants';
+import { C } from '../../../Constants';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 
 export class LoopingPath extends Behaviour {

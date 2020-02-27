@@ -1,9 +1,9 @@
-import { Enemy } from '../enemy';
+import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { TargetPlayerStartPath } from '../../behaviours/enemy/movement/TargetPlayerStartPath';
-import { FiresBulletBehaviour } from '../../behaviours/enemy/FiresBulletBehaviour';
+import { TargetPlayerStartPath } from '../../behaviours/Enemy/movement/TargetPlayerStartPath';
+import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
-import { C, CT } from '../../constants';
+import { C, CT } from '../../Constants';
 
 
 export class Fang extends Enemy {

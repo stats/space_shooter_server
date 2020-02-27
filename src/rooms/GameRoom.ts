@@ -5,13 +5,13 @@ import { JWTHelper } from '../helpers/JWTHelper';
 import { CollisionHelper } from '../helpers/CollisionHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
-import { Enemy } from '../models/enemy';
-import { Ship } from '../models/ship';
-import { Bullet } from '../models/bullet';
-import { Spawner } from '../spawner/spawner';
+import { Enemy } from '../models/Enemy';
+import { Ship } from '../models/Ship';
+import { Bullet } from '../models/Bullet';
+import { Spawner } from '../spawner/Spawner';
 
 
-import { C } from '../constants';
+import { C } from '../Constants';
 
 export class GameRoom extends Room<GameState> {
 

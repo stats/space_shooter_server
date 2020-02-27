@@ -1,5 +1,5 @@
 import { Schema, type} from '@colyseus/schema';
-import { C } from '../constants';
+import { C } from '../Constants';
 
 export class Position  extends Schema {
   @type("number")

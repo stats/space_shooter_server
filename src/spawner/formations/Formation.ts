@@ -1,5 +1,5 @@
 import { GameState } from '../../models/GameState';
-import { C, S } from '../../constants';
+import { C, S } from '../../Constants';
 import { sample } from 'lodash';
 
 export class Formation {

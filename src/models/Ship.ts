@@ -8,13 +8,13 @@ import { PrimaryAttackBehaviour } from '../behaviours/player/PrimaryAttackBehavi
 import { SpecialAttackBehaviour } from '../behaviours/player/SpecialAttackBehaviour';
 import { ShieldRechargeBehaviour } from '../behaviours/player/ShieldRechargeBehaviour';
 
-import { C } from '../constants';
+import { C } from '../Constants';
 
 import { AccountHelper } from '../helpers/AccountHelper';
 
 import { GameState } from './GameState';
 
-import { Entity } from './entity';
+import { Entity } from './Entity';
 
 import { pick, merge } from 'lodash';
 

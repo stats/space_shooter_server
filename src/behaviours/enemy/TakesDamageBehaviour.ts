@@ -1,8 +1,8 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
+import { C } from '../../Constants';
 import { Bounds } from '../../helpers/Bounds';
-import { Ship } from '../../models/ship';
-import { Entity } from '../../models/entity';
+import { Ship } from '../../models/Ship';
+import { Entity } from '../../models/Entity';
 
 export class TakesDamageBehaviour extends Behaviour {
 

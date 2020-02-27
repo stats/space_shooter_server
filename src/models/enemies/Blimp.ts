@@ -1,7 +1,7 @@
-import { Enemy } from '../enemy';
+import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { SimpleFlockingPath } from '../../behaviours/enemy/movement/SimpleFlockingPath';
-import { CT } from '../../constants';
+import { SimpleFlockingPath } from '../../behaviours/Enemy/movement/SimpleFlockingPath';
+import { CT } from '../../Constants';
 
 export class Blimp extends Enemy {
 

@@ -1,8 +1,8 @@
 import { Schema, type, MapSchema } from '@colyseus/schema';
 
-import { Ship } from './ship';
-import { Enemy } from './enemy';
-import { Bullet } from './bullet';
+import { Ship } from './Ship';
+import { Enemy } from './Enemy';
+import { Bullet } from './Bullet';
 
 import { CollisionHelper } from '../helpers/CollisionHelper';
 import { Bounds } from '../helpers/Bounds';

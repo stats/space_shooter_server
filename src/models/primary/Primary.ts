@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
-import { Entity } from '../entity';
-import { Ship } from '../ship';
-import { Bullet } from '../bullet';
+import { Entity } from '../Entity';
+import { Ship } from '../Ship';
+import { Bullet } from '../Bullet';
 
 export class Primary {
 

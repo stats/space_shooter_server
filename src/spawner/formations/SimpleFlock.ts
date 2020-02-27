@@ -1,7 +1,7 @@
-import { Formation } from './formation';
-import { C, S } from '../../constants';
-import { Enemy } from '../../models/enemy';
-import { Position } from '../../models/position';
+import { Formation } from './Formation';
+import { C, S } from '../../Constants';
+import { Enemy } from '../../models/Enemy';
+import { Position } from '../../models/Position';
 
 export class SimpleFlock extends Formation {
 

@@ -1,6 +1,6 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../constants';
-import { Position } from '../../models/position';
+import { C } from '../../Constants';
+import { Position } from '../../models/Position';
 
 export class StraightAnglePath extends Behaviour {
 

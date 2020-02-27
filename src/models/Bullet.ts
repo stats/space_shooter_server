@@ -1,12 +1,12 @@
 import { Schema, type } from "@colyseus/schema";
 
-import { Entity } from './entity';
+import { Entity } from './Entity';
 
 import { merge } from 'lodash';
 
-import { DestroyedBehaviour } from '../behaviours/bullet/DestroyedBehaviour';
+import { DestroyedBehaviour } from '../behaviours/Bullet/DestroyedBehaviour';
 
-import { CT } from '../constants';
+import { CT } from '../Constants';
 
 export class Bullet extends Entity {
 

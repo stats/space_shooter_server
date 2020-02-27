@@ -5,11 +5,11 @@ import { JWTHelper } from '../helpers/JWTHelper';
 import { AccountHelper } from '../helpers/AccountHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
-import { Ship } from '../models/ship'
+import { Ship } from '../models/Ship'
 import { ErrorMessage } from '../models/ErrorMessage';
 import { ShipList } from '../models/ShipList';
 
-import { DB } from '../database';
+import { DB } from '../Database';
 
 import { ShipBuilderState } from '../models/ShipBuilderState'
 
@@ -117,10 +117,8 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
     let ships = await ShipHelper.getShips(client.username);
     let sl = new ShipList();
     for(var i = 0, l = ships.length; i < l; i++) {
-      let ship:Ship = new Ship(ships[i]);
-      sl.ships[ship.uuid] = ship;
+      sl.ships[ships[i].uuid] = new Ship(ships[i]);
     }
-    console.log(sl, sl.ships);
     this.send(client, sl);
   }
 

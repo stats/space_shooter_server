@@ -1,7 +1,7 @@
-import { Enemy } from '../enemy';
+import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { ClosestPlayerPath } from '../../behaviours/enemy/movement/ClosestPlayerPath';
-import { CT } from '../../constants';
+import { ClosestPlayerPath } from '../../behaviours/Enemy/movement/ClosestPlayerPath';
+import { CT } from '../../Constants';
 
 
 export class Tracker extends Enemy {

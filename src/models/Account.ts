@@ -2,7 +2,7 @@ import { MapSchema, Schema, type } from "@colyseus/schema";
 import { pick, merge } from 'lodash';
 import { UsernameGenerator } from '../helpers/UsernameGenerator';
 import { ShipHelper } from '../helpers/ShipHelper';
-import { Ship } from './ship';
+import { Ship } from './Ship';
 import { Statistics } from './Statistics';
 import { UnlockMessage } from './UnlockMessage';
 import { UnlockItem } from './UnlockItem';

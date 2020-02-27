@@ -1,4 +1,4 @@
-import { DB } from '../database';
+import { DB } from '../Database';
 import { Account } from '../models/Account';
 
 export class AccountHelper {
