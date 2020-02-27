@@ -1,6 +1,7 @@
 import { DB } from '../Database';
 import { Account } from '../models/Account';
 import { Ship } from '../models/Ship';
+import { ShipList } from '../models/ShipList';
 import { SHIP } from '../Ship';
 import { AccountHelper } from './AccountHelper';
 
@@ -14,6 +15,15 @@ export class ShipHelper {
 
   static async getShips(username:string) {
     return await DB.$ships.find({username}).toArray();
+  }
+
+  static async getShipList(username:string):Promise<ShipList> {
+    let ships = await ShipHelper.getShips(username);
+    let shipList:ShipList = new ShipList();
+    for(var i = 0, l = ships.length; i < l; i++) {
+      shipList.ships[ships[i].uuid] = new Ship(ships[i]);
+    }
+    return shipList;
   }
 
   static async validateShipParameters(username:string, data:{ name:string, ship_type:string, ship_material:string, primary_weapon:string, special_weapon:string }) {
