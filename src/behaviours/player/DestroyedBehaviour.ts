@@ -1,15 +1,15 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
+import { Ship } from '../../models/Ship';
 
 export class DestroyedBehaviour extends Behaviour {
 
-  startY: number;
+  target: Ship;
 
-  constructor(target: any, ) {
+  constructor(target: Ship) {
     super('destroyed', target);
   }
 
-  onEvent() {
+  onEvent(): void {
     this.target.$state.removeShip(this.target);
   }
 }

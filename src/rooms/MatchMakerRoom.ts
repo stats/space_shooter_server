@@ -1,4 +1,4 @@
-import { Room, Client, Delayed, matchMaker } from 'colyseus';
+import { Room, Client, matchMaker } from 'colyseus';
 import { JWTHelper } from '../helpers/JWTHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
@@ -21,7 +21,7 @@ interface ClientStat {
 }
 
 export class MatchMakerRoom extends Room {
-  allowUnmatchedGroups = true;
+  allowUnmatchedGroups: number = true;
 
   evaluateGroupInterval = 2000;
 
@@ -39,7 +39,7 @@ export class MatchMakerRoom extends Room {
 
   clientShipHash: any = {};
 
-  onCreate(options: any) {
+  onCreate(options: any): void {
     if(options.maxWaitingTime) {
       this.maxWaitingTime = options.maxWaitingTime;
     }
@@ -51,7 +51,7 @@ export class MatchMakerRoom extends Room {
     this.setSimulationInterval(() => this.redistributeGroups(), this.evaluateGroupInterval);
   }
 
-  async onAuth(client, options) {
+  async onAuth(client, options): Promise<any> {
     const isValidToken = await JWTHelper.verifyToken(options.token);
 
     if(!isValidToken) {
@@ -66,7 +66,7 @@ export class MatchMakerRoom extends Room {
     return username;
   }
 
-  async onJoin(client: Client, options: any, username: string) {
+  async onJoin(client: Client, options: any, username: string): Promise<void> {
     console.log('[MatchMakerRoom] (onJoin)', username);
     this.stats.push({
       client: client,
@@ -85,7 +85,7 @@ export class MatchMakerRoom extends Room {
     this.send(client, 1);
   }
 
-  onMessage(client: Client, message: any) {
+  onMessage(client: Client, message: any): void{
     if(message === 1) {
       const stat = this.stats.find(stat => stat.client === client);
 
@@ -100,13 +100,13 @@ export class MatchMakerRoom extends Room {
     }
   }
 
-  createGroup() {
+  createGroup(): void {
     const group: MatchmakingGroup = { clients: [], averageRank: 0};
     this.groups.push(group);
     return group;
   }
 
-  redistributeGroups() {
+  redistributeGroups(): void {
     this.groups = [];
 
     const stats = this.stats.sort((a, b) => a.rank - b.rank);
@@ -159,7 +159,7 @@ export class MatchMakerRoom extends Room {
     this.checkGroupsReady();
   }
 
-  async checkGroupsReady() {
+  async checkGroupsReady(): Promise<void> {
     await Promise.all(
       this.groups
         .map(async (group) => {
@@ -192,13 +192,9 @@ export class MatchMakerRoom extends Room {
     );
   }
 
-  onLeave(client: Client, consented: boolean) {
+  onLeave(client: Client, ): void {
     const index = this.stats.findIndex(stat => stat.client === client);
     this.stats.splice(index, 1);
     delete this.clientShipHash[client.id];
-  }
-
-  onDispose() {
-
   }
 }

@@ -25,15 +25,15 @@ export class AccountHelper {
     }
   }
 
-  static async createAccount(account: Account) {
+  static async createAccount(account: Account): Promise<any> {
     return DB.$accounts.insertOne(account.toSaveObject());
   }
 
-  static async saveAccount(account: Account) {
+  static async saveAccount(account: Account): Promise<any> {
     return DB.$accounts.updateOne({ username: account.username }, { $set: account.toSaveObject() });
   }
 
-  static async clearInGame(username: string) {
+  static async clearInGame(username: string): Promise<any> {
     return DB.$ships.updateMany({username}, {$set: {inGame: -1}});
   }
 }

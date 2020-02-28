@@ -4,7 +4,7 @@ import * as Intersects from 'intersects';
 
 export class CollisionHelper {
 
-  static collisionBetween(e1: Entity, e2: Entity) {
+  static collisionBetween(e1: Entity, e2: Entity): boolean {
     if(e1.collisionType == CT.CIRCLE && e2.collisionType == CT.CIRCLE)
       return Intersects.circleCircle(e1.position.x, e1.position.y, e1.radius, e2.position.x, e2.position.y, e2.radius);
     if(e1.collisionType == CT.CIRCLE && e2.collisionType == CT.ELLIPSE)

@@ -2,12 +2,12 @@ import { SpecialSystem } from './SpecialSystem';
 
 export class RammingShield extends SpecialSystem {
 
-  handleEvent() {
+  handleEvent(): void {
     this.target.collisionInvulnerable = true;
     this.active = true;
   }
 
-  handleUpdate(deltaTime: number) {
+  handleUpdate(deltaTime: number): void {
     if(!this.active) return;
 
     this.timer += deltaTime;

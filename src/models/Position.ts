@@ -14,7 +14,7 @@ export class Position  extends Schema {
     this.y = y;
   }
 
-  distanceTo(another: Position) {
+  distanceTo(another: Position): number {
     const dx: number = this.x - another.x;
     const dy: number = this.y - another.y;
     return Math.sqrt(dx*dx + dy*dy);
@@ -24,37 +24,37 @@ export class Position  extends Schema {
     return Math.sqrt(this.x*this.x + this.y*this.y);
   }
 
-  add(another: Position) {
+  add(another: Position): void {
     this.x = this.x + another.x;
     this.y = this.y + another.y;
   }
 
-  addN(n: number) {
+  addN(n: number): void {
     this.x = this.x + n;
     this.y = this.y + n;
   }
 
-  sub(another: Position) {
+  sub(another: Position): void {
     this.x = this.x - another.x;
     this.y = this.y - another.y;
   }
 
-  div(another: Position) {
+  div(another: Position): void {
     this.x = this.x / another.x;
     this.y = this.y / another.y;
   }
 
-  divN(n: number) {
+  divN(n: number): void {
     this.x = this.x / n;
     this.y = this.y / n;
   }
 
-  mult(another: Position) {
+  mult(another: Position): void {
     this.x = this.x * another.x;
     this.y = this.y * another.y;
   }
 
-  capSpeed(speed: number) {
+  capSpeed(speed: number): void {
     if(this.magnitude() > speed) {
       const reduction: number = speed / this.magnitude();
       this.x *= reduction;

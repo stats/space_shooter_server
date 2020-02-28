@@ -8,7 +8,7 @@ import { C, CT } from '../../Constants';
 
 export class Bomber extends Enemy {
 
-  constructor(options) {
+  constructor(options:any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;
@@ -24,9 +24,9 @@ export class Bomber extends Enemy {
     this.radius = 30;
   }
 
-  onInitGame(state: GameState) {
+  onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviours([new LoopingPath(this)]);
+    this.registerBehaviour("path", new LoopingPath(this));
 
     const bulletOptions = {
       system: EnemyBullet,
@@ -42,7 +42,7 @@ export class Bomber extends Enemy {
       cooldown: 3000,
       behaviour: 'drops'
     }
-    this.registerBehaviour(new DropsBulletBehaviour(this, {bulletOptions: bulletOptions}));
+    this.registerBehaviour("primary", new DropsBulletBehaviour(this, {bulletOptions: bulletOptions}));
   }
 
 }

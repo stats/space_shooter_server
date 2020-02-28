@@ -1,13 +1,13 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
+import { Entity } from '../../models/Entity';
 
 export class DestroyedBehaviour extends Behaviour {
 
-  constructor(target: any) {
+  constructor(target: Entity) {
     super('destroyed', target);
   }
 
-  onEvent() {
+  onEvent(): void {
     this.target.$state.removeEnemy(this.target);
   }
 }

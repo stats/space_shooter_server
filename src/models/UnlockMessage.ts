@@ -6,7 +6,7 @@ export class UnlockMessage extends Schema {
   @type({map: UnlockItem})
   unlocks: MapSchema;
 
-  constructor(unlocks: any = {}) {
+  constructor( unlocks: any ) {
     super();
     this.unlocks = new MapSchema(unlocks);
   }

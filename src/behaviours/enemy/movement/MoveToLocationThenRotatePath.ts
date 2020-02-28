@@ -2,6 +2,7 @@ import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
 import { Position } from '../../../models/Position';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Entity } from '../../../models/Entity';
 
 export class MoveToLocationThenRotatePath extends Behaviour {
 
@@ -13,7 +14,7 @@ export class MoveToLocationThenRotatePath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: any, args: {moveTo: Position}) {
+  constructor(target: Entity) {
     super('MoveToLocationThenRotate', target);
     this.moveTo = args.moveTo || Position.randomOnScreen();
     if(this.moveTo == null) {
@@ -27,7 +28,7 @@ export class MoveToLocationThenRotatePath extends Behaviour {
     this.rotationDirection = Math.random() > 0.5 ? 1 : -1;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     if(this.moveComplete) {
       this.handleRotation(deltaTime);
     } else {
@@ -35,11 +36,11 @@ export class MoveToLocationThenRotatePath extends Behaviour {
     }
   }
 
-  private handleRotation(deltaTime) {
+  private handleRotation(deltaTime): void {
     this.target.angle += this.rotationDirection * 0.5 * deltaTime/1000;
   }
 
-  private handleMovement(deltaTime) {
+  private handleMovement(deltaTime): void {
     if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * deltaTime/1000) {
       console.log("Hit target position");
       this.target.position.x = this.moveTo.x;

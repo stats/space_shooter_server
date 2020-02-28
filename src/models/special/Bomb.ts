@@ -6,7 +6,7 @@ import { C, CT } from '../../Constants';
 
 export class Bomb extends SpecialSystem {
 
-  handleEvent() {
+  handleEvent(): void {
     const spawnLocation = this.target.getBulletSpawnLocation();
     const bullet: Bullet = new Bullet({
       damage: this.target.getDamage() / 3,
@@ -21,8 +21,8 @@ export class Bomb extends SpecialSystem {
       blastRadius: 300,
       explodes: true
     });
-    bullet.registerBehaviour(new StraightLineUpPath(bullet));
-    bullet.registerBehaviour(new ExplodeBehaviour(bullet));
+    bullet.registerBehaviour("path", new StraightLineUpPath(bullet));
+    bullet.registerBehaviour("explode", new ExplodeBehaviour(bullet));
     bullet.firedBy = this.target;
     this.target.$state.addBullet(bullet);
   }

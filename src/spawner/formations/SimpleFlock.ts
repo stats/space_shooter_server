@@ -5,7 +5,7 @@ import { Position } from '../../models/Position';
 
 export class SimpleFlock extends Formation {
 
-  onSpawnEnemies(spawnTpe: any, allowedSides?: number[]) {
+  onSpawnEnemies(spawnType: Enemy, allowedSides?: number[]): void {
 
     let i: number, spawns: number;
     spawns = 3;
@@ -49,7 +49,7 @@ export class SimpleFlock extends Formation {
 
     const flock: Enemy[] = [];
     for(i = 0; i < spawns; i++) {
-      flock[i] = new spawnTpe();
+      flock[i] = new spawnType();
     }
 
     for(i = 0; i < spawns; i++) {

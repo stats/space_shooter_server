@@ -1,16 +1,17 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
+import { Bullet } from '../../models/Bullet';
 
 export class StraightLineDownPath extends Behaviour {
 
   startY: number;
+  target: Bullet;
 
-  constructor(target: any) {
+  constructor(target: Bullet) {
     super('StraightLineDownPath', target);
     this.startY = this.target.position.y;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     this.target.position.y -= this.target.speed * deltaTime/1000;
 
     if(Math.abs(this.target.position.y - this.startY) >= this.target.range) {

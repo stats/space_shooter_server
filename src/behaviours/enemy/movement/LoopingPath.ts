@@ -1,6 +1,6 @@
 import { Behaviour } from '../../behaviour';
-import { C } from '../../../Constants';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Entity } from '../../../models/Entity';
 
 export class LoopingPath extends Behaviour {
 
@@ -10,7 +10,7 @@ export class LoopingPath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: any) {
+  constructor(target: Entity) {
     super('LoopingPath', target);
 
     const dx = 800 - this.target.position.x;
@@ -21,7 +21,7 @@ export class LoopingPath extends Behaviour {
     this.dir = Math.random() < 0.5 ? 1 : -1;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
 
     this.theta += this.dir * Math.PI / 20 * (deltaTime/1000);
     this.target.angle = this.theta;
@@ -37,7 +37,7 @@ export class LoopingPath extends Behaviour {
     }
   }
 
-  remove() {
+  remove(): void {
     this.target.$state.removeEnemy(this.target);
   }
 }

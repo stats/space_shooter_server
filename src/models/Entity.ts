@@ -3,7 +3,8 @@ import { merge } from 'lodash';
 import { GameState } from './GameState';
 import { Position } from './Position';
 import { CT } from '../Constants';
-const uuid = require('uuid/v4');
+
+import { v4 as uuid } from 'uuid';
 
 export class Entity extends Schema {
 
@@ -40,68 +41,83 @@ export class Entity extends Schema {
 
   public $state: GameState;
 
-  protected $behaviours: any[] = [];
+  protected $behaviours: any = {};
 
-  constructor(opts: any) {
+  constructor(options:any) {
     super();
-    merge(this, opts);
+    merge(this, options);
     if(!this.position) this.position = new Position(0, 0);
-    if(opts && opts.x) this.position.x = opts.x;
-    if(opts && opts.y) this.position.y = opts.y;
+    if(options && options.x) this.position.x = options.x;
+    if(options && options.y) this.position.y = options.y;
     if(!this.uuid) this.uuid = uuid();
   }
 
-  public registerBehaviours(list: any[]) {
+  public registerBehaviours(list: any[]): void {
     for(const item of list) {
-      this.registerBehaviour(item);
+      this.registerBehaviour(item[0], item[1]);
     }
   }
 
-  public registerBehaviour(behaviour: any) {
-    this.$behaviours.push(behaviour);
+  public registerBehaviour(key: string, behaviour: any): void {
+    this.$behaviours[key] = behaviour;
+    behaviour.onRegistered();
   }
 
-  public removeBehaviour(behaviour: any) {
-    for(let i = this.$behaviours.length - 1; i >=0; i--) {
-      if(this.$behaviours[i] == behaviour) {
-        this.$behaviours.splice(i, 1);
-      }
+  public removeBehaviour(key: string): void {
+    this.$behaviours[key].onRemoved();
+    delete(this.$behaviours[key]);
+  }
+
+  public removeAllBehaviours(): void {
+    for(const key in this.$behaviours) {
+      this.removeBehaviour(key);
     }
   }
 
-  public removeAllBehaviours() {
-    this.$behaviours = [];
+  public enableBehaviour(key: string): void {
+    this.$behaviours[key].enable();
   }
 
-  public getBulletSpawnLocation() {
-    return {
-      x: this.position.x + this.bullet_offset_x,
-      y: this.position.y + this.bulletOffsetY
-    }
+  public disableBehaviour(key: string): void {
+    this.$behaviours[key].disable();
   }
 
-  onInitGame(state: GameState) {
-    this.$state = state;
-  };
+  public isBehavourEnabled(key: string): boolean {
+    return this.$behaviours[key].isEnabled();
+  }
 
-  public handleEvent(eventType: string, args?: any) {
+  public handleEvent(eventType: string, args?: any): void {
     let handledEvent = false;
-    for(let i = 0; i < this.$behaviours.length; i++) {
-      const behaviour = this.$behaviours[i];
-      if(behaviour.eventType == eventType) {
+    for(const key in this.$behaviours) {
+      const behaviour = this.$behaviours[key];
+      if(behaviour.event_type == eventType && behaviour.isEnabled()) {
         behaviour.onEvent(args);
         handledEvent = true;
       }
     }
     if(!handledEvent) {
-      console.log('Warning:', eventType, 'not handled in', this);
+      console.warn('[Entity]', eventType, 'not handled in', this.uuid);
     }
   }
 
-  onUpdate(deltaTime: number) {
-    for(let i = 0; i < this.$behaviours.length; i++) {
-      this.$behaviours[i].onUpdate(deltaTime);
+  /**
+   * Iterates through the behaviours and fires their onUpdate method
+   **/
+  onUpdate(deltaTime: number): void {
+    for(const key in this.$behaviours) {
+      const behaviour = this.$behaviours[key];
+      if(behaviour.isEnabled()) {
+        behaviour.onUpdate(deltaTime);
+      }
     }
   }
+
+  public getBulletSpawnLocation(): Position {
+    return new Position(this.position.x + this.bullet_offset_x, this.position.y + this.bulletOffsetY);
+  }
+
+  onInitGame(state: GameState): void {
+    this.$state = state;
+  };
 
 }

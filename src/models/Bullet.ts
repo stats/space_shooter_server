@@ -1,4 +1,4 @@
-import { Schema, type } from "@colyseus/schema";
+import { type } from "@colyseus/schema";
 
 import { Entity } from './Entity';
 
@@ -41,16 +41,10 @@ export class Bullet extends Entity {
   collision_tpe = CT.CIRCLE;
   radius = 15;
 
-  constructor(options) {
+  constructor(options:any) {
     super(options);
     merge(this, options);
-    this.registerBehaviours([
-      new DestroyedBehaviour(this)
-    ]);
-    if(options.behaviours) {
-      for(const behaviour of options.behaviours) {
-        this.registerBehaviour(new behaviour(this))
-      }
-    }
+    this.registerBehaviour("destroyed", new DestroyedBehaviour(this));
+
   }
 }

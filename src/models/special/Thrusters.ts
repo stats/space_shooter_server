@@ -2,12 +2,12 @@ import { SpecialSystem } from './SpecialSystem';
 
 export class Thrusters extends SpecialSystem {
 
-  handleEvent() {
+  handleEvent(): void {
     this.target.setThrusters(this.amount);
     this.active = true;
   }
 
-  handleUpdate(deltaTime: number) {
+  handleUpdate(deltaTime: number): void {
     if(!this.active) return;
 
     this.timer += deltaTime;

@@ -1,7 +1,6 @@
-import { MapSchema, Schema, type } from "@colyseus/schema";
+import { Schema, type } from "@colyseus/schema";
 import { pick, merge } from 'lodash';
 import { UsernameGenerator } from '../helpers/UsernameGenerator';
-import { ShipHelper } from '../helpers/ShipHelper';
 import { Ship } from './Ship';
 import { Statistics } from './Statistics';
 import { UnlockMessage } from './UnlockMessage';
@@ -25,7 +24,7 @@ export class Account extends Schema {
   unlocked: any;
   stats: any;
 
-  constructor(options) {
+  constructor(options:any) {
     super();
     merge(this, options);
     if(!this.unlocked) this.unlocked = options.unlocked || {};
@@ -85,7 +84,7 @@ export class Account extends Schema {
     return message;
   }
 
-  updateUnlocks() {
+  updateUnlocks(): void {
 
     for(const key in SHIP.TYPE) {
       /** We need do no tests if already unlocked. **/
@@ -133,41 +132,41 @@ export class Account extends Schema {
 
   }
 
-  updateStatsWithShip(ship: Ship) {
-    this.updateStat("max_level", ship.level);
-    this.updateStat(`max_level_${ship.ship_type}`, ship.level);
+  updateStatsWithShip(ship: Ship): void {
+    this.updateStat("maxLevel", ship.level);
+    this.updateStat(`maxLevel_${ship.shipType}`, ship.level);
 
-    this.updateStat("max_kills", ship.kills);
-    this.updateStat(`max_kills_${ship.ship_type}`, ship.kills);
-    this.updateStat(`max_kills_${ship.primary_weapon}`, ship.kills);
-    this.updateStat(`max_kills_${ship.special_weapon}`, ship.kills);
+    this.updateStat("maxKills", ship.kills);
+    this.updateStat(`maxKills_${ship.shipType}`, ship.kills);
+    this.updateStat(`maxKills_${ship.primaryWeapon}`, ship.kills);
+    this.updateStat(`maxKills_${ship.specialWeapon}`, ship.kills);
 
     for(const key in ship.tracker) {
-      this.updateStat(`max_kills_${key}`, ship.tracker[key]);
+      this.updateStat(`maxKills_${key}`, ship.tracker[key]);
     }
     this.updateUnlocks();
   }
 
-  getStat(type) {
+  getStat(type): number {
     if(type in this.stats) return this.stats[type];
     return 0;
   }
 
-  updateStat(type, count) {
+  updateStat(type, count): void {
     if(!(type in this.stats) || count > this.stats[type]) this.stats[type] = count;
   }
 
-  increaseStat(type, amount) {
+  increaseStat(type, amount): void {
     if(!(type in this.stats)) this.stats[type] = amount;
     else this.stats[type] += amount;
   }
 
-  isUnlocked(type: string) {
+  isUnlocked(type: string): boolean {
     if(type in this.unlocked && this.unlocked[type] == true) return true;
     return false;
   }
 
-  unlock(type: string) {
+  unlock(type: string): void {
     this.unlocked[type] = true;
   }
 

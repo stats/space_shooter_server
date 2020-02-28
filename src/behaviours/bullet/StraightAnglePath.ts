@@ -1,19 +1,21 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
 import { Position } from '../../models/Position';
+import { Bullet } from '../../models/Bullet';
 
 export class StraightAnglePath extends Behaviour {
 
   start: Position;
   angle: number;
 
-  constructor(target: any, args: {angle: number}) {
+  target: Bullet;
+
+  constructor(target: Bullet, args: { angle: number}) {
     super('StraightAnglePath', target);
     this.start = new Position(this.target.position.x, this.target.position.y);
     this.angle = args.angle;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     this.target.position.x += Math.cos(this.angle) * this.target.speed * deltaTime/1000;
     this.target.position.y += Math.sin(this.angle) * this.target.speed * deltaTime/1000;
 

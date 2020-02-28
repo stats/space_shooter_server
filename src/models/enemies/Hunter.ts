@@ -1,12 +1,10 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
 import { TargetPlayerStartPath } from '../../behaviours/Enemy/movement/TargetPlayerStartPath';
-import { CT } from '../../Constants';
-
 
 export class Hunter extends Enemy {
 
-  constructor(options) {
+  constructor(options:any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;
@@ -22,9 +20,9 @@ export class Hunter extends Enemy {
     this.radius = 30;
   }
 
-  onInitGame(state: GameState) {
+  onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviours([new TargetPlayerStartPath(this)]);
+    this.registerBehaviour("path", new TargetPlayerStartPath(this));
   }
 
 }

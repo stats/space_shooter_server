@@ -1,23 +1,23 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
 import { PRIMARY } from '../../Primary';
-import { Bounds } from '../../helpers/Bounds';
-import { Bullet } from '../../models/Bullet';
+import { Ship } from '../../models/Ship';
+import { Primary } from '../../models/primary/Primary';
 
 
 export class PrimaryAttackBehaviour extends Behaviour {
 
-  private system: any;
+  private system: Primary;
+  target: Ship;
 
-  constructor(target) {
+  constructor(target: Ship) {
     super('primary_attack', target);
 
-    this.system = PRIMARY.getSystem(this.target.primary_weapon, this.target)
+    this.system = PRIMARY.getSystem(this.target.primaryWeapon, this.target)
     this.target.primaryCooldownMax = this.system.fireRate;
     this.target.primaryCooldown = this.system.fireRate;
   }
 
-  public onEvent() {
+  public onEvent(): void {
     if(!this.canFire()) return;
     this.target.primaryCooldown = 0;
 
@@ -28,7 +28,7 @@ export class PrimaryAttackBehaviour extends Behaviour {
     }
   }
 
-  public onUpdate(deltaTime: number) {
+  public onUpdate(deltaTime: number): void {
     if(this.target.primaryCooldown <= this.target.primaryCooldownMax) {
       this.target.primaryCooldown += deltaTime;
     }

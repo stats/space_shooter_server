@@ -11,39 +11,39 @@ export class MATERIAL {
 
     },
     "bone_brigade1": {
-      unlockKey: "max_kills",
+      unlockKey: "maxKills",
       unlockCount: 100
     },
     "royal_fleet1": {
-      unlockKey: "max_kills",
+      unlockKey: "maxKills",
       unlockCount: 200
     },
     "camo1": {
-      unlockKey: "max_kills",
+      unlockKey: "maxKills",
       unlockCount: 300
     },
     "earth_defense1": {
-      unlockKey: "max_kills",
+      unlockKey: "maxKills",
       unlockCount: 400
     },
     "royal_fleet2": {
-      unlockKey: "max_kills",
+      unlockKey: "maxKills",
       unlockCount: 500
     },
     "bone_brigade2": {
-      unlockKey: "max_kills",
+      unlockKey: "maxKills",
       unlockCount: 600
     },
     "camo2": {
-      unlockKey: "max_kills",
+      unlockKey: "maxKills",
       unlockCount: 700
     },
     "royal_fleet3": {
-      unlockKey: "max_kills",
+      unlockKey: "maxKills",
       unlockCount: 800
     },
     "bone_brigade3": {
-      unlockKey: "max_kills",
+      unlockKey: "maxKills",
       unlockCount: 900
     },
   }

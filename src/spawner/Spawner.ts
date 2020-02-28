@@ -1,13 +1,11 @@
-import { Delayed } from 'colyseus';
 import Clock from '@gamestdio/timer';
 
 import { Enemy } from '../models/Enemy';
 import { Asteroid, Blaster, Blimp, Bomber, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
-import { AsteroidFormation, LineFormation, RandomFormation, SquareFormation,
+import { AsteroidFormation, Formation, LineFormation, RandomFormation, SquareFormation,
          TriangleFormation, DiagonalFormation, SimpleFlock } from './Formations/';
 
 import { GameState} from '../models/GameState';
-import { Position } from '../models/Position';
 
 import { sample } from 'lodash';
 
@@ -18,7 +16,7 @@ export class Spawner {
 
   private numberOfFormations = 0;
 
-  private enemy_types: any = [
+  private enemy_types: Array<Array<number, Enemy>> = [
     [1, Asteroid],
     [1, Blaster],
     [1, Blimp],
@@ -30,19 +28,19 @@ export class Spawner {
     [1, Tracker]
   ];
 
-  private formations: any = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];
+  private formations: Array<Formation> = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];
 
-  private possibleEnemies: any;
+  private possibleEnemies: Array<Enemy>;
 
   private minFormations = 1;
   private maxFormations = 1;
 
-  constructor(state: GameState, clock: Clock) {
+  constructor( state: GameState, clock: Clock ) {
     this.state = state;
     this.clock = clock;
   }
 
-  nextWave() {
+  nextWave(): void {
     this.numberOfFormations = (this.state.currentWave + 3);
     this.possibleEnemies = [];
     this.minFormations = Math.ceil(this.state.currentWave / 10);
@@ -57,11 +55,11 @@ export class Spawner {
     this.spawnFormation();
   }
 
-  public complete() {
+  public complete(): void {
     return this.numberOfFormations == 0;
   }
 
-  spawnFormation() {
+  spawnFormation(): void {
     const formations = Math.min((Math.random() * (this.maxFormations - this.minFormations)) + this.minFormations, this.numberOfFormations);
     for(let i = 0; i < formations; i++) {
       const enemy = sample(this.possibleEnemies);

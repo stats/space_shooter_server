@@ -32,7 +32,7 @@ export class PRIMARY {
       bulletAngle: Math.PI/6,
       bulletOffset: 0,
       bulletMesh: "Cannon",
-      unlockKey: "max_kills_Cannon",
+      unlockKey: "maxKills_Cannon",
       unlockCount: 200,
     },
     "Cannon 3.0": {
@@ -46,7 +46,7 @@ export class PRIMARY {
       bulletAngle: Math.PI/4,
       bulletOffset: 0,
       bulletMesh: "Cannon",
-      unlockKey: "max_kills_Cannon 2.0",
+      unlockKey: "maxKills_Cannon 2.0",
       unlockCount: 300
     },
     "Blaster": {
@@ -72,7 +72,7 @@ export class PRIMARY {
       bulletAngle: 0,
       bulletOffset: 30,
       bulletMesh: "Blaster",
-      unlockKey: "max_kills_Blaster",
+      unlockKey: "maxKills_Blaster",
       unlockCount: 200
     },
     "Blaster 3.0": {
@@ -86,7 +86,7 @@ export class PRIMARY {
       bulletAngle: 0,
       bulletOffset: 30,
       bulletMesh: "Blaster",
-      unlockKey: "max_kills_Blaster 2.0",
+      unlockKey: "maxKills_Blaster 2.0",
       unlockCount: 200
     },
     "Rapid": {
@@ -100,7 +100,7 @@ export class PRIMARY {
       bulletAngle: 0,
       bulletOffset: 0,
       bulletMesh: "Cannon",
-      unlockKey: "max_kills_Cannon",
+      unlockKey: "maxKills_Cannon",
       unlockCount: 750
     },
     "Beam": {
@@ -114,7 +114,7 @@ export class PRIMARY {
       bulletAngle: 0,
       bulletOffset: 0,
       bulletMesh: "Beam",
-      unlockKey: "max_kills_Blaster 2.0",
+      unlockKey: "maxKills_Blaster 2.0",
       unlockCount: 400
     },
     "Double Beam": {
@@ -128,7 +128,7 @@ export class PRIMARY {
       bulletAngle: 0,
       bulletOffset: 15,
       bulletMesh: "Beam",
-      unlockKey: "max_kills_Beam",
+      unlockKey: "maxKills_Beam",
       unlockCount: 200
     },
     "Triple Beam": {
@@ -142,7 +142,7 @@ export class PRIMARY {
       bulletAngle: 0,
       bulletOffset: 15,
       bulletMesh: "Beam",
-      unlockKey: "max_kills_Double Beam",
+      unlockKey: "maxKills_Double Beam",
       unlockCount: 400
     },
     "Missile": {
@@ -156,7 +156,7 @@ export class PRIMARY {
       bulletAngle: 0,
       bulletOffset: 0,
       bulletMesh: "Missile",
-      unlockKey: "max_kills_Cannon",
+      unlockKey: "maxKills_Cannon",
       unlockCount: 750
     },
     "Double Missile": {
@@ -170,7 +170,7 @@ export class PRIMARY {
       bulletAngle: Math.PI/6,
       bulletOffset: 15,
       bulletMesh: "Missile",
-      unlockKey: "max_kills_Missile",
+      unlockKey: "maxKills_Missile",
       unlockCount: 750
     },
     "Triple Missile": {
@@ -184,7 +184,7 @@ export class PRIMARY {
       bulletAngle: Math.PI/4,
       bulletOffset: 15,
       bulletMesh: "Missile",
-      unlockKey: "max_kills_Double Missile",
+      unlockKey: "maxKills_Double Missile",
       unlockCount: 750
     },
     "Torpedo": {
@@ -199,7 +199,7 @@ export class PRIMARY {
       bulletOffset: 0,
       blastRadius: 200,
       bulletMesh: "Torpedo",
-      unlockKey: "max_kills_Blaster 2.0",
+      unlockKey: "maxKills_Blaster 2.0",
       unlockCount: 1000
     },
     "Double Torpedo": {
@@ -214,7 +214,7 @@ export class PRIMARY {
       bulletOffset: 15,
       blastRadius: 200,
       bulletMesh: "Torpedo",
-      unlockKey: "max_kills_Torpedo",
+      unlockKey: "maxKills_Torpedo",
       unlockCount: 1000
     },
     "Triple Torpedo": {
@@ -229,7 +229,7 @@ export class PRIMARY {
       bulletOffset: 15,
       blastRadius: 200,
       bulletMesh: "Torpedo",
-      unlockKey: "max_kills_Double Torpedo",
+      unlockKey: "maxKills_Double Torpedo",
       unlockCount: 1000
     },
   };

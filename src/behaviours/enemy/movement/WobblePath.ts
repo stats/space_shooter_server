@@ -1,6 +1,7 @@
 import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Entity } from '../../../models/Entity';
 
 export class WobblePath extends Behaviour {
 
@@ -13,7 +14,7 @@ export class WobblePath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: any, args?: {wobblePercent: number; wobbleDuration: number}) {
+  constructor(target: Entity, args: { wobblePercent: number, wobbleDuration: number}) {
     super('WobblePath', target);
     if(args) {
       this.wobblePercent = args.wobblePercent || 1;
@@ -25,7 +26,7 @@ export class WobblePath extends Behaviour {
     if(this.target.position.y > C.BOUNDS.maxY) this.yDir = -1;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     if(this.xDir != 0) {
       this.target.position.x += this.target.speed * this.xDir * (deltaTime/1000);
       this.target.position.y += this.target.speed * this.wobblePercent * (deltaTime/1000);
@@ -50,7 +51,7 @@ export class WobblePath extends Behaviour {
     }
   }
 
-  remove() {
+  remove(): void {
     this.target.$state.removeEnemy(this.target);
   }
 }

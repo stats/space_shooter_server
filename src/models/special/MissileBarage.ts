@@ -5,7 +5,7 @@ import { C, CT } from '../../Constants';
 
 export class MissileBarage extends SpecialSystem {
 
-  handleEvent() {
+  handleEvent(): void {
     for(let i = 0; i < 6; i++) {
       const spawnLocation = this.target.getBulletSpawnLocation();
       const bullet: Bullet = new Bullet({
@@ -20,7 +20,7 @@ export class MissileBarage extends SpecialSystem {
         bulletType: C.SHIP_BULLET
       });
 
-      bullet.registerBehaviour(new MissilePath(bullet, {angle: (i * Math.PI/6)}));
+      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: (i * Math.PI/6)}));
       bullet.firedBy = this.target;
       this.target.$state.addBullet(bullet);
     }

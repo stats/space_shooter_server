@@ -4,7 +4,7 @@ const AUTH_SECRET = process.env.AUTH_SECRET || 'change_me_make_me_secret';
 const MAX_AGE = 3600;
 
 export class JWTHelper {
-  public static createJWToken(details) {
+  public static createJWToken(details): string {
     if (typeof details !== 'object') details = {};
 
     if(!details.maxAge || typeof details.maxAge !== 'number') details.maxAge = 3600;
@@ -33,7 +33,7 @@ export class JWTHelper {
     return decodedToken.data
   }
 
-  public static getSuccessJSON(username) {
+  public static getSuccessJSON(username): any {
     return {
       success: true,
       token: JWTHelper.createJWToken({

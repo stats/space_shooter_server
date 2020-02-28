@@ -2,6 +2,7 @@ import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
 import { Position } from '../../../models/Position';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Entity } from '../../../models/Entity';
 
 export class StraightAnglePath extends Behaviour {
 
@@ -10,7 +11,7 @@ export class StraightAnglePath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: any) {
+  constructor(target: Entity): void {
     super('StraightAnglePath', target);
     this.start = new Position(this.target.position.x, this.target.position.y);
 
@@ -41,7 +42,7 @@ export class StraightAnglePath extends Behaviour {
     this.target.angle = this.angle;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     this.target.position.x += Math.cos(this.angle) * this.target.speed * deltaTime/1000;
     this.target.position.y += Math.sin(this.angle) * this.target.speed * deltaTime/1000;
 

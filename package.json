@@ -14,7 +14,8 @@
     "test:explosion": "mocha --require ts-node/register test/TestExplosionDistance.ts --exit --timeout 15000",
     "test:username": "ts-node test/UsernameTest.ts",
     "codegen": "npx schema-codegen src/models/Account.ts src/models/GameState.ts src/models/ShipBuilderState --output build/codegen --csharp",
-    "parseStats": "node scripts/stat_parser.js > ship_stats.json"
+    "parseStats": "node scripts/stat_parser.js > ship_stats.json",
+    "lint": "npx eslint \"src/**\""
   },
   "author": "Dan Curran",
   "license": "MIT",
@@ -28,7 +29,6 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "nodemon": "^2.0.2",
-    "nonenumerable": "^1.1.1",
     "npm-run-all": "^4.1.5",
     "uuid": "^3.4.0"
   },

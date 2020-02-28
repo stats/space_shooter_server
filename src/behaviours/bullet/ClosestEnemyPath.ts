@@ -1,7 +1,7 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
 import { Enemy } from '../../models/Enemy';
 import { CollisionHelper } from '../../helpers/CollisionHelper';
+import { Bullet} from '../../models/Bullet';
 
 export class ClosestEnemyPath extends Behaviour {
 
@@ -10,7 +10,9 @@ export class ClosestEnemyPath extends Behaviour {
   enteredScreen = false;
   distanceTraveled = 0;
 
-  constructor(target: any) {
+  target:Bullet;
+
+  constructor(target: Bullet): void {
     super('ClosestPlayerPath', target);
     this.targetEnemy = this.target.$state.getClosestEnemy(this.target.x, this.target.y);
     if(this.targetEnemy == null){
@@ -23,7 +25,7 @@ export class ClosestEnemyPath extends Behaviour {
     this.theta = Math.atan2(dy, dx);
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     if(this.targetEnemy != null) {
       const dx = this.target.position.x - this.targetEnemy.position.x;
       const dy = this.target.position.y - this.targetEnemy.position.y;

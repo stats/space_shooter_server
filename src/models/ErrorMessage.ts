@@ -1,4 +1,4 @@
-import {Schema, MapSchema, type} from '@colyseus/schema';
+import {Schema, type} from '@colyseus/schema';
 
 export class ErrorMessage extends Schema {
 
@@ -8,7 +8,7 @@ export class ErrorMessage extends Schema {
   @type("string")
   message: string;
 
-  constructor(message: string, key = "error") {
+  constructor(key: string, message: string) {
     super();
     this.key = key;
     this.message = message;

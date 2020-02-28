@@ -1,17 +1,13 @@
-import { Room, Delayed } from 'colyseus';
+import { Room, Delayed , Client} from 'colyseus';
 import { GameState } from '../models/GameState';
 
 import { JWTHelper } from '../helpers/JWTHelper';
-import { CollisionHelper } from '../helpers/CollisionHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
 import { Enemy } from '../models/Enemy';
 import { Ship } from '../models/Ship';
 import { Bullet } from '../models/Bullet';
 import { Spawner } from '../spawner/Spawner';
-
-
-import { C } from '../Constants';
 
 export class GameRoom extends Room<GameState> {
 
@@ -25,7 +21,7 @@ export class GameRoom extends Room<GameState> {
 
   private spawnCompleteInterval: Delayed;
 
-  onCreate(options) {
+  onCreate(options: any): void {
     console.log('[GameRoom]', this.roomId, 'Created');
     this.setSimulationInterval((deltaTime) => this.onUpdate(deltaTime));
     this.setState(new GameState());
@@ -44,7 +40,7 @@ export class GameRoom extends Room<GameState> {
 
   }
 
-  async onAuth(client, options) {
+  async onAuth(client: Client, options: any): Promise<void> {
     const isValidToken = await JWTHelper.verifyToken(options.token);
 
     if(!isValidToken) {
@@ -57,7 +53,7 @@ export class GameRoom extends Room<GameState> {
     return username;
   }
 
-  async onJoin(client, options, username) {
+  async onJoin(client: Client, options: any, username: string): Promise<void> {
     console.log('[GameRoom]', this.roomId, 'Client Join', username);
     const ship = await ShipHelper.getShipInGame(username);
     ship.position.x = 700 + (Math.random() * 200);
@@ -70,11 +66,11 @@ export class GameRoom extends Room<GameState> {
     this.state.addShip(ship)
   }
 
-  onMessage(client, data) {
+  onMessage(client: Client, data: any): void {
     if(data.action === "input") this.handleClientInput(client, data.input);
   }
 
-  onLeave(client) {
+  onLeave(client: Client): void {
     console.log("[GameRoom]", this.roomId, "Client Leave");
     const ship = this.clientShipHash[client.id];
     ship.checkLevelUp();
@@ -85,11 +81,11 @@ export class GameRoom extends Room<GameState> {
     delete this.clientShipHash[client.id];
   }
 
-  onDispose() {
+  onDispose(): void {
     console.log("[GameRoom]", this.roomId, "Disposed");
   }
 
-  onUpdate( deltaTime ) {
+  onUpdate( deltaTime: number ): void {
     let uuid;
     for(uuid in this.state.ships) {
       const ship: Ship = this.state.ships[uuid];
@@ -111,12 +107,12 @@ export class GameRoom extends Room<GameState> {
     }
   }
 
-  handleClientInput(client, input) {
+  handleClientInput(client: Client, input: any): Promise<void> {
     const ship: Ship = this.clientShipHash[client.id];
     ship.handleEvent('input', input);
   }
 
-  startWave() {
+  startWave(): void {
     this.spawner.nextWave();
     this.broadcast(`Wave ${this.state.currentWave} Starting`);
     console.log("[GameRoom] Starting Wave", this.state.currentWave);

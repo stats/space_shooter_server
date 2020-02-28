@@ -1,8 +1,8 @@
 import { Behaviour } from '../../behaviour';
-import { C } from '../../../Constants';
 import { Position } from '../../../models/Position';
 import { Enemy } from '../../../models/Enemy';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Entity } from '../../../models/Entity';
 
 export class SimpleFlockingPath extends Behaviour {
 
@@ -11,14 +11,14 @@ export class SimpleFlockingPath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: any, args: {destination: Position; flock: Enemy[]}) {
+  constructor(target: Entity, args: { destination: Position }) {
     super('SimpleFlockingPath', target);
     this.flock = args.flock || [];
     this.destination = args.destination || new Position(0, 0);
     this.target.velocity = new Position(0,0);
   }
 
-  onUpdate(deltaTime: number) {
+  onUpdate(deltaTime: number): void {
     if(this.flock.length > 1) {
       this.flockBehaviour(deltaTime);
     } else {
@@ -36,7 +36,7 @@ export class SimpleFlockingPath extends Behaviour {
     }
   }
 
-  private moveTowardsTarget(deltaTime: number) {
+  private moveTowardsTarget(deltaTime: number): void {
     this.target.velocity.x = this.destination.x - this.target.position.x;
     this.target.velocity.y = this.destination.y - this.target.position.y;
     this.target.velocity.capSpeed(this.target.speed);
@@ -45,7 +45,7 @@ export class SimpleFlockingPath extends Behaviour {
 
   }
 
-  private flockBehaviour(deltaTime: number) {
+  private flockBehaviour(deltaTime: number): void {
     const v1: Position = this.towardsCenter();
     const v2: Position = this.keepDistance();
     const v3: Position = this.matchVelocity();
@@ -109,7 +109,7 @@ export class SimpleFlockingPath extends Behaviour {
     return pv;
   }
 
-  private towardsDestination() {
+  private towardsDestination(): Position {
     const x: number = (this.destination.x - this.target.position.x) / 100;
     const y: number = (this.destination.y - this.target.position.y) / 100;
     return new Position(x, y);

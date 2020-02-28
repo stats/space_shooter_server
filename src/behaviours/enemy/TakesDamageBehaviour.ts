@@ -1,6 +1,4 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
-import { Bounds } from '../../helpers/Bounds';
 import { Ship } from '../../models/Ship';
 import { Entity } from '../../models/Entity';
 
@@ -8,11 +6,11 @@ export class TakesDamageBehaviour extends Behaviour {
 
   private _destroyed = false;
 
-  constructor(target) {
+  constructor(target: Entity) {
     super('take_damage', target);
   }
 
-  public onEvent(args: {damage: number; firedBy?: Entity}) {
+  public onEvent(args: {damage: number; firedBy?: Entity}): void {
     this.target.health = Math.max(this.target.health - args.damage, 0);
     if(this.target.health <= 0 && !this._destroyed) {
       if(args.firedBy && args.firedBy instanceof Ship) {

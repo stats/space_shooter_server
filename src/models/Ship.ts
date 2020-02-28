@@ -1,4 +1,4 @@
-import { Schema, type } from "@colyseus/schema";
+import { type } from '@colyseus/schema';
 import { InputBehaviour } from '../behaviours/player/InputBehaviour';
 import { CollidesWithEnemy } from '../behaviours/player/CollidesWithEnemy';
 import { CollidesWithEnemyBullet } from '../behaviours/player/CollidesWithEnemyBullet';
@@ -18,7 +18,7 @@ import { Entity } from './Entity';
 
 import { pick, merge } from 'lodash';
 
-const uuid = require('uuid/v4');
+import { v4 as uuid } from 'uuid';
 
 export class Ship extends Entity {
 
@@ -32,16 +32,16 @@ export class Ship extends Entity {
   uuid: string;
 
   @type("string")
-  ship_type: string;
+  shipType: string;
 
   @type("string")
-  ship_material: string;
+  shipMaterial: string;
 
   @type("string")
-  primary_weapon: string;
+  primaryWeapon: string;
 
   @type("string")
-  special_weapon: string;
+  specialWeapon: string;
 
   @type("number")
   primaryCooldownMax = 0;
@@ -121,78 +121,78 @@ export class Ship extends Entity {
   upgradePoints = 0;
 
   @type("int32")
-  upgrade_damage = 0;
+  upgradeDamage = 0;
 
   @type("int32")
-  upgrade_range = 0;
+  upgradeRange = 0;
 
   @type("int32")
-  upgrade_fireRate = 0;
+  upgradeFireRate = 0;
 
   @type("int32")
-  upgrade_accelleration = 0;
+  upgradeAccelleration = 0;
 
   @type("int32")
-  upgrade_speed = 0;
+  upgradeSpeed = 0;
 
   @type("int32")
-  upgrade_shields_max = 0;
+  upgradeShieldsMax = 0;
 
   @type("int32")
-  upgrade_shields_recharge = 0;
+  upgradeShieldsRecharge = 0;
 
-  damage_base = 1;
-  damage_growth = 1;
+  damageBase = 1;
+  damageGrowth = 1;
 
-  range_base = 0;
-  range_growth = 25;
+  rangeBase = 0;
+  rangeGrowth = 25;
 
-  fireRate_base = 0;
-  fireRate_growth = 250;
+  fireRateBase = 0;
+  fireRateGrowth = 250;
 
   speedBase = 100;
   speedGrowth = 50;
 
-  accelleration_base = 100;
-  accelleration_growth = 50;
+  accellerationBase = 100;
+  accellerationGrowth = 50;
 
-  shields_base = 1;
-  shields_growth = 1;
+  shieldsBase = 1;
+  shieldsGrowth = 1;
 
-  shield_recharge_base = 30000;
-  shield_recharge_growth = 750;
+  shieldRechargeBase = 30000;
+  shieldRechargeGrowth = 750;
 
   tracker: any = {};
 
-  getDamage() {
-    return ( this.damage_base + (this.upgrade_damage * this.damage_growth) ) * this.weaponCharge;
+  getDamage(): number {
+    return ( this.damageBase + (this.upgradeDamage * this.damageGrowth) ) * this.weaponCharge;
   }
 
-  getRange() {
-    return this.range_base + (this.upgrade_range * this.range_growth)
+  getRange(): number {
+    return this.rangeBase + (this.upgradeRange * this.rangeGrowth)
   }
 
-  getFireRate() {
-    return this.fireRate_base - (this.upgrade_fireRate * this.fireRate_growth);
+  getFireRate(): number {
+    return this.fireRateBase - (this.upgradeFireRate * this.fireRateGrowth);
   }
 
-  getMaxShields() {
-    return this.shields_base + (this.upgrade_shields_max * this.shields_growth);
+  getMaxShields(): number {
+    return this.shieldsBase + (this.upgradeShieldsMax * this.shieldsGrowth);
   }
 
-  getShieldRecharge() {
-    return this.shield_recharge_base - (this.upgrade_shields_recharge * this.shield_recharge_growth);
+  getShieldRecharge(): number {
+    return this.shieldRechargeBase - (this.upgradeShieldsRecharge * this.shieldRechargeGrowth);
   }
 
-  getSpeed() {
-    return this.speedBase + (this.upgrade_speed * this.speedGrowth) * this.thrusters;
+  getSpeed(): number {
+    return this.speedBase + (this.upgradeSpeed * this.speedGrowth) * this.thrusters;
   }
 
-  getAccelleration() {
-    return this.accelleration_base + (this.upgrade_accelleration * this.accelleration_growth) * this.thrusters;
+  getAccelleration(): number {
+    return this.accellerationBase + (this.upgradeAccelleration * this.accellerationGrowth) * this.thrusters;
   }
 
-  async updateWaveRank(wave: number) {
+  async updateWaveRank(wave: number): Promise<void> {
     if(wave > this.highestWave) {
       this.highestWave = wave;
     }
@@ -213,17 +213,17 @@ export class Ship extends Entity {
     }
   }
 
-  constructor(opts) {
-    super(opts);
-    merge(this, opts);
-    if(!this.tracker) this.tracker = opts.tracker || {};
+  constructor(options:any) {
+    super(options);
+    merge(this, options);
+    if(!this.tracker) this.tracker = options.tracker || {};
     if(this.uuid == null) this.uuid = uuid();
     this.radius = 27;
     this.bulletOffsetY = 50;
     this.setupShip();
   }
 
-  setupShip() {
+  setupShip(): void {
     this.damage = this.getDamage();
     this.fireRate = this.getFireRate();
     this.range = this.getRange();
@@ -234,34 +234,32 @@ export class Ship extends Entity {
     this.updateNextLevel();
   }
 
-  onInitGame(state: GameState) {
+  onInitGame(state: GameState): void {
     super.onInitGame(state);
     this.removeAllBehaviours();
-    this.registerBehaviours([
-      new InputBehaviour(this),
-      new CollidesWithEnemy(this),
-      new CollidesWithEnemyBullet(this),
-      new DestroyedBehaviour(this),
-      new TakesDamageBehaviour(this),
-      new ShieldRechargeBehaviour(this),
-      new PrimaryAttackBehaviour(this),
-      new SpecialAttackBehaviour(this)
-    ]);
+    this.registerBehaviour("input", new InputBehaviour(this));
+    this.registerBehaviour("collides_enemy", new CollidesWithEnemy(this));
+    this.registerBehaviour("collides_enemy_bullet", new CollidesWithEnemyBullet(this));
+    this.registerBehaviour("destroyed", new DestroyedBehaviour(this));
+    this.registerBehaviour("takes_damage", new TakesDamageBehaviour(this));
+    this.registerBehaviour("shield_recharge", new ShieldRechargeBehaviour(this));
+    this.registerBehaviour("priamry", new PrimaryAttackBehaviour(this));
+    this.registerBehaviour("special", new SpecialAttackBehaviour(this));
     this.setupShip()
   }
 
-  setWeaponCharge(n: number) {
+  setWeaponCharge(n: number): void {
     this.weaponCharge = n;
     this.damage = this.getDamage();
   }
 
-  setThrusters(n: number) {
+  setThrusters(n: number): void {
     this.thrusters = n;
     this.speed = this.getSpeed();
     this.accelleration = this.getAccelleration();
   }
 
-  checkLevelUp() {
+  checkLevelUp(): void {
     while( this.kills > this.nextLevel ) {
       this.level += 1;
       this.upgradePoints += 1;
@@ -269,7 +267,7 @@ export class Ship extends Entity {
     }
   }
 
-  clampToBounds() {
+  clampToBounds(): void {
     if(this.position.x < C.BOUNDS.minX) {
       this.position.x = C.BOUNDS.minX;
       this.horizontalAccelleration = 0;
@@ -288,7 +286,7 @@ export class Ship extends Entity {
     }
   }
 
-  addKill(currentWave, modelType) {
+  addKill(currentWave: number, modelType: string): void {
     this.currentKills += 1;
     this.kills += 1;
     this.killScore += currentWave;
@@ -298,7 +296,7 @@ export class Ship extends Entity {
     this.checkLevelUp();
   }
 
-  updateNextLevel() {
+  updateNextLevel(): void {
     this.previousLevel = Math.floor(50*Math.pow(this.level-1, 1.25));
     this.nextLevel = Math.floor(50*Math.pow(this.level, 1.25));
   }
@@ -308,10 +306,10 @@ export class Ship extends Entity {
       'name',
       'uuid',
       'username',
-      'ship_type',
-      'ship_material',
-      'primary_weapon',
-      'special_weapon',
+      'shipType',
+      'shipMaterial',
+      'primaryWeapon',
+      'specialWeapon',
       'kills',
       'killScore',
       'rank',
@@ -320,27 +318,27 @@ export class Ship extends Entity {
       'radius',
       'createdAt',
       'upgradePoints',
-      'upgrade_damage',
-      'upgrade_range',
-      'upgrade_fireRate',
-      'upgrade_accelleration',
-      'upgrade_speed',
-      'upgrade_shields_max',
-      'upgrade_shields_recharge',
-      'damage_base',
-      'damage_growth',
-      'range_base',
-      'range_growth',
-      'fireRate_base',
-      'fireRate_growth',
+      'upgradeDamage',
+      'upgradeRange',
+      'upgradeFireRate',
+      'upgradeAccelleration',
+      'upgradeSpeed',
+      'upgradeShieldsMax',
+      'upgradeShieldsRecharge',
+      'damageBase',
+      'damageGrowth',
+      'rangeBase',
+      'rangeGrowth',
+      'fireRateBase',
+      'fireRateGrowth',
       'speedBase',
       'speedGrowth',
-      'accelleration_base',
-      'accelleration_growth',
-      'shields_base',
-      'shields_growth',
-      'shield_recharge_base',
-      'shield_recharge_growth',
+      'accellerationBase',
+      'accellerationGrowth',
+      'shieldsBase',
+      'shieldsGrowth',
+      'shieldRechargeBase',
+      'shieldRechargeGrowth',
       'tracker'
     ]);
     return baseObj;

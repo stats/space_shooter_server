@@ -5,7 +5,7 @@ import { Bullet } from '../Bullet';
 
 export class Shotgun extends SpecialSystem {
 
-  handleEvent() {
+  handleEvent(): void {
     for(let i = 0; i < 5; i++) {
       const spawnLocation = this.target.getBulletSpawnLocation();
       const bullet: Bullet = new Bullet({
@@ -19,7 +19,7 @@ export class Shotgun extends SpecialSystem {
         y: spawnLocation.y,
         bulletType: C.SHIP_BULLET
       });
-      bullet.registerBehaviour(new StraightAnglePath(bullet, {angle: ((i * 10) + 70) * (Math.PI/180)}));
+      bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: ((i * 10) + 70) * (Math.PI/180)}));
       bullet.firedBy = this.target;
       this.target.$state.addBullet(bullet);
     }

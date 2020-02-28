@@ -1,6 +1,6 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { TargetPlayerStartPath } from '../../behaviours/Enemy/movement/TargetPlayerStartPath';
+import { ClosestPlayerPath } from '../../behaviours/Enemy/movement/ClosestPlayerPath';
 import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
 import { C, CT } from '../../Constants';
@@ -8,7 +8,7 @@ import { C, CT } from '../../Constants';
 
 export class Fang extends Enemy {
 
-  constructor(options) {
+  constructor(options:any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;
@@ -24,7 +24,7 @@ export class Fang extends Enemy {
     this.radius = 30;
   }
 
-  onInitGame(state: GameState) {
+  onInitGame(state: GameState): void {
     super.onInitGame(state);
     this.registerBehaviours([new ClosestPlayerPath(this)]);
 

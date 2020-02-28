@@ -1,9 +1,10 @@
 import { Formation } from './Formation';
 import { C, S } from '../../Constants';
+import { Enemy } from '../../models/Enemy';
 
 export class RandomFormation extends Formation {
 
-  onSpawnEnemies(spawnTpe: any, allowedSides?: number[]) {
+  onSpawnEnemies(spawnType: Enemy, allowedSides?: number[]): void {
 
     let i: number, spawns: number;
     spawns = 3;
@@ -39,7 +40,7 @@ export class RandomFormation extends Formation {
           startY = this.randomY();
           break;
       }
-      this.state.addEnemy(new spawnTpe({x: startX , y: startY }));
+      this.state.addEnemy(new spawnType({x: startX , y: startY }));
     }
   }
 

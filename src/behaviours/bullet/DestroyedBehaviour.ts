@@ -1,13 +1,14 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
+import { Entity } from '../../models/Entity';
+import { Bullet } from '../../models/Bullet';
 
 export class DestroyedBehaviour extends Behaviour {
 
-  constructor(target: any, ) {
+  constructor(target: Entity) {
     super('destroyed', target);
   }
 
-  onEvent() {
-    this.target.$state.removeBullet(this.target);
+  onEvent(): void {
+    this.target.$state.removeBullet(this.target as Bullet);
   }
 }

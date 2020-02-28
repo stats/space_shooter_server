@@ -1,5 +1,4 @@
 import { DB } from '../Database';
-import { Account } from '../models/Account';
 import { Ship } from '../models/Ship';
 import { ShipList } from '../models/ShipList';
 import { SHIP } from '../Ship';
@@ -7,13 +6,13 @@ import { AccountHelper } from './AccountHelper';
 
 export class ShipHelper {
 
-  static async getShip(username: string, shipUuid: string) {
+  static async getShip(username: string, shipUuid: string): Promise<Ship> {
     const ship = await DB.$ships.findOne({username, uuid: shipUuid});
     if(ship) return new Ship(ship);
     return null;
   }
 
-  static async getShips(username: string) {
+  static async getShips(username: string): Promise<Ship[]> {
     return await DB.$ships.find({username}).toArray();
   }
 
@@ -26,52 +25,52 @@ export class ShipHelper {
     return shipList;
   }
 
-  static async validateShipParameters(username: string, data: { name: string; ship_type: string; ship_material: string; primary_weapon: string; special_weapon: string }) {
+  static async validateShipParameters(username: string, data: { name: string; shipType: string; shipMaterial: string; primaryWeapon: string; specialWeapon: string }): Promise<boolean> {
     const account = await AccountHelper.getAccountByUsername(username);
-    if (data['name'].length > 3 && account.isUnlocked(data['ship_type']) && account.isUnlocked(data['ship_material']) && account.isUnlocked(data['primary_weapon']) && account.isUnlocked(data['special_weapon'])) {
+    if (data['name'].length > 3 && account.isUnlocked(data['shipType']) && account.isUnlocked(data['shipMaterial']) && account.isUnlocked(data['primaryWeapon']) && account.isUnlocked(data['specialWeapon'])) {
       return true;
     }
     return false;
   }
 
-  static setShipValues(shipData: any) {
+  static setShipValues(shipData: any): any {
     console.log(shipData);
-    console.log(SHIP.TYPE[shipData.ship_type]);
-    shipData['damage_base'] = SHIP.TYPE[shipData.ship_type]['damage_base'];
-    shipData['damage_growth'] = SHIP.TYPE[shipData.ship_type]['damage_growth'];
+    console.log(SHIP.TYPE[shipData.shipType]);
+    shipData['damageBase'] = SHIP.TYPE[shipData.shipType]['damageBase'];
+    shipData['damageGrowth'] = SHIP.TYPE[shipData.shipType]['damageGrowth'];
 
-    shipData['range_base'] = SHIP.TYPE[shipData.ship_type]['range_base'];
-    shipData['range_growth'] = SHIP.TYPE[shipData.ship_type]['range_growth'];
+    shipData['rangeBase'] = SHIP.TYPE[shipData.shipType]['rangeBase'];
+    shipData['rangeGrowth'] = SHIP.TYPE[shipData.shipType]['rangeGrowth'];
 
-    shipData['fireRate_base'] = SHIP.TYPE[shipData.ship_type]['fireRate_base'];
-    shipData['fireRate_growth'] = SHIP.TYPE[shipData.ship_type]['fireRate_growth'];
+    shipData['fireRateBase'] = SHIP.TYPE[shipData.shipType]['fireRateBase'];
+    shipData['fireRateGrowth'] = SHIP.TYPE[shipData.shipType]['fireRateGrowth'];
 
-    shipData['speedBase'] = SHIP.TYPE[shipData.ship_type]['speedBase'];
-    shipData['speedGrowth'] = SHIP.TYPE[shipData.ship_type]['speedGrowth'];
+    shipData['speedBase'] = SHIP.TYPE[shipData.shipType]['speedBase'];
+    shipData['speedGrowth'] = SHIP.TYPE[shipData.shipType]['speedGrowth'];
 
-    shipData['accelleration_base'] = SHIP.TYPE[shipData.ship_type]['accelleration_base'];
-    shipData['accelleration_growth'] = SHIP.TYPE[shipData.ship_type]['accelleration_growth'];
+    shipData['accellerationBase'] = SHIP.TYPE[shipData.shipType]['accellerationBase'];
+    shipData['accellerationGrowth'] = SHIP.TYPE[shipData.shipType]['accellerationGrowth'];
 
-    shipData['shields_base'] = SHIP.TYPE[shipData.ship_type]['shields_base'];
-    shipData['shields_growth'] = SHIP.TYPE[shipData.ship_type]['shields_growth'];
+    shipData['shieldsBase'] = SHIP.TYPE[shipData.shipType]['shieldsBase'];
+    shipData['shieldsGrowth'] = SHIP.TYPE[shipData.shipType]['shieldsGrowth'];
 
-    shipData['shield_recharge_base'] = SHIP.TYPE[shipData.ship_type]['shield_recharge_base'];
-    shipData['shield_recharge_growth'] = SHIP.TYPE[shipData.ship_type]['shield_recharge_growth'];
+    shipData['shieldRechargeBase'] = SHIP.TYPE[shipData.shipType]['shieldRechargeBase'];
+    shipData['shieldRechargeGrowth'] = SHIP.TYPE[shipData.shipType]['shieldRechargeGrowth'];
 
     return shipData;
   }
 
-  static async createShip(username: string, data: { name: string; ship_type: string; ship_material: string; primary_weapon: string; special_weapon: string }) {
+  static async createShip(username: string, data: { name: string; shipType: string; shipMaterial: string; primaryWeapon: string; specialWeapon: string }): Promise<any> {
     const canCreate = ShipHelper.validateShipParameters(username, data);
     if(!canCreate) return false;
 
     let shipData = {};
     shipData['username'] = username;
     shipData['name'] = data.name;
-    shipData['ship_type'] = data.ship_type;
-    shipData['ship_material'] = data.ship_material;
-    shipData['primary_weapon'] = data.primary_weapon;
-    shipData['special_weapon'] = data.special_weapon;
+    shipData['shipType'] = data.shipType;
+    shipData['shipMaterial'] = data.shipMaterial;
+    shipData['primaryWeapon'] = data.primaryWeapon;
+    shipData['specialWeapon'] = data.specialWeapon;
     shipData['level'] = 1;
     shipData['created_at'] = Date.now();
     shipData = ShipHelper.setShipValues(shipData);
@@ -81,21 +80,21 @@ export class ShipHelper {
     AccountHelper.saveAccount(account);
 
     const ship = new Ship(shipData);
-    return DB.$ships.insertOne(ship.toSaveObject());
+    return await DB.$ships.insertOne(ship.toSaveObject());
   }
 
-  static async saveShip(ship: Ship) {
+  static async saveShip(ship: Ship): Promise<any> {
     return await DB.$ships.updateOne({uuid: ship.uuid}, { $set: ship.toSaveObject() });
   }
 
-  static async deleteShip(username: string, uuid: string) {
+  static async deleteShip(username: string, uuid: string): Primise<any> {
     const account = await AccountHelper.getAccountByUsername(username);
     account.increaseStat("ships_destroyed", 1);
     AccountHelper.saveAccount(account);
     return await DB.$ships.deleteOne({username: username, uuid: uuid});
   }
 
-  static async upgradeShip(ship: Ship, upgrades: any) {
+  static async upgradeShip(ship: Ship, upgrades: any): Promise<any> {
     let spentPoints = 0;
     for (const key in upgrades) {
       spentPoints += upgrades[key];
@@ -111,11 +110,11 @@ export class ShipHelper {
     }
   }
 
-  static async addInGame(uuid: string) {
+  static async addInGame(uuid: string): Promise<any> {
     return await DB.$ships.updateOne({uuid: uuid}, { $set: { inGame: 1 }});
   }
 
-  static async removeInGame(uuid: string) {
+  static async removeInGame(uuid: string): Promise<any> {
     return await DB.$ships.updateOne({uuid: uuid}, { $set: { inGame: -1 }});
   }
 

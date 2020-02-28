@@ -1,8 +1,7 @@
 import { Behaviour } from '../behaviour';
 import { C } from '../../Constants';
-import { Position } from '../../models/Position';
+import { Bullet } from '../../models/Bullet';
 import { Entity } from '../../models/Entity';
-import { GameState } from '../../models/GameState';
 
 export class MissilePath extends Behaviour {
 
@@ -25,13 +24,15 @@ export class MissilePath extends Behaviour {
   private t1 = 0.01;
   private t2 = 0.001;
 
+  target: Bullet;
 
-  constructor(target: any, args: { angle: number }) {
+
+  constructor(target: Bullet, args: { angle: number }) {
     super('MissilePath', target);
     this.theta = args.angle || Math.PI/2;
   }
 
-  handleGameState() {
+  handleGameState(): void {
     if(this.target.bulletType == C.SHIP_BULLET) {
       this.entity = this.target.$state.getClosestEnemy(this.target.position.x, this.target.position.y);
     } else {
@@ -44,7 +45,7 @@ export class MissilePath extends Behaviour {
     this.gotGameState = true;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     if(this.gotGameState == false && this.target.$state == null) {
       return;
     } else if (this.gotGameState == false && this.target.$state != null) {
@@ -81,25 +82,25 @@ export class MissilePath extends Behaviour {
     if(this.traveled > this.target.range) this.target.handleEvent('destroyed');
   }
 
-  engine() {
+  engine(): number {
     return 5 * Math.random() * 0.1 + 0.05;
   }
 
-  drag() {
+  drag(): number {
     return 5 * Math.random() * 0.05 + 0.94;
   }
 
-  sgn(n: number) {
+  sgn(n: number): number {
     return n < 0 ? -1 : 1;
   }
 
-  getEntityX() {
+  getEntityX(): number {
     if( this.entity == null && this.xLoc == -999) return null;
     if( this.entity != null ) this.xLoc = this.entity.position.x;
     return this.xLoc;
   }
 
-  getEntityY() {
+  getEntityY(): number {
     if( this.entity == null && this.yLoc == -999) return null;
     if( this.entity != null ) this.yLoc = this.entity.position.y;
     return this.yLoc;

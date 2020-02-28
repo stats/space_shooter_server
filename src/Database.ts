@@ -1,4 +1,4 @@
-import { MongoClient, ObjectID } from 'mongodb';
+import { MongoClient } from 'mongodb';
 
 const DB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/development';
 
@@ -9,7 +9,7 @@ class Database {
   private client: MongoClient;
   private db: any;
 
-  async init() {
+  async init(): Promise<void> {
     if(this.client) return;
 
     try {
@@ -29,4 +29,3 @@ class Database {
 }
 
 export const DB = new Database();
-export const stringToObjectId = (str: string) => new ObjectID(str);

@@ -1,17 +1,20 @@
 import { GameState } from '../../models/GameState';
+import { Enemy } from '../../models/Enemy';
 import { C, S } from '../../Constants';
 import { sample } from 'lodash';
 
 export class Formation {
 
   protected state: GameState;
-  protected positions: any;
+  protected positions: Array<Array<number, number>>;
 
-  constructor(state: GameState) {
+  constructor( state: GameState ) {
     this.state = state;
   }
 
-  onSpawnEnemies(spawnTpe: any, allowed_sizes?: number[]) {}
+  onSpawnEnemies(spawnType: Enemy, allowedSides?: number[]): void {
+    // Do nothing.
+  }
 
   protected randomX(): number {
     return (Math.random() * (C.BOUNDS.maxX - 200)) + 100;
@@ -52,7 +55,7 @@ export class Formation {
     return [startX, startY];
   }
 
-  protected getRandomSide(allowedSides?: number[]) {
+  protected getRandomSide(allowedSides?: number[]): number {
     if (allowedSides) {
       return sample(allowedSides);
     } else {
@@ -60,18 +63,18 @@ export class Formation {
     }
   }
 
-  protected spawnEnemies(startX, startY, side, spawns, spawnTpe): void {
+  protected spawnEnemies(startX: number, startY: number, side: number, spawns: number, spawnType: Enemy): void {
     let i: number;
     for(i = 0; i < spawns; i++) {
       switch(side) {
         case S.TOP:
-          this.state.addEnemy(new spawnTpe({x: startX + this.positions[i][0], y: startY + this.positions[i][1]}));
+          this.state.addEnemy(new spawnType({x: startX + this.positions[i][0], y: startY + this.positions[i][1]}));
         break;
         case S.LEFT:
-          this.state.addEnemy(new spawnTpe({x: startX - this.positions[i][1], y: startY + this.positions[i][0]}));
+          this.state.addEnemy(new spawnType({x: startX - this.positions[i][1], y: startY + this.positions[i][0]}));
         break;
         case S.RIGHT:
-          this.state.addEnemy(new spawnTpe({x: startX + this.positions[i][1], y: startY - this.positions[i][0]}));
+          this.state.addEnemy(new spawnType({x: startX + this.positions[i][1], y: startY - this.positions[i][0]}));
         break;
       }
     }

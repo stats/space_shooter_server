@@ -6,7 +6,7 @@ import { Primary } from './Primary';
 
 export class Missile extends Primary {
 
-  constructor(entity, options) {
+  constructor(entity: Entity, options:any) {
     super(entity, options);
   }
 
@@ -33,32 +33,32 @@ export class Missile extends Primary {
     let bullet;
     if(this.bullet_count == 1){
       bullet = new Bullet(options);
-      bullet.registerBehaviour(new MissilePath(bullet, {angle: Math.PI/2}));
+      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2}));
       bullets.push( bullet );
     } else if (this.bullet_count == 2){
       bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart;
-      bullet.registerBehaviour(new MissilePath(bullet, {angle: Math.PI/2 - this.bullet_angle}));
+      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2 - this.bullet_angle}));
       bullets.push(bullet);
 
       bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart + this.bullet_offset;
-      bullet.registerBehaviour(new MissilePath(bullet, {angle: Math.PI/2 + this.bullet_angle}));
+      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2 + this.bullet_angle}));
       bullets.push(bullet);
     } else if (this.bullet_count == 3){
       bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart;
-      bullet.registerBehaviour(new MissilePath(bullet, {angle: Math.PI/2 -this.bullet_angle}));
+      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2 -this.bullet_angle}));
       bullets.push(bullet);
 
       bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart + this.bullet_offset;
-      bullet.registerBehaviour(new MissilePath(bullet, {angle: Math.PI/2 +this.bullet_angle}));
+      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2 +this.bullet_angle}));
       bullets.push(bullet);
 
       bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart + (2 * this.bullet_offset);
-      bullet.registerBehaviour(new MissilePath(bullet, {angle: Math.PI/2}));
+      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2}));
       bullets.push(bullet);
 
     }

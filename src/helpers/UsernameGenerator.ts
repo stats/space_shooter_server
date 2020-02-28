@@ -63,13 +63,13 @@ export class UsernameGenerator {
     'execusioner'
   ];
 
-  public static getUsername() {
+  public static getUsername(): string {
     const first = capitalize(sample(UsernameGenerator.names));
 
     return first + (Math.round(Math.random() * 9999999));
   }
 
-  public static getShipname() {
+  public static getShipname(): string {
     const first = capitalize(sample(UsernameGenerator.names));
     let second =  capitalize(sample(UsernameGenerator.names));
     while(first == second) {

@@ -1,7 +1,6 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
-import { PRIMARY } from '../../Primary';
 import { Primary } from '../../models/primary/Primary';
+import { Entity } from '../../models/Entity';
 
 export class DropsBulletBehaviour extends Behaviour {
 
@@ -9,13 +8,13 @@ export class DropsBulletBehaviour extends Behaviour {
   cooldown = 0;
   system: Primary;
 
-  constructor(target: any, args: {bulletOptions: any}) {
+  constructor(target: Entity, args: { bulletOptions: any }) {
     super('drops_bullet', target);
     this.system = new args.bulletOptions.system(this.target, args.bulletOptions);
     this.cooldown = args.bulletOptions.cooldown;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     this.timer += deltaTime;
     if(this.timer >= this.cooldown) {
       this.system.spawnBullets(this.target);

@@ -23,7 +23,7 @@ export class Primary {
 
   behaviour: string;
 
-  constructor(entity: Entity, options: any) {
+  constructor(entity: Entity, options:any) {
     merge(this, options);
     this.entity = entity;
 

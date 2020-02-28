@@ -2,13 +2,13 @@ import { SpecialSystem } from './SpecialSystem';
 
 export class ForceShield extends SpecialSystem {
 
-  handleEvent() {
+  handleEvent(): void {
     this.target.collisionInvulnerable = true;
     this.target.bulletInvulnerable = true;
     this.active = true;
   }
 
-  handleUpdate(deltaTime: number) {
+  handleUpdate(deltaTime: number): void {
     if(!this.active) return;
 
     this.timer += deltaTime;

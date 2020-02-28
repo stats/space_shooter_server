@@ -2,7 +2,6 @@
 
 import { Bullet } from '../Bullet';
 import { C, CT } from '../../Constants';
-import { GameState } from '../GameState';
 import { Entity } from '../Entity';
 import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
 import { ExplodeBehaviour } from '../../behaviours/Bullet/ExplodeBehaviour';
@@ -10,7 +9,7 @@ import { Primary } from './Primary';
 
 export class Torpedo extends Primary {
 
-  constructor(entity, options) {
+  constructor(entity: Entity, options:any) {
     super(entity, options);
   }
 
@@ -40,8 +39,8 @@ export class Torpedo extends Primary {
     for(let i = 0; i < this.bullet_count; i++){
       const bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart + (i * this.bullet_offset);
-      bullet.registerBehaviour(new StraightLineUpPath(bullet));
-      bullet.registerBehaviour(new ExplodeBehaviour(bullet));
+      bullet.registerBehaviour("path", new StraightLineUpPath(bullet));
+      bullet.registerBehaviour("explode", new ExplodeBehaviour(bullet));
       bullets.push(bullet);
     }
 

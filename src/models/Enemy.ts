@@ -1,4 +1,4 @@
-import { Schema, type } from "@colyseus/schema";
+import { type } from "@colyseus/schema";
 import { GameState } from './GameState';
 import { Position } from './Position';
 
@@ -30,23 +30,21 @@ export class Enemy extends Entity {
 
   wave: number;
 
-  constructor(options) {
+  constructor(options:any) {
     super(options);
   }
 
-  updateStats(wave) {
+  updateStats(wave: number): void {
     this.health = Math.floor(this.healthBase + (this.healthGrowth * wave));
     this.speed = Math.floor(this.speedBase + (this.speedGrowth * wave));
     this.collisionDamage = Math.floor(this.collisionDamageBase + (this.collisionDamageGrowth * wave));
   }
 
-  onInitGame(state: GameState) {
+  onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviours([
-      new CollidesWithShipBullet(this),
-      new DestroyedBehaviour(this),
-      new TakesDamageBehaviour(this)
-    ]);
+    this.registerBehaviour("collides_ship_bullet", new CollidesWithShipBullet(this));
+    this.registerBehaviour("destroyed", new DestroyedBehaviour(this));
+    this.registerBehaviour("takes_damage", new TakesDamageBehaviour(this));
     this.updateStats(state.currentWave);
   }
 }

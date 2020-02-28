@@ -1,12 +1,11 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
 import { ClosestPlayerAtStartPath } from '../../behaviours/Enemy/movement/ClosestPlayerAtStartPath';
-import { CT } from '../../Constants';
 
 
 export class Speeder extends Enemy {
 
-  constructor(options) {
+  constructor(options:any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;
@@ -22,9 +21,9 @@ export class Speeder extends Enemy {
     this.radius = 30;
   }
 
-  onInitGame(state: GameState) {
+  onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviours([new ClosestPlayerAtStartPath(this)]);
+    this.registerBehaviour("path", new ClosestPlayerAtStartPath(this));
   }
 
 }

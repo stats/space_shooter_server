@@ -1,14 +1,15 @@
 import { Formation } from './Formation';
-import { C } from '../../Constants';
+import { Enemy } from '../../models/Enemy';
 
 export class LineFormation extends Formation {
 
-  positions: any = [
+  positions: Array<Array<number,number>> = [
     [0,0],[0,100],[0,200],[0,300],[0,400],[0,500],[0,600]
   ];
 
-  onSpawnEnemies(spawnTpe: any, allowedSides?: number[]) {
-    let side: number, spawns: number, i: number, startX: number, startY: number;
+  onSpawnEnemies(spawnType: Enemy, allowedSides?: number[]): void {
+    const side: number, startX: number, startY: number
+    let spawns: number;
 
     side = this.getRandomSide(allowedSides);
     [startX, startY] = this.getStartPositions(side);
@@ -24,7 +25,7 @@ export class LineFormation extends Formation {
       spawns = 7;
     }
 
-    this.spawnEnemies(startX, startY, side, spawns, spawnTpe);
+    this.spawnEnemies(startX, startY, side, spawns, spawnType);
   }
 
 }

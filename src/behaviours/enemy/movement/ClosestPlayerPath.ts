@@ -2,6 +2,7 @@ import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
 import { Ship } from '../../../models/Ship';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Entity } from '../../../models/Entity';
 
 export class ClosestPlayerPath extends Behaviour {
 
@@ -9,7 +10,7 @@ export class ClosestPlayerPath extends Behaviour {
   theta: number;
   enteredScreen = false;
 
-  constructor(target: any) {
+  constructor(target: Entity) {
     super('ClosestPlayerPath', target);
     this.targetPlayer = this.target.$state.getClosestShip(this.target.x, this.target.y);
     let dx: number, dy: number;
@@ -25,7 +26,7 @@ export class ClosestPlayerPath extends Behaviour {
     this.target.angle = this.theta;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     this.targetPlayer = this.target.$state.getClosestShip(this.target.x, this.target.y);
     if(this.targetPlayer != null) {
       const dx = this.target.position.x - this.targetPlayer.position.x;

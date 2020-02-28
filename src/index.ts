@@ -1,4 +1,3 @@
-import path from 'path';
 import express from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
@@ -47,7 +46,7 @@ DB.init().then(() => {
 
   app.use('/colyseus', monitor());
 
-  app.post('/quick_login', asyncMiddleware( async function(req, res, next) {
+  app.post('/quick_login', asyncMiddleware( async function(req, res, ) {
     const { systemId } = req.body;
     console.log("System_ID", systemId)
     let account = null;
@@ -72,7 +71,7 @@ DB.init().then(() => {
 
   }));
 
-  app.post('/login', asyncMiddleware( async function(req, res, next) {
+  app.post('/login', asyncMiddleware( async function(req, res, ) {
     const { email, password } = req.body;
     let account = null;
     try {
@@ -94,7 +93,7 @@ DB.init().then(() => {
     }
   }));
 
-  app.post('/signup', asyncMiddleware( async function(req, res, next) {
+  app.post('/signup', asyncMiddleware( async function(req, res, ) {
     const { username, email, password } = req.body;
     if(username && email && password) {
       let account = null;
@@ -123,7 +122,7 @@ DB.init().then(() => {
     }
   }));
 
-  app.post('/renew', asyncMiddleware( async function(req, res, next) {
+  app.post('/renew', asyncMiddleware( async function(req, res, ) {
     const { token } = req.body;
     if(token) {
       if(JWTHelper.verifyToken(token)) {

@@ -2,6 +2,8 @@ import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
 import { Position } from '../../../models/Position';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Entity } from '../../../models/Entity';
+import { Entity } from '../../../models/Entity';
 
 export class MoveToLocationPath extends Behaviour {
 
@@ -11,7 +13,7 @@ export class MoveToLocationPath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: any, args: {moveTo: Position}) {
+  constructor(target: Entity. args: { moveTo: Position}) {
     super('MoveToLocation', target);
     this.moveTo = args.moveTo;
     if(this.moveTo == null) {
@@ -25,7 +27,7 @@ export class MoveToLocationPath extends Behaviour {
     this.target.angle = this.theta;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     if(this.moveComplete) return;
 
     if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * detaTime/1000) {

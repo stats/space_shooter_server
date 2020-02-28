@@ -1,16 +1,18 @@
 import { Behaviour } from '../behaviour';
 import { C } from '../../Constants';
+import { Bullet } from '../../models/Bullet';
 import { Entity } from '../../models/Entity';
 
 export class ExplodeBehaviour extends Behaviour {
 
   public blastRadius: number;
+  target: Bullet;
 
-  constructor(target: any) {
+  constructor(target: Bullet) {
     super('explode', target);
   }
 
-  onEvent() {
+  onEvent(): void {
     if(this.target.blastRadius == null || this.target.blastRadius == 0) return;
     let entities: Entity[];
     if(this.target.bulletType == C.SHIP_BULLET) {

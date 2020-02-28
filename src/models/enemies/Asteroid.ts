@@ -1,11 +1,10 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
 import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePath';
-import { CT } from '../../Constants';
 
 export class Asteroid extends Enemy {
 
-  constructor(options) {
+  constructor(options:any) {
     super(options);
     this.healthBase = 999;
     this.healthGrowth = 0;
@@ -21,9 +20,9 @@ export class Asteroid extends Enemy {
     this.radius = 30;
   }
 
-  onInitGame(state: GameState) {
+  onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviours([new StraightLinePath(this)]);
+    this.registerBehaviour("path", new StraightLinePath(this));
   }
 
 }

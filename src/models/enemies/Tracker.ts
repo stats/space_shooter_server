@@ -1,12 +1,10 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
 import { ClosestPlayerPath } from '../../behaviours/Enemy/movement/ClosestPlayerPath';
-import { CT } from '../../Constants';
-
 
 export class Tracker extends Enemy {
 
-  constructor(options) {
+  constructor(options:any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;
@@ -22,9 +20,9 @@ export class Tracker extends Enemy {
     this.radius = 30;
   }
 
-  onInitGame(state: GameState) {
+  onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviours([new ClosestPlayerPath(this)]);
+    this.registerBehaviour("path", new ClosestPlayerPath(this));
   }
 
 }

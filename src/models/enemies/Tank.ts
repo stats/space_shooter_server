@@ -11,7 +11,7 @@ export class Tank extends Enemy {
 
   moveTo: Position;
 
-  constructor(options) {
+  constructor(options:any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;
@@ -29,9 +29,9 @@ export class Tank extends Enemy {
     this.moveTo = options.moveTo || Position.randomOnScreen();
   }
 
-  onInitGame(state: GameState) {
+  onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviours([new MoveToLocationThenRotatePath(this, { moveTo: this.moveTo })]);
+    this.registerBehaviour("path", new MoveToLocationThenRotatePath(this, { moveTo: this.moveTo }));
 
     const bulletOptions = {
       system: EnemyBullet,
@@ -47,7 +47,7 @@ export class Tank extends Enemy {
       cooldown: 5000,
       behaviour: 'fires'
     }
-    this.registerBehaviour(new FiresBulletBehaviour(this, {bulletOptions: bulletOptions}));
+    this.registerBehaviour("primary", new FiresBulletBehaviour(this, {bulletOptions: bulletOptions}));
   }
 
 }

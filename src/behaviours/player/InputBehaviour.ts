@@ -1,6 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
-import { Bounds } from '../../helpers/Bounds';
+import { Ship } from '../../models/Ship';
 
 export class InputBehaviour extends Behaviour {
 
@@ -9,11 +8,13 @@ export class InputBehaviour extends Behaviour {
 
   drag_factor = 2;
 
-  constructor(target) {
+  target: Ship;
+
+  constructor(target: Ship) {
     super('input', target);
   }
 
-  public onEvent(args: {horizontal?: number; vertical?: number; primary_attack?: number; special_attack?: number}) {
+  public onEvent(args: {horizontal?: number; vertical?: number; primary_attack?: number; special_attack?: number}): void {
     if(args.horizontal) {
       this.horizontalVector = args.horizontal;
     }
@@ -28,15 +29,15 @@ export class InputBehaviour extends Behaviour {
     }
   }
 
-  private clampHorizontal() {
+  private clampHorizontal(): void {
     this.target.horizontalAccelleration = Math.min(Math.max(this.target.horizontalAccelleration, -this.target.getSpeed()), this.target.getSpeed());
   }
 
-  private clampVertical() {
+  private clampVertical(): void {
     this.target.verticalAccelleration = Math.min(Math.max(this.target.verticalAccelleration, -this.target.getSpeed()), this.target.getSpeed());
   }
 
-  private decellerateHorizontal(deltaTime: number) {
+  private decellerateHorizontal(deltaTime: number): void {
     if(this.target.horizontalAccelleration == 0) return;
 
     const sign = Math.sign(this.target.horizontalAccelleration);
@@ -47,7 +48,7 @@ export class InputBehaviour extends Behaviour {
     }
   }
 
-  private decellerateVertical(deltaTime: number) {
+  private decellerateVertical(deltaTime: number): void {
     if(this.target.verticalAccelleration == 0) return;
 
     const sign = Math.sign(this.target.verticalAccelleration);
@@ -58,7 +59,7 @@ export class InputBehaviour extends Behaviour {
     }
   }
 
-  public onUpdate(deltaTime: number) {
+  public onUpdate(deltaTime: number): void {
 
     if(this.horizontalVector != 0) {
       this.target.horizontalAccelleration += this.target.getAccelleration() * this.horizontalVector * (deltaTime/1000);

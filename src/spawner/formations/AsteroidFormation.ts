@@ -1,9 +1,10 @@
 import { Formation } from './Formation';
-import { C, S } from '../../Constants';
+import { C } from '../../Constants';
+import { Enemy } from '../../models/Enemy';
 
 export class AsteroidFormation extends Formation {
 
-  onSpawnEnemies(spawnTpe: any, allowedSides?: number[]) {
+  onSpawnEnemies(spawnType: Enemy, ): void {
 
     let i: number, spawns: number;
     spawns = 2;
@@ -22,11 +23,11 @@ export class AsteroidFormation extends Formation {
     }
 
     let startX: number, startY: number;
-    
+
     for(i = 0; i < spawns; i++) {
       startX = this.randomX();
       startY = this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 3);
-      this.state.addEnemy(new spawnTpe({x: startX , y: startY }));
+      this.state.addEnemy(new spawnType({x: startX , y: startY }));
     }
   }
 

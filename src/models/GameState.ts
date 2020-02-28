@@ -5,7 +5,6 @@ import { Enemy } from './Enemy';
 import { Bullet } from './Bullet';
 
 import { CollisionHelper } from '../helpers/CollisionHelper';
-import { Bounds } from '../helpers/Bounds';
 
 export class GameState extends Schema {
 
@@ -30,22 +29,22 @@ export class GameState extends Schema {
   @type("int32")
   enemies_killed = 0;
 
-  addShip(ship: Ship) {
+  addShip(ship: Ship): void {
     this.ships[ship.uuid] = ship;
     ship.onInitGame(this);
   }
 
-  removeShip(ship: Ship) {
+  removeShip(ship: Ship): void {
     delete this.ships[ship.uuid];
   }
 
-  addEnemy(enemy: Enemy) {
+  addEnemy(enemy: Enemy): void {
     this.enemies[enemy.uuid] = enemy;
     this.enemies_spawned++;
     enemy.onInitGame(this);
   }
 
-  removeEnemy(enemy: Enemy) {
+  removeEnemy(enemy: Enemy): void {
     delete this.enemies[enemy.uuid];
 
     /** Cleanup flocking **/
@@ -59,18 +58,18 @@ export class GameState extends Schema {
     }
   }
 
-  addBullet(bullet: Bullet) {
+  addBullet(bullet: Bullet): void {
     this.bullets[bullet.uuid] = bullet;
     bullet.onInitGame(this);
   }
 
-  addBullets(bullets: Bullet[]) {
+  addBullets(bullets: Bullet[]): void {
     for(let i = 0; i < bullets.length; i++){
       this.addBullet(bullets[i]);
     }
   }
 
-  removeBullet(bullet: Bullet) {
+  removeBullet(bullet: Bullet): void {
     delete this.bullets[bullet.uuid];
   }
 
@@ -110,7 +109,7 @@ export class GameState extends Schema {
     return Object.keys(this.ships).length > 0;
   }
 
-  getClosestEnemy(x: number, y: number, ignoreInvisible= false): Ship {
+  getClosestEnemy(x: number, y: number, ignoreInvisible= false): Enemy {
     let returnEnemy: Ship = null;
     let distance = 99999;
     for(const key in this.enemies) {
@@ -125,7 +124,7 @@ export class GameState extends Schema {
     return returnEnemy;
   }
 
-  getEnemiesInRange(x: number, y: number, radius: number, ignoreInvisible = false) {
+  getEnemiesInRange(x: number, y: number, radius: number, ignoreInvisible = false): Enemy[] {
     const enemies: Enemy[] = [];
     for(const key in this.enemies) {
       const enemy = this.enemies[key];
@@ -138,7 +137,7 @@ export class GameState extends Schema {
     return enemies;
   }
 
-  getShipsInRange(x: number, y: number, radius: number, ignoreInvisible = false) {
+  getShipsInRange(x: number, y: number, radius: number, ignoreInvisible = false): Ship[] {
     const ships: Ship[] = [];
     for(const key in this.ships) {
       const ship = this.ships[key];

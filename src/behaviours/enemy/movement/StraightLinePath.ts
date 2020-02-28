@@ -1,6 +1,7 @@
 import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Entity } from '../../../models/Entity';
 
 export class StraightLinePath extends Behaviour {
 
@@ -9,7 +10,7 @@ export class StraightLinePath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: any) {
+  constructor(target: Entity) {
     super('StraightLinePath', target);
     if(this.target.position.x < C.BOUNDS.minX) this.xDir = 1;
     if(this.target.position.x > C.BOUNDS.maxX) this.xDir = -1;
@@ -17,7 +18,7 @@ export class StraightLinePath extends Behaviour {
     if(this.target.position.y > C.BOUNDS.maxY) this.yDir = -1;
   }
 
-  onUpdate(deltaTime) {
+  onUpdate(deltaTime): void {
     if(this.xDir != 0) this.target.position.x += this.target.speed * this.xDir * (deltaTime/1000);
     if(this.yDir != 0) this.target.position.y += this.target.speed * this.yDir * (deltaTime/1000);
     if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
@@ -28,7 +29,7 @@ export class StraightLinePath extends Behaviour {
     }
   }
 
-  remove() {
+  remove(): void {
     this.target.$state.removeEnemy(this.target);
   }
 }
