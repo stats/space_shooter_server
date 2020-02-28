@@ -48,11 +48,11 @@ DB.init().then(() => {
   app.use('/colyseus', monitor());
 
   app.post('/quick_login', asyncMiddleware( async function(req, res, next) {
-    let { system_id } = req.body;
-    console.log("System_ID", system_id)
+    const { systemId } = req.body;
+    console.log("System_ID", systemId)
     let account = null;
     try {
-      account = await AccountHelper.getAccountBySystemID(system_id);
+      account = await AccountHelper.getAccountBySystemID(systemId);
     } catch (err) {
       console.log("[QuickLogin] (error)", err);
       res.status(401).json({
@@ -73,7 +73,7 @@ DB.init().then(() => {
   }));
 
   app.post('/login', asyncMiddleware( async function(req, res, next) {
-    let { email, password } = req.body;
+    const { email, password } = req.body;
     let account = null;
     try {
       account = await AccountHelper.getAccountByEmail(email);
@@ -95,7 +95,7 @@ DB.init().then(() => {
   }));
 
   app.post('/signup', asyncMiddleware( async function(req, res, next) {
-    let { username, email, password } = req.body;
+    const { username, email, password } = req.body;
     if(username && email && password) {
       let account = null;
       try {
@@ -124,10 +124,10 @@ DB.init().then(() => {
   }));
 
   app.post('/renew', asyncMiddleware( async function(req, res, next) {
-    let { token } = req.body;
+    const { token } = req.body;
     if(token) {
       if(JWTHelper.verifyToken(token)) {
-        let username = JWTHelper.extractUsernameFromToken(token);
+        const username = JWTHelper.extractUsernameFromToken(token);
         console.log("Sending new token");
         res.status(200).json(JWTHelper.getSuccessJSON(username));
       } else {

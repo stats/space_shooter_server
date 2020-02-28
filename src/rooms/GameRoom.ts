@@ -19,11 +19,11 @@ export class GameRoom extends Room<GameState> {
 
   spawnCompleteFrequency = 1000;
 
-  clientShipHash:any = {};
+  clientShipHash: any = {};
 
   private spawner;
 
-  private spawnCompleteInterval:Delayed;
+  private spawnCompleteInterval: Delayed;
 
   onCreate(options) {
     console.log('[GameRoom]', this.roomId, 'Created');
@@ -31,14 +31,14 @@ export class GameRoom extends Room<GameState> {
     this.setState(new GameState());
     this.spawner = new Spawner(this.state, this.clock);
 
-    this.state.current_wave = Math.max(options.wave_rank, 1) || 1;
+    this.state.currentWave = Math.max(options.waveRank, 1) || 1;
 
-    let game_start_timeout = this.clock.setInterval(() => {
-      this.state.start_game -= 1;
-      this.broadcast(`Battle Starts In ${this.state.start_game} Seconds`);
-      if(this.state.start_game <= 0) {
+    const gameStartTimeout = this.clock.setInterval(() => {
+      this.state.startGame -= 1;
+      this.broadcast(`Battle Starts In ${this.state.startGame} Seconds`);
+      if(this.state.startGame <= 0) {
         this.startWave();
-        game_start_timeout.clear();
+        gameStartTimeout.clear();
       }
     }, 1000);
 
@@ -52,14 +52,14 @@ export class GameRoom extends Room<GameState> {
       return false;
     }
 
-    let username = JWTHelper.extractUsernameFromToken(options.token)
+    const username = JWTHelper.extractUsernameFromToken(options.token)
 
     return username;
   }
 
   async onJoin(client, options, username) {
     console.log('[GameRoom]', this.roomId, 'Client Join', username);
-    let ship = await ShipHelper.getShipInGame(username);
+    const ship = await ShipHelper.getShipInGame(username);
     ship.position.x = 700 + (Math.random() * 200);
     ship.position.y = 350 + (Math.random() * 200);
     if(!ship) {
@@ -76,9 +76,9 @@ export class GameRoom extends Room<GameState> {
 
   onLeave(client) {
     console.log("[GameRoom]", this.roomId, "Client Leave");
-    let ship = this.clientShipHash[client.id];
+    const ship = this.clientShipHash[client.id];
     ship.checkLevelUp();
-    ship.updateWaveRank(this.state.current_wave);
+    ship.updateWaveRank(this.state.currentWave);
     ShipHelper.saveShip(ship);
     this.state.removeShip(ship);
     ShipHelper.removeInGame(ship.uuid);
@@ -92,15 +92,15 @@ export class GameRoom extends Room<GameState> {
   onUpdate( deltaTime ) {
     let uuid;
     for(uuid in this.state.ships) {
-      let ship:Ship = this.state.ships[uuid];
+      const ship: Ship = this.state.ships[uuid];
       ship.onUpdate(deltaTime);
     }
     for(uuid in this.state.enemies) {
-      let enemy:Enemy = this.state.enemies[uuid];
+      const enemy: Enemy = this.state.enemies[uuid];
       enemy.onUpdate(deltaTime);
     }
     for(uuid in this.state.bullets) {
-      let bullet:Bullet = this.state.bullets[uuid];
+      const bullet: Bullet = this.state.bullets[uuid];
       bullet.onUpdate(deltaTime);
     }
 
@@ -112,19 +112,19 @@ export class GameRoom extends Room<GameState> {
   }
 
   handleClientInput(client, input) {
-    let ship:Ship = this.clientShipHash[client.id];
+    const ship: Ship = this.clientShipHash[client.id];
     ship.handleEvent('input', input);
   }
 
   startWave() {
     this.spawner.nextWave();
-    this.broadcast(`Wave ${this.state.current_wave} Starting`);
-    console.log("[GameRoom] Starting Wave", this.state.current_wave);
+    this.broadcast(`Wave ${this.state.currentWave} Starting`);
+    console.log("[GameRoom] Starting Wave", this.state.currentWave);
 
     this.spawnCompleteInterval = this.clock.setInterval(() => {
       if(this.spawner.complete() && !this.state.hasEnemies()) {
         this.spawnCompleteInterval.clear();
-        this.state.current_wave++;
+        this.state.currentWave++;
         this.startWave();
       }
     }, this.spawnCompleteFrequency);

@@ -4,8 +4,8 @@ import { ShipHelper } from '../helpers/ShipHelper';
 
 interface MatchmakingGroup {
   averageRank: number;
-  clients: ClientStat[],
-  priority?:boolean;
+  clients: ClientStat[];
+  priority?: boolean;
 
   ready?: boolean;
   confirmed?: number;
@@ -21,7 +21,7 @@ interface ClientStat {
 }
 
 export class MatchMakerRoom extends Room {
-  allowUnmatchedGroups: boolean = true;
+  allowUnmatchedGroups = true;
 
   evaluateGroupInterval = 2000;
 
@@ -29,15 +29,15 @@ export class MatchMakerRoom extends Room {
 
   roomToCreate = 'GameRoom';
 
-  maxWaitingTime:number = 60 * 1000;
+  maxWaitingTime: number = 60 * 1000;
 
-  maxWaitingTimeForPriority?:number = 30 * 1000;
+  maxWaitingTimeForPriority?: number = 30 * 1000;
 
   numClientsToMatch = 4;
 
   stats: ClientStat[] = [];
 
-  clientShipHash:any = {};
+  clientShipHash: any = {};
 
   onCreate(options: any) {
     if(options.maxWaitingTime) {
@@ -61,12 +61,12 @@ export class MatchMakerRoom extends Room {
       return false;
     }
 
-    let username = JWTHelper.extractUsernameFromToken(options.token);
+    const username = JWTHelper.extractUsernameFromToken(options.token);
 
     return username;
   }
 
-  async onJoin(client:Client, options: any, username: string) {
+  async onJoin(client: Client, options: any, username: string) {
     console.log('[MatchMakerRoom] (onJoin)', username);
     this.stats.push({
       client: client,
@@ -75,7 +75,7 @@ export class MatchMakerRoom extends Room {
       options
     });
 
-    let ship = await ShipHelper.getShipInGame(username);
+    const ship = await ShipHelper.getShipInGame(username);
     if(!ship) {
       this.send(client, { error: 'no_ship_in_game'});
       return;
@@ -101,7 +101,7 @@ export class MatchMakerRoom extends Room {
   }
 
   createGroup() {
-    let group: MatchmakingGroup = { clients: [], averageRank: 0};
+    const group: MatchmakingGroup = { clients: [], averageRank: 0};
     this.groups.push(group);
     return group;
   }
@@ -167,23 +167,23 @@ export class MatchMakerRoom extends Room {
             group.ready = true;
             group.confirmed = 0;
 
-            let count:number = 0;
-            let rankings:number = 0;
-            for(let client of group.clients) {
+            let count = 0;
+            let rankings = 0;
+            for(const client of group.clients) {
               count += 1;
               rankings += client.rank;
             }
 
-            const room = await matchMaker.createRoom(this.roomToCreate, {wave_rank: Math.max(Math.round(rankings/count) - 5, 1)}); //TODO: Set the wave_rank to be the correct wave rank
+            const room = await matchMaker.createRoom(this.roomToCreate, {waveRank: Math.max(Math.round(rankings/count) - 5, 1)}); //TODO: Set the waveRank to be the correct wave rank
 
             await Promise.all(group.clients.map(async (client) => {
               const matchData = await matchMaker.reserveSeatFor(room, client.options);
               this.send(client.client, matchData);
             }));
           } else {
-            let ships = [];
+            const ships = [];
             for(let i = 0; i < group.clients.length; i++) {
-              let ship = this.clientShipHash[group.clients[i].client.id];
+              const ship = this.clientShipHash[group.clients[i].client.id];
               ships.push(ship)
             }
             group.clients.forEach(client => this.send(client.client, { ships: ships }));
@@ -192,7 +192,7 @@ export class MatchMakerRoom extends Room {
     );
   }
 
-  onLeave(client:Client, consented: boolean) {
+  onLeave(client: Client, consented: boolean) {
     const index = this.stats.findIndex(stat => stat.client === client);
     this.stats.splice(index, 1);
     delete this.clientShipHash[client.id];

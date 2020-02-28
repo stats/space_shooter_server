@@ -5,28 +5,28 @@ import { Position } from '../../models/Position';
 
 export class SimpleFlock extends Formation {
 
-  onSpawnEnemies(spawn_type:any, allowed_sides?:number[]) {
+  onSpawnEnemies(spawnTpe: any, allowedSides?: number[]) {
 
-    let i:number, spawns:number;
+    let i: number, spawns: number;
     spawns = 3;
-    if(this.state.current_wave > 5) {
+    if(this.state.currentWave > 5) {
       spawns = 4;
-    } else if (this.state.current_wave > 10 ) {
+    } else if (this.state.currentWave > 10 ) {
       spawns = 5;
-    } else if (this.state.current_wave > 15 ) {
+    } else if (this.state.currentWave > 15 ) {
       spawns = 6;
-    } else if (this.state.current_wave > 20 ) {
+    } else if (this.state.currentWave > 20 ) {
       spawns = 8;
-    } else if (this.state.current_wave > 25 ) {
+    } else if (this.state.currentWave > 25 ) {
       spawns = 10;
-    } else if (this.state.current_wave > 30 ) {
+    } else if (this.state.currentWave > 30 ) {
       spawns = 12;
     }
 
-    let start:Position = new Position(0,0)
-    let destination:Position = new Position(0,0);
+    const start: Position = new Position(0,0)
+    const destination: Position = new Position(0,0);
 
-    switch(this.getRandomSide(allowed_sides)) {
+    switch(this.getRandomSide(allowedSides)) {
       case S.TOP:
         start.x = this.randomX();
         start.y = this.topOffset() + C.SPAWN_OFFSET * 5;
@@ -47,9 +47,9 @@ export class SimpleFlock extends Formation {
         break;
     }
 
-    let flock:Enemy[] = [];
+    const flock: Enemy[] = [];
     for(i = 0; i < spawns; i++) {
-      flock[i] = new spawn_type();
+      flock[i] = new spawnTpe();
     }
 
     for(i = 0; i < spawns; i++) {

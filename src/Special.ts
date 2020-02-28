@@ -5,84 +5,84 @@ Bomb, MissileBarage, MegaBomb, ShieldRecharge, ForceShield } from './models/spec
 export class SPECIAL {
   public static TYPE = {
     "Weapon Charge": {
-      system_type: WeaponCharge,
+      systemType: WeaponCharge,
       amount: 2,
-      fire_rate: 3000
+      fireRate: 3000
     },
     "Shotgun": {
-      system_type: Shotgun,
-      fire_rate: 5000,
-      unlock_key: "max_kills_Weapon Charge",
-      unlock_count: 200
+      systemType: Shotgun,
+      fireRate: 5000,
+      unlockKey: "max_kills_Weapon Charge",
+      unlockCount: 200
     },
     "Bomb": {
-      system_type: Bomb,
-      fire_rate: 5000,
-      unlock_key: "max_kills_Shotgun",
-      unlock_count: 200
+      systemType: Bomb,
+      fireRate: 5000,
+      unlockKey: "max_kills_Shotgun",
+      unlockCount: 200
     },
     "Mega Bomb": {
-      system_type: MegaBomb,
-      fire_rate: 10000,
-      unlock_key: "max_kills_Bomb",
-      unlock_count: 200
+      systemType: MegaBomb,
+      fireRate: 10000,
+      unlockKey: "max_kills_Bomb",
+      unlockCount: 200
     },
     "Scatter Shot": {
-      system_type: ScatterShot,
-      fire_rate: 15000,
-      unlock_key: "max_kills_Mega Bomb",
-      unlock_count: 200
+      systemType: ScatterShot,
+      fireRate: 15000,
+      unlockKey: "max_kills_Mega Bomb",
+      unlockCount: 200
     },
     "Missile Barrage": {
-      system_type: MissileBarage,
-      fire_rate: 5000,
-      unlock_key: "max_kills_Scatter Shot",
-      unlock_count: 200
+      systemType: MissileBarage,
+      fireRate: 5000,
+      unlockKey: "max_kills_Scatter Shot",
+      unlockCount: 200
     },
     "Emergency Brake": {
-      system_type: EmergencyBrake,
-      fire_rate: 2000
+      systemType: EmergencyBrake,
+      fireRate: 2000
     },
     "Shield Recharge": {
-      system_type: ShieldRecharge,
+      systemType: ShieldRecharge,
       amount: 1,
-      fire_rate: 15000,
-      unlock_key: "max_kills_Emergency Brake",
-      unlock_count: 200
+      fireRate: 15000,
+      unlockKey: "max_kills_Emergency Brake",
+      unlockCount: 200
     },
     "Ramming Shield": {
-      system_type: RammingShield,
+      systemType: RammingShield,
       duration: 4000,
-      fire_rate: 10000,
-      unlock_key: "max_kills_Shield Recharge",
-      unlock_count: 200
+      fireRate: 10000,
+      unlockKey: "max_kills_Shield Recharge",
+      unlockCount: 200
     },
     "Force Shield": {
-      system_type: ForceShield,
+      systemType: ForceShield,
       duration: 3000,
-      fire_rate: 15000,
-      unlock_key: "max_kills_Ramming Shield",
-      unlock_count: 200
+      fireRate: 15000,
+      unlockKey: "max_kills_Ramming Shield",
+      unlockCount: 200
     },
     "Thrusters": {
-      system_type: Thrusters,
+      systemType: Thrusters,
       amount: 2,
       duration: 2000,
-      fire_rate: 4000
+      fireRate: 4000
     },
     "Hyper Speed": {
-      system_type: HyperSpeed,
+      systemType: HyperSpeed,
       amount: 1,
-      fire_rate: 5000,
-      unlock_key: "max_kills_Thrusters",
-      unlock_count: 200
+      fireRate: 5000,
+      unlockKey: "max_kills_Thrusters",
+      unlockCount: 200
     },
     "Invisibility": {
-      system_type: Invisibility,
+      systemType: Invisibility,
       duration: 5000,
-      fire_rate: 12000,
-      unlock_key: "max_kills_Hyper Speed",
-      unlock_count: 200
+      fireRate: 12000,
+      unlockKey: "max_kills_Hyper Speed",
+      unlockCount: 200
     },
   };
 }

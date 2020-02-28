@@ -31,7 +31,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
       return false;
     }
 
-    let username = JWTHelper.extractUsernameFromToken(options.token);
+    const username = JWTHelper.extractUsernameFromToken(options.token);
 
     return username;
   }
@@ -61,7 +61,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   }
 
   private async unlockedData(client) {
-    let account = await AccountHelper.getAccountByUsername(client.username);
+    const account = await AccountHelper.getAccountByUsername(client.username);
     if(!account) {
       this.send(client, new ErrorMessage('Your account could not be found', 'invalid_account'));
       return;
@@ -71,7 +71,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   }
 
   private async statsData(client) {
-    let account = await AccountHelper.getAccountByUsername(client.username);
+    const account = await AccountHelper.getAccountByUsername(client.username);
     if(!account) {
       this.send(client, new ErrorMessage('Your account could not be found', 'invalid_account'));
       return;
@@ -88,9 +88,9 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
       this.send(client, new ErrorMessage('The ship requested could not be found', 'invalid_ship'));
       return;
     }
-    const return_ship = await ShipHelper.upgradeShip(ship, upgrades);
-    //console.log("Return Ship", return_ship);
-    if(return_ship) {
+    const returnShip = await ShipHelper.upgradeShip(ship, upgrades);
+    //console.log("Return Ship", returnShip);
+    if(returnShip) {
       this.send(client, { action: 'ship_upgrade_success'});
       this.sendShips(client);
       return;
@@ -114,13 +114,13 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
 
   private async sendShips(client) {
     console.log('[ShipBuilderRoom] sending ships');
-    let ships:ShipList = await ShipHelper.getShipList(client.username);
+    const ships: ShipList = await ShipHelper.getShipList(client.username);
     this.send(client, ships);
   }
 
   private async createShip(client, ship) {
     //console.log('[ShipBuilderRoom] creating a ship', ship);
-    let success = await ShipHelper.createShip(client.username, ship);
+    const success = await ShipHelper.createShip(client.username, ship);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully created.'});
     } else {
@@ -131,7 +131,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   }
 
   private async deleteShip(client, uuid) {
-    let success = await ShipHelper.deleteShip(client.username, uuid);
+    const success = await ShipHelper.deleteShip(client.username, uuid);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully destroyed.'});
     } else {

@@ -3,9 +3,9 @@ import { C } from '../../Constants';
 
 export class DestroyedBehaviour extends Behaviour {
 
-  start_y:number;
+  startY: number;
 
-  constructor(target:any, ) {
+  constructor(target: any, ) {
     super('destroyed', target);
   }
 

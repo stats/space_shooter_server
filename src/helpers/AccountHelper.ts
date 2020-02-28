@@ -15,13 +15,13 @@ export class AccountHelper {
     return null;
   }
 
-  static async getAccountBySystemID(system_id: string): Promise<Account> {
-    const account = await DB.$accounts.findOne({ system_id });
+  static async getAccountBySystemID(systemId: string): Promise<Account> {
+    const account = await DB.$accounts.findOne({ systemId });
     if(account){
       return new Account(account);
     } else {
-      let tmp_act = new Account({system_id});
-      return new Account(DB.$accounts.insertOne(tmp_act.toSaveObject()));
+      const tmpAct = new Account({systemId});
+      return new Account(DB.$accounts.insertOne(tmpAct.toSaveObject()));
     }
   }
 

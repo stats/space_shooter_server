@@ -4,20 +4,20 @@ import { CollisionHelper } from '../../../helpers/CollisionHelper';
 
 export class WobblePath extends Behaviour {
 
-  xDir:number = 0;
-  yDir:number = 0;
+  xDir = 0;
+  yDir = 0;
 
-  wobble_percent:number = 1;
-  wobble_duration:number = 3;
-  private wobble_timer:number = 0;
+  wobblePercent = 1;
+  wobbleDuration = 3;
+  private wobbleTimer = 0;
 
-  entered_screen:boolean = false;
+  enteredScreen = false;
 
-  constructor(target:any, args?:{wobble_percent:number, wobble_duration:number}) {
+  constructor(target: any, args?: {wobblePercent: number; wobbleDuration: number}) {
     super('WobblePath', target);
     if(args) {
-      this.wobble_percent = args.wobble_percent || 1;
-      this.wobble_duration = args.wobble_duration || 3;
+      this.wobblePercent = args.wobblePercent || 1;
+      this.wobbleDuration = args.wobbleDuration || 3;
     }
     if(this.target.position.x < C.BOUNDS.minX) this.xDir = 1;
     if(this.target.position.x > C.BOUNDS.maxX) this.xDir = -1;
@@ -28,24 +28,24 @@ export class WobblePath extends Behaviour {
   onUpdate(deltaTime) {
     if(this.xDir != 0) {
       this.target.position.x += this.target.speed * this.xDir * (deltaTime/1000);
-      this.target.position.y += this.target.speed * this.wobble_percent * (deltaTime/1000);
+      this.target.position.y += this.target.speed * this.wobblePercent * (deltaTime/1000);
     }
     if(this.yDir != 0) {
        this.target.position.y += this.target.speed * this.yDir * (deltaTime/1000);
-       this.target.position.x += this.target.speed * this.wobble_percent * (deltaTime/1000);
+       this.target.position.x += this.target.speed * this.wobblePercent * (deltaTime/1000);
     }
 
-    this.wobble_timer += deltaTime / 1000;
-    if(this.wobble_timer > this.wobble_duration) {
-      this.wobble_timer = 0;
-      this.wobble_percent = -this.wobble_percent;
+    this.wobbleTimer += deltaTime / 1000;
+    if(this.wobbleTimer > this.wobbleDuration) {
+      this.wobbleTimer = 0;
+      this.wobblePercent = -this.wobblePercent;
     }
 
-    if(!this.entered_screen && CollisionHelper.insideBounds(this.target)){
-      this.entered_screen = true;
+    if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
+      this.enteredScreen = true;
     }
 
-    if(this.entered_screen && CollisionHelper.outsideBounds(this.target)) {
+    if(this.enteredScreen && CollisionHelper.outsideBounds(this.target)) {
       this.target.handleEvent('destroyed');
     }
   }

@@ -3,7 +3,7 @@ import { C } from '../../Constants';
 
 export class TriangleFormation extends Formation {
 
-  positions:any = [
+  positions: any = [
     [0,0],
     [-30, 100], [30, 100],
     [-60, 200], [0, 200], [60, 200],
@@ -11,22 +11,23 @@ export class TriangleFormation extends Formation {
     [-120, 400], [-60, 400], [0, 0], [60, 400], [120, 400]
   ];
 
-  onSpawnEnemies(spawn_type:any, allowed_sides?:number[]) {
-    let side:number, spawns:number, i:number, start_x:number, start_y:number;
+  onSpawnEnemies(spawnTpe: any, allowedSides?: number[]) {
+    const side: number, startX: number, startY: number;
+    let spawns: number, i: number,;
 
-    side = this.getRandomSide(allowed_sides);
-    [start_x, start_y] = this.getStartPositions(side);
+    side = this.getRandomSide(allowedSides);
+    [startX, startY] = this.getStartPositions(side);
 
     spawns = 3;
-    if(this.state.current_wave > 5) {
+    if(this.state.currentWave > 5) {
       spawns = 6;
-    } else if (this.state.current_wave > 10 ) {
+    } else if (this.state.currentWave > 10 ) {
       spawns = 10;
-    } else if (this.state.current_wave > 20 ) {
+    } else if (this.state.currentWave > 20 ) {
       spawns = 15;
     }
 
-    this.spawnEnemies(start_x, start_y, side, spawns, spawn_type);
+    this.spawnEnemies(startX, startY, side, spawns, spawnTpe);
   }
 
 }

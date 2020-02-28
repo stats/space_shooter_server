@@ -4,74 +4,74 @@ import { sample } from 'lodash';
 
 export class Formation {
 
-  protected state:GameState;
-  protected positions:any;
+  protected state: GameState;
+  protected positions: any;
 
-  constructor(state:GameState) {
+  constructor(state: GameState) {
     this.state = state;
   }
 
-  onSpawnEnemies(spawn_type:any, allowed_sizes?:number[]) {}
+  onSpawnEnemies(spawnTpe: any, allowed_sizes?: number[]) {}
 
-  protected randomX():number {
+  protected randomX(): number {
     return (Math.random() * (C.BOUNDS.maxX - 200)) + 100;
   }
 
-  protected randomY():number {
+  protected randomY(): number {
     return (Math.random() * (C.BOUNDS.maxY/2 - 200)) + 100 + C.BOUNDS.maxY/2;
   }
 
-  protected topOffset():number {
+  protected topOffset(): number {
     return C.BOUNDS.maxY + C.SPAWN_OFFSET;
   }
 
-  protected leftOffset():number {
+  protected leftOffset(): number {
     return -C.SPAWN_OFFSET;
   }
 
-  protected rightOffset():number {
+  protected rightOffset(): number {
     return C.BOUNDS.maxX + C.SPAWN_OFFSET;
   }
 
-  protected getStartPositions(side:number):number[] {
-    let start_x:number, start_y:number;
+  protected getStartPositions(side: number): number[] {
+    let startX: number, startY: number;
     switch(side) {
       case S.TOP:
-        start_y = this.topOffset();
-        start_x = this.randomX();
+        startY = this.topOffset();
+        startX = this.randomX();
         break;
       case S.LEFT:
-        start_y = this.randomY();
-        start_x = this.leftOffset();
+        startY = this.randomY();
+        startX = this.leftOffset();
         break;
       case S.RIGHT:
-        start_y = this.randomY();
-        start_x = this.rightOffset();
+        startY = this.randomY();
+        startX = this.rightOffset();
         break;
     }
-    return [start_x, start_y];
+    return [startX, startY];
   }
 
-  protected getRandomSide(allowed_sides?:number[]) {
-    if (allowed_sides) {
-      return sample(allowed_sides);
+  protected getRandomSide(allowedSides?: number[]) {
+    if (allowedSides) {
+      return sample(allowedSides);
     } else {
       return Math.floor(Math.random() * 3);
     }
   }
 
-  protected spawnEnemies(start_x, start_y, side, spawns, spawn_type):void {
-    let i:number;
+  protected spawnEnemies(startX, startY, side, spawns, spawnTpe): void {
+    let i: number;
     for(i = 0; i < spawns; i++) {
       switch(side) {
         case S.TOP:
-          this.state.addEnemy(new spawn_type({x: start_x + this.positions[i][0], y: start_y + this.positions[i][1]}));
+          this.state.addEnemy(new spawnTpe({x: startX + this.positions[i][0], y: startY + this.positions[i][1]}));
         break;
         case S.LEFT:
-          this.state.addEnemy(new spawn_type({x: start_x - this.positions[i][1], y: start_y + this.positions[i][0]}));
+          this.state.addEnemy(new spawnTpe({x: startX - this.positions[i][1], y: startY + this.positions[i][0]}));
         break;
         case S.RIGHT:
-          this.state.addEnemy(new spawn_type({x: start_x + this.positions[i][1], y: start_y - this.positions[i][0]}));
+          this.state.addEnemy(new spawnTpe({x: startX + this.positions[i][1], y: startY - this.positions[i][0]}));
         break;
       }
     }

@@ -4,17 +4,17 @@ import { CollisionHelper } from '../../../helpers/CollisionHelper';
 
 export class LoopingPath extends Behaviour {
 
-  dir:number = 0;
+  dir = 0;
 
-  theta:number = 0;
+  theta = 0;
 
-  entered_screen:boolean = false;
+  enteredScreen = false;
 
-  constructor(target:any) {
+  constructor(target: any) {
     super('LoopingPath', target);
 
-    let dx = 800 - this.target.position.x;
-    let dy = 450 - this.target.position.y;
+    const dx = 800 - this.target.position.x;
+    const dy = 450 - this.target.position.y;
 
     this.theta = Math.atan2(dy,dx);
     this.target.angle = this.theta;
@@ -29,10 +29,10 @@ export class LoopingPath extends Behaviour {
     this.target.position.x += this.target.speed * Math.cos(this.theta) * (deltaTime/1000);
     this.target.position.y += this.target.speed * Math.sin(this.theta) * (deltaTime/1000);
 
-    if(!this.entered_screen && CollisionHelper.insideBounds(this.target)){
-      this.entered_screen = true;
+    if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
+      this.enteredScreen = true;
     }
-    if(this.entered_screen && CollisionHelper.outsideBounds(this.target) || CollisionHelper.tooFar(this.target)) {
+    if(this.enteredScreen && CollisionHelper.outsideBounds(this.target) || CollisionHelper.tooFar(this.target)) {
       this.target.handleEvent('destroyed');
     }
   }

@@ -7,7 +7,7 @@ export class Invisibility extends SpecialSystem {
     this.active = true;
   }
 
-  handleUpdate(deltaTime:number) {
+  handleUpdate(deltaTime: number) {
     if(!this.active) return;
 
     this.timer += deltaTime;

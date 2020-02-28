@@ -19,38 +19,38 @@ export class GameState extends Schema {
   bullets = new MapSchema<Bullet>();
 
   @type("number")
-  start_game:number = 5; //number of seconds until the game starts
+  startGame = 5; //number of seconds until the game starts
 
   @type("int32")
-  current_wave:number = 0;
+  currentWave = 0;
 
   @type("int32")
-  enemies_spawned:number = 0;
+  enemies_spawned = 0;
 
   @type("int32")
-  enemies_killed:number = 0;
+  enemies_killed = 0;
 
-  addShip(ship:Ship) {
+  addShip(ship: Ship) {
     this.ships[ship.uuid] = ship;
     ship.onInitGame(this);
   }
 
-  removeShip(ship:Ship) {
+  removeShip(ship: Ship) {
     delete this.ships[ship.uuid];
   }
 
-  addEnemy(enemy:Enemy) {
+  addEnemy(enemy: Enemy) {
     this.enemies[enemy.uuid] = enemy;
     this.enemies_spawned++;
     enemy.onInitGame(this);
   }
 
-  removeEnemy(enemy:Enemy) {
+  removeEnemy(enemy: Enemy) {
     delete this.enemies[enemy.uuid];
 
     /** Cleanup flocking **/
     if(enemy.flock !== undefined) {
-      for(var i = 0, l = enemy.flock.length; i < l; i++) {
+      for(let i = 0, l = enemy.flock.length; i < l; i++) {
         if(enemy.flock[i].uuid == enemy.uuid) {
           enemy.flock.splice(i,1);
           break;
@@ -59,78 +59,78 @@ export class GameState extends Schema {
     }
   }
 
-  addBullet(bullet:Bullet) {
+  addBullet(bullet: Bullet) {
     this.bullets[bullet.uuid] = bullet;
     bullet.onInitGame(this);
   }
 
-  addBullets(bullets:Bullet[]) {
-    for(var i = 0; i < bullets.length; i++){
+  addBullets(bullets: Bullet[]) {
+    for(let i = 0; i < bullets.length; i++){
       this.addBullet(bullets[i]);
     }
   }
 
-  removeBullet(bullet:Bullet) {
+  removeBullet(bullet: Bullet) {
     delete this.bullets[bullet.uuid];
   }
 
-  removeAllShips():void {
-    for(let uuid in this.ships) {
+  removeAllShips(): void {
+    for(const uuid in this.ships) {
       this.removeEnemy(this.ships[uuid]);
     }
   }
 
-  removeAllBullets():void {
-    for(let uuid in this.bullets) {
+  removeAllBullets(): void {
+    for(const uuid in this.bullets) {
       this.removeEnemy(this.bullets[uuid]);
     }
   }
 
-  removeAllEnemies():void {
-    for(let uuid in this.enemies) {
+  removeAllEnemies(): void {
+    for(const uuid in this.enemies) {
       this.removeEnemy(this.enemies[uuid]);
     }
   }
 
-  battleLost():void {
+  battleLost(): void {
     this.removeAllShips();
     this.removeAllBullets();
     this.removeAllEnemies();
   }
 
-  hasStarted():boolean {
-    return this.start_game <= 0;
+  hasStarted(): boolean {
+    return this.startGame <= 0;
   }
 
-  hasEnemies():boolean {
+  hasEnemies(): boolean {
     return Object.keys(this.enemies).length > 0;
   }
 
-  hasShips():boolean {
+  hasShips(): boolean {
     return Object.keys(this.ships).length > 0;
   }
 
-  getClosestEnemy(x:number, y:number, ignoreInvisible:boolean= false):Ship {
-    let return_enemy:Ship = null;
-    let distance:number = 99999;
-    for(let key in this.enemies) {
-      let enemy = this.enemies[key];
+  getClosestEnemy(x: number, y: number, ignoreInvisible= false): Ship {
+    let returnEnemy: Ship = null;
+    let distance = 99999;
+    for(const key in this.enemies) {
+      const enemy = this.enemies[key];
       if(enemy.invisible && ignoreInvisible == false) continue;
-      let d:number = CollisionHelper.distance(x, y, enemy.position.x, enemy.position.y);
+      const d: number = CollisionHelper.distance(x, y, enemy.position.x, enemy.position.y);
       if(d < distance) {
-        return_enemy = enemy;
+        returnEnemy = enemy;
         distance = d;
       }
     }
-    return return_enemy;
+    return returnEnemy;
   }
 
-  getEnemiesInRange(x:number, y:number, radius:number, ignoreInvisible:boolean = false) {
-    let enemies:Enemy[] = [];
-    for(let key in this.enemies) {
-      let enemy = this.enemies[key];
+  getEnemiesInRange(x: number, y: number, radius: number, ignoreInvisible = false) {
+    const enemies: Enemy[] = [];
+    for(const key in this.enemies) {
+      const enemy = this.enemies[key];
       if(enemy.invisible && ignoreInvisible == false) continue;
-      let d:number = CollisionHelper.distance(x, y, enemy.position.x, enemy.position.y);
+      const d: number = CollisionHelper.distance(x, y, enemy.position.x, enemy.position.y);
       if(d <= radius){
         enemies.push(enemy);
       }
@@ -138,12 +138,12 @@ export class GameState extends Schema {
     return enemies;
   }
 
-  getShipsInRange(x:number, y:number, radius:number, ignoreInvisible:boolean = false) {
-    let ships:Ship[] = [];
-    for(let key in this.ships) {
-      let ship = this.ships[key];
+  getShipsInRange(x: number, y: number, radius: number, ignoreInvisible = false) {
+    const ships: Ship[] = [];
+    for(const key in this.ships) {
+      const ship = this.ships[key];
       if(ship.invisible && ignoreInvisible == false) continue;
-      let d:number = CollisionHelper.distance(x, y, ship.position.x, ship.position.y);
+      const d: number = CollisionHelper.distance(x, y, ship.position.x, ship.position.y);
       if(d <= radius){
         ships.push(ship);
       }
@@ -151,19 +151,19 @@ export class GameState extends Schema {
     return ships;
   }
 
-  getClosestShip(x:number, y:number, ignoreInvisible:boolean = false):Ship {
-    let return_ship:Ship = null;
-    let distance:number = 99999;
-    for(let key in this.ships) {
-      let ship = this.ships[key];
+  getClosestShip(x: number, y: number, ignoreInvisible = false): Ship {
+    let returnShip: Ship = null;
+    let distance = 99999;
+    for(const key in this.ships) {
+      const ship = this.ships[key];
       if(ship.invisible && ignoreInvisible == false) continue;
-      let d:number = CollisionHelper.distance(x, y, ship.position.x, ship.position.y);
+      const d: number = CollisionHelper.distance(x, y, ship.position.x, ship.position.y);
       if(d < distance) {
-        return_ship = ship;
+        returnShip = ship;
         distance = d;
       }
     }
-    return return_ship;
+    return returnShip;
   }
 
 }

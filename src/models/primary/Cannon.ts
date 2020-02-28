@@ -14,24 +14,24 @@ export class Cannon extends Primary {
     super(entity, options);
   }
 
-  getBullets():Bullet[] {
-    let spawn_location = this.entity.getBulletSpawnLocation();
+  getBullets(): Bullet[] {
+    const spawnLocation = this.entity.getBulletSpawnLocation();
 
-    let bullets:Bullet[] = [];
-    let options = {
+    const bullets: Bullet[] = [];
+    const options = {
       damage: this.damage,
       speed: this.speed,
       range: this.range,
-      collision_type: CT.CIRCLE,
+      collisionType: CT.CIRCLE,
       radius: this.radius,
-      bullet_mesh: this.bullet_mesh,
-      x: spawn_location.x,
-      y: spawn_location.y,
-      bullet_type: C.SHIP_BULLET
+      bulletMesh: this.bulletMesh,
+      x: spawnLocation.x,
+      y: spawnLocation.y,
+      bulletType: C.SHIP_BULLET
     }
 
     if(this.bullet_count == 1){
-      let bullet = new Bullet(options);
+      const bullet = new Bullet(options);
       bullet.registerBehaviour(new StraightLineUpPath(bullet));
       bullets.push( bullet );
     } else if (this.bullet_count == 2){

@@ -5,14 +5,14 @@ import { Primary } from '../../models/primary/Primary';
 
 export class DropsBulletBehaviour extends Behaviour {
 
-  timer:number = 0;
-  cooldown:number = 0;
-  system:Primary;
+  timer = 0;
+  cooldown = 0;
+  system: Primary;
 
-  constructor(target:any, args: {bullet_options:any}) {
+  constructor(target: any, args: {bulletOptions: any}) {
     super('drops_bullet', target);
-    this.system = new args.bullet_options.system(this.target, args.bullet_options);
-    this.cooldown = args.bullet_options.cooldown;
+    this.system = new args.bulletOptions.system(this.target, args.bulletOptions);
+    this.cooldown = args.bulletOptions.cooldown;
   }
 
   onUpdate(deltaTime) {

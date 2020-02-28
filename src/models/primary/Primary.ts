@@ -5,42 +5,42 @@ import { Bullet } from '../Bullet';
 
 export class Primary {
 
-  damage:number;
-  speed:number;
-  range:number;
-  radius:number;
-  fire_rate:number;
+  damage: number;
+  speed: number;
+  range: number;
+  radius: number;
+  fireRate: number;
 
-  bullet_count:number;
-  bullet_angle:number;
-  bullet_offset:number;
+  bullet_count: number;
+  bullet_angle: number;
+  bullet_offset: number;
 
-  bullet_mesh:string;
+  bulletMesh: string;
 
-  blast_radius:number;
+  blastRadius: number;
 
-  entity:Entity;
+  entity: Entity;
 
-  behaviour:string;
+  behaviour: string;
 
-  constructor(entity:Entity, options:any) {
+  constructor(entity: Entity, options: any) {
     merge(this, options);
     this.entity = entity;
 
     if(this.entity instanceof Ship) {
       this.damage    = (this.entity as Ship).getDamage() * this.damage;
       this.range     = (this.entity as Ship).getRange() * this.range;
-      this.fire_rate = (this.entity as Ship).getFireRate() * this.fire_rate;
+      this.fireRate = (this.entity as Ship).getFireRate() * this.fireRate;
     }
   }
 
-  getBullets():Bullet[] { return []; }
+  getBullets(): Bullet[] { return []; }
 
-  spawnBullets(fired_by?:Entity):void {
-    let bullets = this.getBullets();
-    if(fired_by) {
-      for(var i = 0, l = bullets.length; i < l; i++) {
-        bullets[i].fired_by = fired_by;
+  spawnBullets(firedBy?: Entity): void {
+    const bullets = this.getBullets();
+    if(firedBy) {
+      for(let i = 0, l = bullets.length; i < l; i++) {
+        bullets[i].firedBy = firedBy;
       }
     }
     this.entity.$state.addBullets(bullets);

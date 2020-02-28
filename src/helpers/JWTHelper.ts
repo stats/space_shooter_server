@@ -9,7 +9,7 @@ export class JWTHelper {
 
     if(!details.maxAge || typeof details.maxAge !== 'number') details.maxAge = 3600;
 
-    let token = jwt.sign({
+    const token = jwt.sign({
       data: details.sessionData
     }, AUTH_SECRET, {
       expiresIn: details.maxAge,

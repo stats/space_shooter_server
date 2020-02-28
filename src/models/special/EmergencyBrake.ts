@@ -3,7 +3,7 @@ import { SpecialSystem } from './SpecialSystem';
 export class EmergencyBrake extends SpecialSystem {
 
   handleEvent() {
-    this.target.vertical_accelleration = 0;
-    this.target.horizontal_accelleration = 0;
+    this.target.verticalAccelleration = 0;
+    this.target.horizontalAccelleration = 0;
   }
 }

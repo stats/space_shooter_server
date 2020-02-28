@@ -13,12 +13,12 @@ import { sample } from 'lodash';
 
 export class Spawner {
 
-  private state:GameState;
-  private clock:Clock;
+  private state: GameState;
+  private clock: Clock;
 
-  private number_of_formations:number = 0;
+  private numberOfFormations = 0;
 
-  private enemy_types:any = [
+  private enemy_types: any = [
     [1, Asteroid],
     [1, Blaster],
     [1, Blimp],
@@ -30,26 +30,26 @@ export class Spawner {
     [1, Tracker]
   ];
 
-  private formations:any = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];
+  private formations: any = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];
 
-  private possible_enemies:any;
+  private possibleEnemies: any;
 
-  private min_formations = 1;
-  private max_formations = 1;
+  private minFormations = 1;
+  private maxFormations = 1;
 
-  constructor(state:GameState, clock:Clock) {
+  constructor(state: GameState, clock: Clock) {
     this.state = state;
     this.clock = clock;
   }
 
   nextWave() {
-    this.number_of_formations = (this.state.current_wave + 3);
-    this.possible_enemies = [];
-    this.min_formations = Math.ceil(this.state.current_wave / 10);
-    this.max_formations = Math.ceil(this.state.current_wave / 6);
-    for(let item of this.enemy_types) {
-      if(this.state.current_wave >= item[0]) {
-        this.possible_enemies.push(item[1]);
+    this.numberOfFormations = (this.state.currentWave + 3);
+    this.possibleEnemies = [];
+    this.minFormations = Math.ceil(this.state.currentWave / 10);
+    this.maxFormations = Math.ceil(this.state.currentWave / 6);
+    for(const item of this.enemy_types) {
+      if(this.state.currentWave >= item[0]) {
+        this.possibleEnemies.push(item[1]);
       } else {
         break;
       }
@@ -58,13 +58,13 @@ export class Spawner {
   }
 
   public complete() {
-    return this.number_of_formations == 0;
+    return this.numberOfFormations == 0;
   }
 
   spawnFormation() {
-    let formations = Math.min((Math.random() * (this.max_formations - this.min_formations)) + this.min_formations, this.number_of_formations);
+    const formations = Math.min((Math.random() * (this.maxFormations - this.minFormations)) + this.minFormations, this.numberOfFormations);
     for(let i = 0; i < formations; i++) {
-      let enemy = sample(this.possible_enemies);
+      const enemy = sample(this.possibleEnemies);
       let formation;
       switch(enemy) {
         case Asteroid:
@@ -79,9 +79,9 @@ export class Spawner {
       }
       console.log('Spawned Formation:', formation.constructor.name);
       formation.onSpawnEnemies(enemy);
-      this.number_of_formations--;
+      this.numberOfFormations--;
     }
-    if(this.number_of_formations > 0) {
+    if(this.numberOfFormations > 0) {
       this.clock.setTimeout(() => {
         this.spawnFormation();
       }, (Math.random() * 6000) + 4000);

@@ -9,45 +9,45 @@ import { Position } from '../../models/Position';
 
 export class Tank extends Enemy {
 
-  moveTo:Position;
+  moveTo: Position;
 
   constructor(options) {
     super(options);
-    this.health_base = 1;
-    this.health_growth = 0.1;
+    this.healthBase = 1;
+    this.healthGrowth = 0.1;
 
-    this.speed_base = 75;
-    this.speed_growth = 5;
+    this.speedBase = 75;
+    this.speedGrowth = 5;
 
-    this.collision_damage_base = 1;
-    this.collision_damage_growth = 0.1;
+    this.collisionDamageBase = 1;
+    this.collisionDamageGrowth = 0.1;
 
-    this.model_type = "tank";
+    this.modelType = "tank";
 
     this.radius = 30;
 
     this.moveTo = options.moveTo || Position.randomOnScreen();
   }
 
-  onInitGame(state:GameState) {
+  onInitGame(state: GameState) {
     super.onInitGame(state);
     this.registerBehaviours([new MoveToLocationThenRotatePath(this, { moveTo: this.moveTo })]);
 
-    let bullet_options = {
+    const bulletOptions = {
       system: EnemyBullet,
       damage: 1,
       speed: 300,
       range: 500,
-      collision_type: CT.CIRCLE,
+      collisionType: CT.CIRCLE,
       radius: 25,
-      bullet_mesh: "Enemy1",
+      bulletMesh: "Enemy1",
       x: this.position.x,
       y: this.position.y,
-      bullet_type: C.ENEMY_BULLET,
+      bulletType: C.ENEMY_BULLET,
       cooldown: 5000,
       behaviour: 'fires'
     }
-    this.registerBehaviour(new FiresBulletBehaviour(this, {bullet_options: bullet_options}));
+    this.registerBehaviour(new FiresBulletBehaviour(this, {bulletOptions: bulletOptions}));
   }
 
 }

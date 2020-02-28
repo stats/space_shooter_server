@@ -4,10 +4,10 @@ import { Position } from '../../models/Position';
 
 export class StraightAnglePath extends Behaviour {
 
-  start:Position;
-  angle:number;
+  start: Position;
+  angle: number;
 
-  constructor(target:any, args: {angle:number}) {
+  constructor(target: any, args: {angle: number}) {
     super('StraightAnglePath', target);
     this.start = new Position(this.target.position.x, this.target.position.y);
     this.angle = args.angle;

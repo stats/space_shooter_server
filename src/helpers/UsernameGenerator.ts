@@ -2,7 +2,7 @@ import { sample, capitalize } from 'lodash';
 
 export class UsernameGenerator {
 
-  public static names:string[] = [
+  public static names: string[] = [
     'hunter',
     'killer',
     'bounty',
@@ -64,13 +64,13 @@ export class UsernameGenerator {
   ];
 
   public static getUsername() {
-    let first = capitalize(sample(UsernameGenerator.names));
+    const first = capitalize(sample(UsernameGenerator.names));
 
     return first + (Math.round(Math.random() * 9999999));
   }
 
   public static getShipname() {
-    let first = capitalize(sample(UsernameGenerator.names));
+    const first = capitalize(sample(UsernameGenerator.names));
     let second =  capitalize(sample(UsernameGenerator.names));
     while(first == second) {
       second =  capitalize(sample(UsernameGenerator.names));

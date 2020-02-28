@@ -10,11 +10,11 @@ export class CollidesWithEnemyBullet extends Behaviour {
     super('CollidesWithEnemyBullet', target);
   }
 
-  public onUpdate(deltaTime:number) {
-    for(let uuid in this.target.$state.bullets) {
-      let bullet:Bullet = this.target.$state.bullets[uuid];
-      if(bullet.bullet_type == C.ENEMY_BULLET && CollisionHelper.collisionBetween(this.target, bullet)) {
-        if(this.target.bullet_invulnerable == false) {
+  public onUpdate(deltaTime: number) {
+    for(const uuid in this.target.$state.bullets) {
+      const bullet: Bullet = this.target.$state.bullets[uuid];
+      if(bullet.bulletType == C.ENEMY_BULLET && CollisionHelper.collisionBetween(this.target, bullet)) {
+        if(this.target.bulletInvulnerable == false) {
           this.target.handleEvent('take_damage', {damage: bullet.damage});
         }
         bullet.handleEvent('destroyed');

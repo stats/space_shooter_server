@@ -8,21 +8,21 @@ import { Primary } from './Primary';
 
 export class EnemyBullet extends Primary{
 
-  getBullets():Bullet[] {
-    let bullets:Bullet[] = [];
-    let options = {
+  getBullets(): Bullet[] {
+    const bullets: Bullet[] = [];
+    const options = {
       damage: this.damage,
       speed: this.speed,
       range: this.range,
-      collision_type: CT.CIRCLE,
+      collisionType: CT.CIRCLE,
       radius: this.radius,
-      bullet_mesh: this.bullet_mesh,
+      bulletMesh: this.bulletMesh,
       x: this.entity.position.x,
       y: this.entity.position.y,
-      bullet_type: C.ENEMY_BULLET
+      bulletType: C.ENEMY_BULLET
     }
 
-    let bullet = new Bullet(options);
+    const bullet = new Bullet(options);
     switch(this.behaviour) {
       case 'drops':
         bullet.registerBehaviour(new StraightAnglePath(bullet, {angle: this.entity.angle}));

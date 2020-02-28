@@ -8,21 +8,21 @@ export class Tracker extends Enemy {
 
   constructor(options) {
     super(options);
-    this.health_base = 1;
-    this.health_growth = 0.1;
+    this.healthBase = 1;
+    this.healthGrowth = 0.1;
 
-    this.speed_base = 75;
-    this.speed_growth = 5;
+    this.speedBase = 75;
+    this.speedGrowth = 5;
 
-    this.collision_damage_base = 1;
-    this.collision_damage_growth = 0.1;
+    this.collisionDamageBase = 1;
+    this.collisionDamageGrowth = 0.1;
 
-    this.model_type = "tracker";
+    this.modelType = "tracker";
 
     this.radius = 30;
   }
 
-  onInitGame(state:GameState) {
+  onInitGame(state: GameState) {
     super.onInitGame(state);
     this.registerBehaviours([new ClosestPlayerPath(this)]);
   }

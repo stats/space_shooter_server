@@ -9,44 +9,44 @@ import { TakesDamageBehaviour } from '../behaviours/Enemy/TakesDamageBehaviour';
 import { Entity } from './Entity';
 
 export class Enemy extends Entity {
-  health:number = 1;
-  health_base:number = 1;
-  health_growth:number = 0.1;
+  health = 1;
+  healthBase = 1;
+  healthGrowth = 0.1;
 
-  speed:number = 1;
-  speed_base:number = 1;
-  speed_growth:number = 0.1;
+  speed = 1;
+  speedBase = 1;
+  speedGrowth = 0.1;
 
-  collision_damage:number = 1;
-  collision_damage_base:number = 1;
-  collision_damage_growth:number = 0.1;
+  collisionDamage = 1;
+  collisionDamageBase = 1;
+  collisionDamageGrowth = 0.1;
 
-  flock:Enemy[];
-  destination:Position;
-  velocity:Position;
+  flock: Enemy[];
+  destination: Position;
+  velocity: Position;
 
   @type("string")
-  model_type:string = "";
+  modelType = "";
 
-  wave:number;
+  wave: number;
 
   constructor(options) {
     super(options);
   }
 
   updateStats(wave) {
-    this.health = Math.floor(this.health_base + (this.health_growth * wave));
-    this.speed = Math.floor(this.speed_base + (this.speed_growth * wave));
-    this.collision_damage = Math.floor(this.collision_damage_base + (this.collision_damage_growth * wave));
+    this.health = Math.floor(this.healthBase + (this.healthGrowth * wave));
+    this.speed = Math.floor(this.speedBase + (this.speedGrowth * wave));
+    this.collisionDamage = Math.floor(this.collisionDamageBase + (this.collisionDamageGrowth * wave));
   }
 
-  onInitGame(state:GameState) {
+  onInitGame(state: GameState) {
     super.onInitGame(state);
     this.registerBehaviours([
       new CollidesWithShipBullet(this),
       new DestroyedBehaviour(this),
       new TakesDamageBehaviour(this)
     ]);
-    this.updateStats(state.current_wave);
+    this.updateStats(state.currentWave);
   }
 }

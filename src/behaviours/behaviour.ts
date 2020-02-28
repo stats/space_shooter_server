@@ -1,12 +1,12 @@
 export class Behaviour {
-  public target:any;
-  public event_type:string;
+  public target: any;
+  public eventType: string;
 
-  constructor(type:string, target:any) {
-    this.event_type = type;
+  constructor(type: string, target: any) {
+    this.eventType = type;
     this.target = target;
   }
 
-  public onEvent(args:any) {}
-  public onUpdate(deltaTime:number) {}
+  public onEvent(args: any) {}
+  public onUpdate(deltaTime: number) {}
 }

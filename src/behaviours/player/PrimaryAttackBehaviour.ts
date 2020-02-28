@@ -7,19 +7,19 @@ import { Bullet } from '../../models/Bullet';
 
 export class PrimaryAttackBehaviour extends Behaviour {
 
-  private system:any;
+  private system: any;
 
   constructor(target) {
     super('primary_attack', target);
 
     this.system = PRIMARY.getSystem(this.target.primary_weapon, this.target)
-    this.target.primary_cooldown_max = this.system.fire_rate;
-    this.target.primary_cooldown = this.system.fire_rate;
+    this.target.primaryCooldownMax = this.system.fireRate;
+    this.target.primaryCooldown = this.system.fireRate;
   }
 
   public onEvent() {
     if(!this.canFire()) return;
-    this.target.primary_cooldown = 0;
+    this.target.primaryCooldown = 0;
 
     this.system.spawnBullets(this.target);
 
@@ -28,14 +28,14 @@ export class PrimaryAttackBehaviour extends Behaviour {
     }
   }
 
-  public onUpdate(deltaTime:number) {
-    if(this.target.primary_cooldown <= this.target.primary_cooldown_max) {
-      this.target.primary_cooldown += deltaTime;
+  public onUpdate(deltaTime: number) {
+    if(this.target.primaryCooldown <= this.target.primaryCooldownMax) {
+      this.target.primaryCooldown += deltaTime;
     }
   }
 
-  canFire():boolean {
-    return this.target.primary_cooldown >= this.target.primary_cooldown_max;
+  canFire(): boolean {
+    return this.target.primaryCooldown >= this.target.primaryCooldownMax;
   }
 
 }

@@ -8,41 +8,41 @@ const uuid = require('uuid/v4');
 export class Entity extends Schema {
 
   @type('string')
-  uuid:string;
+  uuid: string;
 
   @type(Position)
-  position:Position = new Position(0, 0);
+  position: Position = new Position(0, 0);
 
   @type('boolean')
-  override_angle:boolean = false;
+  overrideAngle = false;
 
   @type('number')
-  angle:number = 0;
+  angle = 0;
 
-  bullet_offset_x:number = 0;
-  bullet_offset_y:number = 0;
+  bullet_offset_x = 0;
+  bulletOffsetY = 0;
 
-  collision_type:number = CT.CIRCLE;
-  radius:number = 25;
-  width:number;
-  height:number;
-  radiusX:number;
-  radiusY:number;
-
-  @type('boolean')
-  bullet_invulnerable:boolean = false;
+  collisionType: number = CT.CIRCLE;
+  radius = 25;
+  width: number;
+  height: number;
+  radiusX: number;
+  radiusY: number;
 
   @type('boolean')
-  collision_invulnerable:boolean = false;
+  bulletInvulnerable = false;
 
   @type('boolean')
-  invisible:boolean = false;
+  collisionInvulnerable = false;
 
-  public $state:GameState;
+  @type('boolean')
+  invisible = false;
 
-  protected $behaviours:any[] = [];
+  public $state: GameState;
 
-  constructor(opts:any) {
+  protected $behaviours: any[] = [];
+
+  constructor(opts: any) {
     super();
     merge(this, opts);
     if(!this.position) this.position = new Position(0, 0);
@@ -51,17 +51,17 @@ export class Entity extends Schema {
     if(!this.uuid) this.uuid = uuid();
   }
 
-  public registerBehaviours(list:any[]) {
-    for(var item of list) {
+  public registerBehaviours(list: any[]) {
+    for(const item of list) {
       this.registerBehaviour(item);
     }
   }
 
-  public registerBehaviour(behaviour:any) {
+  public registerBehaviour(behaviour: any) {
     this.$behaviours.push(behaviour);
   }
 
-  public removeBehaviour(behaviour:any) {
+  public removeBehaviour(behaviour: any) {
     for(let i = this.$behaviours.length - 1; i >=0; i--) {
       if(this.$behaviours[i] == behaviour) {
         this.$behaviours.splice(i, 1);
@@ -76,29 +76,29 @@ export class Entity extends Schema {
   public getBulletSpawnLocation() {
     return {
       x: this.position.x + this.bullet_offset_x,
-      y: this.position.y + this.bullet_offset_y
+      y: this.position.y + this.bulletOffsetY
     }
   }
 
-  onInitGame(state:GameState) {
+  onInitGame(state: GameState) {
     this.$state = state;
   };
 
-  public handleEvent(event_type:string, args?:any) {
-    let handled_event = false;
+  public handleEvent(eventType: string, args?: any) {
+    let handledEvent = false;
     for(let i = 0; i < this.$behaviours.length; i++) {
-      let behaviour = this.$behaviours[i];
-      if(behaviour.event_type == event_type) {
+      const behaviour = this.$behaviours[i];
+      if(behaviour.eventType == eventType) {
         behaviour.onEvent(args);
-        handled_event = true;
+        handledEvent = true;
       }
     }
-    if(!handled_event) {
-      console.log('Warning:', event_type, 'not handled in', this);
+    if(!handledEvent) {
+      console.log('Warning:', eventType, 'not handled in', this);
     }
   }
 
-  onUpdate(deltaTime:number) {
+  onUpdate(deltaTime: number) {
     for(let i = 0; i < this.$behaviours.length; i++) {
       this.$behaviours[i].onUpdate(deltaTime);
     }

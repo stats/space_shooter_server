@@ -3,30 +3,30 @@ import { C, S } from '../../Constants';
 
 export class AsteroidFormation extends Formation {
 
-  onSpawnEnemies(spawn_type:any, allowed_sides?:number[]) {
+  onSpawnEnemies(spawnTpe: any, allowedSides?: number[]) {
 
-    let i:number, spawns:number;
+    let i: number, spawns: number;
     spawns = 2;
-    if(this.state.current_wave > 3) {
+    if(this.state.currentWave > 3) {
       spawns = 3;
-    } else if (this.state.current_wave > 5 ) {
+    } else if (this.state.currentWave > 5 ) {
       spawns = 4;
-    } else if (this.state.current_wave > 7 ) {
+    } else if (this.state.currentWave > 7 ) {
       spawns = 5;
-    } else if (this.state.current_wave > 10 ) {
+    } else if (this.state.currentWave > 10 ) {
       spawns = 6;
-    } else if (this.state.current_wave > 15 ) {
+    } else if (this.state.currentWave > 15 ) {
       spawns = 7;
-    } else if (this.state.current_wave > 20 ) {
+    } else if (this.state.currentWave > 20 ) {
       spawns = 8;
     }
 
-    let start_x:number, start_y:number;
+    let startX: number, startY: number;
     
     for(i = 0; i < spawns; i++) {
-      start_x = this.randomX();
-      start_y = this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 3);
-      this.state.addEnemy(new spawn_type({x: start_x , y: start_y }));
+      startX = this.randomX();
+      startY = this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 3);
+      this.state.addEnemy(new spawnTpe({x: startX , y: startY }));
     }
   }
 

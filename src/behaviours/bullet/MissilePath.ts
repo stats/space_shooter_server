@@ -6,40 +6,40 @@ import { GameState } from '../../models/GameState';
 
 export class MissilePath extends Behaviour {
 
-  private entity:Entity;
+  private entity: Entity;
 
-  private x_loc:number = -999;
-  private y_loc:number = -999;
+  private xLoc = -999;
+  private yLoc = -999;
 
-  private acc_x:number = 0;
-  private acc_y:number = 0;
+  private acc_x = 0;
+  private acc_y = 0;
 
-  private speed_x:number = 0;
-  private speed_y:number = 0;
+  private speed_x = 0;
+  private speed_y = 0;
 
-  private traveled:number = 0;
+  private traveled = 0;
 
-  private gotGameState:boolean = false;
+  private gotGameState = false;
 
-  private theta:number = 0;
-  private t1:number = 0.01;
-  private t2:number = 0.001;
+  private theta = 0;
+  private t1 = 0.01;
+  private t2 = 0.001;
 
 
-  constructor(target:any, args:{ angle:number }) {
+  constructor(target: any, args: { angle: number }) {
     super('MissilePath', target);
     this.theta = args.angle || Math.PI/2;
   }
 
   handleGameState() {
-    if(this.target.bullet_type == C.SHIP_BULLET) {
+    if(this.target.bulletType == C.SHIP_BULLET) {
       this.entity = this.target.$state.getClosestEnemy(this.target.position.x, this.target.position.y);
     } else {
       this.entity = this.target.$state.getClosestShip(this.target.position.x, this.target.position.y);
     }
     if(this.entity == null) {
-      this.x_loc = this.target.position.x;
-      this.y_loc = this.target.position.y + this.target.range;
+      this.xLoc = this.target.position.x;
+      this.yLoc = this.target.position.y + this.target.range;
     }
     this.gotGameState = true;
   }
@@ -55,14 +55,14 @@ export class MissilePath extends Behaviour {
       return;
     }
     if(this.entity && this.entity.invisible) {
-      this.x_loc = this.entity.position.x;
-      this.y_loc = this.entity.position.y;
+      this.xLoc = this.entity.position.x;
+      this.yLoc = this.entity.position.y;
       this.entity = null;
     }
 
-    let dx = this.getEntityX() - this.target.position.x;
-    let dy = this.getEntityY() - this.target.position.y;
-    let ct = Math.atan2(dy, dx);
+    const dx = this.getEntityX() - this.target.position.x;
+    const dy = this.getEntityY() - this.target.position.y;
+    const ct = Math.atan2(dy, dx);
     if(ct - this.theta > this.t1) {
       this.theta += this.t1;
     } else if(ct - this.theta < this.t1) {
@@ -89,19 +89,19 @@ export class MissilePath extends Behaviour {
     return 5 * Math.random() * 0.05 + 0.94;
   }
 
-  sgn(n:Number) {
+  sgn(n: number) {
     return n < 0 ? -1 : 1;
   }
 
   getEntityX() {
-    if( this.entity == null && this.x_loc == -999) return null;
-    if( this.entity != null ) this.x_loc = this.entity.position.x;
-    return this.x_loc;
+    if( this.entity == null && this.xLoc == -999) return null;
+    if( this.entity != null ) this.xLoc = this.entity.position.x;
+    return this.xLoc;
   }
 
   getEntityY() {
-    if( this.entity == null && this.y_loc == -999) return null;
-    if( this.entity != null ) this.y_loc = this.entity.position.y;
-    return this.y_loc;
+    if( this.entity == null && this.yLoc == -999) return null;
+    if( this.entity != null ) this.yLoc = this.entity.position.y;
+    return this.yLoc;
   }
 }

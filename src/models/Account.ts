@@ -13,17 +13,17 @@ import { MATERIAL } from '../Material';
 
 export class Account extends Schema {
 
-  createdAt:number;
-  email:string;
-  password:string;
+  createdAt: number;
+  email: string;
+  password: string;
 
-  system_id:string;
+  systemId: string;
 
   @type("string")
-  username:string;
+  username: string;
 
-  unlocked:any;
-  stats:any;
+  unlocked: any;
+  stats: any;
 
   constructor(options) {
     super();
@@ -34,50 +34,50 @@ export class Account extends Schema {
     if(!this.username) this.username = UsernameGenerator.getUsername();
   }
 
-  getStatistics():Statistics {
+  getStatistics(): Statistics {
     return new Statistics(this.stats);
   }
 
-  getUnlockMessage():UnlockMessage {
-    let item:UnlockItem;
-    let message:UnlockMessage = new UnlockMessage({});
+  getUnlockMessage(): UnlockMessage {
+    let item: UnlockItem;
+    const message: UnlockMessage = new UnlockMessage({});
 
-    for(let key in SHIP.TYPE) {
-      let t = SHIP.TYPE[key];
-      if( !("unlock_key" in t) ) {
+    for(const key in SHIP.TYPE) {
+      const t = SHIP.TYPE[key];
+      if( !("unlockKey" in t) ) {
         item = new UnlockItem("", true, 0)
       } else {
-        item = new UnlockItem(t.unlock_key, (key in this.unlocked), t.unlock_count)
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount)
       }
       message.unlocks[key] = item;
     }
 
-    for(let key in PRIMARY.TYPE) {
-      let t = PRIMARY.TYPE[key];
-      if( !("unlock_key" in t) ) {
+    for(const key in PRIMARY.TYPE) {
+      const t = PRIMARY.TYPE[key];
+      if( !("unlockKey" in t) ) {
         item = new UnlockItem("", true, 0)
       } else {
-        item = new UnlockItem(t.unlock_key, (key in this.unlocked), t.unlock_count)
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount)
       }
       message.unlocks[key] = item;
     }
 
-    for(let key in SPECIAL.TYPE) {
-      let t = SPECIAL.TYPE[key];
-      if( !("unlock_key" in t) ) {
+    for(const key in SPECIAL.TYPE) {
+      const t = SPECIAL.TYPE[key];
+      if( !("unlockKey" in t) ) {
         item = new UnlockItem("", true, 0)
       } else {
-        item = new UnlockItem(t.unlock_key, (key in this.unlocked), t.unlock_count)
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount)
       }
       message.unlocks[key] = item;
     }
 
-    for(let key in MATERIAL.TYPE) {
-      let t = MATERIAL.TYPE[key];
-      if( !("unlock_key" in t) ) {
+    for(const key in MATERIAL.TYPE) {
+      const t = MATERIAL.TYPE[key];
+      if( !("unlockKey" in t) ) {
         item = new UnlockItem("", true, 0)
       } else {
-        item = new UnlockItem(t.unlock_key, (key in this.unlocked), t.unlock_count)
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount)
       }
       message.unlocks[key] = item;
     }
@@ -87,53 +87,53 @@ export class Account extends Schema {
 
   updateUnlocks() {
 
-    for(let key in SHIP.TYPE) {
+    for(const key in SHIP.TYPE) {
       /** We need do no tests if already unlocked. **/
       if(this.isUnlocked(key)) continue;
-      let t = SHIP.TYPE[key];
-      if( !("unlock_key" in t) ) {
+      const t = SHIP.TYPE[key];
+      if( !("unlockKey" in t) ) {
         this.unlock(key);
       } else {
-        if(this.getStat(t["unlock_key"]) >= t["unlock_count"]) this.unlock(key);
+        if(this.getStat(t["unlockKey"]) >= t["unlockCount"]) this.unlock(key);
       }
     }
 
-    for(let key in SPECIAL.TYPE) {
+    for(const key in SPECIAL.TYPE) {
       /** We need do no tests if already unlocked. **/
       if(this.isUnlocked(key)) continue;
-      let t = SPECIAL.TYPE[key];
-      if( !("unlock_key" in t) ) {
+      const t = SPECIAL.TYPE[key];
+      if( !("unlockKey" in t) ) {
         this.unlock(key);
       } else {
-        if(this.getStat(t["unlock_key"]) >= t["unlock_count"]) this.unlock(key);
+        if(this.getStat(t["unlockKey"]) >= t["unlockCount"]) this.unlock(key);
       }
     }
 
-    for(let key in PRIMARY.TYPE) {
+    for(const key in PRIMARY.TYPE) {
      /** We need do no tests if already unlocked. **/
      if(this.isUnlocked(key)) continue;
-     let t = PRIMARY.TYPE[key];
-     if( !("unlock_key" in t) ) {
+     const t = PRIMARY.TYPE[key];
+     if( !("unlockKey" in t) ) {
        this.unlock(key);
      } else {
-       if(this.getStat(t["unlock_key"]) >= t["unlock_count"]) this.unlock(key);
+       if(this.getStat(t["unlockKey"]) >= t["unlockCount"]) this.unlock(key);
      }
     }
 
-    for(let key in MATERIAL.TYPE) {
+    for(const key in MATERIAL.TYPE) {
      /** We need do no tests if already unlocked. **/
      if(this.isUnlocked(key)) continue;
-     let t = MATERIAL.TYPE[key];
-     if( !("unlock_key" in t) ) {
+     const t = MATERIAL.TYPE[key];
+     if( !("unlockKey" in t) ) {
        this.unlock(key);
      } else {
-       if(this.getStat(t["unlock_key"]) >= t["unlock_count"]) this.unlock(key);
+       if(this.getStat(t["unlockKey"]) >= t["unlockCount"]) this.unlock(key);
      }
     }
 
   }
 
-  updateStatsWithShip(ship:Ship) {
+  updateStatsWithShip(ship: Ship) {
     this.updateStat("max_level", ship.level);
     this.updateStat(`max_level_${ship.ship_type}`, ship.level);
 
@@ -142,7 +142,7 @@ export class Account extends Schema {
     this.updateStat(`max_kills_${ship.primary_weapon}`, ship.kills);
     this.updateStat(`max_kills_${ship.special_weapon}`, ship.kills);
 
-    for(let key in ship.tracker) {
+    for(const key in ship.tracker) {
       this.updateStat(`max_kills_${key}`, ship.tracker[key]);
     }
     this.updateUnlocks();
@@ -162,18 +162,18 @@ export class Account extends Schema {
     else this.stats[type] += amount;
   }
 
-  isUnlocked(type:string) {
+  isUnlocked(type: string) {
     if(type in this.unlocked && this.unlocked[type] == true) return true;
     return false;
   }
 
-  unlock(type:string) {
+  unlock(type: string) {
     this.unlocked[type] = true;
   }
 
   public toSaveObject(): any {
-    const baseObj:any = pick(this, [
-      'createdAt', 'email', 'password', 'system_id', 'username', 'unlocked', 'stats'
+    const baseObj: any = pick(this, [
+      'createdAt', 'email', 'password', 'systemId', 'username', 'unlocked', 'stats'
     ]);
     return baseObj;
   }

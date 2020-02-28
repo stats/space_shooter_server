@@ -22,147 +22,147 @@ const uuid = require('uuid/v4');
 
 export class Ship extends Entity {
 
-  sessionId?:number;
-  connected:boolean = false;
+  sessionId?: number;
+  connected = false;
 
   @type("string")
-  name:string;
+  name: string;
 
-  username:string;
-  uuid:string;
-
-  @type("string")
-  ship_type:string;
+  username: string;
+  uuid: string;
 
   @type("string")
-  ship_material:string;
+  ship_type: string;
 
   @type("string")
-  primary_weapon:string;
+  ship_material: string;
 
   @type("string")
-  special_weapon:string;
+  primary_weapon: string;
+
+  @type("string")
+  special_weapon: string;
 
   @type("number")
-  primary_cooldown_max:number = 0;
+  primaryCooldownMax = 0;
 
   @type("number")
-  primary_cooldown:number = 0;
+  primaryCooldown = 0;
 
   @type("number")
-  special_cooldown_max:number = 0;
+  specialCooldownMax = 0;
 
   @type("number")
-  special_cooldown:number = 0;
+  specialCooldown = 0;
 
   @type("number")
-  kills:number = 0;
+  kills = 0;
 
   @type("number")
-  kill_score:number = 0;
+  killScore = 0;
 
   @type("number")
-  current_kills:number = 0;
+  currentKills = 0;
 
   @type("int32")
-  shields:number = 1;
+  shields = 1;
 
   @type("number")
-  damage:number = 1;
+  damage = 1;
 
   @type("number")
-  fire_rate:number = 1;
+  fireRate = 1;
 
   @type("number")
-  range:number = 1;
+  range = 1;
 
   @type("int32")
-  max_shields:number = 1; //TODO: Be the upgrade value
+  maxShields = 1; //TODO: Be the upgrade value
 
   @type("number")
-  shields_recharge_cooldown:number = 0;
+  shieldsRechargeCooldown = 0;
 
   @type("number")
-  shields_recharge_time:number = 30000;
+  shieldsRechargeTime = 30000;
 
   @type("number")
-  speed:number = 0;
+  speed = 0;
 
   @type("number")
-  accelleration:number = 0;
+  accelleration = 0;
 
-  horizontal_accelleration:number = 0;
-  vertical_accelleration:number = 0;
-
-  @type("number")
-  rank:number = 1; //The current ranking of the ship which corresponds to which wave to start on
+  horizontalAccelleration = 0;
+  verticalAccelleration = 0;
 
   @type("number")
-  highest_wave:number = 1;
+  rank = 1; //The current ranking of the ship which corresponds to which wave to start on
 
   @type("number")
-  level:number = 1;
+  highestWave = 1;
 
   @type("number")
-  previous_level:number = 0;
+  level = 1;
 
   @type("number")
-  next_level:number = 0;
+  previousLevel = 0;
 
-  createdAt:number;
+  @type("number")
+  nextLevel = 0;
 
-  weaponCharge:number = 1;
-  thrusters:number = 1;
+  createdAt: number;
 
-  inGame:number;
+  weaponCharge = 1;
+  thrusters = 1;
+
+  inGame: number;
 
   //upgrades
   @type("int32")
-  upgrade_points:number = 0;
+  upgradePoints = 0;
 
   @type("int32")
-  upgrade_damage:number = 0;
+  upgrade_damage = 0;
 
   @type("int32")
-  upgrade_range:number = 0;
+  upgrade_range = 0;
 
   @type("int32")
-  upgrade_fire_rate:number = 0;
+  upgrade_fireRate = 0;
 
   @type("int32")
-  upgrade_accelleration:number = 0;
+  upgrade_accelleration = 0;
 
   @type("int32")
-  upgrade_speed:number = 0;
+  upgrade_speed = 0;
 
   @type("int32")
-  upgrade_shields_max:number = 0;
+  upgrade_shields_max = 0;
 
   @type("int32")
-  upgrade_shields_recharge:number = 0;
+  upgrade_shields_recharge = 0;
 
-  damage_base:number = 1;
-  damage_growth:number = 1;
+  damage_base = 1;
+  damage_growth = 1;
 
-  range_base:number = 0;
-  range_growth:number = 25;
+  range_base = 0;
+  range_growth = 25;
 
-  fire_rate_base:number = 0;
-  fire_rate_growth:number = 250;
+  fireRate_base = 0;
+  fireRate_growth = 250;
 
-  speed_base:number = 100;
-  speed_growth:number = 50;
+  speedBase = 100;
+  speedGrowth = 50;
 
-  accelleration_base:number = 100;
-  accelleration_growth:number = 50;
+  accelleration_base = 100;
+  accelleration_growth = 50;
 
-  shields_base:number = 1;
-  shields_growth:number = 1;
+  shields_base = 1;
+  shields_growth = 1;
 
-  shield_recharge_base:number = 30000;
-  shield_recharge_growth:number = 750;
+  shield_recharge_base = 30000;
+  shield_recharge_growth = 750;
 
-  tracker:any = {};
+  tracker: any = {};
 
   getDamage() {
     return ( this.damage_base + (this.upgrade_damage * this.damage_growth) ) * this.weaponCharge;
@@ -173,7 +173,7 @@ export class Ship extends Entity {
   }
 
   getFireRate() {
-    return this.fire_rate_base - (this.upgrade_fire_rate * this.fire_rate_growth);
+    return this.fireRate_base - (this.upgrade_fireRate * this.fireRate_growth);
   }
 
   getMaxShields() {
@@ -185,16 +185,16 @@ export class Ship extends Entity {
   }
 
   getSpeed() {
-    return this.speed_base + (this.upgrade_speed * this.speed_growth) * this.thrusters;
+    return this.speedBase + (this.upgrade_speed * this.speedGrowth) * this.thrusters;
   }
 
   getAccelleration() {
     return this.accelleration_base + (this.upgrade_accelleration * this.accelleration_growth) * this.thrusters;
   }
 
-  async updateWaveRank(wave:number) {
-    if(wave > this.highest_wave) {
-      this.highest_wave = wave;
+  async updateWaveRank(wave: number) {
+    if(wave > this.highestWave) {
+      this.highestWave = wave;
     }
     if( wave > this.rank ) {
       this.rank += Math.round((wave - this.rank) / 2);
@@ -203,7 +203,7 @@ export class Ship extends Entity {
     }
     this.rank = Math.max(this.rank, 1);
     console.log("[Ship] (username)", this.username);
-    let account = await AccountHelper.getAccountByUsername(this.username);
+    const account = await AccountHelper.getAccountByUsername(this.username);
     /** This could fail **/
     if(account) {
       account.updateStatsWithShip(this);
@@ -219,22 +219,22 @@ export class Ship extends Entity {
     if(!this.tracker) this.tracker = opts.tracker || {};
     if(this.uuid == null) this.uuid = uuid();
     this.radius = 27;
-    this.bullet_offset_y = 50;
+    this.bulletOffsetY = 50;
     this.setupShip();
   }
 
   setupShip() {
     this.damage = this.getDamage();
-    this.fire_rate = this.getFireRate();
+    this.fireRate = this.getFireRate();
     this.range = this.getRange();
-    this.shields = this.max_shields = this.getMaxShields();
+    this.shields = this.maxShields = this.getMaxShields();
     this.speed = this.getSpeed();
     this.accelleration = this.getAccelleration();
-    this.shields_recharge_time = this.getShieldRecharge();
+    this.shieldsRechargeTime = this.getShieldRecharge();
     this.updateNextLevel();
   }
 
-  onInitGame(state:GameState) {
+  onInitGame(state: GameState) {
     super.onInitGame(state);
     this.removeAllBehaviours();
     this.registerBehaviours([
@@ -250,21 +250,21 @@ export class Ship extends Entity {
     this.setupShip()
   }
 
-  setWeaponCharge(n:number) {
+  setWeaponCharge(n: number) {
     this.weaponCharge = n;
     this.damage = this.getDamage();
   }
 
-  setThrusters(n:number) {
+  setThrusters(n: number) {
     this.thrusters = n;
     this.speed = this.getSpeed();
     this.accelleration = this.getAccelleration();
   }
 
   checkLevelUp() {
-    while( this.kills > this.next_level ) {
+    while( this.kills > this.nextLevel ) {
       this.level += 1;
-      this.upgrade_points += 1;
+      this.upgradePoints += 1;
       this.updateNextLevel();
     }
   }
@@ -272,39 +272,39 @@ export class Ship extends Entity {
   clampToBounds() {
     if(this.position.x < C.BOUNDS.minX) {
       this.position.x = C.BOUNDS.minX;
-      this.horizontal_accelleration = 0;
+      this.horizontalAccelleration = 0;
     }
     if(this.position.x > C.BOUNDS.maxX) {
        this.position.x = C.BOUNDS.maxX;
-       this.horizontal_accelleration = 0;
+       this.horizontalAccelleration = 0;
     }
     if(this.position.y < C.BOUNDS.minY) {
        this.position.y = C.BOUNDS.minY;
-       this.vertical_accelleration = 0;
+       this.verticalAccelleration = 0;
     }
     if(this.position.y > C.BOUNDS.maxY) {
        this.position.y = C.BOUNDS.maxY;
-       this.vertical_accelleration = 0;
+       this.verticalAccelleration = 0;
     }
   }
 
-  addKill(current_wave, model_type) {
-    this.current_kills += 1;
+  addKill(currentWave, modelType) {
+    this.currentKills += 1;
     this.kills += 1;
-    this.kill_score += current_wave;
+    this.killScore += currentWave;
     this.$state.enemies_killed++;
-    if( !(model_type in this.tracker) ) this.tracker[model_type] = 1;
-    else this.tracker[model_type] += 1;
+    if( !(modelType in this.tracker) ) this.tracker[modelType] = 1;
+    else this.tracker[modelType] += 1;
     this.checkLevelUp();
   }
 
   updateNextLevel() {
-    this.previous_level = Math.floor(50*Math.pow(this.level-1, 1.25));
-    this.next_level = Math.floor(50*Math.pow(this.level, 1.25));
+    this.previousLevel = Math.floor(50*Math.pow(this.level-1, 1.25));
+    this.nextLevel = Math.floor(50*Math.pow(this.level, 1.25));
   }
 
-  toSaveObject():any {
-    const baseObj:any = pick(this, [
+  toSaveObject(): any {
+    const baseObj: any = pick(this, [
       'name',
       'uuid',
       'username',
@@ -313,16 +313,16 @@ export class Ship extends Entity {
       'primary_weapon',
       'special_weapon',
       'kills',
-      'kill_score',
+      'killScore',
       'rank',
-      'highest_wave',
+      'highestWave',
       'level',
       'radius',
       'createdAt',
-      'upgrade_points',
+      'upgradePoints',
       'upgrade_damage',
       'upgrade_range',
-      'upgrade_fire_rate',
+      'upgrade_fireRate',
       'upgrade_accelleration',
       'upgrade_speed',
       'upgrade_shields_max',
@@ -331,10 +331,10 @@ export class Ship extends Entity {
       'damage_growth',
       'range_base',
       'range_growth',
-      'fire_rate_base',
-      'fire_rate_growth',
-      'speed_base',
-      'speed_growth',
+      'fireRate_base',
+      'fireRate_growth',
+      'speedBase',
+      'speedGrowth',
       'accelleration_base',
       'accelleration_growth',
       'shields_base',
