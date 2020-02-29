@@ -5,7 +5,7 @@ import { Position } from '../../models/Position';
 
 export class SimpleFlock extends Formation {
 
-  onSpawnEnemies(spawnType: Enemy, allowedSides?: number[]): void {
+  onSpawnEnemies(spawnType: any, allowedSides?: number[]): void {
 
     let i: number, spawns: number;
     spawns = 3;
@@ -23,8 +23,8 @@ export class SimpleFlock extends Formation {
       spawns = 12;
     }
 
-    const start: Position = new Position(0,0)
-    const destination: Position = new Position(0,0);
+    let start: Position = new Position(0,0)
+    let destination: Position = new Position(0,0);
 
     switch(this.getRandomSide(allowedSides)) {
       case S.TOP:

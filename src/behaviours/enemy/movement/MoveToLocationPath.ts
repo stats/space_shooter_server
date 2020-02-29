@@ -3,7 +3,7 @@ import { C } from '../../../Constants';
 import { Position } from '../../../models/Position';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 import { Entity } from '../../../models/Entity';
-import { Entity } from '../../../models/Entity';
+import { Enemy } from '../../../models/Enemy';
 
 export class MoveToLocationPath extends Behaviour {
 
@@ -13,7 +13,9 @@ export class MoveToLocationPath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: Entity. args: { moveTo: Position}) {
+  target: Enemy;
+
+  constructor(target: Enemy args: { moveTo: Position}) {
     super('MoveToLocation', target);
     this.moveTo = args.moveTo;
     if(this.moveTo == null) {

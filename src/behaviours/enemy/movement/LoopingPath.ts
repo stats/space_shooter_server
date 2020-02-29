@@ -1,6 +1,7 @@
 import { Behaviour } from '../../behaviour';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 import { Entity } from '../../../models/Entity';
+import { Enemy } from '../../../models/Enemy';
 
 export class LoopingPath extends Behaviour {
 
@@ -10,7 +11,9 @@ export class LoopingPath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: Entity) {
+  target: Enemy;
+
+  constructor(target: Enemy) {
     super('LoopingPath', target);
 
     const dx = 800 - this.target.position.x;

@@ -33,7 +33,7 @@ export class Cannon extends Primary {
 
     if(this.bullet_count == 1){
       const bullet = new Bullet(options);
-      bullet.registerBehaviour(new StraightLineUpPath(bullet));
+      bullet.registerBehaviour("path", new StraightLineUpPath(bullet));
       bullets.push( bullet );
     } else if (this.bullet_count == 2){
       let bullet = new Bullet(options);

@@ -110,7 +110,7 @@ export class GameState extends Schema {
   }
 
   getClosestEnemy(x: number, y: number, ignoreInvisible= false): Enemy {
-    let returnEnemy: Ship = null;
+    let returnEnemy: Enemy = null;
     let distance = 99999;
     for(const key in this.enemies) {
       const enemy = this.enemies[key];

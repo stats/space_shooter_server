@@ -2,6 +2,7 @@ import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 import { Entity } from '../../../models/Entity';
+import { Enemy } from '../../../models/Enemy';
 
 export class StraightLinePath extends Behaviour {
 
@@ -10,7 +11,9 @@ export class StraightLinePath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: Entity) {
+  target: Enemy;
+
+  constructor(target: Enemy) {
     super('StraightLinePath', target);
     if(this.target.position.x < C.BOUNDS.minX) this.xDir = 1;
     if(this.target.position.x > C.BOUNDS.maxX) this.xDir = -1;

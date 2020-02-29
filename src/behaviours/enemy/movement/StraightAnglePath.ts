@@ -3,6 +3,7 @@ import { C } from '../../../Constants';
 import { Position } from '../../../models/Position';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 import { Entity } from '../../../models/Entity';
+import { Enemy } from '../../../models/Enemy';
 
 export class StraightAnglePath extends Behaviour {
 
@@ -11,7 +12,9 @@ export class StraightAnglePath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: Entity): void {
+  target: Enemy;
+
+  constructor(target: Enemy): void {
     super('StraightAnglePath', target);
     this.start = new Position(this.target.position.x, this.target.position.y);
 

@@ -2,17 +2,18 @@ import { GameState } from '../../models/GameState';
 import { Enemy } from '../../models/Enemy';
 import { C, S } from '../../Constants';
 import { sample } from 'lodash';
+import { Position } from '../../models/Position';
 
 export class Formation {
 
   protected state: GameState;
-  protected positions: Array<Array<number, number>>;
+  protected positions: any;
 
   constructor( state: GameState ) {
     this.state = state;
   }
 
-  onSpawnEnemies(spawnType: Enemy, allowedSides?: number[]): void {
+  onSpawnEnemies(spawnType: any, allowedSides?: number[]): void {
     // Do nothing.
   }
 
@@ -25,34 +26,34 @@ export class Formation {
   }
 
   protected topOffset(): number {
-    return C.BOUNDS.maxY + C.SPAWN_OFFSET;
+    return C.BOUNDS.maxY + ( C.SPAWN_OFFSET * 2 );
   }
 
   protected leftOffset(): number {
-    return -C.SPAWN_OFFSET;
+    return -C.SPAWN_OFFSET * 2;
   }
 
   protected rightOffset(): number {
-    return C.BOUNDS.maxX + C.SPAWN_OFFSET;
+    return C.BOUNDS.maxX + ( C.SPAWN_OFFSET * 2 );
   }
 
-  protected getStartPositions(side: number): number[] {
-    let startX: number, startY: number;
+  protected getStartPositions(side: number): Position {
+    let position = new Position(0, 0);
     switch(side) {
       case S.TOP:
-        startY = this.topOffset();
-        startX = this.randomX();
+        position.y = this.topOffset();
+        position.x = this.randomX();
         break;
       case S.LEFT:
-        startY = this.randomY();
-        startX = this.leftOffset();
+        position.y = this.randomY();
+        position.x = this.leftOffset();
         break;
       case S.RIGHT:
-        startY = this.randomY();
-        startX = this.rightOffset();
+        position.y = this.randomY();
+        position.x = this.rightOffset();
         break;
     }
-    return [startX, startY];
+    return position;
   }
 
   protected getRandomSide(allowedSides?: number[]): number {
@@ -63,20 +64,22 @@ export class Formation {
     }
   }
 
-  protected spawnEnemies(startX: number, startY: number, side: number, spawns: number, spawnType: Enemy): void {
+  protected spawnEnemies(start: Position, side: number, spawns: number, spawnType: any): void {
     let i: number;
+    let position: Position;
     for(i = 0; i < spawns; i++) {
       switch(side) {
         case S.TOP:
-          this.state.addEnemy(new spawnType({x: startX + this.positions[i][0], y: startY + this.positions[i][1]}));
+          position = new Position(start.x + this.positions[i][0], start.y + this.positions[i][1])
         break;
         case S.LEFT:
-          this.state.addEnemy(new spawnType({x: startX - this.positions[i][1], y: startY + this.positions[i][0]}));
+          position = new Position(start.x - this.positions[i][1], start.y + this.positions[i][0]);
         break;
         case S.RIGHT:
-          this.state.addEnemy(new spawnType({x: startX + this.positions[i][1], y: startY - this.positions[i][0]}));
+          position = new Position(start.x + this.positions[i][1], start.y - this.positions[i][0]);
         break;
       }
+      this.state.addEnemy(new spawnType({position: position}));
     }
   }
 }

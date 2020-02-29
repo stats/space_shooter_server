@@ -1,9 +1,12 @@
 import { Behaviour } from '../behaviour';
 import { Entity } from '../../models/Entity';
+import { Enemy } from '../../models/Enemy';
 
 export class DestroyedBehaviour extends Behaviour {
 
-  constructor(target: Entity) {
+  target: Enemy;
+
+  constructor(target: Enemy) {
     super('destroyed', target);
   }
 

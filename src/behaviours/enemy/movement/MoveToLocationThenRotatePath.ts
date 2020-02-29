@@ -3,6 +3,7 @@ import { C } from '../../../Constants';
 import { Position } from '../../../models/Position';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 import { Entity } from '../../../models/Entity';
+import { Enemy } from '../../../models/Enemy';
 
 export class MoveToLocationThenRotatePath extends Behaviour {
 
@@ -14,7 +15,9 @@ export class MoveToLocationThenRotatePath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: Entity) {
+  target: Enemy;
+
+  constructor(target: Enemy, args: { moveTo: Position }) {
     super('MoveToLocationThenRotate', target);
     this.moveTo = args.moveTo || Position.randomOnScreen();
     if(this.moveTo == null) {

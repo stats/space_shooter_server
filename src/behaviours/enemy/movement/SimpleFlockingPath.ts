@@ -11,7 +11,9 @@ export class SimpleFlockingPath extends Behaviour {
 
   enteredScreen = false;
 
-  constructor(target: Entity, args: { destination: Position }) {
+  target: Enemy;
+
+  constructor(target: Enemy, args: { destination: Position, flock: Enemy[] }) {
     super('SimpleFlockingPath', target);
     this.flock = args.flock || [];
     this.destination = args.destination || new Position(0, 0);

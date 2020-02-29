@@ -40,7 +40,7 @@ export class GameRoom extends Room<GameState> {
 
   }
 
-  async onAuth(client: Client, options: any): Promise<void> {
+  async onAuth(client: Client, options: any): Promise<any> {
     const isValidToken = await JWTHelper.verifyToken(options.token);
 
     if(!isValidToken) {
@@ -107,7 +107,7 @@ export class GameRoom extends Room<GameState> {
     }
   }
 
-  handleClientInput(client: Client, input: any): Promise<void> {
+  handleClientInput(client: Client, input: any): void {
     const ship: Ship = this.clientShipHash[client.id];
     ship.handleEvent('input', input);
   }

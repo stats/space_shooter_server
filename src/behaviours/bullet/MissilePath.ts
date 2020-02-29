@@ -26,7 +26,6 @@ export class MissilePath extends Behaviour {
 
   target: Bullet;
 
-
   constructor(target: Bullet, args: { angle: number }) {
     super('MissilePath', target);
     this.theta = args.angle || Math.PI/2;

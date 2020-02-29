@@ -1,6 +1,7 @@
 import { Behaviour } from '../behaviour';
 import { Primary } from '../../models/primary/Primary';
 import { Entity } from '../../models/Entity';
+import { Enemy } from '../../models/Enemy';
 
 export class FiresBulletBehaviour extends Behaviour {
 
@@ -8,7 +9,9 @@ export class FiresBulletBehaviour extends Behaviour {
   cooldown = 0;
   system: Primary;
 
-  constructor(target: Entity, args: { bulletOptions: any} ) {
+  target: Enemy;
+
+  constructor(target: Enemy, args: { bulletOptions: any} ) {
     super('fires_bullet', target);
     this.system = new args.bulletOptions.system(this.target, args.bulletOptions);
     this.cooldown = args.bulletOptions.cooldown;

@@ -1,9 +1,10 @@
 import { Formation } from './Formation';
 import { Enemy } from '../../models/Enemy';
+import { Position } from '../../models/Position';
 
 export class TriangleFormation extends Formation {
 
-  positions: Array<Array<number, number>> = [
+  positions: any = [
     [0,0],
     [-30, 100], [30, 100],
     [-60, 200], [0, 200], [60, 200],
@@ -11,14 +12,12 @@ export class TriangleFormation extends Formation {
     [-120, 400], [-60, 400], [0, 0], [60, 400], [120, 400]
   ];
 
-  onSpawnEnemies(spawnType: Enemy, allowedSides?: number[]): void {
-    const side: number, startX: number, startY: number;
-    let spawns: number;
+  onSpawnEnemies(spawnType: any, allowedSides?: number[]): void {
+    const side: number = this.getRandomSide(allowedSides);
 
-    side = this.getRandomSide(allowedSides);
-    [startX, startY] = this.getStartPositions(side);
+    const position: Position = this.getStartPositions(side);
 
-    spawns = 3;
+    let spawns: number = 3;
     if(this.state.currentWave > 5) {
       spawns = 6;
     } else if (this.state.currentWave > 10 ) {
@@ -27,7 +26,7 @@ export class TriangleFormation extends Formation {
       spawns = 15;
     }
 
-    this.spawnEnemies(startX, startY, side, spawns, spawnType);
+    this.spawnEnemies(position, side, spawns, spawnType);
   }
 
 }

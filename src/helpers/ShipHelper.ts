@@ -87,7 +87,7 @@ export class ShipHelper {
     return await DB.$ships.updateOne({uuid: ship.uuid}, { $set: ship.toSaveObject() });
   }
 
-  static async deleteShip(username: string, uuid: string): Primise<any> {
+  static async deleteShip(username: string, uuid: string): Promise<any> {
     const account = await AccountHelper.getAccountByUsername(username);
     account.increaseStat("ships_destroyed", 1);
     AccountHelper.saveAccount(account);

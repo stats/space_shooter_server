@@ -1,10 +1,11 @@
 import { Formation } from './Formation';
 import { C, S } from '../../Constants';
 import { Enemy } from '../../models/Enemy';
+import { Position } from '../../models/Position';
 
 export class RandomFormation extends Formation {
 
-  onSpawnEnemies(spawnType: Enemy, allowedSides?: number[]): void {
+  onSpawnEnemies(spawnType: any, allowedSides?: number[]): void {
 
     let i: number, spawns: number;
     spawns = 3;
@@ -23,24 +24,29 @@ export class RandomFormation extends Formation {
     }
 
     for(i = 0; i < spawns; i++) {
-      const side: number;
-      let startX: number, startY: number;
-      side = this.getRandomSide(allowedSides);
+      const side: number = this.getRandomSide(allowedSides);;
+      let position: Position;
       switch(side) {
         case S.TOP:
-          startX = this.randomX();
-          startY = this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 5);
+          position = new Position(
+            this.randomX(),
+            this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 5)
+          );
           break;
         case S.LEFT:
-          startX = this.leftOffset() - (Math.random() * C.SPAWN_OFFSET * 5);
-          startY = this.randomY();
+          position = new Position(
+            this.leftOffset() - (Math.random() * C.SPAWN_OFFSET * 5),
+            this.randomY()
+          );
           break;
         case S.RIGHT:
-          startX = this.rightOffset() + (Math.random() * C.SPAWN_OFFSET * 5);
-          startY = this.randomY();
+          position = new Position(
+            this.rightOffset() + (Math.random() * C.SPAWN_OFFSET * 5),
+            this.randomY()
+          );
           break;
       }
-      this.state.addEnemy(new spawnType({x: startX , y: startY }));
+      this.state.addEnemy(new spawnType({position}));
     }
   }
 

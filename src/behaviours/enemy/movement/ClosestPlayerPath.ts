@@ -3,6 +3,7 @@ import { C } from '../../../Constants';
 import { Ship } from '../../../models/Ship';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 import { Entity } from '../../../models/Entity';
+import { Enemy } from '../../../models/Enemy';
 
 export class ClosestPlayerPath extends Behaviour {
 
@@ -10,9 +11,11 @@ export class ClosestPlayerPath extends Behaviour {
   theta: number;
   enteredScreen = false;
 
-  constructor(target: Entity) {
+  target: Enemy;
+
+  constructor(target: Enemy) {
     super('ClosestPlayerPath', target);
-    this.targetPlayer = this.target.$state.getClosestShip(this.target.x, this.target.y);
+    this.targetPlayer = this.target.$state.getClosestShip(this.target.position.x, this.target.position.y);
     let dx: number, dy: number;
     if(this.targetPlayer == null){
       dx = ( C.BOUNDS.maxX / 2 ) - this.target.position.x;
@@ -27,7 +30,7 @@ export class ClosestPlayerPath extends Behaviour {
   }
 
   onUpdate(deltaTime): void {
-    this.targetPlayer = this.target.$state.getClosestShip(this.target.x, this.target.y);
+    this.targetPlayer = this.target.$state.getClosestShip(this.target.position.x, this.target.position.y);
     if(this.targetPlayer != null) {
       const dx = this.target.position.x - this.targetPlayer.position.x;
       const dy = this.target.position.y - this.targetPlayer.position.y;

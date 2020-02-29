@@ -16,7 +16,7 @@ export class Spawner {
 
   private numberOfFormations = 0;
 
-  private enemy_types: Array<Array<number, Enemy>> = [
+  private enemy_types: any = [
     [1, Asteroid],
     [1, Blaster],
     [1, Blimp],
@@ -28,9 +28,9 @@ export class Spawner {
     [1, Tracker]
   ];
 
-  private formations: Array<Formation> = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];
+  private formations: any = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];
 
-  private possibleEnemies: Array<Enemy>;
+  private possibleEnemies: Array<any>;
 
   private minFormations = 1;
   private maxFormations = 1;
@@ -55,7 +55,7 @@ export class Spawner {
     this.spawnFormation();
   }
 
-  public complete(): void {
+  public complete(): boolean {
     return this.numberOfFormations == 0;
   }
 

@@ -1,11 +1,13 @@
 import { Behaviour } from '../behaviour';
 import { CollisionHelper } from '../../helpers/CollisionHelper';
 import { Entity } from '../../models/Entity';
-
+import { Ship } from '../../models/Ship';
 
 export class CollidesWithEnemy extends Behaviour {
 
-  constructor(target: Entity) {
+  target:Ship;
+
+  constructor(target: Ship) {
     super('CollidesWithEnemy', target);
   }
 

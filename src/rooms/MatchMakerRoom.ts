@@ -21,7 +21,7 @@ interface ClientStat {
 }
 
 export class MatchMakerRoom extends Room {
-  allowUnmatchedGroups: number = true;
+  allowUnmatchedGroups = true;
 
   evaluateGroupInterval = 2000;
 
@@ -100,7 +100,7 @@ export class MatchMakerRoom extends Room {
     }
   }
 
-  createGroup(): void {
+  createGroup(): MatchmakingGroup {
     const group: MatchmakingGroup = { clients: [], averageRank: 0};
     this.groups.push(group);
     return group;

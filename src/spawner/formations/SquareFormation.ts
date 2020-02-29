@@ -1,9 +1,10 @@
 import { Formation } from './Formation';
 import { Enemy } from '../../models/Enemy';
+import { Position } from '../../models/Position';
 
 export class SquareFormation extends Formation {
 
-  positions: Array<Array<number, number>> = [
+  positions: any = [
     [-60,0], [0,0], [60,0],
     [-60,60], [0,60], [60,60],
     [-120, 0], [120,0], [-120, 60], [120, 60],
@@ -11,12 +12,11 @@ export class SquareFormation extends Formation {
     [-120, 180], [-60, 180], [0, 180], [-60, 180], [120, 180]
   ];
 
-  onSpawnEnemies(spawnType: Enemy, allowedSides?: number[]): void {
-    const side: number, startX: number, startY: number;
+  onSpawnEnemies(spawnType: any, allowedSides?: number[]): void {
+    const side: number = this.getRandomSide(allowedSides);
     let spawns: number;
 
-    side = this.getRandomSide(allowedSides);
-    [startX, startY] = this.getStartPositions(side);
+    const position: Position = this.getStartPositions(side);
 
     spawns = 3;
     if(this.state.currentWave > 5) {
@@ -29,7 +29,7 @@ export class SquareFormation extends Formation {
       spawns = 20;
     }
 
-    this.spawnEnemies(startX, startY, side, spawns, spawnType);
+    this.spawnEnemies(position, side, spawns, spawnType);
   }
 
 }

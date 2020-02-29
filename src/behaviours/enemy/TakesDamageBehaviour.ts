@@ -1,12 +1,15 @@
 import { Behaviour } from '../behaviour';
 import { Ship } from '../../models/Ship';
 import { Entity } from '../../models/Entity';
+import { Enemy } from '../../models/Enemy';
 
 export class TakesDamageBehaviour extends Behaviour {
 
   private _destroyed = false;
 
-  constructor(target: Entity) {
+  target: Enemy;
+
+  constructor(target: Enemy) {
     super('take_damage', target);
   }
 
