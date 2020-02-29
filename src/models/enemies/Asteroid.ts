@@ -4,7 +4,7 @@ import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePa
 
 export class Asteroid extends Enemy {
 
-  constructor(options:any) {
+  constructor(options: any) {
     super(options);
     this.healthBase = 999;
     this.healthGrowth = 0;

@@ -43,7 +43,7 @@ export class Entity extends Schema {
 
   protected $behaviours: any = {};
 
-  constructor(options:any) {
+  constructor(options: any) {
     super();
     merge(this, options);
     if(!this.position) this.position = new Position(0, 0);

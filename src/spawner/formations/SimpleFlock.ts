@@ -1,7 +1,7 @@
 import { Formation } from './Formation';
 import { C, S } from '../../Constants';
-import { Enemy } from '../../models/Enemy';
 import { Position } from '../../models/Position';
+import { Enemy } from '../../models/Enemy';
 
 export class SimpleFlock extends Formation {
 
@@ -23,27 +23,39 @@ export class SimpleFlock extends Formation {
       spawns = 12;
     }
 
-    let start: Position = new Position(0,0)
-    let destination: Position = new Position(0,0);
+    let start: Position;
+    let destination: Position;
 
     switch(this.getRandomSide(allowedSides)) {
       case S.TOP:
-        start.x = this.randomX();
-        start.y = this.topOffset() + C.SPAWN_OFFSET * 5;
-        destination.x = this.randomX();
-        destination.y = -C.SPAWN_OFFSET * 5;
+        start = new Position(
+          this.randomX(),
+          this.topOffset() + C.SPAWN_OFFSET * 5
+        );
+        destination = new Position(
+          this.randomX(),
+          -C.SPAWN_OFFSET * 5
+        );
         break;
       case S.LEFT:
-        start.x = this.leftOffset() - C.SPAWN_OFFSET * 5;
-        start.y = this.randomY();
-        destination.x = this.rightOffset() + C.SPAWN_OFFSET * 5;
-        destination.y = this.randomY()
+        start = new Position(
+          this.leftOffset() - C.SPAWN_OFFSET * 5,
+          this.randomY()
+        );
+        destination = new Position(
+          this.rightOffset() + C.SPAWN_OFFSET * 5,
+          this.randomY()
+        );
         break;
       case S.RIGHT:
-        start.x = this.rightOffset() + C.SPAWN_OFFSET * 5;
-        start.y = this.randomY();
-        destination.x = -C.SPAWN_OFFSET * 5;
-        destination.y = this.randomY();
+        start = new Position(
+          this.rightOffset() + C.SPAWN_OFFSET * 5,
+          this.randomY()
+        );
+        destination = new Position(
+          -C.SPAWN_OFFSET * 5,
+          this.randomY()
+        );
         break;
     }
 

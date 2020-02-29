@@ -5,7 +5,7 @@ import { ClosestPlayerAtStartPath } from '../../behaviours/Enemy/movement/Closes
 
 export class Speeder extends Enemy {
 
-  constructor(options:any) {
+  constructor(options: any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;

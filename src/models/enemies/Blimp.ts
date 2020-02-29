@@ -4,7 +4,7 @@ import { SimpleFlockingPath } from '../../behaviours/Enemy/movement/SimpleFlocki
 
 export class Blimp extends Enemy {
 
-  constructor(options:any) {
+  constructor(options: any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;

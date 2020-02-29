@@ -1,6 +1,5 @@
 import { Behaviour } from '../../behaviour';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
-import { Entity } from '../../../models/Entity';
 import { Enemy } from '../../../models/Enemy';
 
 export class LoopingPath extends Behaviour {

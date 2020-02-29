@@ -1,5 +1,4 @@
 import { Formation } from './Formation';
-import { Enemy } from '../../models/Enemy';
 import { Position } from '../../models/Position';
 
 export class TriangleFormation extends Formation {
@@ -17,7 +16,7 @@ export class TriangleFormation extends Formation {
 
     const position: Position = this.getStartPositions(side);
 
-    let spawns: number = 3;
+    let spawns = 3;
     if(this.state.currentWave > 5) {
       spawns = 6;
     } else if (this.state.currentWave > 10 ) {

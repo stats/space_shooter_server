@@ -9,7 +9,7 @@ import { Primary } from './Primary';
 
 export class Torpedo extends Primary {
 
-  constructor(entity: Entity, options:any) {
+  constructor(entity: Entity, options: any) {
     super(entity, options);
   }
 

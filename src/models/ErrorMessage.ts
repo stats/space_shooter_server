@@ -8,7 +8,7 @@ export class ErrorMessage extends Schema {
   @type("string")
   message: string;
 
-  constructor(message: string, key: string = "error") {
+  constructor(message: string, key = "error") {
     super();
     this.key = key;
     this.message = message;

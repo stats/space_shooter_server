@@ -4,7 +4,7 @@ import { ClosestPlayerPath } from '../../behaviours/Enemy/movement/ClosestPlayer
 
 export class Tracker extends Enemy {
 
-  constructor(options:any) {
+  constructor(options: any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;

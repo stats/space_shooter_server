@@ -6,7 +6,7 @@ import { Primary } from './Primary';
 
 export class Missile extends Primary {
 
-  constructor(entity: Entity, options:any) {
+  constructor(entity: Entity, options: any) {
     super(entity, options);
   }
 

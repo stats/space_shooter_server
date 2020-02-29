@@ -1,8 +1,7 @@
 import Clock from '@gamestdio/timer';
 
-import { Enemy } from '../models/Enemy';
 import { Asteroid, Blaster, Blimp, Bomber, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
-import { AsteroidFormation, Formation, LineFormation, RandomFormation, SquareFormation,
+import { AsteroidFormation, LineFormation, RandomFormation, SquareFormation,
          TriangleFormation, DiagonalFormation, SimpleFlock } from './Formations/';
 
 import { GameState} from '../models/GameState';

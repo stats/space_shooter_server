@@ -41,7 +41,7 @@ export class Bullet extends Entity {
   collision_tpe = CT.CIRCLE;
   radius = 15;
 
-  constructor(options:any) {
+  constructor(options: any) {
     super(options);
     merge(this, options);
     this.registerBehaviour("destroyed", new DestroyedBehaviour(this));

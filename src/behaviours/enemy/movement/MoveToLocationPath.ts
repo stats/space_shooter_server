@@ -15,7 +15,7 @@ export class MoveToLocationPath extends Behaviour {
 
   target: Enemy;
 
-  constructor(target: Enemy args: { moveTo: Position}) {
+  constructor(target: Enemy, args: { moveTo: Position}) {
     super('MoveToLocation', target);
     this.moveTo = args.moveTo;
     if(this.moveTo == null) {

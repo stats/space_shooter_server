@@ -10,7 +10,7 @@ export class ClosestEnemyPath extends Behaviour {
   enteredScreen = false;
   distanceTraveled = 0;
 
-  target:Bullet;
+  target: Bullet;
 
   constructor(target: Bullet): void {
     super('ClosestPlayerPath', target);

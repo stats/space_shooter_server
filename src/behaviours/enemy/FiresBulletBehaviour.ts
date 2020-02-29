@@ -1,6 +1,5 @@
 import { Behaviour } from '../behaviour';
 import { Primary } from '../../models/primary/Primary';
-import { Entity } from '../../models/Entity';
 import { Enemy } from '../../models/Enemy';
 
 export class FiresBulletBehaviour extends Behaviour {

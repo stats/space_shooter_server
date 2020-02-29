@@ -1,5 +1,4 @@
 import { Behaviour } from '../behaviour';
-import { Entity } from '../../models/Entity';
 import { Ship } from '../../models/Ship';
 
 
@@ -7,7 +6,7 @@ export class ShieldRechargeBehaviour extends Behaviour {
 
   private shield_cooldown: number;
 
-  target:Ship;
+  target: Ship;
 
   constructor(target: Ship) {
     super('shield_recharge', target);

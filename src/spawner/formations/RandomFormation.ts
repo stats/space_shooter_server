@@ -1,6 +1,5 @@
 import { Formation } from './Formation';
 import { C, S } from '../../Constants';
-import { Enemy } from '../../models/Enemy';
 import { Position } from '../../models/Position';
 
 export class RandomFormation extends Formation {

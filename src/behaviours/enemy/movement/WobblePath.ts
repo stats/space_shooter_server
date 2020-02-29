@@ -1,7 +1,6 @@
 import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
-import { Entity } from '../../../models/Entity';
 import { Enemy } from '../../../models/Enemy';
 
 export class WobblePath extends Behaviour {
@@ -17,7 +16,7 @@ export class WobblePath extends Behaviour {
 
   target: Enemy;
 
-  constructor(target: Enemy, args: { wobblePercent: number, wobbleDuration: number}) {
+  constructor(target: Enemy, args: { wobblePercent: number; wobbleDuration: number}) {
     super('WobblePath', target);
     if(args) {
       this.wobblePercent = args.wobblePercent || 1;

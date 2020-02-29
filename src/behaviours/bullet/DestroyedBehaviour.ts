@@ -3,7 +3,7 @@ import { Bullet } from '../../models/Bullet';
 
 export class DestroyedBehaviour extends Behaviour {
 
-  target:Bullet;
+  target: Bullet;
 
   constructor(target: Bullet) {
     super('destroyed', target);

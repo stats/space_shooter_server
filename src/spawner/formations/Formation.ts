@@ -1,5 +1,4 @@
 import { GameState } from '../../models/GameState';
-import { Enemy } from '../../models/Enemy';
 import { C, S } from '../../Constants';
 import { sample } from 'lodash';
 import { Position } from '../../models/Position';
@@ -38,19 +37,25 @@ export class Formation {
   }
 
   protected getStartPositions(side: number): Position {
-    let position = new Position(0, 0);
+    let position: Position;
     switch(side) {
       case S.TOP:
-        position.y = this.topOffset();
-        position.x = this.randomX();
+        position = new Position(
+          this.topOffset(),
+          this.randomX()
+        );
         break;
       case S.LEFT:
-        position.y = this.randomY();
-        position.x = this.leftOffset();
+        position = new Position(
+          this.randomY(),
+          this.leftOffset()
+        );
         break;
       case S.RIGHT:
-        position.y = this.randomY();
-        position.x = this.rightOffset();
+        position = new Position(
+          this.randomY(),
+          this.rightOffset()
+        );
         break;
     }
     return position;

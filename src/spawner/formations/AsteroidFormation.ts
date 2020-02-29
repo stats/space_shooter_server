@@ -1,6 +1,5 @@
 import { Formation } from './Formation';
 import { C } from '../../Constants';
-import { Enemy } from '../../models/Enemy';
 import { Position } from '../../models/Position';
 
 export class AsteroidFormation extends Formation {
@@ -24,11 +23,16 @@ export class AsteroidFormation extends Formation {
     }
 
     for(i = 0; i < spawns; i++) {
-      let position = new Position(
-        this.randomX(),
-        this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 3)
+      this.state.addEnemy(
+        new spawnType(
+          {
+            position: new Position(
+              this.randomX(),
+              this.topOffset() + (Math.random() * C.SPAWN_OFFSET * 3)
+            )
+          }
+        )
       );
-      this.state.addEnemy(new spawnType({ position }));
     }
   }
 

@@ -2,7 +2,6 @@ import { Behaviour } from '../../behaviour';
 import { Position } from '../../../models/Position';
 import { Enemy } from '../../../models/Enemy';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
-import { Entity } from '../../../models/Entity';
 
 export class SimpleFlockingPath extends Behaviour {
 
@@ -13,7 +12,7 @@ export class SimpleFlockingPath extends Behaviour {
 
   target: Enemy;
 
-  constructor(target: Enemy, args: { destination: Position, flock: Enemy[] }) {
+  constructor(target: Enemy, args: { destination: Position; flock: Enemy[] }) {
     super('SimpleFlockingPath', target);
     this.flock = args.flock || [];
     this.destination = args.destination || new Position(0, 0);

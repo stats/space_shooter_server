@@ -15,7 +15,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
     this.setState(new ShipBuilderState());
   }
 
-  async onAuth(client: Client, options:any): Promise<any> {
+  async onAuth(client: Client, options: any): Promise<any> {
     console.log("[ShipBuilderRoom] Client auth attempt");
     const isValidToken = await JWTHelper.verifyToken(options.token);
 

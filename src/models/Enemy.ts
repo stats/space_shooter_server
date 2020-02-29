@@ -30,7 +30,7 @@ export class Enemy extends Entity {
 
   wave: number;
 
-  constructor(options:any) {
+  constructor(options: any) {
     super(options);
   }
 

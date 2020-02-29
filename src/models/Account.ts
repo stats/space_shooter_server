@@ -24,7 +24,7 @@ export class Account extends Schema {
   unlocked: any;
   stats: any;
 
-  constructor(options:any) {
+  constructor(options: any) {
     super();
     merge(this, options);
     if(!this.unlocked) this.unlocked = options.unlocked || {};

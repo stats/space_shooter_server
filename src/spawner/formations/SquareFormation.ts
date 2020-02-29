@@ -1,5 +1,4 @@
 import { Formation } from './Formation';
-import { Enemy } from '../../models/Enemy';
 import { Position } from '../../models/Position';
 
 export class SquareFormation extends Formation {

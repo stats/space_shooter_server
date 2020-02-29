@@ -213,7 +213,7 @@ export class Ship extends Entity {
     }
   }
 
-  constructor(options:any) {
+  constructor(options: any) {
     super(options);
     merge(this, options);
     if(!this.tracker) this.tracker = options.tracker || {};

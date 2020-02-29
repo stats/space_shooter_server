@@ -2,7 +2,6 @@ import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
 import { Position } from '../../../models/Position';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
-import { Entity } from '../../../models/Entity';
 import { Enemy } from '../../../models/Enemy';
 
 export class StraightAnglePath extends Behaviour {

@@ -4,7 +4,7 @@ import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePa
 
 export class Scout extends Enemy {
 
-  constructor(options:any) {
+  constructor(options: any) {
     super(options);
     this.healthBase = 1;
     this.healthGrowth = 0.1;

@@ -2,13 +2,12 @@ import { Behaviour } from '../behaviour';
 import { Bullet } from '../../models/Bullet';
 import { CollisionHelper } from '../../helpers/CollisionHelper';
 import { C } from '../../Constants';
-import { Entity } from '../../models/Entity';
 import { Ship } from '../../models/Ship';
 
 
 export class CollidesWithEnemyBullet extends Behaviour {
 
-  target:Ship;
+  target: Ship;
 
   constructor(target: Ship) {
     super('CollidesWithEnemyBullet', target);
