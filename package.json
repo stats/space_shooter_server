@@ -13,7 +13,7 @@
     "test:server": "mocha --require ts-node/register test/ServerTest.ts --exit --timeout 15000",
     "test:explosion": "mocha --require ts-node/register test/TestExplosionDistance.ts --exit --timeout 15000",
     "test:username": "ts-node test/UsernameTest.ts",
-    "codegen": "npx schema-codegen src/models/Account.ts src/models/GameState.ts src/models/ShipBuilderState --output build/codegen --csharp",
+    "codegen": "npx schema-codegen src/models/Account.ts src/models/GameState.ts src/models/ShipBuilderState --output schema-unity --csharp",
     "parseStats": "node scripts/stat_parser.js > ship_stats.json",
     "lint": "npx eslint \"src/**\""
   },
