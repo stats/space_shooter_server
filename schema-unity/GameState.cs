@@ -2,7 +2,7 @@
 // THIS FILE HAS BEEN GENERATED AUTOMATICALLY
 // DO NOT CHANGE IT MANUALLY UNLESS YOU KNOW WHAT YOU'RE DOING
 // 
-// GENERATED USING @colyseus/schema 0.5.27
+// GENERATED USING @colyseus/schema 0.5.32
 // 
 
 using Colyseus.Schema;
@@ -24,9 +24,9 @@ public class GameState : Schema {
 	public int currentWave = 0;
 
 	[Type(5, "int32")]
-	public int enemies_spawned = 0;
+	public int enemiesSpawned = 0;
 
 	[Type(6, "int32")]
-	public int enemies_killed = 0;
+	public int enemiesKilled = 0;
 }
 

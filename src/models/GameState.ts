@@ -24,10 +24,10 @@ export class GameState extends Schema {
   currentWave = 0;
 
   @type("int32")
-  enemies_spawned = 0;
+  enemiesSpawned = 0;
 
   @type("int32")
-  enemies_killed = 0;
+  enemiesKilled = 0;
 
   addShip(ship: Ship): void {
     this.ships[ship.uuid] = ship;
@@ -40,7 +40,7 @@ export class GameState extends Schema {
 
   addEnemy(enemy: Enemy): void {
     this.enemies[enemy.uuid] = enemy;
-    this.enemies_spawned++;
+    this.enemiesSpawned++;
     enemy.onInitGame(this);
   }
 
