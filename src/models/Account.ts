@@ -1,4 +1,5 @@
 import { Schema, type } from "@colyseus/schema";
+import { CommandResult } from 'mongodb';
 import { pick, merge } from 'lodash';
 import { UsernameGenerator } from '../helpers/UsernameGenerator';
 import { Ship } from './Ship';
@@ -85,12 +86,13 @@ export class Account extends Schema {
   }
 
   updateUnlocks(): void {
-
+    console.log("Running update unlocks");
     for(const key in SHIP.TYPE) {
       /** We need do no tests if already unlocked. **/
       if(this.isUnlocked(key)) continue;
       const t = SHIP.TYPE[key];
       if( !("unlockKey" in t) ) {
+        console.log("Setting a default unlock for", key);
         this.unlock(key);
       } else {
         if(this.getStat(t["unlockKey"]) >= t["unlockCount"]) this.unlock(key);

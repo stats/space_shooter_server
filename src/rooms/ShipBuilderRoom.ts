@@ -11,6 +11,8 @@ import { ShipBuilderState } from '../models/ShipBuilderState'
 
 export class ShipBuilderRoom extends Room<ShipBuilderState> {
 
+  private clientUsernameHash:any = {};
+
   onCreate(options: any): void {
     this.setState(new ShipBuilderState());
   }
@@ -33,9 +35,14 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
 
   onJoin(client: Client, options: any, username: string): void {
     console.log("[ShipBuilderRoom] Client joined: ", username);
-    client["username"] = username;
+    this.clientUsernameHash[client.id] = username;
     AccountHelper.clearInGame(username);
     this.sendShips(client);
+    this.unlockedData(client);
+  }
+
+  onLeave(client: Client) {
+    delete this.clientUsernameHash[client.id];
   }
 
   onMessage(client: Client, data: any): void {
@@ -50,7 +57,9 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   }
 
   private async unlockedData(client: Client): Promise<void> {
-    const account = await AccountHelper.getAccountByUsername(client["username"]);
+    const username = this.clientUsernameHash[client.id];
+    console.log('[ShipBuilderRoom] Starting unlockedData for', username);
+    const account = await AccountHelper.getAccountByUsername(username);
     if(!account) {
       this.send(client, new ErrorMessage('Your account could not be found', 'invalid_account'));
       return;
@@ -60,7 +69,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   }
 
   private async statsData(client: Client): Promise<void> {
-    const account = await AccountHelper.getAccountByUsername(client["username"]);
+    const account = await AccountHelper.getAccountByUsername(this.clientUsernameHash[client.id]);
     if(!account) {
       this.send(client, new ErrorMessage('Your account could not be found', 'invalid_account'));
       return;
@@ -72,7 +81,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
   }
 
   private async upgradeShip(client: Client, uuid: string, upgrades: any): Promise<void> {
-    const ship = await ShipHelper.getShip(client["username"], uuid);
+    const ship = await ShipHelper.getShip(this.clientUsernameHash[client.id], uuid);
     if(!ship) {
       this.send(client, new ErrorMessage('The ship requested could not be found', 'invalid_ship'));
       return;
@@ -91,7 +100,7 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
 
   private async playShip(client: Client, uuid: string): Promise<void> {
     console.log('[ShipBuilderRoom] playShip', uuid);
-    const ship = await ShipHelper.getShip(client["username"], uuid);
+    const ship = await ShipHelper.getShip(this.clientUsernameHash[client.id], uuid);
 
     if(!ship) {
       this.send(client, new ErrorMessage('The ship requested could not be found', 'invalid_ship'));
@@ -103,13 +112,13 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
 
   private async sendShips(client: Client): Promise<void> {
     console.log('[ShipBuilderRoom] sending ships');
-    const ships: ShipList = await ShipHelper.getShipList(client["username"]);
+    const ships: ShipList = await ShipHelper.getShipList(this.clientUsernameHash[client.id]);
     this.send(client, ships);
   }
 
   private async createShip(client: Client, ship: any): Promise<void> {
     //console.log('[ShipBuilderRoom] creating a ship', ship);
-    const success = await ShipHelper.createShip(client["username"], ship);
+    const success = await ShipHelper.createShip(this.clientUsernameHash[client.id], ship);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully created.'});
     } else {
@@ -119,8 +128,9 @@ export class ShipBuilderRoom extends Room<ShipBuilderState> {
     this.sendShips(client);
   }
 
+
   private async deleteShip(client: Client, uuid: string): Promise<void> {
-    const success = await ShipHelper.deleteShip(client["username"], uuid);
+    const success = await ShipHelper.deleteShip(this.clientUsernameHash[client.id], uuid);
     if(success) {
       this.send(client, { action: 'message', message: 'Ship successfully destroyed.'});
     } else {

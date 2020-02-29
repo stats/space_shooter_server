@@ -11,14 +11,14 @@ export class ShipBuilderState extends Schema {
    * Exposing types that will be used during OnMessage callbacks below.
    **/
   @type(Statistics)
-  stats: Statistics = new Statistics();
+  stats: Statistics;
 
   @type(UnlockMessage)
-  unlockMessage: UnlockMessage = new UnlockMessage();
+  unlockMessage: UnlockMessage;
 
   @type(ErrorMessage)
-  error: ErrorMessage = new ErrorMessage("Error Text");
+  error: ErrorMessage;
 
   @type(ShipList)
-  shipList: ShipList = new ShipList();
+  shipList: ShipList;
 }
