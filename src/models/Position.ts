@@ -14,6 +14,10 @@ export class Position  extends Schema {
     this.y = y;
   }
 
+  clone(): Position {
+    return new Position(this.x, this.y);
+  }
+
   distanceTo(another: Position): number {
     const dx: number = this.x - another.x;
     const dy: number = this.y - another.y;

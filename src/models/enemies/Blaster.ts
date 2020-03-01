@@ -1,6 +1,6 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePath';
+import { StraightAnglePath } from '../../behaviours/Enemy/movement/StraightAnglePath';
 import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
 import { C, CT } from '../../Constants';
@@ -26,7 +26,7 @@ export class Blaster extends Enemy {
 
   onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviour("path", new StraightLinePath(this));
+    this.registerBehaviour("path", new StraightAnglePath(this));
 
     const bulletOptions = {
       system: EnemyBullet,
@@ -36,8 +36,7 @@ export class Blaster extends Enemy {
       collisionType: CT.CIRCLE,
       radius: 25,
       bulletMesh: "Enemy1",
-      x: this.position.x,
-      y: this.position.y,
+      position: this.position.clone(),
       bulletType: C.ENEMY_BULLET,
       cooldown: 3000,
       behaviour: 'fires'

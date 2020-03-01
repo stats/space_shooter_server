@@ -6,6 +6,7 @@ import { Entity } from '../Entity';
 import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
 import { ExplodeBehaviour } from '../../behaviours/Bullet/ExplodeBehaviour';
 import { Primary } from './Primary';
+import { Position } from '../Position';
 
 export class Torpedo extends Primary {
 
@@ -14,7 +15,7 @@ export class Torpedo extends Primary {
   }
 
   getBullets(): Bullet[] {
-    const spawnLocation = this.entity.getBulletSpawnLocation();
+    const spawnLocation: Position = this.entity.getBulletSpawnLocation();
 
     const bullets: Bullet[] = [];
     const options = {
@@ -24,21 +25,20 @@ export class Torpedo extends Primary {
       collisionType: CT.CIRCLE,
       radius: this.radius,
       bulletMesh: this.bulletMesh,
-      x: spawnLocation.x,
-      y: spawnLocation.y,
+      postion: spawnLocation,
       bulletType: C.SHIP_BULLET,
       explodes: true,
       blastRadius: this.blastRadius
     }
 
     let offsetStart = 0;
-    if(this.bullet_offset != 0) {
-      offsetStart = -(this.bullet_count * this.bullet_offset) / 2;
+    if(this.bulletOffset != 0) {
+      offsetStart = -(this.bulletCount * this.bulletOffset) / 2;
     }
 
-    for(let i = 0; i < this.bullet_count; i++){
+    for(let i = 0; i < this.bulletCount; i++){
       const bullet = new Bullet(options);
-      bullet.position.x = bullet.position.x + offsetStart + (i * this.bullet_offset);
+      bullet.position.x = bullet.position.x + offsetStart + (i * this.bulletOffset);
       bullet.registerBehaviour("path", new StraightLineUpPath(bullet));
       bullet.registerBehaviour("explode", new ExplodeBehaviour(bullet));
       bullets.push(bullet);

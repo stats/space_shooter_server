@@ -14,15 +14,24 @@ export class StraightLinePath extends Behaviour {
 
   constructor(target: Enemy) {
     super('StraightLinePath', target);
-    if(this.target.position.x < C.BOUNDS.minX) this.xDir = 1;
-    if(this.target.position.x > C.BOUNDS.maxX) this.xDir = -1;
-    if(this.target.position.y < C.BOUNDS.minY) this.yDir = 1;
-    if(this.target.position.y > C.BOUNDS.maxY) this.yDir = -1;
+    if(this.target.position.x < C.BOUNDS.minX) {
+      this.target.angle = 0;
+    }
+    if(this.target.position.x > C.BOUNDS.maxX) {
+      this.target.angle = Math.PI;
+    }
+    if(this.target.position.y < C.BOUNDS.minY) {
+      this.target.angle = Math.PI / 2;
+    }
+    if(this.target.position.y > C.BOUNDS.maxY) {
+      this.target.angle = (3 * Math.PI) / 2;
+    }
   }
 
   onUpdate(deltaTime): void {
-    if(this.xDir != 0) this.target.position.x += this.target.speed * this.xDir * (deltaTime/1000);
-    if(this.yDir != 0) this.target.position.y += this.target.speed * this.yDir * (deltaTime/1000);
+    this.target.position.x += Math.cos(this.target.angle) * this.target.speed * deltaTime/1000;
+    this.target.position.y += Math.sin(this.target.angle) * this.target.speed * deltaTime/1000;
+
     if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
       this.enteredScreen = true;
     }

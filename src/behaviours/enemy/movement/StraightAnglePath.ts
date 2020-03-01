@@ -13,7 +13,7 @@ export class StraightAnglePath extends Behaviour {
 
   target: Enemy;
 
-  constructor(target: Enemy): void {
+  constructor(target: Enemy) {
     super('StraightAnglePath', target);
     this.start = new Position(this.target.position.x, this.target.position.y);
 

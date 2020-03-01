@@ -3,6 +3,7 @@ import { C, CT } from '../../Constants';
 import { StraightLineDownPath } from '../../behaviours/Bullet/StraightLineDownPath';
 import { StraightAnglePath } from '../../behaviours/Bullet/StraightAnglePath';
 import { Primary } from './Primary';
+import { Position } from '../Position';
 
 export class EnemyBullet extends Primary{
 
@@ -15,17 +16,17 @@ export class EnemyBullet extends Primary{
       collisionType: CT.CIRCLE,
       radius: this.radius,
       bulletMesh: this.bulletMesh,
-      x: this.entity.position.x,
-      y: this.entity.position.y,
+      position: this.entity.position.clone(),
       bulletType: C.ENEMY_BULLET
     }
 
     const bullet = new Bullet(options);
     switch(this.behaviour) {
       case 'drops':
-        bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: this.entity.angle}));
-      case 'fires':
+        console.log("Adding drops bullet behaviour");
         bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+      case 'fires':
+        bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: this.entity.angle}));
       break;
     }
     bullets.push(bullet);

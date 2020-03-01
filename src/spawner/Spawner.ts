@@ -1,6 +1,6 @@
 import Clock from '@gamestdio/timer';
 
-import { Asteroid, Blaster, Blimp, Bomber, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
+import { Asteroid, Blaster, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
 import { AsteroidFormation, LineFormation, RandomFormation, SquareFormation,
          TriangleFormation, DiagonalFormation, SimpleFlock } from './Formations/';
 
@@ -16,10 +16,11 @@ export class Spawner {
   private numberOfFormations = 0;
 
   private enemy_types: any = [
-    [1, Asteroid],
+    // [1, Asteroid],
     [1, Blaster],
     [1, Blimp],
     [1, Bomber],
+    [1, Fang],
     [1, Hunter],
     [1, Scout],
     [1, Speeder],

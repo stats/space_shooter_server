@@ -16,5 +16,8 @@ public class UnlockItem : Schema {
 
 	[Type(2, "number")]
 	public float count = 0;
+
+	[Type(3, "string")]
+	public string unlockType = "";
 }
 

@@ -28,6 +28,8 @@ export class MoveToLocationThenRotatePath extends Behaviour {
 
     this.theta = Math.atan2(dy, dx);
     this.rotationDirection = Math.random() > 0.5 ? 1 : -1;
+    this.target.disableBehaviour("primary");
+    this.target.angle = this.theta;
   }
 
   onUpdate(deltaTime): void {
@@ -44,12 +46,12 @@ export class MoveToLocationThenRotatePath extends Behaviour {
 
   private handleMovement(deltaTime): void {
     if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * deltaTime/1000) {
-      console.log("Hit target position");
       this.target.position.x = this.moveTo.x;
       this.target.position.y = this.moveTo.y;
       this.moveComplete = true;
       this.target.overrideAngle = true;
       this.target.angle = this.theta;
+      this.target.enableBehaviour("primary");
     } else {
       this.target.position.x += Math.cos(this.theta) * this.target.speed * deltaTime/1000;
       this.target.position.y += Math.sin(this.theta) * this.target.speed * deltaTime/1000;

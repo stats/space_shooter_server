@@ -11,11 +11,15 @@ export class UnlockItem extends Schema {
   @type("number")
   count: number;
 
-  constructor(key: string, unlocked: boolean, count: number) {
+  @type("string")
+  unlockType: string;
+
+  constructor(key: string, unlocked: boolean, count: number, unlockType: string) {
     super();
     this.key = key;
     this.unlocked = unlocked;
     this.count = count;
+    this.unlockType = unlockType;
   }
 
 }

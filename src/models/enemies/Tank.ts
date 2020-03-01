@@ -31,7 +31,6 @@ export class Tank extends Enemy {
 
   onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviour("path", new MoveToLocationThenRotatePath(this, { moveTo: this.moveTo }));
 
     const bulletOptions = {
       system: EnemyBullet,
@@ -41,13 +40,13 @@ export class Tank extends Enemy {
       collisionType: CT.CIRCLE,
       radius: 25,
       bulletMesh: "Enemy1",
-      x: this.position.x,
-      y: this.position.y,
+      position: this.position.clone(),
       bulletType: C.ENEMY_BULLET,
       cooldown: 5000,
       behaviour: 'fires'
     }
     this.registerBehaviour("primary", new FiresBulletBehaviour(this, {bulletOptions: bulletOptions}));
+    this.registerBehaviour("path", new MoveToLocationThenRotatePath(this, { moveTo: this.moveTo }));
   }
 
 }

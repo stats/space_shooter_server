@@ -27,6 +27,7 @@ export class MoveToLocationPath extends Behaviour {
 
     this.theta = Math.atan2(dy, dx);
     this.target.angle = this.theta;
+    this.target.disableBehaviour("primary");
   }
 
   onUpdate(deltaTime): void {
@@ -35,6 +36,7 @@ export class MoveToLocationPath extends Behaviour {
     if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * detaTime/1000) {
       this.target.position.x = this.moveTo.x;
       this.target.position.y = this.moveTo.y;
+      this.target.enableBehaviour("primary");
       this.moveComplete = true;
     } else {
       this.target.position.x += Math.cos(this.theta) * this.target.speed * deltaTime/1000;

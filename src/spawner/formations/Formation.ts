@@ -41,20 +41,20 @@ export class Formation {
     switch(side) {
       case S.TOP:
         position = new Position(
-          this.topOffset(),
-          this.randomX()
+          this.randomX(),
+          this.topOffset()
         );
         break;
       case S.LEFT:
         position = new Position(
-          this.randomY(),
-          this.leftOffset()
+          this.leftOffset(),
+          this.randomY()
         );
         break;
       case S.RIGHT:
         position = new Position(
-          this.randomY(),
-          this.rightOffset()
+          this.rightOffset(),
+          this.randomY()
         );
         break;
     }

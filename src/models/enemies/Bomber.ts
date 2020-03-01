@@ -1,7 +1,7 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
 import { LoopingPath } from '../../behaviours/Enemy/movement/LoopingPath';
-import { DropsBulletBehaviour } from '../../behaviours/Enemy/DropsBulletBehaviour';
+import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
 import { C, CT } from '../../Constants';
 
@@ -36,13 +36,12 @@ export class Bomber extends Enemy {
       collisionType: CT.CIRCLE,
       radius: 25,
       bulletMesh: "Enemy1",
-      x: this.position.x,
-      y: this.position.y,
+      position: this.position.clone(),
       bulletType: C.ENEMY_BULLET,
       cooldown: 3000,
       behaviour: 'drops'
     }
-    this.registerBehaviour("primary", new DropsBulletBehaviour(this, {bulletOptions: bulletOptions}));
+    this.registerBehaviour("primary", new FiresBulletBehaviour(this, {bulletOptions: bulletOptions}));
   }
 
 }

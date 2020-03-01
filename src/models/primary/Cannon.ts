@@ -8,6 +8,7 @@ import { C, CT } from '../../Constants';
 import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
 import { StraightAnglePath } from '../../behaviours/Bullet/StraightAnglePath';
 import { Primary } from './Primary';
+import { Position } from '../Position';
 
 export class Cannon extends Primary {
 
@@ -16,7 +17,7 @@ export class Cannon extends Primary {
   }
 
   getBullets(): Bullet[] {
-    const spawnLocation = this.entity.getBulletSpawnLocation();
+    const spawnLocation: Position = this.entity.getBulletSpawnLocation();
 
     const bullets: Bullet[] = [];
     const options = {
@@ -26,16 +27,15 @@ export class Cannon extends Primary {
       collisionType: CT.CIRCLE,
       radius: this.radius,
       bulletMesh: this.bulletMesh,
-      x: spawnLocation.x,
-      y: spawnLocation.y,
+      position: spawnLocation,
       bulletType: C.SHIP_BULLET
     }
 
-    if(this.bullet_count == 1){
+    if(this.bulletCount == 1){
       const bullet = new Bullet(options);
       bullet.registerBehaviour("path", new StraightLineUpPath(bullet));
       bullets.push( bullet );
-    } else if (this.bullet_count == 2){
+    } else if (this.bulletCount == 2){
       let bullet = new Bullet(options);
       bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: Math.PI/2 - this.bullet_angle}));
       bullets.push(bullet);
@@ -43,7 +43,7 @@ export class Cannon extends Primary {
       bullet = new Bullet(options);
       bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: Math.PI/2 + this.bullet_angle}));
       bullets.push(bullet);
-    } else if (this.bullet_count == 3){
+    } else if (this.bulletCount == 3){
 
       let bullet = new Bullet(options);
       bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: Math.PI/2 -this.bullet_angle}));

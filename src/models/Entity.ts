@@ -20,7 +20,7 @@ export class Entity extends Schema {
   @type('number')
   angle = 0;
 
-  bullet_offset_x = 0;
+  bulletOffsetX = 0;
   bulletOffsetY = 0;
 
   collisionType: number = CT.CIRCLE;
@@ -50,12 +50,6 @@ export class Entity extends Schema {
     if(!this.uuid) this.uuid = uuid();
   }
 
-  public registerBehaviours(list: any[]): void {
-    for(const item of list) {
-      this.registerBehaviour(item[0], item[1]);
-    }
-  }
-
   public registerBehaviour(key: string, behaviour: any): void {
     this.$behaviours[key] = behaviour;
     behaviour.onRegistered();
@@ -73,22 +67,26 @@ export class Entity extends Schema {
   }
 
   public enableBehaviour(key: string): void {
-    this.$behaviours[key].enable();
+    let behaviour: any = this.$behaviours[key];
+    if(behaviour) behaviour.enable();
   }
 
   public disableBehaviour(key: string): void {
-    this.$behaviours[key].disable();
+    let behaviour: any = this.$behaviours[key];
+    if(behaviour) behaviour.disable();
   }
 
   public isBehavourEnabled(key: string): boolean {
-    return this.$behaviours[key].isEnabled();
+    let behaviour: any = this.$behaviours[key];
+    if(behaviour) behaviour.isEnabled();
+    return false;
   }
 
   public handleEvent(eventType: string, args?: any): void {
     let handledEvent = false;
     for(const key in this.$behaviours) {
       const behaviour = this.$behaviours[key];
-      if(behaviour.event_type == eventType && behaviour.isEnabled()) {
+      if(behaviour.eventType == eventType && behaviour.isEnabled()) {
         behaviour.onEvent(args);
         handledEvent = true;
       }
@@ -111,7 +109,7 @@ export class Entity extends Schema {
   }
 
   public getBulletSpawnLocation(): Position {
-    return new Position(this.position.x + this.bullet_offset_x, this.position.y + this.bulletOffsetY);
+    return new Position(this.position.x + this.bulletOffsetX, this.position.y + this.bulletOffsetY);
   }
 
   onInitGame(state: GameState): void {

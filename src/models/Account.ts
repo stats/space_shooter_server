@@ -45,9 +45,9 @@ export class Account extends Schema {
     for(const key in SHIP.TYPE) {
       const t = SHIP.TYPE[key];
       if( !("unlockKey" in t) ) {
-        item = new UnlockItem("", true, 0)
+        item = new UnlockItem("", true, 0, "ship")
       } else {
-        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount)
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "ship")
       }
       message.unlocks[key] = item;
     }
@@ -55,9 +55,9 @@ export class Account extends Schema {
     for(const key in PRIMARY.TYPE) {
       const t = PRIMARY.TYPE[key];
       if( !("unlockKey" in t) ) {
-        item = new UnlockItem("", true, 0)
+        item = new UnlockItem("", true, 0, "primary")
       } else {
-        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount)
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "primary")
       }
       message.unlocks[key] = item;
     }
@@ -65,9 +65,9 @@ export class Account extends Schema {
     for(const key in SPECIAL.TYPE) {
       const t = SPECIAL.TYPE[key];
       if( !("unlockKey" in t) ) {
-        item = new UnlockItem("", true, 0)
+        item = new UnlockItem("", true, 0, "special")
       } else {
-        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount)
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "special")
       }
       message.unlocks[key] = item;
     }
@@ -75,9 +75,9 @@ export class Account extends Schema {
     for(const key in MATERIAL.TYPE) {
       const t = MATERIAL.TYPE[key];
       if( !("unlockKey" in t) ) {
-        item = new UnlockItem("", true, 0)
+        item = new UnlockItem("", true, 0, "material")
       } else {
-        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount)
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "material")
       }
       message.unlocks[key] = item;
     }

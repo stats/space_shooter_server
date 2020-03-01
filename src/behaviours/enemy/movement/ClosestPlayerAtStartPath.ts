@@ -20,8 +20,8 @@ export class ClosestPlayerAtStartPath extends Behaviour {
       dx = ( C.BOUNDS.maxX / 2 ) - this.target.position.x;
       dy = ( C.BOUNDS.maxY / 2 ) - this.target.position.y;
     } else {
-      dx = this.target.position.x - this.targetPlayer.position.x;
-      dy = this.target.position.y - this.targetPlayer.position.y;
+      dx = this.targetPlayer.position.x - this.target.position.x;
+      dy = this.targetPlayer.position.y - this.target.position.y;
     }
     this.theta = Math.atan2(dy, dx);
     this.target.angle = this.theta;
@@ -29,14 +29,14 @@ export class ClosestPlayerAtStartPath extends Behaviour {
 
   onUpdate(deltaTime): void {
     if(this.targetPlayer != null && this.targetPlayer.invisible == false) {
-      const dx = this.target.position.x - this.targetPlayer.position.x;
-      const dy = this.target.position.y - this.targetPlayer.position.y;
+      const dx = this.targetPlayer.position.x - this.target.position.x;
+      const dy = this.targetPlayer.position.y - this.target.position.y;
       this.theta = Math.atan2(dy, dx);
       this.target.angle = this.theta;
     }
 
-    this.target.position.x += -Math.cos(this.theta) * this.target.speed * deltaTime/1000;
-    this.target.position.y += -Math.sin(this.theta) * this.target.speed * deltaTime/1000;
+    this.target.position.x += Math.cos(this.theta) * this.target.speed * deltaTime/1000;
+    this.target.position.y += Math.sin(this.theta) * this.target.speed * deltaTime/1000;
 
     if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
       this.enteredScreen = true;
