@@ -15,28 +15,28 @@ export class Torpedo extends Primary {
   }
 
   getBullets(): Bullet[] {
-    const spawnLocation: Position = this.entity.getBulletSpawnLocation();
-
     const bullets: Bullet[] = [];
-    const options = {
-      damage: this.damage,
-      speed: this.speed,
-      range: this.range,
-      collisionType: CT.CIRCLE,
-      radius: this.radius,
-      bulletMesh: this.bulletMesh,
-      postion: spawnLocation,
-      bulletType: C.SHIP_BULLET,
-      explodes: true,
-      blastRadius: this.blastRadius
-    }
-
+    
     let offsetStart = 0;
     if(this.bulletOffset != 0) {
       offsetStart = -(this.bulletCount * this.bulletOffset) / 2;
     }
 
     for(let i = 0; i < this.bulletCount; i++){
+
+      let options = {
+        damage: this.damage,
+        speed: this.speed,
+        range: this.range,
+        collisionType: CT.CIRCLE,
+        radius: this.radius,
+        bulletMesh: this.bulletMesh,
+        postion: this.entity.getBulletSpawnLocation(),
+        bulletType: C.SHIP_BULLET,
+        explodes: true,
+        blastRadius: this.blastRadius
+      }
+
       const bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart + (i * this.bulletOffset);
       bullet.registerBehaviour("path", new StraightLineUpPath(bullet));

@@ -12,56 +12,37 @@ export class Missile extends Primary {
   }
 
   getBullets(): Bullet[] {
-    const spawnLocation: Position = this.entity.getBulletSpawnLocation();
-
     const bullets: Bullet[] = [];
-    const options = {
-      damage: this.damage,
-      speed: this.speed,
-      range: this.range,
-      collisionType: CT.CIRCLE,
-      radius: this.radius,
-      bulletMesh: this.bulletMesh,
-      position: spawnLocation,
-      bulletType: C.SHIP_BULLET
-    }
 
     let offsetStart = 0;
     if(this.bulletOffset != 0) {
       offsetStart = -(this.bulletCount * this.bulletOffset) / 2;
     }
-    let bullet;
-    if(this.bulletCount == 1){
-      bullet = new Bullet(options);
+
+    for(let i = 0; i < this.bulletCount; i++) {
+      const options = {
+        damage: this.damage,
+        speed: this.speed,
+        range: this.range,
+        collisionType: CT.CIRCLE,
+        radius: this.radius,
+        bulletMesh: this.bulletMesh,
+        position: this.entity.getBulletSpawnLocation(),
+        bulletType: C.SHIP_BULLET
+      }
+
+      let angle = Math.PI/2;
+      if( (i == 0 && this.bulletCount == 2) || (i == 1 && this.bulletCount == 3)) {
+        angle -= this.bulletAngle;
+      }  else if ( ( i == 1 && this.bulletCount == 2 ) || (i == 2 && this.bulletCount == 3)) {
+        angle += this.bulletAngle;
+      }
+
+      let bullet = new Bullet(options);
       bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2}));
       bullets.push( bullet );
-    } else if (this.bulletCount == 2){
-      bullet = new Bullet(options);
-      bullet.position.x = bullet.position.x + offsetStart;
-      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2 - this.bullet_angle}));
-      bullets.push(bullet);
-
-      bullet = new Bullet(options);
-      bullet.position.x = bullet.position.x + offsetStart + this.bulletOffset;
-      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2 + this.bullet_angle}));
-      bullets.push(bullet);
-    } else if (this.bulletCount == 3){
-      bullet = new Bullet(options);
-      bullet.position.x = bullet.position.x + offsetStart;
-      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2 -this.bullet_angle}));
-      bullets.push(bullet);
-
-      bullet = new Bullet(options);
-      bullet.position.x = bullet.position.x + offsetStart + this.bulletOffset;
-      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2 +this.bullet_angle}));
-      bullets.push(bullet);
-
-      bullet = new Bullet(options);
-      bullet.position.x = bullet.position.x + offsetStart + (2 * this.bulletOffset);
-      bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2}));
-      bullets.push(bullet);
-
     }
+
     return bullets;
   }
 }

@@ -3,7 +3,6 @@ import { Entity } from '../Entity';
 import { C, CT } from '../../Constants';
 import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
 import { Primary } from './Primary';
-import { Position } from '../Position';
 
 export class Blaster extends Primary{
 
@@ -12,19 +11,7 @@ export class Blaster extends Primary{
   }
 
   getBullets(): Bullet[] {
-    const spawnLocation: Position = this.entity.getBulletSpawnLocation();
-
     const bullets: Bullet[] = [];
-    const options = {
-      damage: this.damage,
-      speed: this.speed,
-      range: this.range,
-      collisionType: CT.CIRCLE,
-      radius: this.radius,
-      bulletMesh: this.bulletMesh,
-      position: spawnLocation,
-      bulletType: C.SHIP_BULLET
-    }
 
     let offsetStart = 0;
     if(this.bulletOffset != 0) {
@@ -32,6 +19,18 @@ export class Blaster extends Primary{
     }
 
     for(let i = 0; i < this.bulletCount; i++){
+
+      let options = {
+        damage: this.damage,
+        speed: this.speed,
+        range: this.range,
+        collisionType: CT.CIRCLE,
+        radius: this.radius,
+        bulletMesh: this.bulletMesh,
+        position: this.entity.getBulletSpawnLocation(),
+        bulletType: C.SHIP_BULLET
+      }
+
       const bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart + (i * this.bulletOffset);
       bullet.registerBehaviour("path", new StraightLineUpPath(bullet));

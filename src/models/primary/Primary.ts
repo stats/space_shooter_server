@@ -12,7 +12,7 @@ export class Primary {
   fireRate: number;
 
   bulletCount: number;
-  bullet_angle: number;
+  bulletAngle: number;
   bulletOffset: number;
 
   bulletMesh: string;
