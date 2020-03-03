@@ -67,17 +67,17 @@ export class Entity extends Schema {
   }
 
   public enableBehaviour(key: string): void {
-    let behaviour: any = this.$behaviours[key];
+    const behaviour: any = this.$behaviours[key];
     if(behaviour) behaviour.enable();
   }
 
   public disableBehaviour(key: string): void {
-    let behaviour: any = this.$behaviours[key];
+    const behaviour: any = this.$behaviours[key];
     if(behaviour) behaviour.disable();
   }
 
   public isBehavourEnabled(key: string): boolean {
-    let behaviour: any = this.$behaviours[key];
+    const behaviour: any = this.$behaviours[key];
     if(behaviour) behaviour.isEnabled();
     return false;
   }

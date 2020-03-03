@@ -52,7 +52,7 @@ export class AccountHelper {
   }
 
   static async clearInGame(username: string): Promise<boolean> {
-    let results: CommandResult = DB.$ships.updateMany({username}, {$set: {inGame: -1}});
+    const results: CommandResult = DB.$ships.updateMany({username}, {$set: {inGame: -1}});
     if(results.error) return false;
     return true;
   }

@@ -21,6 +21,9 @@ export class GameState extends Schema {
   startGame = 5; //number of seconds until the game starts
 
   @type("int32")
+  startWave = 0;
+
+  @type("int32")
   currentWave = 0;
 
   @type("int32")

@@ -16,7 +16,7 @@ export class Torpedo extends Primary {
 
   getBullets(): Bullet[] {
     const bullets: Bullet[] = [];
-    
+
     let offsetStart = 0;
     if(this.bulletOffset != 0) {
       offsetStart = -(this.bulletCount * this.bulletOffset) / 2;
@@ -24,7 +24,7 @@ export class Torpedo extends Primary {
 
     for(let i = 0; i < this.bulletCount; i++){
 
-      let options = {
+      const options = {
         damage: this.damage,
         speed: this.speed,
         range: this.range,

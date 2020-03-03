@@ -38,7 +38,7 @@ export class Missile extends Primary {
         angle += this.bulletAngle;
       }
 
-      let bullet = new Bullet(options);
+      const bullet = new Bullet(options);
       bullet.registerBehaviour("path", new MissilePath(bullet, {angle: Math.PI/2}));
       bullets.push( bullet );
     }

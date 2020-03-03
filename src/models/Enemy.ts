@@ -21,6 +21,14 @@ export class Enemy extends Entity {
   collisionDamageBase = 1;
   collisionDamageGrowth = 0.1;
 
+  damage = 1;
+  damageBase = 1;
+  damageGrowth = 0.2;
+
+  range = 300;
+  rangeBase = 300;
+  rangeGrowth = 25;
+
   flock: Enemy[];
   destination: Position;
   velocity: Position;
@@ -38,6 +46,8 @@ export class Enemy extends Entity {
     this.health = Math.floor(this.healthBase + (this.healthGrowth * wave));
     this.speed = Math.floor(this.speedBase + (this.speedGrowth * wave));
     this.collisionDamage = Math.floor(this.collisionDamageBase + (this.collisionDamageGrowth * wave));
+    this.damage = Math.floor(this.damageBase + (this.damageGrowth * wave));
+    this.range = Math.floor(this.rangeBase + ( this.rangeGrowth * wave ));
   }
 
   onInitGame(state: GameState): void {

@@ -20,7 +20,7 @@ export class Blaster extends Primary{
 
     for(let i = 0; i < this.bulletCount; i++){
 
-      let options = {
+      const options = {
         damage: this.damage,
         speed: this.speed,
         range: this.range,

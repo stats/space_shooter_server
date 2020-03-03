@@ -11,7 +11,7 @@ import { ShipBuilderState } from '../models/ShipBuilderState'
 
 export class ShipBuilderRoom extends Room<ShipBuilderState> {
 
-  private clientUsernameHash:any = {};
+  private clientUsernameHash: any = {};
 
   onCreate(options: any): void {
     this.setState(new ShipBuilderState());

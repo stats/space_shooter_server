@@ -40,7 +40,7 @@ export class Cannon extends Primary {
         angle += this.bulletAngle;
       }
 
-      let bullet = new Bullet(options);
+      const bullet = new Bullet(options);
       bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: Math.PI/2 - this.bulletAngle}));
       bullets.push( bullet );
     }

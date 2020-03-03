@@ -1,6 +1,7 @@
 import Clock from '@gamestdio/timer';
 
 import { Asteroid, Blaster, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
+import { Eagle } from '../models/bosses';
 import { AsteroidFormation, LineFormation, RandomFormation, SquareFormation,
          TriangleFormation, DiagonalFormation, SimpleFlock } from './Formations/';
 
@@ -15,8 +16,12 @@ export class Spawner {
 
   private numberOfFormations = 0;
 
+  private boss_types: any = [
+    [1, Eagle],
+  ]
+
   private enemy_types: any = [
-    // [1, Asteroid],
+    [1, Asteroid],
     [1, Blaster],
     [1, Blimp],
     [1, Bomber],
@@ -40,19 +45,35 @@ export class Spawner {
     this.clock = clock;
   }
 
+  isBossWave(): boolean {
+    return this.state.startWave != this.state.currentWave && (this.state.currentWave - this.state.startWave) % 5 == 0;
+  }
+
   nextWave(): void {
-    this.numberOfFormations = (this.state.currentWave + 3);
-    this.possibleEnemies = [];
-    this.minFormations = Math.ceil(this.state.currentWave / 10);
-    this.maxFormations = Math.ceil(this.state.currentWave / 6);
-    for(const item of this.enemy_types) {
-      if(this.state.currentWave >= item[0]) {
-        this.possibleEnemies.push(item[1]);
-      } else {
-        break;
+    if( this.isBossWave() ) {
+      let possibleBosses = [];
+      for(const item of this.boss_types) {
+        if(this.state.currentWave >= item[0]) {
+          possibleBosses.push(item[1]);
+        } else {
+          break;
+        }
       }
+      this.state.addEnemy(new sample(possibleBosses)());
+    } else {
+      this.numberOfFormations = (this.state.currentWave + 3);
+      this.possibleEnemies = [];
+      this.minFormations = Math.ceil(this.state.currentWave / 10);
+      this.maxFormations = Math.ceil(this.state.currentWave / 6);
+      for(const item of this.enemy_types) {
+        if(this.state.currentWave >= item[0]) {
+          this.possibleEnemies.push(item[1]);
+        } else {
+          break;
+        }
+      }
+      this.spawnFormation();
     }
-    this.spawnFormation();
   }
 
   public complete(): boolean {
