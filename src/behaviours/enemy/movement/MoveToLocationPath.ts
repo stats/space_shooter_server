@@ -8,7 +8,6 @@ import { Enemy } from '../../../models/Enemy';
 export class MoveToLocationPath extends Behaviour {
 
   moveTo: Position;
-  theta: number;
   moveComplete = false;
 
   enteredScreen = false;
@@ -25,8 +24,7 @@ export class MoveToLocationPath extends Behaviour {
     const dx = this.moveTo.x - this.target.position.x;
     const dy = this.moveTo.y - this.target.position.y;
 
-    this.theta = Math.atan2(dy, dx);
-    this.target.angle = this.theta;
+    this.target.angle = Math.atan2(dy, dx);
     this.target.disableBehaviour("primary");
   }
 
@@ -39,8 +37,8 @@ export class MoveToLocationPath extends Behaviour {
       this.target.enableBehaviour("primary");
       this.moveComplete = true;
     } else {
-      this.target.position.x += Math.cos(this.theta) * this.target.speed * deltaTime/1000;
-      this.target.position.y += Math.sin(this.theta) * this.target.speed * deltaTime/1000;
+      this.target.position.x += Math.cos(this.target.angle) * this.target.speed * deltaTime/1000;
+      this.target.position.y += Math.sin(this.target.angle) * this.target.speed * deltaTime/1000;
 
       if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
         this.enteredScreen = true;

@@ -5,7 +5,6 @@ import { Enemy } from '../../../models/Enemy';
 
 export class TargetPlayerStartPath extends Behaviour {
 
-  theta = 0;
   enteredScreen = false;
 
   target: Enemy;
@@ -20,13 +19,12 @@ export class TargetPlayerStartPath extends Behaviour {
     }
     const dx = this.target.position.x - ship.position.x;
     const dy = this.target.position.y - ship.position.y;
-    this.theta = Math.atan2(dy, dx);
-    this.target.angle = this.theta;
+    this.target.angle = Math.atan2(dy, dx);
   }
 
   onUpdate(deltaTime): void {
-    this.target.position.x += -Math.cos(this.theta) * this.target.speed * deltaTime/1000;
-    this.target.position.y += -Math.sin(this.theta) * this.target.speed * deltaTime/1000;
+    this.target.position.x += -Math.cos(this.target.angle) * this.target.speed * deltaTime/1000;
+    this.target.position.y += -Math.sin(this.target.angle) * this.target.speed * deltaTime/1000;
 
     if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
       this.enteredScreen = true;

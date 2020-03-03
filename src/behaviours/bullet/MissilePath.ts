@@ -20,7 +20,6 @@ export class MissilePath extends Behaviour {
 
   private gotGameState = false;
 
-  private theta = 0;
   private t1 = 0.01;
   private t2 = 0.001;
 
@@ -28,7 +27,7 @@ export class MissilePath extends Behaviour {
 
   constructor(target: Bullet, args: { angle: number }) {
     super('MissilePath', target);
-    this.theta = args.angle || Math.PI/2;
+    this.target.angle = args.angle || Math.PI/2;
   }
 
   handleGameState(): void {
@@ -63,18 +62,18 @@ export class MissilePath extends Behaviour {
     const dx = this.getEntityX() - this.target.position.x;
     const dy = this.getEntityY() - this.target.position.y;
     const ct = Math.atan2(dy, dx);
-    if(ct - this.theta > this.t1) {
-      this.theta += this.t1;
-    } else if(ct - this.theta < this.t1) {
-      this.theta -= this.t1;
+    if(ct - this.target.angle > this.t1) {
+      this.target.angle += this.t1;
+    } else if(ct - this.target.angle < this.t1) {
+      this.target.angle -= this.t1;
     } else {
-      this.theta = ct;
+      this.target.angle = ct;
     }
 
     this.t1 += this.t2;
 
-    this.target.position.x += Math.cos(this.theta) * this.target.speed * deltaTime / 1000;
-    this.target.position.y += Math.sin(this.theta) * this.target.speed * deltaTime / 1000;
+    this.target.position.x += Math.cos(this.target.angle) * this.target.speed * deltaTime / 1000;
+    this.target.position.y += Math.sin(this.target.angle) * this.target.speed * deltaTime / 1000;
 
     this.traveled += this.target.speed * deltaTime / 1000;
 

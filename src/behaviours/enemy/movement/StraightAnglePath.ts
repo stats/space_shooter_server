@@ -7,8 +7,6 @@ import { Enemy } from '../../../models/Enemy';
 export class StraightAnglePath extends Behaviour {
 
   start: Position;
-  angle: number;
-
   enteredScreen = false;
 
   target: Enemy;
@@ -40,13 +38,12 @@ export class StraightAnglePath extends Behaviour {
     const dx = toX - this.target.position.x;
     const dy = toY - this.target.position.y;
 
-    this.angle = Math.atan2(dy, dx);
-    this.target.angle = this.angle;
+    this.target.angle = Math.atan2(dy, dx);
   }
 
   onUpdate(deltaTime): void {
-    this.target.position.x += Math.cos(this.angle) * this.target.speed * deltaTime/1000;
-    this.target.position.y += Math.sin(this.angle) * this.target.speed * deltaTime/1000;
+    this.target.position.x += Math.cos(this.target.angle) * this.target.speed * deltaTime/1000;
+    this.target.position.y += Math.sin(this.target.angle) * this.target.speed * deltaTime/1000;
 
     if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
       this.enteredScreen = true;

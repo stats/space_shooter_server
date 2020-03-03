@@ -7,7 +7,6 @@ import { Enemy } from '../../../models/Enemy';
 export class MoveToLocationThenRotatePath extends Behaviour {
 
   moveTo: Position;
-  theta: number;
   moveComplete = false;
 
   rotationDirection = 1;
@@ -26,10 +25,9 @@ export class MoveToLocationThenRotatePath extends Behaviour {
     const dx = this.moveTo.x - this.target.position.x;
     const dy = this.moveTo.y - this.target.position.y;
 
-    this.theta = Math.atan2(dy, dx);
+    this.target.angle = Math.atan2(dy, dx);
     this.rotationDirection = Math.random() > 0.5 ? 1 : -1;
     this.target.disableBehaviour("primary");
-    this.target.angle = this.theta;
   }
 
   onUpdate(deltaTime): void {
@@ -50,11 +48,10 @@ export class MoveToLocationThenRotatePath extends Behaviour {
       this.target.position.y = this.moveTo.y;
       this.moveComplete = true;
       this.target.overrideAngle = true;
-      this.target.angle = this.theta;
       this.target.enableBehaviour("primary");
     } else {
-      this.target.position.x += Math.cos(this.theta) * this.target.speed * deltaTime/1000;
-      this.target.position.y += Math.sin(this.theta) * this.target.speed * deltaTime/1000;
+      this.target.position.x += Math.cos(this.target.angle) * this.target.speed * deltaTime/1000;
+      this.target.position.y += Math.sin(this.target.angle) * this.target.speed * deltaTime/1000;
 
       if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
         this.enteredScreen = true;
