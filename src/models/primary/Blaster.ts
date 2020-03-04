@@ -1,7 +1,7 @@
 import { Bullet } from '../Bullet';
 import { Entity } from '../Entity';
 import { C, CT } from '../../Constants';
-import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
+import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
 import { Primary } from './Primary';
 
 export class Blaster extends Primary{

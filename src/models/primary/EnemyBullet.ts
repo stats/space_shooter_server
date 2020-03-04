@@ -1,7 +1,7 @@
 import { Bullet } from '../Bullet';
 import { C, CT } from '../../Constants';
-import { StraightLineDownPath } from '../../behaviours/Bullet/StraightLineDownPath';
-import { StraightAnglePath } from '../../behaviours/Bullet/StraightAnglePath';
+import { StraightLineDownPath } from '../../behaviours/bullet/StraightLineDownPath';
+import { StraightAnglePath } from '../../behaviours/bullet/StraightAnglePath';
 import { Primary } from './Primary';
 import { Position } from '../Position';
 

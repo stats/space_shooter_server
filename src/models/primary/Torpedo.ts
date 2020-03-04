@@ -3,8 +3,8 @@
 import { Bullet } from '../Bullet';
 import { C, CT } from '../../Constants';
 import { Entity } from '../Entity';
-import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
-import { ExplodeBehaviour } from '../../behaviours/Bullet/ExplodeBehaviour';
+import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
+import { ExplodeBehaviour } from '../../behaviours/bullet/ExplodeBehaviour';
 import { Primary } from './Primary';
 import { Position } from '../Position';
 

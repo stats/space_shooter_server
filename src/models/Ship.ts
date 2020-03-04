@@ -23,7 +23,6 @@ import { v4 as uuid } from 'uuid';
 export class Ship extends Entity {
 
   sessionId?: number;
-  connected = false;
 
   @type("string")
   name: string;

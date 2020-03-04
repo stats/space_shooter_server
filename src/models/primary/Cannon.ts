@@ -5,8 +5,8 @@
 import { Bullet } from '../Bullet';
 import { Entity } from '../Entity';
 import { C, CT } from '../../Constants';
-import { StraightLineUpPath } from '../../behaviours/Bullet/StraightLineUpPath';
-import { StraightAnglePath } from '../../behaviours/Bullet/StraightAnglePath';
+import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
+import { StraightAnglePath } from '../../behaviours/bullet/StraightAnglePath';
 import { Primary } from './Primary';
 import { Position } from '../Position';
 

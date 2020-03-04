@@ -4,7 +4,7 @@ import { Entity } from './Entity';
 
 import { merge } from 'lodash';
 
-import { DestroyedBehaviour } from '../behaviours/Bullet/DestroyedBehaviour';
+import { DestroyedBehaviour } from '../behaviours/bullet/DestroyedBehaviour';
 
 import { CT } from '../Constants';
 

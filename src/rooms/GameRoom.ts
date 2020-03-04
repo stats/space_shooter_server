@@ -72,7 +72,7 @@ export class GameRoom extends Room<GameState> {
     if(data.action === "input") this.handleClientInput(client, data.input);
   }
 
-  onLeave(client: Client, consented: boolean): void {
+  async onLeave(client: Client, consented: boolean): Promise<void> {
     let ship = this.clientShipHash[client.id];
     ship.connected = false;
     try {
