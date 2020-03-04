@@ -7,12 +7,14 @@ import { Entity } from '../models/Entity';
 export class Behaviour {
   public target: Entity;
   public eventType: string;
+  public onCompleteCallback: any;
 
   private _enabled = true;
 
-  constructor(type: string, target: any) {
+  constructor(type: string, target: any, onCompleteCallback?: any) {
     this.eventType = type;
     this.target = target;
+    this.onCompleteCallback = onCompleteCallback;
   }
 
   /**
@@ -37,6 +39,12 @@ export class Behaviour {
   }
   public onRemoved(): void {
     // do nothing.
+  }
+
+  public onComplete(): void {
+    if(this.onCompleteCallback){    
+      this.onCompleteCallback();
+    }
   }
 
   public enable(): void {

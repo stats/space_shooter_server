@@ -14,8 +14,8 @@ export class MoveToLocationPath extends Behaviour {
 
   target: Enemy;
 
-  constructor(target: Enemy, args: { moveTo: Position}) {
-    super('MoveToLocation', target);
+  constructor(target: Enemy, args: { moveTo: Position}, onComplete?: any) {
+    super('MoveToLocation', target, onComplete);
     this.moveTo = args.moveTo;
     if(this.moveTo == null) {
       this.moveTo = new Position( C.RANDOM_X_ON_SCREEN,  C.RANDOM_Y_ON_SCREEN)
@@ -31,11 +31,12 @@ export class MoveToLocationPath extends Behaviour {
   onUpdate(deltaTime): void {
     if(this.moveComplete) return;
 
-    if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * detaTime/1000) {
+    if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * deltaTime/1000) {
       this.target.position.x = this.moveTo.x;
       this.target.position.y = this.moveTo.y;
       this.target.enableBehaviour("primary");
       this.moveComplete = true;
+      this.onComplete();
     } else {
       this.target.position.x += Math.cos(this.target.angle) * this.target.speed * deltaTime/1000;
       this.target.position.y += Math.sin(this.target.angle) * this.target.speed * deltaTime/1000;
