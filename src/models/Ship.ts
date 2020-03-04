@@ -31,6 +31,9 @@ export class Ship extends Entity {
   username: string;
   uuid: string;
 
+  @type("boolean")
+  connected: boolean = false;
+
   @type("string")
   shipType: string;
 

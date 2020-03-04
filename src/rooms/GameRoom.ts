@@ -63,6 +63,7 @@ export class GameRoom extends Room<GameState> {
       this.send(client, { error: 'no_ship_in_game'});
       return;
     }
+    ship.connected = true;
     this.clientShipHash[client.id] = ship;
     this.state.addShip(ship)
   }
@@ -71,15 +72,25 @@ export class GameRoom extends Room<GameState> {
     if(data.action === "input") this.handleClientInput(client, data.input);
   }
 
-  onLeave(client: Client): void {
-    console.log("[GameRoom]", this.roomId, "Client Leave");
-    const ship = this.clientShipHash[client.id];
-    ship.checkLevelUp();
-    ship.updateWaveRank(this.state.currentWave);
-    ShipHelper.saveShip(ship);
-    this.state.removeShip(ship);
-    ShipHelper.removeInGame(ship.uuid);
-    delete this.clientShipHash[client.id];
+  onLeave(client: Client, consented: boolean): void {
+    let ship = this.clientShipHash[client.id];
+    ship.connected = false;
+    try {
+      if(consented) {
+        /** This error allows the room to be cleaned up **/
+        throw new Error("consented leave");
+      }
+      // allow a disconnected client up to 5 seconds to reconnect.
+      await this.allowReconnection(client, 5);
+      ship.connected = true;
+    } catch(e) {
+      ship.checkLevelUp();
+      ship.updateWaveRank(this.state.currentWave);
+      ShipHelper.saveShip(ship);
+      this.state.removeShip(ship);
+      ShipHelper.removeInGame(ship.uuid);
+      delete this.clientShipHash[client.id];
+    }
   }
 
   onDispose(): void {
