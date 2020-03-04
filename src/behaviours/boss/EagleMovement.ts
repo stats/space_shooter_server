@@ -30,6 +30,10 @@ export class EagleMovement extends Behaviour {
   constructor(target: Eagle) {
     super('eagleMovement', target);
 
+    if(this.targetPosition == null) {
+      this.targetPosition = new Position(800, 700);
+    }
+
     const dx = this.targetPosition.x - this.target.position.x;
     const dy = this.targetPosition.y - this.target.position.y;
 
@@ -82,9 +86,6 @@ export class EagleMovement extends Behaviour {
     this.target.bulletInvulnerable = true;
     this.target.collisionInvulnerable = true;
 
-    if(this.targetPosition == null) {
-      this.targetPosition = new Position(800, 700);
-    }
     if(this.target.position.distanceTo(this.targetPosition) <= this.target.speed * deltaTime/1000) {
       this.target.position.x = this.targetPosition.x;
       this.target.position.y = this.targetPosition.y;
@@ -126,6 +127,7 @@ export class EagleMovement extends Behaviour {
     this.target.$state.addEnemy(new Tank({ position: new Position(1800, 400), moveTo: new Position(1300, 400) }));
 
     this.waitCooldown = 4000;
+    this.target.state = EagleState.WAIT;
     this.nextState = EagleState.MOVE;
   }
 
@@ -135,11 +137,11 @@ export class EagleMovement extends Behaviour {
 
     this.target.position.x += this.moveDirection * this.target.speed * deltaTime / 1000;
 
-    if(this.target.position.x >= 1200) {
-      this.moveDirection == -1;
+    if(this.target.position.x >= 1300) {
+      this.moveDirection = -1;
     }
-    if( this.target.position.x <= 400) {
-      this.moveDirection == 1;
+    if( this.target.position.x <= 300) {
+      this.moveDirection = 1;
     }
 
     if( this.moveTimer >= this.moveCooldown && this.target.position.distanceTo(new Position(800, 700)) <= this.target.speed * deltaTime / 1000 ) {

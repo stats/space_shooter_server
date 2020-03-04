@@ -46,6 +46,7 @@ export class Spawner {
   }
 
   isBossWave(): boolean {
+    return true;
     return this.state.startWave != this.state.currentWave && (this.state.currentWave - this.state.startWave) % 5 == 0;
   }
 
@@ -59,7 +60,8 @@ export class Spawner {
           break;
         }
       }
-      this.state.addEnemy(new sample(possibleBosses)());
+      const boss: any = sample(possibleBosses);
+      this.state.addEnemy(new boss());
     } else {
       this.numberOfFormations = (this.state.currentWave + 3);
       this.possibleEnemies = [];
