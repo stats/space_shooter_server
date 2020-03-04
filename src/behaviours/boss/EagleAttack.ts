@@ -19,7 +19,7 @@ export class EagleAttack extends Behaviour {
 
     const options = {
       damage: this.target.damage,
-      speed: this.target.speed,
+      speed: this.target.speed * 5,
       range: this.target.range,
       collisionType: CT.CIRCLE,
       radius: 15,
