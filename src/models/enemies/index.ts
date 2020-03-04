@@ -1,5 +1,6 @@
 export { Asteroid } from './Asteroid';
 export { Blaster } from './Blaster';
+export { Blaster2 } from './Blaster2';
 export { Blimp } from './Blimp';
 export { Bomber } from './Bomber';
 export { Fang } from './Fang';

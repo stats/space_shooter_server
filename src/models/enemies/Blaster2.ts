@@ -1,16 +1,12 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
 import { MoveToLocationPath } from '../../behaviours/Enemy/movement/MoveToLocationPath';
-import { RotateInCircle } from '../../behaviours/Enemy/movement/RotateInCircle';
 import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
 import { C, CT } from '../../Constants';
-import { Position } from '../../models/Position';
 
 
-export class Tank extends Enemy {
-
-  moveTo: Position;
+export class Blaster2 extends Enemy {
 
   constructor(options: any) {
     super(options);
@@ -23,15 +19,17 @@ export class Tank extends Enemy {
     this.collisionDamageBase = 1;
     this.collisionDamageGrowth = 0.1;
 
-    this.modelType = "tank";
+    this.modelType = "blaster";
 
     this.radius = 30;
-
-    this.moveTo = options.moveTo || Position.randomOnScreen();
   }
 
   onInitGame(state: GameState): void {
     super.onInitGame(state);
+    let moveAgain = () => {
+      new MoveToLocationPath(this, null, moveAgain);
+    }
+    this.registerBehaviour("path", new MoveToLocationPath(this, null, moveAgain));
 
     const bulletOptions = {
       system: EnemyBullet,
@@ -43,13 +41,10 @@ export class Tank extends Enemy {
       bulletMesh: "Enemy1",
       position: this.position.clone(),
       bulletType: C.ENEMY_BULLET,
-      cooldown: 5000,
+      cooldown: 3000,
       behaviour: 'fires'
     }
     this.registerBehaviour("primary", new FiresBulletBehaviour(this, {bulletOptions: bulletOptions}));
-    this.registerBehaviour("path", new MoveToLocationPath(this, this.moveTo, () => {
-      new RotateInCircle(this);
-    }));
   }
 
 }
