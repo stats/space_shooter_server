@@ -8,8 +8,11 @@
 using Colyseus.Schema;
 
 public class Ship : Entity {
-	[Type(7, "string")]
+	[Type(6, "string")]
 	public string name = "";
+
+	[Type(7, "boolean")]
+	public bool connected = false;
 
 	[Type(8, "string")]
 	public string shipType = "";

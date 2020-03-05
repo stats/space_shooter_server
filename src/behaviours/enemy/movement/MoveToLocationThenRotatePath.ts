@@ -47,7 +47,6 @@ export class MoveToLocationThenRotatePath extends Behaviour {
       this.target.position.x = this.moveTo.x;
       this.target.position.y = this.moveTo.y;
       this.moveComplete = true;
-      this.target.overrideAngle = true;
       this.target.enableBehaviour("primary");
     } else {
       this.target.position.x += Math.cos(this.target.angle) * this.target.speed * deltaTime/1000;

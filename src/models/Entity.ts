@@ -14,9 +14,6 @@ export class Entity extends Schema {
   @type(Position)
   position: Position = new Position(0, 0);
 
-  @type('boolean')
-  overrideAngle = false;
-
   @type('number')
   angle = 0;
 
