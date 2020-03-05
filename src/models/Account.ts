@@ -45,9 +45,9 @@ export class Account extends Schema {
     for(const key in SHIP.TYPE) {
       const t = SHIP.TYPE[key];
       if( !("unlockKey" in t) ) {
-        item = new UnlockItem("", true, 0, "ship")
+        item = new UnlockItem("", true, 0, "ship", key, t.description)
       } else {
-        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "ship")
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "ship", key, t.description)
       }
       message.unlocks[key] = item;
     }
@@ -55,9 +55,9 @@ export class Account extends Schema {
     for(const key in PRIMARY.TYPE) {
       const t = PRIMARY.TYPE[key];
       if( !("unlockKey" in t) ) {
-        item = new UnlockItem("", true, 0, "primary")
+        item = new UnlockItem("", true, 0, "primary", key, t.description)
       } else {
-        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "primary")
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "primary", key, t.description)
       }
       message.unlocks[key] = item;
     }
@@ -65,9 +65,9 @@ export class Account extends Schema {
     for(const key in SPECIAL.TYPE) {
       const t = SPECIAL.TYPE[key];
       if( !("unlockKey" in t) ) {
-        item = new UnlockItem("", true, 0, "special")
+        item = new UnlockItem("", true, 0, "special", key, t.description)
       } else {
-        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "special")
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "special", key, t.description)
       }
       message.unlocks[key] = item;
     }
@@ -75,9 +75,9 @@ export class Account extends Schema {
     for(const key in MATERIAL.TYPE) {
       const t = MATERIAL.TYPE[key];
       if( !("unlockKey" in t) ) {
-        item = new UnlockItem("", true, 0, "material")
+        item = new UnlockItem("", true, 0, "material", key, t.description)
       } else {
-        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "material")
+        item = new UnlockItem(t.unlockKey, (key in this.unlocked), t.unlockCount, "material", key, t.description)
       }
       message.unlocks[key] = item;
     }

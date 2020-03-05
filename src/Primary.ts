@@ -97,7 +97,7 @@ export class PRIMARY {
     },
     "Rapid": {
       'systemType': Cannon,
-      'description': `Upgraded Cannon that quickly energizes and launches metal slugs in front of your ship. Much faster fire rate but much less powerful.`
+      'description': `Upgraded Cannon that quickly energizes and launches metal slugs in front of your ship. Much faster fire rate but much less powerful.`,
       'damage': 0.15,
       'range': 0.8,
       'speed': 400,

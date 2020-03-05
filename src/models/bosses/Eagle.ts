@@ -13,7 +13,7 @@ export enum EagleState {
   MOVE
 }
 
-export class Eagle extends Boss {
+export class Eagle extends Enemy {
 
   constructor(options) {
     super(options);

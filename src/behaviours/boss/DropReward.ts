@@ -1,11 +1,11 @@
 import { Behaviour } from '../behaviour';
-import { Boss } from '../../models/Boss';
+import { Enemy } from '../../models/Enemy';
 
 export class DropReward extends Behaviour {
 
-  target: Boss;
+  target: Enemy;
 
-  constructor(target: Boss) {
+  constructor(target: Enemy) {
     super('destroyed', target);
   }
 

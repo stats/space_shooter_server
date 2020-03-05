@@ -7,14 +7,12 @@ import { Entity } from '../models/Entity';
 export class Behaviour {
   public target: Entity;
   public eventType: string;
-  public onCompleteState: number;
 
   private _enabled = true;
 
   constructor(type: string, target: any, onCompleteState?: number) {
     this.eventType = type;
     this.target = target;
-    this.onCompleteState = onCompleteState;
   }
 
   /**
@@ -39,12 +37,6 @@ export class Behaviour {
   }
   public onRemoved(): void {
     // do nothing.
-  }
-
-  public onComplete(): void {
-    if(this.onCompleteState){
-      this.target.state = this.onCompleteState;
-    }
   }
 
   public enable(): void {

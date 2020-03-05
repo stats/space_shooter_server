@@ -15,9 +15,9 @@ export class MoveToLocationThenRotatePath extends Behaviour {
 
   target: Enemy;
 
-  constructor(target: Enemy, args: { moveTo: Position }) {
+  constructor(target: Enemy, moveTo: Position ) {
     super('MoveToLocationThenRotate', target);
-    this.moveTo = args.moveTo || Position.randomOnScreen();
+    this.moveTo = moveTo || Position.randomOnScreen();
     if(this.moveTo == null) {
       this.moveTo = new Position( C.RANDOM_X_ON_SCREEN,  C.RANDOM_Y_ON_SCREEN)
     }

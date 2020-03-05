@@ -36,7 +36,6 @@ export class MoveToLocationPath extends Behaviour {
       this.target.position.y = this.moveTo.y;
       this.target.enableBehaviour("primary");
       this.moveComplete = true;
-      this.onComplete();
     } else {
       this.target.position.x += Math.cos(this.target.angle) * this.target.speed * deltaTime/1000;
       this.target.position.y += Math.sin(this.target.angle) * this.target.speed * deltaTime/1000;
