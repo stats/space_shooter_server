@@ -41,7 +41,7 @@ export class Fang extends Enemy {
       cooldown: 3000,
       behaviour: 'fires'
     }
-    this.registerBehaviour("primary", new FiresBulletBehaviour(this, {bulletOptions: bulletOptions}));
+    this.registerBehaviour("primary", new FiresBulletBehaviour(this, bulletOptions));
   }
 
 }

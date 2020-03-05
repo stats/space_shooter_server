@@ -11,6 +11,7 @@ export class PRIMARY {
   public static TYPE = {
     "Cannon": {
       'systemType': Cannon,
+      'description': `Fires a single high speed molten slug in a straight line in front of your ship.`,
       'damage': 1,
       'range': 1,
       'speed': 400,
@@ -23,6 +24,7 @@ export class PRIMARY {
     },
     "Cannon 2.0": {
       'systemType': Cannon,
+      'description': `Fires two high speed molten slugs from your ship at an angle.`,
       'damage': 1,
       'range': 1,
       'speed': 400,
@@ -37,6 +39,7 @@ export class PRIMARY {
     },
     "Cannon 3.0": {
       'systemType': Cannon,
+      'description': `Fires three high speed molten slugs from your ship, two at an angle and one staight in front of your ship.`,
       'damage': 1,
       'range': 1,
       'speed': 400,
@@ -51,8 +54,9 @@ export class PRIMARY {
     },
     "Blaster": {
       'systemType': Blaster,
+      'description': `Fires a single burst of plasma out in front of your ship. Higher damage but less range, fire rate and speed.`,
       'damage': 1.2,
-      'range': 1.2,
+      'range': 0.8,
       'speed': 350,
       'fireRate': 0.8,
       'radius': 15,
@@ -63,8 +67,9 @@ export class PRIMARY {
     },
     "Blaster 2.0": {
       'systemType': Blaster,
+      'description': `Fires two bursts of plasma out in front of your ship. Higher damage but less range, fire rate and speed.`,
       'damage': 1.2,
-      'range': 1.2,
+      'range': 0.8,
       'speed': 350,
       'fireRate': 0.8,
       'radius': 15,
@@ -77,8 +82,9 @@ export class PRIMARY {
     },
     "Blaster 3.0": {
       'systemType': Blaster,
+      'description': `Fires three bursts of plasma out in front of your ship. Higher damage but less range, fire rate and speed.`,
       'damage': 1.2,
-      'range': 1.2,
+      'range': 0.8,
       'speed': 350,
       'fireRate': 0.8,
       'radius': 15,
@@ -91,6 +97,7 @@ export class PRIMARY {
     },
     "Rapid": {
       'systemType': Cannon,
+      'description': `Upgraded Cannon that quickly energizes and launches metal slugs in front of your ship. Much faster fire rate but much less powerful.`
       'damage': 0.15,
       'range': 0.8,
       'speed': 400,
@@ -105,6 +112,7 @@ export class PRIMARY {
     },
     "Beam": {
       'systemType': Blaster,
+      'description': `Fires a single laser blast out in front of your ship. Average damage but higher range, speed and fire rate.`,
       'damage': 1,
       'range': 1.1,
       'speed': 600,
@@ -119,6 +127,7 @@ export class PRIMARY {
     },
     "Double Beam": {
       'systemType': Blaster,
+      'description': `Fires two laser blasts out in front of your ship. Average damage but higher range, speed and fire rate.`,
       'damage': 1,
       'range': 1.1,
       'speed': 600,
@@ -133,6 +142,7 @@ export class PRIMARY {
     },
     "Triple Beam": {
       'systemType': Blaster,
+      'description': `Fires three laser blasts out in front of your ship. Average damage but higher range, speed and fire rate.`,
       'damage': 1,
       'range': 1.1,
       'speed': 600,
@@ -147,6 +157,7 @@ export class PRIMARY {
     },
     "Missile": {
       'systemType': Missile,
+      'description': `Fires a tracking missile out from your ship. Higher damage and bult slower fire rate.`,
       'damage': 1.2,
       'range': 1.5,
       'speed': 350,
@@ -161,6 +172,7 @@ export class PRIMARY {
     },
     "Double Missile": {
       'systemType': Missile,
+      'description': `Fires two tracking missiles out from your ship. Higher damage and bult slower fire rate.`,
       'damage': 1.2,
       'range': 1.5,
       'speed': 350,
@@ -175,6 +187,7 @@ export class PRIMARY {
     },
     "Triple Missile": {
       'systemType': Missile,
+      'description': `Fires three tracking missiles out from your ship. Higher damage and bult slower fire rate.`,
       'damage': 1.2,
       'range': 1.5,
       'speed': 350,
@@ -189,6 +202,7 @@ export class PRIMARY {
     },
     "Torpedo": {
       'systemType': Torpedo,
+      'description': `Fires a torpedo in a staight line which explodes on impact. High damage low fire rate.`,
       'damage': 1.3,
       'range': 1.2,
       'speed': 400,
@@ -204,6 +218,7 @@ export class PRIMARY {
     },
     "Double Torpedo": {
       'systemType': Torpedo,
+      'description': `Fires two torpedos in a staight line which explodes on impact. High damage low fire rate.`,
       'damage': 1.3,
       'range': 1.2,
       'speed': 400,
@@ -219,6 +234,7 @@ export class PRIMARY {
     },
     "Triple Torpedo": {
       'systemType': Torpedo,
+      'description': `Fires three torpedos in a staight line which explodes on impact. High damage low fire rate.`,
       'damage': 1.3,
       'range': 1.2,
       'speed': 400,

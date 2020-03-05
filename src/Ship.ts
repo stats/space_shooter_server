@@ -1,6 +1,7 @@
 export class SHIP {
   public static TYPE = {
     'explorer1': {
+      'description': `First generation of the explorer model. Designed for speed and minor combat ability.`,
       'damageBase': 4,
       'damageGrowth': 1,
       'rangeBase': 300,
@@ -19,6 +20,7 @@ export class SHIP {
       'specialGrowth': 0.005
     },
     'explorer2': {
+      'description': `Second generation of the explorer model. Designed for speed and minor combat ability.`,
       'damageBase': 5,
       'damageGrowth': 1,
       'rangeBase': 350,
@@ -40,6 +42,7 @@ export class SHIP {
 
     },
     'explorer3': {
+      'description': `Third generation of the explorer model. Designed for speed and minor combat ability.`,
       'damageBase': 6,
       'damageGrowth': 1,
       'rangeBase': 400,
@@ -60,6 +63,7 @@ export class SHIP {
       'unlockCount': 600
     },
     'explorer4': {
+      'description': `Fourth generation of the explorer model. Designed for speed and minor combat ability.`,
       'damageBase': 8,
       'damageGrowth': 2,
       'rangeBase': 450,
@@ -80,6 +84,7 @@ export class SHIP {
       'unlockCount': 700
     },
     'explorer5': {
+      'description': `Fifth generation of the explorer model. Designed for speed and minor combat ability.`,
       'damageBase': 10,
       'damageGrowth': 2,
       'rangeBase': 500,
@@ -100,6 +105,7 @@ export class SHIP {
       'unlockCount': 800
     },
     'scout1': {
+      'description': `First generation of the scout model. Designed primarily for speed.`,
       'damageBase': 4,
       'damageGrowth': 1,
       'rangeBase': 320,
@@ -118,6 +124,7 @@ export class SHIP {
       'specialGrowth': 0.01
     },
     'scout2': {
+      'description': `Second generation of the scout model. Designed primarily for speed.`,
       'damageBase': 5,
       'damageGrowth': 1,
       'rangeBase': 370,
@@ -138,6 +145,7 @@ export class SHIP {
       'unlockCount': 500
     },
     'scout3': {
+      'description': `Third generation of the scout model. Designed primarily for speed.`,
       'damageBase': 6,
       'damageGrowth': 1,
       'rangeBase': 420,
@@ -158,6 +166,7 @@ export class SHIP {
       'unlockCount': 600
     },
     'scout4': {
+      'description': `Fourth generation of the scout model. Designed primarily for speed.`,
       'damageBase': 8,
       'damageGrowth': 2,
       'rangeBase': 470,
@@ -178,6 +187,7 @@ export class SHIP {
       'unlockCount': 700
     },
     'scout5': {
+      'description': `Fifth generation of the scout model. Designed primarily for speed.`,
       'damageBase': 10,
       'damageGrowth': 2,
       'rangeBase': 520,
@@ -198,6 +208,7 @@ export class SHIP {
       'unlockCount': 800
     },
     'gunship1': {
+      'description': `First generation of the gunship model. Designed primarily for maximum damage output.`,
       'damageBase': 6,
       'damageGrowth': 2,
       'rangeBase': 350,
@@ -218,6 +229,7 @@ export class SHIP {
       'unlockCount': 1000
     },
     'gunship2': {
+      'description': `Second generation of the gunship model. Designed primarily for maximum damage output.`,
       'damageBase': 8,
       'damageGrowth': 2,
       'rangeBase': 400,
@@ -238,6 +250,7 @@ export class SHIP {
       'unlockCount': 600
     },
     'gunship3': {
+      'description': `Third generation of the gunship model. Designed primarily for maximum damage output.`,
       'damageBase': 12,
       'damageGrowth': 3,
       'rangeBase': 450,
@@ -258,6 +271,7 @@ export class SHIP {
       'unlockCount': 700
     },
     'gunship4': {
+      'description': `Fourth generation of the gunship model. Designed primarily for maximum damage output.`,
       'damageBase': 16,
       'damageGrowth': 4,
       'rangeBase': 500,
@@ -278,6 +292,7 @@ export class SHIP {
       'unlockCount': 800
     },
     'gunship5': {
+      'description': `Fifth generation of the gunship model. Designed primarily for maximum damage output.`,
       'damageBase': 20,
       'damageGrowth': 5,
       'rangeBase': 550,
@@ -298,6 +313,7 @@ export class SHIP {
       'unlockCount': 900
     },
     'defender1': {
+      'description': `First generation of the defender model. Designed for shielding.`,
       'damageBase': 4,
       'damageGrowth': 1,
       'rangeBase': 300,
@@ -318,6 +334,7 @@ export class SHIP {
       'unlockCount': 5
     },
     'defender2': {
+      'description': `Second generation of the defender model. Designed for shielding.`,
       'damageBase': 5,
       'damageGrowth': 1,
       'rangeBase': 350,
@@ -338,6 +355,7 @@ export class SHIP {
       'unlockCount': 600
     },
     'defender3': {
+      'description': `Third generation of the defender model. Designed for shielding.`,
       'damageBase': 6,
       'damageGrowth': 2,
       'rangeBase': 400,
@@ -358,6 +376,7 @@ export class SHIP {
       'unlockCount': 700
     },
     'defender4': {
+      'description': `Fourth generation of the defender model. Designed for shielding.`,
       'damageBase': 8,
       'damageGrowth': 2,
       'rangeBase': 450,
@@ -378,6 +397,7 @@ export class SHIP {
       'unlockCount': 800
     },
     'defender5': {
+      'description': `Fifth generation of the defender model. Designed for shielding.`,
       'damageBase': 10,
       'damageGrowth': 3,
       'rangeBase': 500,
@@ -398,6 +418,7 @@ export class SHIP {
       'unlockCount': 900
     },
     'fighter1': {
+      'description': `First generation of the fighter model. Designed for for fighting and manueverability.`,
       'damageBase': 5,
       'damageGrowth': 2,
       'rangeBase': 325,
@@ -416,6 +437,7 @@ export class SHIP {
       'specialGrowth': 0.005
     },
     'fighter2': {
+      'description': `Second generation of the fighter model. Designed for for fighting and manueverability.`,
       'damageBase': 7,
       'damageGrowth': 2,
       'rangeBase': 375,
@@ -436,6 +458,7 @@ export class SHIP {
       'unlockCount': 500
     },
     'fighter3': {
+      'description': `Third generation of the fighter model. Designed for for fighting and manueverability.`,
       'damageBase': 9,
       'damageGrowth': 3,
       'rangeBase': 425,
@@ -456,6 +479,7 @@ export class SHIP {
       'unlockCount': 600
     },
     'fighter4': {
+      'description': `Fourth generation of the fighter model. Designed for for fighting and manueverability.`,
       'damageBase': 13,
       'damageGrowth': 3,
       'rangeBase': 475,
@@ -476,6 +500,7 @@ export class SHIP {
       'unlockCount': 700
     },
     'fighter5': {
+      'description': `Fifth generation of the fighter model. Designed for for fighting and manueverability.`,
       'damageBase': 16,
       'damageGrowth': 4,
       'rangeBase': 525,

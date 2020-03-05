@@ -1,11 +1,15 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { MoveToLocationPath } from '../../behaviours/Enemy/movement/MoveToLocationPath';
-import { RotateInCircle } from '../../behaviours/Enemy/movement/RotateInCircle';
+import { MoveToLocationThenRotatePath } from '../../behaviours/Enemy/movement/MoveToLocationThenRotatePath';
 import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
 import { C, CT } from '../../Constants';
 import { Position } from '../../models/Position';
+
+export enum TankStates {
+  MOVE,
+  ROTATE
+}
 
 
 export class Tank extends Enemy {
@@ -47,9 +51,7 @@ export class Tank extends Enemy {
       behaviour: 'fires'
     }
     this.registerBehaviour("primary", new FiresBulletBehaviour(this, {bulletOptions: bulletOptions}));
-    this.registerBehaviour("path", new MoveToLocationPath(this, this.moveTo, () => {
-      new RotateInCircle(this);
-    }));
+    this.registerBehaviour("path", new MoveToLocationThenRotatePath(this, this.moveTo));
   }
 
 }

@@ -10,10 +10,10 @@ export class FiresBulletBehaviour extends Behaviour {
 
   target: Enemy;
 
-  constructor(target: Enemy, args: { bulletOptions: any} ) {
+  constructor(target: Enemy, bulletOptions ) {
     super('fires_bullet', target);
-    this.system = new args.bulletOptions.system(this.target, args.bulletOptions);
-    this.cooldown = args.bulletOptions.cooldown;
+    this.system = new bulletOptions.system(this.target, args.bulletOptions);
+    this.cooldown = bulletOptions.cooldown;
   }
 
   onUpdate(deltaTime): void {

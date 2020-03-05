@@ -1,4 +1,4 @@
-import { Boss } from '../Boss';
+import { Enemy } from '../Enemy';
 import { EagleAttack } from '../../behaviours/boss/EagleAttack';
 import { EagleMovement } from '../../behaviours/boss/EagleMovement';
 import { DropReward } from '../../behaviours/boss/DropReward';

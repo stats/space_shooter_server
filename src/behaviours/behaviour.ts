@@ -7,14 +7,14 @@ import { Entity } from '../models/Entity';
 export class Behaviour {
   public target: Entity;
   public eventType: string;
-  public onCompleteCallback: any;
+  public onCompleteState: number;
 
   private _enabled = true;
 
-  constructor(type: string, target: any, onCompleteCallback?: any) {
+  constructor(type: string, target: any, onCompleteState?: number) {
     this.eventType = type;
     this.target = target;
-    this.onCompleteCallback = onCompleteCallback;
+    this.onCompleteState = onCompleteState;
   }
 
   /**
@@ -42,8 +42,8 @@ export class Behaviour {
   }
 
   public onComplete(): void {
-    if(this.onCompleteCallback){    
-      this.onCompleteCallback();
+    if(this.onCompleteState){
+      this.target.state = this.onCompleteState;
     }
   }
 
