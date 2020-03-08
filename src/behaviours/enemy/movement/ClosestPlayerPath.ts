@@ -40,7 +40,7 @@ export class ClosestPlayerPath extends Behaviour {
     if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
       this.enteredScreen = true;
     }
-    if(this.enteredScreen && CollisionHelper.outsideBounds(this.target)) {
+    if(this.enteredScreen && CollisionHelper.outsideBounds(this.target) || CollisionHelper.tooFar(this.target)) {
       this.target.handleEvent('destroyed');
     }
   }

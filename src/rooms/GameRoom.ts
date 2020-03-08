@@ -73,6 +73,7 @@ export class GameRoom extends Room<GameState> {
   }
 
   async onLeave(client: Client, consented: boolean): Promise<void> {
+    console.log('[GameRoom] On Leave (consented):', consented)
     let ship = this.clientShipHash[client.id];
     ship.connected = false;
     try {
@@ -83,6 +84,7 @@ export class GameRoom extends Room<GameState> {
       // allow a disconnected client up to 5 seconds to reconnect.
       await this.allowReconnection(client, 5);
       ship.connected = true;
+      console.log('[GameRoom] On Leave Completed with no Reconnect');
     } catch(e) {
       ship.checkLevelUp();
       ship.updateWaveRank(this.state.currentWave);

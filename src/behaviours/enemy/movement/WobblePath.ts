@@ -48,7 +48,7 @@ export class WobblePath extends Behaviour {
       this.enteredScreen = true;
     }
 
-    if(this.enteredScreen && CollisionHelper.outsideBounds(this.target)) {
+    if(this.enteredScreen && CollisionHelper.outsideBounds(this.target) || CollisionHelper.tooFar(this.target)) {
       this.target.handleEvent('destroyed');
     }
   }

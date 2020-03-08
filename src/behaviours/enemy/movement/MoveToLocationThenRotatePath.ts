@@ -17,7 +17,7 @@ export class MoveToLocationThenRotatePath extends Behaviour {
 
   constructor(target: Enemy, moveTo: Position ) {
     super('MoveToLocationThenRotate', target);
-    this.moveTo = moveTo || Position.randomOnScreen();
+    this.moveTo = moveTo || C.RANDOM_ON_SCREEN();
     if(this.moveTo == null) {
       this.moveTo = new Position( C.RANDOM_X_ON_SCREEN,  C.RANDOM_Y_ON_SCREEN)
     }
@@ -55,7 +55,7 @@ export class MoveToLocationThenRotatePath extends Behaviour {
       if(!this.enteredScreen && CollisionHelper.insideBounds(this.target)){
         this.enteredScreen = true;
       }
-      if(this.enteredScreen && CollisionHelper.outsideBounds(this.target)) {
+      if(this.enteredScreen && CollisionHelper.outsideBounds(this.target) || CollisionHelper.tooFar(this.target)) {
         this.target.handleEvent('destroyed');
       }
     }

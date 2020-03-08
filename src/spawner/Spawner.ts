@@ -23,14 +23,14 @@ export class Spawner {
   private enemy_types: any = [
     [1, Asteroid],
     [1, Blaster],
-    [1, Blaster2],
+    //[1, Blaster2],
     [1, Blimp],
     [1, Bomber],
     [1, Fang],
     [1, Hunter],
     [1, Scout],
     [1, Speeder],
-    [1, Tank],
+    //[1, Tank],
     [1, Tracker]
   ];
 
@@ -47,7 +47,7 @@ export class Spawner {
   }
 
   isBossWave(): boolean {
-    return true;
+    return false;
     return this.state.startWave != this.state.currentWave && (this.state.currentWave - this.state.startWave) % 5 == 0;
   }
 
@@ -99,7 +99,7 @@ export class Spawner {
           formation = new (sample(this.formations))(this.state);
         break;
       }
-      console.log('Spawned Formation:', formation.constructor.name);
+      console.log('Spawned Formation:', formation.constructor.name, enemy.constructor.name);
       formation.onSpawnEnemies(enemy);
       this.numberOfFormations--;
     }

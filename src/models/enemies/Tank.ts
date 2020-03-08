@@ -31,7 +31,7 @@ export class Tank extends Enemy {
 
     this.radius = 30;
 
-    this.moveTo = options.moveTo || Position.randomOnScreen();
+    this.moveTo = options.moveTo || C.RANDOM_ON_SCREEN();
   }
 
   onInitGame(state: GameState): void {
@@ -50,7 +50,7 @@ export class Tank extends Enemy {
       cooldown: 5000,
       behaviour: 'fires'
     }
-    this.registerBehaviour("primary", new FiresBulletBehaviour(this, {bulletOptions: bulletOptions}));
+    this.registerBehaviour("primary", new FiresBulletBehaviour(this, bulletOptions));
     this.registerBehaviour("path", new MoveToLocationThenRotatePath(this, this.moveTo));
   }
 

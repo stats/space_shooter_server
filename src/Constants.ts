@@ -1,4 +1,5 @@
 import { Bounds } from './helpers/Bounds';
+import { Position } from './models/Position';
 
 /* Game constants*/
 export class C {
@@ -15,6 +16,12 @@ export class C {
 
   public static get RANDOM_Y_ON_SCREEN(): number {
     return Math.random() * ( C.BOUNDS.maxY - C.BOUNDS.minY - C.SPAWN_OFFSET*2 ) + C.SPAWN_OFFSET;
+  }
+
+  public static CENTER_OF_SCREEN: Position = new Position(800, 450);
+
+  public static RANDOM_ON_SCREEN(): Position {
+    return new Position(C.RANDOM_X_ON_SCREEN, C.RANDOM_Y_ON_SCREEN);
   }
 }
 
