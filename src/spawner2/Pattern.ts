@@ -12,11 +12,16 @@ export class Pattern {
   enemyCount: number;
   enemyType: any;
   difficulty: number;
+  positionOffset: number = 0;
 
   getSpawns(timeOffset: number = 0): Spawn[] {
     let spawns:Spawn[] = [];
-    for(let i = 0, l = Math.min(this.points.length, this.enemyCount); i < l; i++) {
+    for(let i = this.positionOffset, l = Math.min(this.points.length, this.enemyCount); i < l; i++) {
       let point: TimedPosition = this.points[i];
+      if(point == null || point.time == null) {
+        console.log('[Pattern (error)] ', this.constructor.name, this.enemyType.constructor.name, i);
+        continue;
+      }
       let spawn:Spawn = new Spawn(
         point.time + timeOffset,
         new this.enemyType({position: point.clone()})

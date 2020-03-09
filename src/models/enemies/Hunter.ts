@@ -1,6 +1,6 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { TargetPlayerStartPath } from '../../behaviours/Enemy/movement/TargetPlayerStartPath';
+import { ClosestPlayerAtStartPath } from '../../behaviours/Enemy/movement/ClosestPlayerAtStartPath';
 
 export class Hunter extends Enemy {
 
@@ -22,7 +22,7 @@ export class Hunter extends Enemy {
 
   onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviour("path", new TargetPlayerStartPath(this));
+    this.registerBehaviour("path", new ClosestPlayerAtStartPath(this));
   }
 
 }

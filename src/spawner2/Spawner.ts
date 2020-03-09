@@ -1,10 +1,10 @@
 import { GameState } from '../models/GameState';
 import { GameRoom } from '../rooms/GameRoom';
-import { Scout, Blaster } from '../models/enemies';
+import { Blaster, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
 import { Pattern } from './Pattern';
 import { Spawn } from './Spawn';
 import { filter, sample } from 'lodash';
-import { HorizontalLine, VerticalLine } from './patterns';
+import { AlternatingLeftSide, AlternatingRightSide, BothSideLine, HorizontalLine, LeftSideLine, RightSideLine, VerticalLine } from './patterns';
 
 export class Spawner {
 
@@ -18,8 +18,15 @@ export class Spawner {
 
   /**
    * Difficulty values for enemies
-   * - Scout = 0.5
    * - Blaster = 2
+   * - Blimp = 0.5
+   * - Bomber = 1
+   * - Fang = 4
+   * - Hunter = 2
+   * - Scout = 0.5
+   * - Speeder = 2
+   * - Tank = 2.5
+   * - Tracker = 3
    **/
 
   constructor(room: any) {
@@ -27,18 +34,90 @@ export class Spawner {
     this.state = room.state;
 
     this.possiblePatterns = [
-      new HorizontalLine(2, Scout, 1),
-      new HorizontalLine(4, Scout, 2),
-      new HorizontalLine(6, Scout, 3),
-      new HorizontalLine(8, Scout, 4),
+
       new HorizontalLine(2, Blaster, 4),
       new HorizontalLine(4, Blaster, 8),
       new HorizontalLine(6, Blaster, 12),
       new HorizontalLine(8, Blaster, 16),
+
+      new AlternatingLeftSide(2, Bomber, 4),
+      new AlternatingLeftSide(2, Bomber, 4, 0, 1),
+      new AlternatingLeftSide(2, Bomber, 4, 0, 2),
+      new AlternatingLeftSide(3, Bomber, 6),
+      new AlternatingLeftSide(3, Bomber, 6, 0, 1),
+      new AlternatingLeftSide(4, Bomber, 8),
+      new AlternatingRightSide(2, Bomber, 4),
+      new AlternatingRightSide(2, Bomber, 4, 0, 1),
+      new AlternatingRightSide(2, Bomber, 4, 0, 2),
+      new AlternatingRightSide(3, Bomber, 6),
+      new AlternatingRightSide(3, Bomber, 6, 0, 1),
+      new AlternatingRightSide(4, Bomber, 8),
+      new BothSideLine(2, Bomber, 4),
+      new BothSideLine(2, Bomber, 4, 0, 2),
+      new BothSideLine(2, Bomber, 4, 0, 4),
+      new BothSideLine(4, Bomber, 8),
+      new BothSideLine(4, Bomber, 8, 0, 2),
+      new BothSideLine(6, Bomber, 12),
+      new BothSideLine(8, Bomber, 16),
+
+      new BothSideLine(2, Fang, 8, -4, 0),
+      new BothSideLine(2, Fang, 8, -4, 2),
+      new BothSideLine(2, Fang, 8, -4, 4),
+      new BothSideLine(4, Fang, 16, -4, 0),
+      new BothSideLine(4, Fang, 16, -4, 2),
+
+      new BothSideLine(2, Hunter, 4, -4, 0),
+      new BothSideLine(2, Hunter, 4 -4, 2),
+      new BothSideLine(2, Hunter, 4, -4, 4),
+      new BothSideLine(4, Hunter, 8, -4, 0),
+      new BothSideLine(4, Hunter, 8, -4, 2),
+
+      new HorizontalLine(2, Scout, 1),
+      new HorizontalLine(4, Scout, 2),
+      new HorizontalLine(6, Scout, 3),
+      new HorizontalLine(8, Scout, 4),
       new VerticalLine(2, Scout, 1),
       new VerticalLine(4, Scout, 2),
       new VerticalLine(6, Scout, 3),
       new VerticalLine(8, Scout, 4),
+      new LeftSideLine(2, Scout, 1),
+      new LeftSideLine(3, Scout, 2),
+      new LeftSideLine(4, Scout, 4),
+      new RightSideLine(2, Scout, 1),
+      new RightSideLine(3, Scout, 2),
+      new RightSideLine(4, Scout, 4),
+
+      new BothSideLine(2, Speeder, 4, -4, 0),
+      new BothSideLine(2, Speeder, 4 -4, 2),
+      new BothSideLine(2, Speeder, 4, -4, 4),
+      new BothSideLine(4, Speeder, 8, -4, 0),
+      new BothSideLine(4, Speeder, 8, -4, 2),
+
+      new AlternatingLeftSide(2, Tank, 5),
+      new AlternatingLeftSide(2, Tank, 5, 0, 1),
+      new AlternatingLeftSide(2, Tank, 5, 0, 2),
+      new AlternatingLeftSide(3, Tank, 8),
+      new AlternatingLeftSide(3, Tank, 8, 0, 1),
+      new AlternatingLeftSide(4, Tank, 10),
+      new AlternatingRightSide(2, Tank, 5),
+      new AlternatingRightSide(2, Tank, 5, 0, 1),
+      new AlternatingRightSide(2, Tank, 5, 0, 2),
+      new AlternatingRightSide(3, Tank, 8),
+      new AlternatingRightSide(3, Tank, 8, 0, 1),
+      new AlternatingRightSide(4, Tank, 10),
+      new BothSideLine(2, Tank, 5),
+      new BothSideLine(2, Tank, 5, 0, 2),
+      new BothSideLine(2, Tank, 5, 0, 4),
+      new BothSideLine(4, Tank, 10),
+      new BothSideLine(4, Tank, 10, 0, 2),
+      new BothSideLine(6, Tank, 15),
+      new BothSideLine(8, Tank, 20),
+
+      new BothSideLine(2, Tracker, 6, -4, 0),
+      new BothSideLine(2, Tracker, 6, -4, 2),
+      new BothSideLine(2, Tracker, 6, -4, 4),
+      new BothSideLine(4, Tracker, 12, -4, 0),
+      new BothSideLine(4, Tracker, 12, -4, 2),
     ]
   }
 
@@ -67,9 +146,9 @@ export class Spawner {
     let currentPatterns: any[];
 
     let difficulty = 15 + (this.state.currentWave * 5);
-    const maxPatternDifficulty = Math.ceil(difficulty / 5);
+    const maxPatternDifficulty = Math.ceil(difficulty / 12) + 1;
 
-    console.log('[Spawner] difficulty:', difficulty, ' maxPatternDifficulty:', maxPatternDifficulty)
+    console.log('[Spawner] wave:', this.state.currentWave, 'difficulty:', difficulty, 'maxPatternDifficulty:', maxPatternDifficulty)
 
     while( difficulty > 0 ) {
       let diff = Math.min(difficulty, maxPatternDifficulty);
