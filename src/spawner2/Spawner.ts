@@ -4,7 +4,7 @@ import { Blaster, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker } f
 import { Pattern } from './Pattern';
 import { Spawn } from './Spawn';
 import { filter, sample } from 'lodash';
-import { AlternatingLeftSide, AlternatingRightSide, BothSideLine, HorizontalLine, LeftSideLine, RightSideLine, VerticalLine } from './patterns';
+import { AlternatingLeftSide, AlternatingRightSide, BothSideLine, DiagonalLine, HorizontalLine, LeftSideDiagonalLine, LeftSideLine, RightSideDiagonalLine, RightSideLine, TopTriangle, VerticalLine } from './patterns';
 
 export class Spawner {
 
@@ -39,6 +39,10 @@ export class Spawner {
       new HorizontalLine(4, Blaster, 8),
       new HorizontalLine(6, Blaster, 12),
       new HorizontalLine(8, Blaster, 16),
+      new DiagonalLine(2, Blaster, 4),
+      new DiagonalLine(4, Blaster, 8),
+      new DiagonalLine(6, Blaster, 12),
+      new DiagonalLine(8, Blaster, 16),
 
       new AlternatingLeftSide(2, Bomber, 4),
       new AlternatingLeftSide(2, Bomber, 4, 0, 1),
@@ -86,6 +90,21 @@ export class Spawner {
       new RightSideLine(2, Scout, 1),
       new RightSideLine(3, Scout, 2),
       new RightSideLine(4, Scout, 4),
+
+      new DiagonalLine(2, Scout, 1),
+      new DiagonalLine(4, Scout, 2),
+      new DiagonalLine(6, Scout, 3),
+      new DiagonalLine(8, Scout, 4),
+      new LeftSideDiagonalLine(2, Scout, 1),
+      new LeftSideDiagonalLine(3, Scout, 2),
+      new LeftSideDiagonalLine(4, Scout, 4),
+      new RightSideDiagonalLine(2, Scout, 1),
+      new RightSideDiagonalLine(3, Scout, 2),
+      new RightSideDiagonalLine(4, Scout, 4),
+
+      new TopTriangle(3, Scout, 1),
+      new TopTriangle(6, Scout, 3),
+      new TopTriangle(10, Scout, 5)
 
       new BothSideLine(2, Speeder, 4, -4, 0),
       new BothSideLine(2, Speeder, 4 -4, 2),

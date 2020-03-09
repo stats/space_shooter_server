@@ -1,7 +1,11 @@
 export { AlternatingLeftSide } from './AlternatingLeftSide';
 export { AlternatingRightSide } from './AlternatingRightSide';
 export { BothSideLine } from './BothSideLine';
+export { DiagonalLine } from './DiagonalLine';
 export { HorizontalLine } from './HorizontalLine';
+export { LeftSideDiagonalLine } from './LeftSideDiagonalLine';
 export { LeftSideLine } from './LeftSideLine';
+export { RightSideDiagonalLine } from './RightSideDiagonalLine';
 export { RightSideLine } from './RightSideLine';
+export { TopTriangle } from './TopTriangle';
 export { VerticalLine } from './VerticalLine';
