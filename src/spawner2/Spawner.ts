@@ -3,8 +3,9 @@ import { GameRoom } from '../rooms/GameRoom';
 import { Blaster, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
 import { Pattern } from './Pattern';
 import { Spawn } from './Spawn';
-import { filter, sample } from 'lodash';
-import { AlternatingLeftSide, AlternatingRightSide, BothSideLine, DiagonalLine, HorizontalLine, LeftSideDiagonalLine, LeftSideLine, RightSideDiagonalLine, RightSideLine, TopTriangle, VerticalLine } from './patterns';
+import { filter, sample, shuffle } from 'lodash';
+import { AlternatingLeftSide, AlternatingRightSide, BothSideLine, DiagonalLine, DoubleVerticalLine, HorizontalLine,
+         LeftSideDiagonalLine, LeftSideLine, RightSideDiagonalLine, RightSideLine, TopTriangle, TripleVerticalLine, VerticalLine } from './patterns';
 
 export class Spawner {
 
@@ -44,25 +45,25 @@ export class Spawner {
       new DiagonalLine(6, Blaster, 12),
       new DiagonalLine(8, Blaster, 16),
 
-      new AlternatingLeftSide(2, Bomber, 4),
-      new AlternatingLeftSide(2, Bomber, 4, 0, 1),
-      new AlternatingLeftSide(2, Bomber, 4, 0, 2),
-      new AlternatingLeftSide(3, Bomber, 6),
-      new AlternatingLeftSide(3, Bomber, 6, 0, 1),
-      new AlternatingLeftSide(4, Bomber, 8),
-      new AlternatingRightSide(2, Bomber, 4),
-      new AlternatingRightSide(2, Bomber, 4, 0, 1),
-      new AlternatingRightSide(2, Bomber, 4, 0, 2),
-      new AlternatingRightSide(3, Bomber, 6),
-      new AlternatingRightSide(3, Bomber, 6, 0, 1),
-      new AlternatingRightSide(4, Bomber, 8),
-      new BothSideLine(2, Bomber, 4),
-      new BothSideLine(2, Bomber, 4, 0, 2),
-      new BothSideLine(2, Bomber, 4, 0, 4),
-      new BothSideLine(4, Bomber, 8),
-      new BothSideLine(4, Bomber, 8, 0, 2),
-      new BothSideLine(6, Bomber, 12),
-      new BothSideLine(8, Bomber, 16),
+      new AlternatingLeftSide(2, Bomber, 2),
+      new AlternatingLeftSide(2, Bomber, 2, 0, 1),
+      new AlternatingLeftSide(2, Bomber, 2, 0, 2),
+      new AlternatingLeftSide(3, Bomber, 3),
+      new AlternatingLeftSide(3, Bomber, 3, 0, 1),
+      new AlternatingLeftSide(4, Bomber, 4),
+      new AlternatingRightSide(2, Bomber, 2),
+      new AlternatingRightSide(2, Bomber, 2, 0, 1),
+      new AlternatingRightSide(2, Bomber, 2, 0, 2),
+      new AlternatingRightSide(3, Bomber, 3),
+      new AlternatingRightSide(3, Bomber, 3, 0, 1),
+      new AlternatingRightSide(4, Bomber, 4),
+      new BothSideLine(2, Bomber, 2),
+      new BothSideLine(2, Bomber, 2, 0, 2),
+      new BothSideLine(2, Bomber, 2, 0, 4),
+      new BothSideLine(4, Bomber, 4),
+      new BothSideLine(4, Bomber, 4, 0, 2),
+      new BothSideLine(6, Bomber, 6),
+      new BothSideLine(8, Bomber, 8),
 
       new BothSideLine(2, Fang, 8, -4, 0),
       new BothSideLine(2, Fang, 8, -4, 2),
@@ -90,7 +91,6 @@ export class Spawner {
       new RightSideLine(2, Scout, 1),
       new RightSideLine(3, Scout, 2),
       new RightSideLine(4, Scout, 4),
-
       new DiagonalLine(2, Scout, 1),
       new DiagonalLine(4, Scout, 2),
       new DiagonalLine(6, Scout, 3),
@@ -101,10 +101,25 @@ export class Spawner {
       new RightSideDiagonalLine(2, Scout, 1),
       new RightSideDiagonalLine(3, Scout, 2),
       new RightSideDiagonalLine(4, Scout, 4),
-
       new TopTriangle(3, Scout, 1),
       new TopTriangle(6, Scout, 3),
-      new TopTriangle(10, Scout, 5)
+      new TopTriangle(10, Scout, 5),
+      new DoubleVerticalLine(2, Scout, 2),
+      new DoubleVerticalLine(4, Scout, 4),
+      new DoubleVerticalLine(6, Scout, 6),
+      new DoubleVerticalLine(8, Scout, 8),
+      new DoubleVerticalLine(10, Scout, 10),
+      new DoubleVerticalLine(12, Scout, 12),
+      new DoubleVerticalLine(14, Scout, 14),
+      new DoubleVerticalLine(16, Scout, 16),
+      new TripleVerticalLine(3, Scout, 3),
+      new TripleVerticalLine(6, Scout, 6),
+      new TripleVerticalLine(9, Scout, 9),
+      new TripleVerticalLine(12, Scout, 12),
+      new TripleVerticalLine(15, Scout, 15),
+      new TripleVerticalLine(18, Scout, 18),
+      new TripleVerticalLine(21, Scout, 21),
+      new TripleVerticalLine(24, Scout, 24),
 
       new BothSideLine(2, Speeder, 4, -4, 0),
       new BothSideLine(2, Speeder, 4 -4, 2),
@@ -175,22 +190,21 @@ export class Spawner {
         return o.difficulty <= diff;
       });
       let pattern: Pattern = sample(currentPatterns);
-      //console.log('[Spawner] pattern: ', pattern);
       patterns.push( pattern.clone() );
       difficulty -= pattern.difficulty;
     }
-    //console.log('[Spawner] patterns', patterns);
+
+    patterns = shuffle(patterns);
 
     let spawns: Spawn[] = [];
     let timeOffset = 10; // Number of seconds between waves
     for(let i = 0, l = patterns.length; i < l; i++) {
       let s: Spawn[] = patterns[i].getSpawns(timeOffset);
-      //console.log('[Spawner] spawn', s);
       spawns = spawns.concat(s);
-      timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 6); //add a random 0 to 5 second delay between spawns
+      timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 6);  //add a random 0 to 5 second delay between spawns
+      timeOffset = Math.max(timeOffset, 10); //ensure that the delay is never less than 10 seconds
     }
 
-    //console.log('[Spawns] spawns', spawns);
 
     return spawns.sort((a: Spawn,b: Spawn) => {
       if( a.time < b.time ) {
