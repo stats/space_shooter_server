@@ -66,11 +66,11 @@ export class Spawner {
       new BothSideLine(4, Fang, 16, -4, 0),
       new BothSideLine(4, Fang, 16, -4, 2),
 
-      new BothSideLine(2, Hunter, 4, -4, 0),
-      new BothSideLine(2, Hunter, 4 -4, 2),
-      new BothSideLine(2, Hunter, 4, -4, 4),
-      new BothSideLine(4, Hunter, 8, -4, 0),
-      new BothSideLine(4, Hunter, 8, -4, 2),
+      new BothSideLine(2, Hunter, 6, -4, 0),
+      new BothSideLine(2, Hunter, 6 -4, 2),
+      new BothSideLine(2, Hunter, 6, -4, 4),
+      new BothSideLine(4, Hunter, 12, -4, 0),
+      new BothSideLine(4, Hunter, 12, -4, 2),
 
       new HorizontalLine(2, Scout, 1),
       new HorizontalLine(4, Scout, 2),
@@ -168,17 +168,17 @@ export class Spawner {
       let s: Spawn[] = patterns[i].getSpawns(timeOffset);
       //console.log('[Spawner] spawn', s);
       spawns = spawns.concat(s);
-      timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 6); //add a random 0 to 5 second delay between spawns
+      timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 11) - 5; //add a random 0 to 5 second delay between spawns
     }
 
     //console.log('[Spawns] spawns', spawns);
 
     return spawns.sort((a: Spawn,b: Spawn) => {
       if( a.time < b.time ) {
-        return -1;
+        return 1;
       }
       if( a.time > b.time) {
-        return 1;
+        return -1;
       }
       return 0;
     });
