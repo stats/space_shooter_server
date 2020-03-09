@@ -119,6 +119,8 @@ export class GameRoom extends Room<GameState> {
       this.state.battleLost();
       this.disconnect();
     }
+
+    //this.spawner.onUpdate(deltaTime);
   }
 
   handleClientInput(client: Client, input: any): void {
