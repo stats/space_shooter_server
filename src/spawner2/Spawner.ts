@@ -168,7 +168,7 @@ export class Spawner {
       let s: Spawn[] = patterns[i].getSpawns(timeOffset);
       //console.log('[Spawner] spawn', s);
       spawns = spawns.concat(s);
-      timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 11) - 5; //add a random 0 to 5 second delay between spawns
+      timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 6); //add a random 0 to 5 second delay between spawns
     }
 
     //console.log('[Spawns] spawns', spawns);
