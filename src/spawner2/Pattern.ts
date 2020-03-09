@@ -1,4 +1,6 @@
 import { TimedPosition } from './TimedPosition';
+import { Spawn } from './Spawn';
+import { cloneDeep } from 'lodash';
 
 export class Pattern {
 
@@ -11,15 +13,21 @@ export class Pattern {
   enemyType: any;
   difficulty: number;
 
-  getSpawns(): Spawn[] {
+  getSpawns(timeOffset: number = 0): Spawn[] {
     let spawns:Spawn[] = [];
-    for(let i = 0; l = Math.min(this.points.length, this.enemyCount); i < l; i++) {
-      let point this.points[i];
+    for(let i = 0, l = Math.min(this.points.length, this.enemyCount); i < l; i++) {
+      let point: TimedPosition = this.points[i];
       let spawn:Spawn = new Spawn(
-        point.time,
-        new enemyType({position: point.clone()})
+        point.time + timeOffset,
+        new this.enemyType({position: point.clone()})
       )
+      spawns.push(spawn);
     }
+    return spawns;
+  }
+
+  clone(): Pattern {
+    return cloneDeep(this);
   }
 
 }

@@ -1,9 +1,11 @@
+import { Enemy } from '../models/Enemy';
+
 export class Spawn {
   time: number;
   enemy: Enemy;
 
-  constructor(time: number, position: Position, enemy: Enemy ) {
-    this.time = x;
+  constructor(time: number, enemy: Enemy ) {
+    this.time = time;
     this.enemy = enemy;
   }
 }

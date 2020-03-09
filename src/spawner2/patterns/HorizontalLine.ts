@@ -1,15 +1,19 @@
+import { TimedPosition } from '../TimedPosition';
+import { Pattern } from '../Pattern';
+
 export class HorizontalLine extends Pattern {
 
   constructor(enemyCount: number, enemyType: any, difficulty: number ) {
+    super();
     this.points = [
-      new TimedPosition(1, 1500, 1100),
-      new Position(1, 100),
-      new Position(1, 1300),
-      new Position(1, 300),
-      new Position(1, 1100),
-      new Position(1, 500),
-      new Position(1, 900),
-      new Position(1, 700),
+      new TimedPosition(0, 900, 1100),
+      new TimedPosition(0, 700, 1100),
+      new TimedPosition(0, 1100, 1100),
+      new TimedPosition(0, 500, 1100),
+      new TimedPosition(0, 1300, 1100),
+      new TimedPosition(0, 300, 1100),
+      new TimedPosition(0, 1500, 1100),
+      new TimedPosition(0, 100, 1100),
     ];
     this.maxTime = 2;
     this.enemyCount = enemyCount;

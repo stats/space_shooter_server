@@ -7,7 +7,7 @@ import { ShipHelper } from '../helpers/ShipHelper';
 import { Enemy } from '../models/Enemy';
 import { Ship } from '../models/Ship';
 import { Bullet } from '../models/Bullet';
-import { Spawner } from '../spawner/Spawner';
+import { Spawner } from '../spawner2/Spawner';
 
 export class GameRoom extends Room<GameState> {
 
@@ -17,7 +17,7 @@ export class GameRoom extends Room<GameState> {
 
   clientShipHash: any = {};
 
-  private spawner;
+  spawner;
 
   private spawnCompleteInterval: Delayed;
 
@@ -25,19 +25,20 @@ export class GameRoom extends Room<GameState> {
     console.log('[GameRoom]', this.roomId, 'Created');
     this.setSimulationInterval((deltaTime) => this.onUpdate(deltaTime));
     this.setState(new GameState());
-    this.spawner = new Spawner(this.state, this.clock);
 
     this.state.startWave = Math.max(options.waveRank, 1) || 1;
     this.state.currentWave = this.state.startWave;
 
-    const gameStartTimeout = this.clock.setInterval(() => {
-      this.state.startGame -= 1;
-      this.broadcast(`Battle Starts In ${this.state.startGame} Seconds`);
-      if(this.state.startGame <= 0) {
-        this.startWave();
-        gameStartTimeout.clear();
-      }
-    }, 1000);
+    this.spawner = new Spawner(this);
+
+    // const gameStartTimeout = this.clock.setInterval(() => {
+    //   this.state.startGame -= 1;
+    //   this.broadcast(`Battle Starts In ${this.state.startGame} Seconds`);
+    //   if(this.state.startGame <= 0) {
+    //     this.startWave();
+    //     gameStartTimeout.clear();
+    //   }
+    // }, 1000);
 
   }
 
@@ -120,7 +121,7 @@ export class GameRoom extends Room<GameState> {
       this.disconnect();
     }
 
-    //this.spawner.onUpdate(deltaTime);
+    this.spawner.onUpdate(deltaTime);
   }
 
   handleClientInput(client: Client, input: any): void {
@@ -128,18 +129,22 @@ export class GameRoom extends Room<GameState> {
     ship.handleEvent('input', input);
   }
 
-  startWave(): void {
-    this.spawner.nextWave();
-    this.broadcast(`Wave ${this.state.currentWave} Starting`);
-    console.log("[GameRoom] Starting Wave", this.state.currentWave);
-
-    this.spawnCompleteInterval = this.clock.setInterval(() => {
-      if(this.spawner.complete() && !this.state.hasEnemies()) {
-        this.spawnCompleteInterval.clear();
-        this.state.currentWave++;
-        this.startWave();
-      }
-    }, this.spawnCompleteFrequency);
+  announceNextWave() {
+    this.broadcast(`Wave ${this.state.currentWave} Incoming`);
+    console.log(`[GameRoom (${this.roomId})] Wave ${this.state.currentWave} Incoming`);
   }
+
+  // startWave(): void {
+  //   this.spawner.nextWave();
+  //   this.announceNextWave();
+  //
+  //   this.spawnCompleteInterval = this.clock.setInterval(() => {
+  //     if(this.spawner.complete() && !this.state.hasEnemies()) {
+  //       this.spawnCompleteInterval.clear();
+  //       this.state.currentWave++;
+  //       this.startWave();
+  //     }
+  //   }, this.spawnCompleteFrequency);
+  // }
 
 }

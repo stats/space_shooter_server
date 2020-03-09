@@ -1,3 +1,5 @@
+import { Position } from '../models/Position';
+
 export class TimedPosition extends Position {
 
   time: number;
