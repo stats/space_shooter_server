@@ -11,6 +11,8 @@ export class CollidesWithEnemy extends Behaviour {
   }
 
   public onUpdate(deltaTime: number): void {
+    if(target.justDamaged) return;
+    
     for(const uuid in this.target.$state.enemies) {
       const enemy = this.target.$state.enemies[uuid];
       if(CollisionHelper.collisionBetween(this.target, enemy)) {

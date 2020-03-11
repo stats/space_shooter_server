@@ -35,6 +35,9 @@ export class Ship extends Entity {
   @type("boolean")
   connected: boolean = false;
 
+  @type("boolean")
+  justDamaged: boolean = false;
+
   @type("string")
   shipType: string;
 
