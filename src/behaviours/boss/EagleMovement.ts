@@ -109,6 +109,8 @@ export class EagleMovement extends Behaviour {
 
     if(this.attackPhaseTimer >= this.attackPhaseCooldown) {
       this.attackPhaseTimer = 0;
+      this.moveCooldown = (Math.random() * 2000) + 4000;
+      this.moveTimer = 0;
       this.target.state = EagleState.MOVE;
       this.nextState = EagleState.SPAWN;
     } else {
@@ -118,15 +120,25 @@ export class EagleMovement extends Behaviour {
   }
 
   private spawn(deltaTime: number): void {
+    if(this.target.$state.numberEnemies() > 1) {
+      this.target.state = EagleState.ATTACK;
+      return;
+    }
     this.target.bulletInvulnerable = true;
     this.target.collisionInvulnerable = true;
 
     this.target.$state.addEnemy(new Tank({ position: new Position(-200, 600), moveTo: new Position(300, 600) }));
-    this.target.$state.addEnemy(new Tank({ position: new Position(-200, 400), moveTo: new Position(300, 400) }));
     this.target.$state.addEnemy(new Tank({ position: new Position(1800, 600), moveTo: new Position(1300, 600) }));
+    this.target.$state.addEnemy(new Tank({ position: new Position(-200, 400), moveTo: new Position(300, 400) }));
     this.target.$state.addEnemy(new Tank({ position: new Position(1800, 400), moveTo: new Position(1300, 400) }));
+    if( this.target.$state.currentWave > 20) {
+      this.target.$state.addEnemy(new Tank({ position: new Position(-200, 400), moveTo: new Position(300, 200) }));
+      this.target.$state.addEnemy(new Tank({ position: new Position(1800, 400), moveTo: new Position(1300, 200) }));
+    }
 
     this.waitCooldown = 4000;
+    this.moveCooldown = (Math.random() * 2000) + 4000;
+    this.moveTimer = 0;
     this.target.state = EagleState.WAIT;
     this.nextState = EagleState.MOVE;
   }
@@ -137,16 +149,14 @@ export class EagleMovement extends Behaviour {
 
     this.target.position.x += this.moveDirection * this.target.speed * deltaTime / 1000;
 
-    if(this.target.position.x >= 1300) {
+    if(this.target.position.x >= 1400) {
       this.moveDirection = -1;
     }
-    if( this.target.position.x <= 300) {
+    if( this.target.position.x <= 200) {
       this.moveDirection = 1;
     }
 
-    if( this.moveTimer >= this.moveCooldown && this.target.position.distanceTo(new Position(800, 700)) <= this.target.speed * deltaTime / 1000 ) {
-      this.target.position.x = 800;
-      this.target.position.y = 700;
+    if( this.moveTimer >= this.moveCooldown ) {
       this.moveTimer = 0;
       if( this.nextState == EagleState.MOVE ) {
         this.nextState = EagleState.ATTACK;

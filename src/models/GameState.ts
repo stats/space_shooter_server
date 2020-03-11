@@ -61,6 +61,10 @@ export class GameState extends Schema {
     }
   }
 
+  numberEnemies(): void {
+    return Object.keys(this.enemies).length;
+  }
+
   addBullet(bullet: Bullet): void {
     this.bullets[bullet.uuid] = bullet;
     bullet.onInitGame(this);

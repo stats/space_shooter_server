@@ -2,6 +2,7 @@ import { Behaviour } from '../behaviour';
 import { Eagle } from '../../models/bosses/Eagle';
 import { C, CT } from '../../Constants';
 import { StraightLineDownPath } from '../bullet/StraightLineDownPath';
+import { StraightAnglePath } from '../bullet/StraightAnglePath';
 import { Position } from '../../models/Position';
 import { Bullet } from '../../models/Bullet';
 
@@ -32,42 +33,42 @@ export class EagleAttack extends Behaviour {
 
     if(args && args.attackPhase) {
       bullet = new Bullet(options);
-      bullet.position = new Position(this.target.position.x, this.target.position.y - 50);
+      bullet.position = new Position(this.target.position.x, this.target.position.y - 30);
       bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
       this.target.$state.addBullet(bullet);
 
       bullet = new Bullet(options);
-      bullet.position = new Position(this.target.position.x - 200, this.target.position.y - 50);
+      bullet.position = new Position(this.target.position.x - 100, this.target.position.y - 30);
       bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
       this.target.$state.addBullet(bullet);
 
       bullet = new Bullet(options);
-      bullet.position = new Position(this.target.position.x + 200, this.target.position.y - 50);
+      bullet.position = new Position(this.target.position.x + 100, this.target.position.y - 30);
       bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
       this.target.$state.addBullet(bullet);
 
       bullet = new Bullet(options);
-      bullet.position = new Position(this.target.position.x - 400, this.target.position.y - 50);
-      bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+      bullet.position = new Position(this.target.position.x - 200, this.target.position.y - 30);
+      bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: -Math.PI/2 - Math.PI/8}));
       this.target.$state.addBullet(bullet);
 
       bullet = new Bullet(options);
-      bullet.position = new Position(this.target.position.x + 400, this.target.position.y - 50);
-      bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+      bullet.position = new Position(this.target.position.x + 200, this.target.position.y - 30);
+      bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: -Math.PI/2 + Math.PI/8}));
       this.target.$state.addBullet(bullet);
     } else {
       bullet = new Bullet(options);
-      bullet.position = new Position(this.target.position.x, this.target.position.y - 50);
+      bullet.position = new Position(this.target.position.x, this.target.position.y - 30);
       bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
       this.target.$state.addBullet(bullet);
 
       bullet = new Bullet(options);
-      bullet.position = new Position(this.target.position.x - 200, this.target.position.y - 50);
+      bullet.position = new Position(this.target.position.x - 200, this.target.position.y - 30);
       bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
       this.target.$state.addBullet(bullet);
 
       bullet = new Bullet(options);
-      bullet.position = new Position(this.target.position.x + 200, this.target.position.y - 50);
+      bullet.position = new Position(this.target.position.x + 200, this.target.position.y - 30);
       bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
       this.target.$state.addBullet(bullet);
     }
