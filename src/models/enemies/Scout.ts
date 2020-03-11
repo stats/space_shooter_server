@@ -6,10 +6,10 @@ export class Scout extends Enemy {
 
   constructor(options: any) {
     super(options);
-    this.healthBase = 1;
+    this.healthBase = 3;
     this.healthGrowth = 0.1;
 
-    this.speedBase = 75;
+    this.speedBase = 85;
     this.speedGrowth = 5;
 
     this.collisionDamageBase = 1;

@@ -44,7 +44,7 @@ export class Enemy extends Entity {
 
   updateStats(wave: number): void {
     this.health = Math.floor(this.healthBase + (this.healthGrowth * wave));
-    this.speed = Math.floor(this.speedBase + (this.speedGrowth * wave));
+    this.speed = Math.min(Math.floor(this.speedBase + (this.speedGrowth * wave)), 350); // Don't let speed go over 350 that might get a bit silly
     this.collisionDamage = Math.floor(this.collisionDamageBase + (this.collisionDamageGrowth * wave));
     this.damage = Math.floor(this.damageBase + (this.damageGrowth * wave));
     this.range = Math.floor(this.rangeBase + ( this.rangeGrowth * wave ));

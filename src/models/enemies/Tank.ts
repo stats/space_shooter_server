@@ -18,8 +18,8 @@ export class Tank extends Enemy {
 
   constructor(options: any) {
     super(options);
-    this.healthBase = 1;
-    this.healthGrowth = 0.1;
+    this.healthBase = 5;
+    this.healthGrowth = 0.2;
 
     this.speedBase = 75;
     this.speedGrowth = 5;
