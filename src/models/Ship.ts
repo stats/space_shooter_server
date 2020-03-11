@@ -7,6 +7,8 @@ import { TakesDamageBehaviour } from '../behaviours/player/TakesDamageBehaviour'
 import { PrimaryAttackBehaviour } from '../behaviours/player/PrimaryAttackBehaviour';
 import { SpecialAttackBehaviour } from '../behaviours/player/SpecialAttackBehaviour';
 import { ShieldRechargeBehaviour } from '../behaviours/player/ShieldRechargeBehaviour';
+import { CollectDrop } from '../behaviours/player/CollectDrop';
+import { CollidesWithDrop } from '../behaviours/player/CollidesWithDrop';
 
 import { C } from '../Constants';
 
@@ -249,6 +251,8 @@ export class Ship extends Entity {
     this.registerBehaviour("shield_recharge", new ShieldRechargeBehaviour(this));
     this.registerBehaviour("priamry", new PrimaryAttackBehaviour(this));
     this.registerBehaviour("special", new SpecialAttackBehaviour(this));
+    this.registerBehaviour("collectDrop", new CollectDrop(this));
+    this.registerBehaviour("colliedsWithDrop", new CollidesWithDrop(this));
     this.setupShip()
   }
 

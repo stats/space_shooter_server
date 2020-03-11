@@ -7,11 +7,7 @@
 
 using Colyseus.Schema;
 
-public class Position : Schema {
-	[Type(0, "number")]
-	public float x = 0;
+public class Drop : Entity {
 
-	[Type(1, "number")]
-	public float y = 0;
 }
 

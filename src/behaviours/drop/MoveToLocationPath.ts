@@ -3,7 +3,7 @@ import { C } from '../../../Constants';
 import { Position } from '../../../models/Position';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
 import { Entity } from '../../../models/Entity';
-import { Enemy } from '../../../models/Enemy';
+import { Drop } from '../../../models/Drop';
 
 export class MoveToLocationPath extends Behaviour {
 
@@ -12,9 +12,9 @@ export class MoveToLocationPath extends Behaviour {
 
   enteredScreen = false;
 
-  target: Enemy;
+  target: Drop;
 
-  constructor(target: Enemy, moveTo?: Position) {
+  constructor(target: Drop, moveTo?: Position) {
     super('MoveToLocation', target, onComplete);
     this.moveTo = moveTo;
     if(this.moveTo == null) {
@@ -25,7 +25,6 @@ export class MoveToLocationPath extends Behaviour {
     const dy = this.moveTo.y - this.target.position.y;
 
     this.target.angle = Math.atan2(dy, dx);
-    this.target.disableBehaviour("primary");
   }
 
   onUpdate(deltaTime): void {
@@ -34,7 +33,6 @@ export class MoveToLocationPath extends Behaviour {
     if(this.target.position.distanceTo(this.moveTo) <= this.target.speed * deltaTime/1000) {
       this.target.position.x = this.moveTo.x;
       this.target.position.y = this.moveTo.y;
-      this.target.enableBehaviour("primary");
       this.moveComplete = true;
     } else {
       this.target.position.x += Math.cos(this.target.angle) * this.target.speed * deltaTime/1000;
