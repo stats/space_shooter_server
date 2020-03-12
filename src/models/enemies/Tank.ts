@@ -31,7 +31,17 @@ export class Tank extends Enemy {
 
     this.radius = 30;
 
-    this.moveTo = options.moveTo || C.RANDOM_ON_SCREEN();
+    this.moveTo = options.moveTo || this.randomMoveToLocation();
+  }
+
+  private randomMoveToLocation(): Position {
+    let x = Math.random() * 6;
+    if(this.position.x < 0) {
+      x = x * 100;
+    } else {
+      x = (x * 100) + 900;
+    }
+    return new Position(x, this.position.y);
   }
 
   onInitGame(state: GameState): void {
