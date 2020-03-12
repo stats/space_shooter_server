@@ -3,6 +3,7 @@ import { Schema, type, MapSchema } from '@colyseus/schema';
 import { Ship } from './Ship';
 import { Enemy } from './Enemy';
 import { Bullet } from './Bullet';
+import { Drop } from './Drop';
 
 import { CollisionHelper } from '../helpers/CollisionHelper';
 
@@ -16,6 +17,9 @@ export class GameState extends Schema {
 
   @type({map:Bullet})
   bullets = new MapSchema<Bullet>();
+
+  @type({map:Drop})
+  drops = new MapSchema<Drop>();
 
   @type("number")
   startGame = 5; //number of seconds until the game starts
@@ -41,6 +45,15 @@ export class GameState extends Schema {
     delete this.ships[ship.uuid];
   }
 
+  addDrop(drop: Drop): void {
+    this.drops[drop.uuid] = drop;
+    drop.onInitGame(this);
+  }
+
+  removeDrop(drop: Drop): void {
+    delete this.drops[drop.uuid];
+  }
+
   addEnemy(enemy: Enemy): void {
     this.enemies[enemy.uuid] = enemy;
     this.enemiesSpawned++;
@@ -59,6 +72,10 @@ export class GameState extends Schema {
         }
       }
     }
+  }
+
+  numberEnemies(): void {
+    return Object.keys(this.enemies).length;
   }
 
   addBullet(bullet: Bullet): void {

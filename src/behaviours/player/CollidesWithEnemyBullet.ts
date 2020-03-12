@@ -14,6 +14,8 @@ export class CollidesWithEnemyBullet extends Behaviour {
   }
 
   public onUpdate(deltaTime: number): void {
+    if(target.justDamaged) return;
+    
     for(const uuid in this.target.$state.bullets) {
       const bullet: Bullet = this.target.$state.bullets[uuid];
       if(bullet.bulletType == C.ENEMY_BULLET && CollisionHelper.collisionBetween(this.target, bullet)) {
