@@ -6,6 +6,7 @@ import { Spawn } from './Spawn';
 import { filter, sample, shuffle } from 'lodash';
 import { AlternatingSide, BothSideLine, DiagonalLine, DoubleVerticalLine, HorizontalLine,
          SideDiagonalLine, SideLine, TopTriangle, TripleVerticalLine, VerticalLine } from './patterns';
+import { Eagle } from '../models/bosses';
 
 export class Spawner {
 
@@ -14,6 +15,12 @@ export class Spawner {
   private spawns: Spawn[] = [];
 
   private possiblePatterns: any[];
+
+  private bossTypes: any[] = [
+    Eagle
+  ]
+
+  private bossActive = false;
 
   private timer = 0;
 
@@ -96,6 +103,14 @@ export class Spawner {
 
   onUpdate(deltaTime: number): void {
 
+    if(bossActive) {
+      if(this.state.numberEnemies() > 0) {
+        return;
+      } else {
+          this.bossActive = false;
+      }
+    }
+
     this.timer += deltaTime / (1010 - Math.min(this.state.currentWave * 10, 700));
 
     if(!this.state.hasStarted()) {
@@ -113,9 +128,15 @@ export class Spawner {
 
     if( this.spawns.length == 0) {
       this.state.currentWave++;
-      this.spawns = this.getSpawns();
-      this.room.announceNextWave();
-      this.timer = 0;
+      if(this.state.currentWave % 5 == 0) {
+        const boss = new sample(this.bossTypes)();
+        this.state.addEnemy(boss);
+        this.bossActive = true;
+      } else {
+        this.spawns = this.getSpawns();
+        this.room.announceNextWave();
+        this.timer = 0;
+      }
     }
   }
 

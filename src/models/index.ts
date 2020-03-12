@@ -10,5 +10,6 @@ export { Ship } from './Ship';
 export { ShipBuilderState } from './ShipBuilderState';
 export { ShipList } from './ShipList';
 export { Statistics } from './Statistics';
+export { TempUpgrade } from './TempUpgrade';
 export { UnlockItem } from './UnlockItem';
 export { UnlockMessage } from './UnlockMessage';
