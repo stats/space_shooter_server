@@ -7,7 +7,7 @@ import { ShipHelper } from '../helpers/ShipHelper';
 import { Enemy } from '../models/Enemy';
 import { Ship } from '../models/Ship';
 import { Bullet } from '../models/Bullet';
-import { Spawner } from '../spawner2/Spawner';
+import { Spawner } from '../spawner/Spawner';
 
 export class GameRoom extends Room<GameState> {
 

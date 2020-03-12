@@ -1,112 +1,164 @@
-import Clock from '@gamestdio/timer';
-
-import { Asteroid, Blaster, Blaster2, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
-import { Eagle } from '../models/bosses';
-import { AsteroidFormation, LineFormation, RandomFormation, SquareFormation,
-         TriangleFormation, DiagonalFormation, SimpleFlock } from './Formations/';
-
-import { GameState} from '../models/GameState';
-
-import { sample } from 'lodash';
+import { GameState } from '../models/GameState';
+import { GameRoom } from '../rooms/GameRoom';
+import { Blaster, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
+import { Pattern } from './Pattern';
+import { Spawn } from './Spawn';
+import { filter, sample, shuffle } from 'lodash';
+import { AlternatingSide, BothSideLine, DiagonalLine, DoubleVerticalLine, HorizontalLine,
+         SideDiagonalLine, SideLine, TopTriangle, TripleVerticalLine, VerticalLine } from './patterns';
 
 export class Spawner {
 
   private state: GameState;
-  private clock: Clock;
+  private room: GameRoom;
+  private spawns: Spawn[] = [];
 
-  private numberOfFormations = 0;
+  private possiblePatterns: any[];
 
-  private boss_types: any = [
-    [1, Eagle],
-  ]
+  private timer = 0;
 
-  private enemy_types: any = [
-    [1, Asteroid],
-    [1, Blaster],
-    //[1, Blaster2],
-    [1, Blimp],
-    [1, Bomber],
-    [1, Fang],
-    [1, Hunter],
-    [1, Scout],
-    [1, Speeder],
-    //[1, Tank],
-    [1, Tracker]
-  ];
+  /**
+   * Difficulty values for enemies
+   * - Blaster = 2
+   * - Blimp = 0.5
+   * - Bomber = 1
+   * - Fang = 4
+   * - Hunter = 2
+   * - Scout = 0.5
+   * - Speeder = 2
+   * - Tank = 2.5
+   * - Tracker = 3
+   **/
 
-  private formations: any = [LineFormation, RandomFormation, SquareFormation, TriangleFormation, DiagonalFormation];
+  constructor(room: any) {
+    this.room = room;
+    this.state = room.state;
 
-  private possibleEnemies: Array<any>;
+    this.possiblePatterns = [];
 
-  private minFormations = 1;
-  private maxFormations = 1;
+    for(let i = 2; i <= 6; i++) {
+      for(let j = 0; j <= 6 - i; j++) {
+        this.possiblePatterns.push(new AlternatingSide(i, Bomber, i, 0, j))
+        this.possiblePatterns.push(new AlternatingSide(i, Scout, Math.ceil(i/2), 0, j))
+        this.possiblePatterns.push(new AlternatingSide(i, Tank, Math.ceil(i*2.5), 0, j))
+      }
+    }
 
-  constructor( state: GameState, clock: Clock ) {
-    this.state = state;
-    this.clock = clock;
+    for(var i = 2; i <= 12; i+=2) {
+      for(let j = 0; j <= 12 - i; j+=2) {
+        this.possiblePatterns.push(new BothSideLine(i, Bomber, i, 0, j));
+        this.possiblePatterns.push(new BothSideLine(i, Tank, Math.ceil(i * 2.5), 0, j));
+        this.possiblePatterns.push(new BothSideLine(i, Fang, i * 4, -4, j));
+        this.possiblePatterns.push(new BothSideLine(i, Hunter, i * 2, -4, j));
+        this.possiblePatterns.push(new BothSideLine(i, Speeder, i * 2, -4, j));
+        this.possiblePatterns.push(new BothSideLine(i, Tracker, i * 3, -4, j));
+      }
+    }
+
+    for(let i = 2; i <= 15; i++) {
+      this.possiblePatterns.push(new DiagonalLine(i, Blaster, i * 2));
+      this.possiblePatterns.push(new DiagonalLine(i, Scout, Math.ceil(i/2)));
+    }
+
+    for(var i = 4; i <= 16; i += 2 ) {
+      this.possiblePatterns.push(new DoubleVerticalLine(i, Scout, Math.ceil(i/2)));
+    }
+
+    for(let i = 3; i <= 15; i += 2) {
+      this.possiblePatterns.push(new HorizontalLine(i, Blaster, i*2));
+      this.possiblePatterns.push(new HorizontalLine(i, Scout, Math.ceil(i/2)));
+    }
+
+    for(let i = 2; i <= 6; i++) {
+      this.possiblePatterns.push(new SideDiagonalLine(2, Scout, Math.ceil(i/2)));
+      this.possiblePatterns.push(new SideLine(2, Scout, Math.ceil(i/2)));
+    }
+
+
+    for(var i = 6; i <= 24; i += 3 ) {
+      this.possiblePatterns.push(new TripleVerticalLine(i, Scout, Math.ceil(i/2)));
+    }
+
+    for(var i = 2; i <= 8; i++ ) {
+      this.possiblePatterns.push(new VerticalLine(i, Scout, Math.ceil(i/2)));
+    }
+
+    this.possiblePatterns = this.possiblePatterns.concat([
+      new TopTriangle(3, Scout, 1),
+      new TopTriangle(6, Scout, 3),
+      new TopTriangle(10, Scout, 5),
+    ]);
+
+    this.spawns = this.getSpawns();
+    this.room.announceNextWave();
+    this.timer = 0;
   }
 
-  isBossWave(): boolean {
-    return false;
-    return this.state.startWave != this.state.currentWave && (this.state.currentWave - this.state.startWave) % 5 == 0;
-  }
+  onUpdate(deltaTime: number): void {
 
-  nextWave(): void {
-    if( this.isBossWave() ) {
-      let possibleBosses = [];
-      for(const item of this.boss_types) {
-        if(this.state.currentWave >= item[0]) {
-          possibleBosses.push(item[1]);
-        } else {
-          break;
-        }
+    this.timer += deltaTime / (1010 - Math.min(this.state.currentWave * 10, 700));
+
+    if(!this.state.hasStarted()) {
+      this.state.startGame = 10 - this.timer;
+    }
+
+    for(let i = this.spawns.length - 1; i >= 0; i--) {
+      if(this.timer > this.spawns[i].time) {
+        this.state.addEnemy(this.spawns[i].enemy);
+        this.spawns.splice(i,1);
+      } else {
+        break;
       }
-      const boss: any = sample(possibleBosses);
-      this.state.addEnemy(new boss());
-    } else {
-      this.numberOfFormations = (this.state.currentWave + 3);
-      this.possibleEnemies = [];
-      this.minFormations = Math.ceil(this.state.currentWave / 10);
-      this.maxFormations = Math.ceil(this.state.currentWave / 6);
-      for(const item of this.enemy_types) {
-        if(this.state.currentWave >= item[0]) {
-          this.possibleEnemies.push(item[1]);
-        } else {
-          break;
-        }
-      }
-      this.spawnFormation();
+    }
+
+    if( this.spawns.length == 0) {
+      this.state.currentWave++;
+      this.spawns = this.getSpawns();
+      this.room.announceNextWave();
+      this.timer = 0;
     }
   }
 
-  public complete(): boolean {
-    return this.numberOfFormations == 0;
+  public getSpawns(): Spawn[] {
+    let patterns: any[] = [];
+    let currentPatterns: any[];
+
+    let difficulty = 15 + (this.state.currentWave * 5);
+    const maxPatternDifficulty = Math.ceil(difficulty / 12) + 1;
+
+    console.log('[Spawner] wave:', this.state.currentWave, 'difficulty:', difficulty, 'maxPatternDifficulty:', maxPatternDifficulty)
+
+    while( difficulty > 0 ) {
+      let diff = Math.min(difficulty, maxPatternDifficulty);
+      currentPatterns = filter(this.possiblePatterns, (o) => {
+        return o.difficulty <= diff;
+      });
+      let pattern: Pattern = sample(currentPatterns);
+      patterns.push( pattern.clone() );
+      difficulty -= pattern.difficulty;
+    }
+
+    patterns = shuffle(patterns);
+
+    let spawns: Spawn[] = [];
+    let timeOffset = 10; // Number of seconds between waves
+    for(let i = 0, l = patterns.length; i < l; i++) {
+      let s: Spawn[] = patterns[i].getSpawns(timeOffset);
+      spawns = spawns.concat(s);
+      timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 5) - 2;  //add a random -2 to 3 second delay between spawns
+      timeOffset = Math.max(timeOffset, 10); //ensure that the delay is never less than 10 seconds
+    }
+
+
+    return spawns.sort((a: Spawn,b: Spawn) => {
+      if( a.time < b.time ) {
+        return 1;
+      }
+      if( a.time > b.time) {
+        return -1;
+      }
+      return 0;
+    });
   }
 
-  spawnFormation(): void {
-    const formations = Math.min((Math.random() * (this.maxFormations - this.minFormations)) + this.minFormations, this.numberOfFormations);
-    for(let i = 0; i < formations; i++) {
-      const enemy = sample(this.possibleEnemies);
-      let formation;
-      switch(enemy) {
-        case Asteroid:
-          formation = new AsteroidFormation(this.state);
-        break;
-        case Blimp:
-          formation = new SimpleFlock(this.state);
-        break;
-        default:
-          formation = new (sample(this.formations))(this.state);
-        break;
-      }
-      console.log('Spawned Formation:', formation.constructor.name, enemy.constructor.name);
-      formation.onSpawnEnemies(enemy);
-      this.numberOfFormations--;
-    }
-    if(this.numberOfFormations > 0) {
-      this.clock.setTimeout(() => {
-        this.spawnFormation();
-      }, (Math.random() * 6000) + 4000);
-    }
-  }
 }
