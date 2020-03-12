@@ -11,6 +11,6 @@ export class CollectDrop extends Behaviour {
   }
 
   public onEvent(drop: Drop): void {
-    console.log('[CollectDrop] Collected a drop');
+    this.target.generateTempUpgrades(drop.modelType);
   }
 }

@@ -1,4 +1,4 @@
-import { type } from '@colyseus/schema';
+import { type, ArraySchema } from '@colyseus/schema';
 import { InputBehaviour } from '../behaviours/player/InputBehaviour';
 import { CollidesWithEnemy } from '../behaviours/player/CollidesWithEnemy';
 import { CollidesWithEnemyBullet } from '../behaviours/player/CollidesWithEnemyBullet';
@@ -169,35 +169,83 @@ export class Ship extends Entity {
   shieldRechargeBase = 30000;
   shieldRechargeGrowth = 750;
 
+  tempDamage = 0;
+  tempDamagePercent = 1;
+  tempDamageLevel = 0;
+
+  tempRange = 0;
+  tempRangePercent = 1;
+  tempRangeLevel = 0;
+
+  tempFireRate = 0;
+  tempFireRatePercent = 1;
+  tempFireRateLevel = 1;
+
+  tempSpeed = 0;
+  tempSpeedPercent = 1;
+  tempSpeedLevel = 0;
+
+  tempAcceleration = 0;
+  tempAccelerationPercent = 1;
+  tempAccelerationLevel = 0;
+
+  tempShield = 0;
+  tempShieldPercent = 1;
+  tempShieldLevel = 0;
+
+  tempShieldRecharge = 0;
+  tempShieldRechargePercent = 1;
+  tempShieldRechargeLevel = 0;
+
+  tempSpecialCooldown = 0;
+  tempSpecialCooldownPercent = 1;
+  tempSpecialCooldownLevel = 0;
+
+  tempSpecialDamage = 0;
+  tempSpecialDamagePercent = 1;
+  tempSpecialDamageLevel = 0;
+
+  type([TempUpgrade])
+  tempUpgrades: ArraySchema<TempUpgrade>;
+
   tracker: any = {};
 
   getDamage(): number {
-    return ( this.damageBase + (this.upgradeDamage * this.damageGrowth) ) * this.weaponCharge;
+    return ( (this.damageBase + this.tempDamage) + ((this.upgradeDamage + this.tempDamageLevel) * this.damageGrowth) ) * this.weaponCharge * this.tempDamagePercent;
   }
 
   getRange(): number {
-    return this.rangeBase + (this.upgradeRange * this.rangeGrowth)
+    return ((this.rangeBase + this.tempRange) + ( (this.upgradeRange + this.tempRangeLevel)  * this.rangeGrowth)) * this.tempRangePercent;
   }
 
   getFireRate(): number {
-    return this.fireRateBase - (this.upgradeFireRate * this.fireRateGrowth);
+    return ((this.fireRateBase + this.tempFireRate) - ( (this.upgradeFireRate + this.tempFireRateLevel) * this.fireRateGrowth) * this.tempFireRatePercent;
   }
 
   getMaxShields(): number {
-    return this.shieldsBase + (this.upgradeShieldsMax * this.shieldsGrowth);
+    return ((this.shieldsBase + this.tempShield) + ((this.upgradeShieldsMax + this.tempShieldLevel) * this.shieldsGrowth)) * this.tempShieldPercent;
   }
 
   getShieldRecharge(): number {
-    return this.shieldRechargeBase - (this.upgradeShieldsRecharge * this.shieldRechargeGrowth);
+    return ( (this.shieldRechargeBase + this.tempShieldRechange) - ((this.upgradeShieldsRecharge + this.tempShieldRechargeLevel) * this.shieldRechargeGrowth)) * this.tempShieldRechangePercent;
   }
 
   getSpeed(): number {
-    return this.speedBase + (this.upgradeSpeed * this.speedGrowth) * this.thrusters;
+    return ((this.speedBase + this.tempSpeed) + ((this.upgradeSpeed + this.tempSpeedLevel) * this.speedGrowth)) * this.thrusters * this.tempSpeedPercent;
   }
 
   getAccelleration(): number {
-    return this.accellerationBase + (this.upgradeAccelleration * this.accellerationGrowth) * this.thrusters;
+    return ( (this.accellerationBase + this.tempAcceleration) + ((this.upgradeAccelleration + this.tempAccelerationLevel) * this.accellerationGrowth)) * this.thrusters * this.tempAccelerationPercent;
   }
+
+  getPrimaryCooldownMax(): number {
+    return 1000;
+  }
+
+  getSpecialCooldownMax(): number {
+    return 1000;
+  }
+
 
   async updateWaveRank(wave: number): Promise<void> {
     if(wave > this.highestWave) {
@@ -240,6 +288,8 @@ export class Ship extends Entity {
     this.speed = this.getSpeed();
     this.accelleration = this.getAccelleration();
     this.shieldsRechargeTime = this.getShieldRecharge();
+    this.primaryCooldownMax = this.getPrimaryCooldownMax();
+    this.specialCooldownMax = this.getSpecialCooldownMax();
     this.updateNextLevel();
   }
 
@@ -310,6 +360,60 @@ export class Ship extends Entity {
   updateNextLevel(): void {
     this.previousLevel = Math.floor(50*Math.pow(this.level-1, 1.25));
     this.nextLevel = Math.floor(50*Math.pow(this.level, 1.25));
+  }
+
+  generateTempUpgrades(type:string) {
+    const r = Math.random() * 4;
+    let upgradeIndex: number[];
+
+    switch(r) {
+      case 0:
+        upgradeIndex = this.getRandomNumbers(Crystals.RED.length);
+        for(var i = 0, l = upgradeIndex.length; i < l; i++) {
+          this.tempUpgrades[i] = new TempUpgrade(Crystals.RED[upgradeIndex[i]]);
+        }
+      break;
+      case 1:
+        upgradeIndex = this.getRandomNumbers(Crystals.BLUE.length);
+        for(var i = 0, l = upgradeIndex.length; i < l; i++) {
+          this.tempUpgrades[i] = new TempUpgrade(Crystals.BLUE[upgradeIndex[i]]);
+        }
+      break;
+      case 2:
+        upgradeIndex = this.getRandomNumbers(Crystals.GREEN.length);
+        for(var i = 0, l = upgradeIndex.length; i < l; i++) {
+          this.tempUpgrades[i] = new TempUpgrade(Crystals.GREEN[upgradeIndex[i]]);
+        }
+      break;
+      case 3:
+        upgradeIndex = this.getRandomNumbers(Crystals.PURPLE.length);
+        for(var i = 0, l = upgradeIndex.length; i < l; i++) {
+          this.tempUpgrades[i] = new TempUpgrade(Crystals.PURPLE[upgradeIndex[i]]);
+        }
+      break;
+    }
+  }
+
+  public selectUpgrade(index) {
+    if(index >= this.tempUpgrades.length) return;
+    this[this.tempUpgrades[index].key] += this.tempUpgrades[index].value;
+    this.setupShip();
+  }
+
+  private getRandomNumbers(array: any): number[] {
+    const u1: number;
+    let u2: number, u3: number;
+
+    u1 = Math.random() * array.length;
+    u2 = Math.random() * array.length;
+    u3 = Math.random() * array.length;
+    while(u2 == u1){
+      u2 = Math.random() * array.length;
+    }
+    while(u3 == u2 || u3 == u1) {
+      u3 = Math.random() * array.length;
+    }
+    return [u1, u2, u3];
   }
 
   toSaveObject(): any {

@@ -9,7 +9,7 @@ export class MegaBomb extends SpecialSystem {
   handleEvent(): void {
     const spawnLocation = this.target.getBulletSpawnLocation();
     const bullet: Bullet = new Bullet({
-      damage: this.target.getDamage() / 3,
+      damage: ( ( this.target.getDamage() + this.target.tempSpecialDamage ) / 3 ) * this.target.tempSpecialDamagePercent,
       speed: 250,
       range: 500,
       collisionType: CT.CIRCLE,

@@ -10,7 +10,7 @@ export class ScatterShot extends SpecialSystem {
     for(let i = 0; i < 18; i++) {
       const spawnLocation = this.target.getBulletSpawnLocation();
       const bullet: Bullet = new Bullet({
-        damage: this.target.getDamage() / 5,
+        damage: ( ( this.target.getDamage() + this.target.tempSpecialDamage ) / 5 ) * this.target.tempSpecialDamagePercent,
         speed: 500,
         range: 250,
         collisionType: CT.CIRCLE,

@@ -9,7 +9,7 @@ export class MissileBarage extends SpecialSystem {
     for(let i = 0; i < 6; i++) {
       const spawnLocation = this.target.getBulletSpawnLocation();
       const bullet: Bullet = new Bullet({
-        damage: this.target.getDamage() / 3,
+        damage: ( ( this.target.getDamage() + this.target.tempSpecialDamage ) / 3 ) * this.target.tempSpecialDamagePercent,
         speed: 350,
         range: 600,
         collisionType: CT.CIRCLE,
