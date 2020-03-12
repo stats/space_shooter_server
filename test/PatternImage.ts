@@ -2,7 +2,10 @@ import { GameState } from '../src/models/GameState';
 import { Spawner } from '../src/spawner2/Spawner';
 
 let room = {
-  state: new GameState()
+  state: new GameState(),
+  announceNextWave: () => {
+    //do nothing.
+  }
 }
 room.state.currentWave = 1;
 

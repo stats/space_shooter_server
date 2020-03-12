@@ -223,8 +223,8 @@ export class Ship extends Entity {
     this.radius = 27;
     this.bulletOffsetY = 50;
     this.setupShip();
-    this.bulletInvulnerable = true;
-    this.collisionInvulnerable = true;
+    this.bulletInvulnerable = false;
+    this.collisionInvulnerable = false;
   }
 
   setupShip(): void {

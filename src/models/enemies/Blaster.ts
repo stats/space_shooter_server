@@ -1,6 +1,6 @@
 import { Enemy } from '../Enemy';
 import { GameState} from '../../models/GameState';
-import { StraightAnglePath } from '../../behaviours/Enemy/movement/StraightAnglePath';
+import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePath';
 import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
 import { C, CT } from '../../Constants';
@@ -26,7 +26,7 @@ export class Blaster extends Enemy {
 
   onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviour("path", new StraightAnglePath(this));
+    this.registerBehaviour("path", new StraightLinePath(this));
 
     const bulletOptions = {
       system: EnemyBullet,

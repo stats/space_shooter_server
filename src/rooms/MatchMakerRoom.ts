@@ -67,7 +67,7 @@ export class MatchMakerRoom extends Room {
   }
 
   async onJoin(client: Client, options: any, username: string): Promise<void> {
-    console.log('[MatchMakerRoom] (onJoin)', username);
+    console.log('[MatchMakerRoom] (onJoin)', username, "rank:", options.rank);
     this.stats.push({
       client: client,
       rank: options.rank,
@@ -174,7 +174,9 @@ export class MatchMakerRoom extends Room {
               rankings += client.rank;
             }
 
-            const room = await matchMaker.createRoom(this.roomToCreate, {waveRank: Math.max(Math.round(rankings/count) - 5, 1)}); //TODO: Set the waveRank to be the correct wave rank
+            let waveRank = Math.max(Math.round(rankings/count) - 5, 1);
+            console.log("[MatchMakerRoom] Creating Room with Rank:", waveRank);
+            const room = await matchMaker.createRoom(this.roomToCreate, {waveRank: waveRank}); //TODO: Set the waveRank to be the correct wave rank
 
             await Promise.all(group.clients.map(async (client) => {
               const matchData = await matchMaker.reserveSeatFor(room, client.options);

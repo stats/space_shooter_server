@@ -23,8 +23,8 @@ export class EnemyBullet extends Primary{
     const bullet = new Bullet(options);
     switch(this.behaviour) {
       case 'drops':
-        console.log("Adding drops bullet behaviour");
         bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+      break;
       case 'fires':
         bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: this.entity.angle}));
       break;

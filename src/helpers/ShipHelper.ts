@@ -72,11 +72,11 @@ export class ShipHelper {
     shipData['primaryWeapon'] = data.primaryWeapon;
     shipData['specialWeapon'] = data.specialWeapon;
     shipData['level'] = 1;
-    shipData['created_at'] = Date.now();
+    shipData['createdAt'] = Date.now();
     shipData = ShipHelper.setShipValues(shipData);
 
     const account = await AccountHelper.getAccountByUsername(username);
-    account.increaseStat("ships_created", 1);
+    account.increaseStat("shipsCreated", 1);
     AccountHelper.saveAccount(account);
 
     const ship = new Ship(shipData);
@@ -89,7 +89,7 @@ export class ShipHelper {
 
   static async deleteShip(username: string, uuid: string): Promise<any> {
     const account = await AccountHelper.getAccountByUsername(username);
-    account.increaseStat("ships_destroyed", 1);
+    account.increaseStat("shipsDestroyed", 1);
     AccountHelper.saveAccount(account);
     return await DB.$ships.deleteOne({username: username, uuid: uuid});
   }
@@ -104,7 +104,7 @@ export class ShipHelper {
     } else {
       ship.upgradePoints -= spentPoints;
       for(const key in upgrades) {
-        ship["upgrade_" + key] += upgrades[key];
+        ship["upgrade" + key] += upgrades[key];
       }
       return await DB.$ships.updateOne({uuid: ship.uuid}, {$set: ship.toSaveObject() });
     }

@@ -1,13 +1,10 @@
-export { AlternatingLeftSide } from './AlternatingLeftSide';
-export { AlternatingRightSide } from './AlternatingRightSide';
+export { AlternatingSide } from './AlternatingSide';
 export { BothSideLine } from './BothSideLine';
 export { DiagonalLine } from './DiagonalLine';
 export { DoubleVerticalLine } from './DoubleVerticalLine';
 export { HorizontalLine } from './HorizontalLine';
-export { LeftSideDiagonalLine } from './LeftSideDiagonalLine';
-export { LeftSideLine } from './LeftSideLine';
-export { RightSideDiagonalLine } from './RightSideDiagonalLine';
-export { RightSideLine } from './RightSideLine';
+export { SideLine } from './SideLine';
+export { SideDiagonalLine } from './SideDiagonalLine';
 export { TopTriangle } from './TopTriangle';
 export { TripleVerticalLine } from './TripleVerticalLine';
 export { VerticalLine } from './VerticalLine';

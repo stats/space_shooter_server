@@ -37,7 +37,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0.05,
       'specialGrowth': 0.005,
-      'unlockKey': "maxKillsExplorer1",
+      'unlockKey': "maxKills_explorer1",
       'unlockCount': 500
 
     },
@@ -59,7 +59,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0.05,
       'specialGrowth': 0.01,
-      'unlockKey': "maxKillsExplorer2",
+      'unlockKey': "maxKills_explorer2",
       'unlockCount': 600
     },
     'explorer4': {
@@ -80,7 +80,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0.05,
       'specialGrowth': 0.01,
-      'unlockKey': "maxKillsExplorer3",
+      'unlockKey': "maxKills_explorer3",
       'unlockCount': 700
     },
     'explorer5': {
@@ -101,7 +101,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0.05,
       'specialGrowth': 0.015,
-      'unlockKey': "maxKillsExplorer4",
+      'unlockKey': "maxKills_explorer4",
       'unlockCount': 800
     },
     'scout1': {
@@ -141,7 +141,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0.01,
       'specialGrowth': 0.01,
-      'unlockKey': "maxKillsScout1",
+      'unlockKey': "maxKills_scout1",
       'unlockCount': 500
     },
     'scout3': {
@@ -162,7 +162,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0.015,
       'specialGrowth': 0.015,
-      'unlockKey': "maxKillsScout2",
+      'unlockKey': "maxKills_scout2",
       'unlockCount': 600
     },
     'scout4': {
@@ -183,7 +183,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0.02,
       'specialGrowth': 0.015,
-      'unlockKey': "maxKillsScout3",
+      'unlockKey': "maxKills_scout3",
       'unlockCount': 700
     },
     'scout5': {
@@ -204,7 +204,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0.025,
       'specialGrowth': 0.02,
-      'unlockKey': "maxKillsScout4",
+      'unlockKey': "maxKills_scout4",
       'unlockCount': 800
     },
     'gunship1': {
@@ -246,7 +246,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0,
       'specialGrowth': 0.005,
-      'unlockKey': "maxKillsGunship1",
+      'unlockKey': "maxKills_gunship1",
       'unlockCount': 600
     },
     'gunship3': {
@@ -267,7 +267,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0,
       'specialGrowth': 0.005,
-      'unlockKey': "maxKillsGunship2",
+      'unlockKey': "maxKills_gunship2",
       'unlockCount': 700
     },
     'gunship4': {
@@ -288,7 +288,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0,
       'specialGrowth': 0.005,
-      'unlockKey': "maxKillsGunship3",
+      'unlockKey': "maxKills_gunship3",
       'unlockCount': 800
     },
     'gunship5': {
@@ -309,7 +309,7 @@ export class SHIP {
       'shieldRechargeGrowth': 500,
       'specialBase': 0,
       'specialGrowth': 0.005,
-      'unlockKey': "maxKillsGunship4",
+      'unlockKey': "maxKills_gunship4",
       'unlockCount': 900
     },
     'defender1': {
@@ -351,7 +351,7 @@ export class SHIP {
       'shieldRechargeGrowth': 650,
       'specialBase': 0.01,
       'specialGrowth': 0.005,
-      'unlockKey': "maxKillsDefender1",
+      'unlockKey': "maxKills_defender1",
       'unlockCount': 600
     },
     'defender3': {
@@ -372,7 +372,7 @@ export class SHIP {
       'shieldRechargeGrowth': 700,
       'specialBase': 0.01,
       'specialGrowth': 0.01,
-      'unlockKey': "maxKillsDefender2",
+      'unlockKey': "maxKills_defender2",
       'unlockCount': 700
     },
     'defender4': {
@@ -393,7 +393,7 @@ export class SHIP {
       'shieldRechargeGrowth': 750,
       'specialBase': 0.015,
       'specialGrowth': 0.01,
-      'unlockKey': "maxKillsDefender3",
+      'unlockKey': "maxKills_defender3",
       'unlockCount': 800
     },
     'defender5': {
@@ -414,7 +414,7 @@ export class SHIP {
       'shieldRechargeGrowth': 800,
       'specialBase': 0.02,
       'specialGrowth': 0.015,
-      'unlockKey': "maxKillsDefender4",
+      'unlockKey': "maxKills_defender4",
       'unlockCount': 900
     },
     'fighter1': {
@@ -454,7 +454,7 @@ export class SHIP {
       'shieldRechargeGrowth': 525,
       'specialBase': 0.01,
       'specialGrowth': 0.005,
-      'unlockKey': "maxKillsFighter1",
+      'unlockKey': "maxKills_fighter1",
       'unlockCount': 500
     },
     'fighter3': {
@@ -475,7 +475,7 @@ export class SHIP {
       'shieldRechargeGrowth': 550,
       'specialBase': 0.015,
       'specialGrowth': 0.005,
-      'unlockKey': "maxKillsFighter2",
+      'unlockKey': "maxKills_fighter2",
       'unlockCount': 600
     },
     'fighter4': {
@@ -496,7 +496,7 @@ export class SHIP {
       'shieldRechargeGrowth': 575,
       'specialBase': 0.015,
       'specialGrowth': 0.005,
-      'unlockKey': "maxKillsFighter3",
+      'unlockKey': "maxKills_fighter3",
       'unlockCount': 700
     },
     'fighter5': {
@@ -517,7 +517,7 @@ export class SHIP {
       'shieldRechargeGrowth': 600,
       'specialBase': 0.02,
       'specialGrowth': 0.01,
-      'unlockKey': "maxKillsFighter4",
+      'unlockKey': "maxKills_fighter4",
       'unlockCount': 800
     }
   }

@@ -85,8 +85,9 @@ export class GameRoom extends Room<GameState> {
       // allow a disconnected client up to 5 seconds to reconnect.
       await this.allowReconnection(client, 5);
       ship.connected = true;
-      console.log('[GameRoom] On Leave Completed with no Reconnect');
+      console.log('[GameRoom] Client has Reconnected.');
     } catch(e) {
+      console.log('[GameRoom] Client Failed to Reconnect.');
       ship.checkLevelUp();
       ship.updateWaveRank(this.state.currentWave);
       ShipHelper.saveShip(ship);
@@ -116,6 +117,7 @@ export class GameRoom extends Room<GameState> {
     }
 
     if(this.state.hasStarted() && !this.state.hasShips()) {
+      console.log(`[GameRoom (${this.roomId})] Battle Lost`);
       this.broadcast('The Battle Has Been Lost');
       this.state.battleLost();
       this.disconnect();

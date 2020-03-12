@@ -8,12 +8,16 @@ export class BothSideLine extends Pattern {
     this.points = [
       new TimedPosition(0 + timeOffset, -200, 800),
       new TimedPosition(0 + timeOffset, 1800, 800),
+      new TimedPosition(0 + timeOffset, -200, 700),
+      new TimedPosition(0 + timeOffset, 1800, 700),
       new TimedPosition(0 + timeOffset, -200, 600),
       new TimedPosition(0 + timeOffset, 1800, 600),
+      new TimedPosition(0 + timeOffset, -200, 500),
+      new TimedPosition(0 + timeOffset, 1800, 500),
       new TimedPosition(0 + timeOffset, -200, 400),
       new TimedPosition(0 + timeOffset, 1800, 400),
-      new TimedPosition(0 + timeOffset, -200, 200),
-      new TimedPosition(0 + timeOffset, 1800, 200),
+      new TimedPosition(0 + timeOffset, -200, 300),
+      new TimedPosition(0 + timeOffset, 1800, 300),
     ];
     this.maxTime = 2;
     this.enemyCount = enemyCount;
