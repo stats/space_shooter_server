@@ -1,8 +1,7 @@
 import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
-import { Ship } from '../../../models/Ship';
+import { Ship, Enemy } from '../../../models';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
-import { Enemy } from '../../../models/Enemy';
 
 export class ClosestPlayerPath extends Behaviour {
 

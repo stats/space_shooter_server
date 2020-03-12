@@ -1,6 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { Position } from '../../models/Position';
-import { Bullet } from '../../models/Bullet';
+import { Bullet, Position } from '../../models';
 
 export class StraightAnglePath extends Behaviour {
 

@@ -74,7 +74,7 @@ export class GameState extends Schema {
     }
   }
 
-  numberEnemies(): void {
+  numberEnemies(): number {
     return Object.keys(this.enemies).length;
   }
 

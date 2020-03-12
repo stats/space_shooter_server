@@ -1,6 +1,6 @@
 import { Behaviour } from '../behaviour';
 import { CollisionHelper } from '../../helpers/CollisionHelper';
-import { Ship } from '../../models/Ship';
+import { Drop, Ship } from '../../models';
 
 export class CollectDrop extends Behaviour {
 

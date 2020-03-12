@@ -1,9 +1,7 @@
 import { Behaviour } from '../../behaviour';
 import { C } from '../../../Constants';
-import { Position } from '../../../models/Position';
+import { Drop, Entity, Position } from '../../../models';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
-import { Entity } from '../../../models/Entity';
-import { Drop } from '../../../models/Drop';
 
 export class MoveToLocationPath extends Behaviour {
 

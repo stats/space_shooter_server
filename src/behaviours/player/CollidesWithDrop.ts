@@ -12,7 +12,7 @@ export class CollidesWithDrop extends Behaviour {
 
   public onUpdate(deltaTime: number): void {
     for(const uuid in this.target.$state.drops) {
-      const enemy = this.target.$state.drops[uuid];
+      const drop = this.target.$state.drops[uuid];
       if(CollisionHelper.collisionBetween(this.target, drop)) {
         this.target.handleEvent('collect_drop', drop);
       }

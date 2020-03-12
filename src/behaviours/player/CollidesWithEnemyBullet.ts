@@ -1,8 +1,7 @@
 import { Behaviour } from '../behaviour';
-import { Bullet } from '../../models/Bullet';
 import { CollisionHelper } from '../../helpers/CollisionHelper';
 import { C } from '../../Constants';
-import { Ship } from '../../models/Ship';
+import { Bullet, Ship } from '../../models';
 
 
 export class CollidesWithEnemyBullet extends Behaviour {
@@ -14,8 +13,8 @@ export class CollidesWithEnemyBullet extends Behaviour {
   }
 
   public onUpdate(deltaTime: number): void {
-    if(target.justDamaged) return;
-    
+    if(this.target.justDamaged) return;
+
     for(const uuid in this.target.$state.bullets) {
       const bullet: Bullet = this.target.$state.bullets[uuid];
       if(bullet.bulletType == C.ENEMY_BULLET && CollisionHelper.collisionBetween(this.target, bullet)) {

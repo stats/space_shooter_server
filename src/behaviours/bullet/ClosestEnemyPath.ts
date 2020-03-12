@@ -1,7 +1,6 @@
 import { Behaviour } from '../behaviour';
-import { Enemy } from '../../models/Enemy';
+import { Enemy, Bullet } from '../../models';
 import { CollisionHelper } from '../../helpers/CollisionHelper';
-import { Bullet} from '../../models/Bullet';
 
 export class ClosestEnemyPath extends Behaviour {
 

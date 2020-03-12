@@ -4,10 +4,7 @@ import { JWTHelper } from '../helpers/JWTHelper';
 import { AccountHelper } from '../helpers/AccountHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
-import { ErrorMessage } from '../models/ErrorMessage';
-import { ShipList } from '../models/ShipList';
-
-import { ShipBuilderState } from '../models/ShipBuilderState'
+import { ErrorMessage, ShipList, ShipBuilderState } from '../models';
 
 export class ShipBuilderRoom extends Room<ShipBuilderState> {
 

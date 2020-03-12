@@ -1,7 +1,6 @@
 import { Behaviour } from '../../behaviour';
 import { CollisionHelper } from '../../../helpers/CollisionHelper';
-import { Ship } from '../../../models/Ship';
-import { Enemy } from '../../../models/Enemy';
+import { Enemy, Ship } from '../../../models';
 
 export class TargetPlayerStartPath extends Behaviour {
 

@@ -1,7 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { Ship } from '../../models/Ship';
-import { Enemy } from '../../models/Enemy';
-import { Entity } from '../../models/Entity';
+import { Enemy, Entity, Ship } from '../../models';
 
 export class TakesDamageBehaviour extends Behaviour {
 
