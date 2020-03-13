@@ -4,11 +4,11 @@ import { Ship } from './Ship';
 export class ShipList extends Schema {
 
   @type({map: Ship})
-  ships: MapSchema;
+  ships: MapSchema<Ship>;
 
   constructor(ships: any = {}) {
     super();
-    this.ships = new MapSchema(ships);
+    this.ships = new MapSchema<Ship>(ships);
   }
 
 }
