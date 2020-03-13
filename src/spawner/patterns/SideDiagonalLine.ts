@@ -6,7 +6,7 @@ export class SideDiagonalLine extends Pattern {
   constructor(enemyCount: number, enemyType: any, difficulty: number ) {
     super();
 
-    let i = Math.random() > 0.5 ? 1800 : -200;
+    const i = Math.random() > 0.5 ? 1800 : -200;
 
     let a: number[] = [0, 2, 4, 6, 8, 10];
     if( Math.random() > 0.5) a = a.reverse();

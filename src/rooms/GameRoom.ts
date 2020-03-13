@@ -73,7 +73,7 @@ export class GameRoom extends Room<GameState> {
 
   async onLeave(client: Client, consented: boolean): Promise<void> {
     console.log('[GameRoom] On Leave (consented):', consented)
-    let ship = this.clientShipHash[client.id];
+    const ship = this.clientShipHash[client.id];
     ship.connected = false;
     try {
       if(consented) {

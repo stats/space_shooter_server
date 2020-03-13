@@ -55,7 +55,7 @@ export class Spawner {
       }
     }
 
-    for(var i = 2; i <= 12; i+=2) {
+    for(let i = 2; i <= 12; i+=2) {
       for(let j = 0; j <= 12 - i; j+=2) {
         this.possiblePatterns.push(new BothSideLine(i, Bomber, i, 0, j));
         this.possiblePatterns.push(new BothSideLine(i, Tank, Math.ceil(i * 2.5), 0, j));
@@ -71,7 +71,7 @@ export class Spawner {
       this.possiblePatterns.push(new DiagonalLine(i, Scout, Math.ceil(i/2)));
     }
 
-    for(var i = 4; i <= 16; i += 2 ) {
+    for(let i = 4; i <= 16; i += 2 ) {
       this.possiblePatterns.push(new DoubleVerticalLine(i, Scout, Math.ceil(i/2)));
     }
 
@@ -86,11 +86,11 @@ export class Spawner {
     }
 
 
-    for(var i = 6; i <= 24; i += 3 ) {
+    for(let i = 6; i <= 24; i += 3 ) {
       this.possiblePatterns.push(new TripleVerticalLine(i, Scout, Math.ceil(i/2)));
     }
 
-    for(var i = 2; i <= 8; i++ ) {
+    for(let i = 2; i <= 8; i++ ) {
       this.possiblePatterns.push(new VerticalLine(i, Scout, Math.ceil(i/2)));
     }
 
@@ -154,11 +154,11 @@ export class Spawner {
     console.log('[Spawner] wave:', this.state.currentWave, 'difficulty:', difficulty, 'maxPatternDifficulty:', maxPatternDifficulty)
 
     while( difficulty > 0 ) {
-      let diff = Math.min(difficulty, maxPatternDifficulty);
+      const diff = Math.min(difficulty, maxPatternDifficulty);
       currentPatterns = filter(this.possiblePatterns, (o) => {
         return o.difficulty <= diff;
       });
-      let pattern: Pattern = sample(currentPatterns);
+      const pattern: Pattern = sample(currentPatterns);
       patterns.push( pattern.clone() );
       difficulty -= pattern.difficulty;
     }
@@ -168,7 +168,7 @@ export class Spawner {
     let spawns: Spawn[] = [];
     let timeOffset = 10; // Number of seconds between waves
     for(let i = 0, l = patterns.length; i < l; i++) {
-      let s: Spawn[] = patterns[i].getSpawns(timeOffset);
+      const s: Spawn[] = patterns[i].getSpawns(timeOffset);
       spawns = spawns.concat(s);
       timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 5) - 2;  //add a random -2 to 3 second delay between spawns
       timeOffset = Math.max(timeOffset, 10); //ensure that the delay is never less than 10 seconds

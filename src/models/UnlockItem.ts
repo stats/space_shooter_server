@@ -20,7 +20,7 @@ export class UnlockItem extends Schema {
   @type("string")
   description: string;
 
-  constructor(key: string, unlocked: boolean, count: number, unlockType: string, name:string, description: string) {
+  constructor(key: string, unlocked: boolean, count: number, unlockType: string, name: string, description: string) {
     super();
     this.key = key;
     this.unlocked = unlocked;

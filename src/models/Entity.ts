@@ -17,7 +17,7 @@ export class Entity extends Schema {
   @type('number')
   angle = 0;
 
-  state:number;
+  state: number;
 
   bulletOffsetX = 0;
   bulletOffsetY = 0;

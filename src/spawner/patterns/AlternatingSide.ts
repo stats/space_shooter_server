@@ -3,10 +3,10 @@ import { Pattern } from '../Pattern';
 
 export class AlternatingSide extends Pattern {
 
-  constructor(enemyCount: number, enemyType: any, difficulty: number, timeOffset: number = 0, positionOffset: number = 0 ) {
+  constructor(enemyCount: number, enemyType: any, difficulty: number, timeOffset = 0, positionOffset = 0 ) {
     super();
-    let i = Math.random() > 0.5 ? 1800 : -200;
-    let j = i == 1800 ? -200 : 1800;
+    const i = Math.random() > 0.5 ? 1800 : -200;
+    const j = i == 1800 ? -200 : 1800;
     this.points = [
       new TimedPosition(0 + timeOffset, i, 800),
       new TimedPosition(0 + timeOffset, j, 700),

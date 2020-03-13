@@ -37,10 +37,10 @@ export class Ship extends Entity {
   uuid: string;
 
   @type("boolean")
-  connected: boolean = false;
+  connected = false;
 
   @type("boolean")
-  justDamaged: boolean = false;
+  justDamaged = false;
 
   @type("string")
   shipType: string;
@@ -213,7 +213,7 @@ export class Ship extends Entity {
   tempUpgrades: ArraySchema<TempUpgrade>;
 
   @type("number")
-  tempUpgradeTimer: number = 0;
+  tempUpgradeTimer = 0;
 
   tracker: any = {};
 
@@ -358,32 +358,32 @@ export class Ship extends Entity {
     this.nextLevel = Math.floor(50*Math.pow(this.level, 1.25));
   }
 
-  generateTempUpgrades(type:string) {
+  generateTempUpgrades(type: string) {
     const r = Math.random() * 4;
     let upgradeIndex: number[];
 
     switch(r) {
       case 0:
         upgradeIndex = this.getRandomNumbers(Crystals.RED.length);
-        for(var i = 0, l = upgradeIndex.length; i < l; i++) {
+        for(let i = 0, l = upgradeIndex.length; i < l; i++) {
           this.tempUpgrades[i] = new TempUpgrade(Crystals.RED[upgradeIndex[i]]);
         }
       break;
       case 1:
         upgradeIndex = this.getRandomNumbers(Crystals.BLUE.length);
-        for(var i = 0, l = upgradeIndex.length; i < l; i++) {
+        for(let i = 0, l = upgradeIndex.length; i < l; i++) {
           this.tempUpgrades[i] = new TempUpgrade(Crystals.BLUE[upgradeIndex[i]]);
         }
       break;
       case 2:
         upgradeIndex = this.getRandomNumbers(Crystals.GREEN.length);
-        for(var i = 0, l = upgradeIndex.length; i < l; i++) {
+        for(let i = 0, l = upgradeIndex.length; i < l; i++) {
           this.tempUpgrades[i] = new TempUpgrade(Crystals.GREEN[upgradeIndex[i]]);
         }
       break;
       case 3:
         upgradeIndex = this.getRandomNumbers(Crystals.PURPLE.length);
-        for(var i = 0, l = upgradeIndex.length; i < l; i++) {
+        for(let i = 0, l = upgradeIndex.length; i < l; i++) {
           this.tempUpgrades[i] = new TempUpgrade(Crystals.PURPLE[upgradeIndex[i]]);
         }
       break;

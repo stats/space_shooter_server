@@ -14,7 +14,7 @@ export class TempUpgrade extends Schema {
   @type('number')
   value: number;
 
-  constructor(options: { name: string, description: string, key: string, value: number}) {
+  constructor( options: { name: string; description: string; key: string; value: number } ) {
     super();
     this.name = options.name;
     this.description = options.description;

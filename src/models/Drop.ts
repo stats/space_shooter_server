@@ -9,11 +9,11 @@ import { C } from '../Constants';
 
 export class Drop extends Entity {
 
-  speed: number = 65;
-  radius: number = 25;
+  speed = 65;
+  radius = 25;
 
   @type("string")
-  modelType: string = "";
+  modelType = "";
 
   constructor(options) {
     super(options);

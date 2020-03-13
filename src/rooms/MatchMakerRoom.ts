@@ -174,7 +174,7 @@ export class MatchMakerRoom extends Room {
               rankings += client.rank;
             }
 
-            let waveRank = Math.max(Math.round(rankings/count) - 5, 1);
+            const waveRank = Math.max(Math.round(rankings/count) - 5, 1);
             console.log("[MatchMakerRoom] Creating Room with Rank:", waveRank);
             const room = await matchMaker.createRoom(this.roomToCreate, {waveRank: waveRank}); //TODO: Set the waveRank to be the correct wave rank
 

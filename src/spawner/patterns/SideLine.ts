@@ -5,7 +5,7 @@ export class SideLine extends Pattern {
 
   constructor(enemyCount: number, enemyType: any, difficulty: number ) {
     super();
-    let i = Math.random() > 0.5 ? 1800 : -200;
+    const i = Math.random() > 0.5 ? 1800 : -200;
     this.points = [
       new TimedPosition(0, i, 800),
       new TimedPosition(0, i, 700),

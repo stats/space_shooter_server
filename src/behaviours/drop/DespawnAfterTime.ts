@@ -5,8 +5,8 @@ export class DespawnAfterTime extends Behaviour {
 
   target: Drop;
 
-  timer: number = 0;
-  cooldown: number = 10;
+  timer = 0;
+  cooldown = 10;
 
   constructor(target: Drop) {
     super('despawnAfterTime', target);

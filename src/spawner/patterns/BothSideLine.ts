@@ -3,7 +3,7 @@ import { Pattern } from '../Pattern';
 
 export class BothSideLine extends Pattern {
 
-  constructor(enemyCount: number, enemyType: any, difficulty: number, timeOffset: number = 0, positionOffset: number = 0 ) {
+  constructor(enemyCount: number, enemyType: any, difficulty: number, timeOffset = 0, positionOffset = 0 ) {
     super();
     this.points = [
       new TimedPosition(0 + timeOffset, -200, 800),
