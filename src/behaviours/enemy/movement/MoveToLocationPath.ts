@@ -13,7 +13,7 @@ export class MoveToLocationPath extends Behaviour {
   target: Enemy;
 
   constructor(target: Enemy, moveTo?: Position) {
-    super('MoveToLocation', target, onComplete);
+    super('MoveToLocation', target);
     this.moveTo = moveTo;
     if(this.moveTo == null) {
       this.moveTo = new Position( C.RANDOM_X_ON_SCREEN,  C.RANDOM_Y_ON_SCREEN)

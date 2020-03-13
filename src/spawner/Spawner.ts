@@ -24,6 +24,8 @@ export class Spawner {
 
   private timer = 0;
 
+  private startWave = 0;
+
   /**
    * Difficulty values for enemies
    * - Blaster = 2
@@ -40,6 +42,8 @@ export class Spawner {
   constructor(room: any) {
     this.room = room;
     this.state = room.state;
+
+    this.startWave = this.state.currentWave;
 
     this.possiblePatterns = [];
 
@@ -103,7 +107,7 @@ export class Spawner {
 
   onUpdate(deltaTime: number): void {
 
-    if(bossActive) {
+    if(this.bossActive) {
       if(this.state.numberEnemies() > 0) {
         return;
       } else {
@@ -128,7 +132,7 @@ export class Spawner {
 
     if( this.spawns.length == 0) {
       this.state.currentWave++;
-      if(this.state.currentWave % 5 == 0) {
+      if((this.state.currentWave - this.startWave) % 5 == 0) {
         const boss = new sample(this.bossTypes)();
         this.state.addEnemy(boss);
         this.bossActive = true;

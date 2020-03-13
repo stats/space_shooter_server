@@ -50,61 +50,61 @@ export class Crystals {
         name: "Percent Damage I",
         description: "Increase total damage by 1%",
         key: "tempDamagePercent",
-        value: 0.01;
+        value: 0.01
       },
       {
         name: "Percent Damage II",
         description: "Increase total damage by 2%",
         key: "tempDamagePercent",
-        value: 0.02;
+        value: 0.02
       },
       {
         name: "Percent Damage III",
         description: "Increase total damage by 3%",
         key: "tempDamagePercent",
-        value: 0.03;
+        value: 0.03
       },
       {
         name: "Percent Damage IV",
         description: "Increase total damage by 4%",
         key: "tempDamagePercent",
-        value: 0.04;
+        value: 0.04
       },
       {
         name: "Percent Damage V",
         description: "Increase total damage by 5%",
         key: "tempDamagePercent",
-        value: 0.05;
+        value: 0.05
       },
       {
         name: "Range I",
         description: "Increase attack range by 25",
         key: "tempRange",
-        value: 25;
+        value: 25
       },
       {
         name: "Range II",
         description: "Increase attack range by 30",
         key: "tempRange",
-        value: 25;
+        value: 25
       },
       {
         name: "Range III",
         description: "Increase attack range by 35",
         key: "tempRange",
-        value: 35;
+        value: 35
       },
       {
         name: "Range IV",
         description: "Increase attack range by 40",
         key: "tempRange",
-        value: 40;
+        value: 40
       },
       {
         name: "Range V",
         description: "Increase attack range by 45",
         key: "tempRange",
-        value: 45;
+        value: 45
       },
       {
         name: "Range Level I",
@@ -122,31 +122,31 @@ export class Crystals {
         name: "Percent Range I",
         description: "Increase attack range by 1%",
         key: "tempRangePercent",
-        value: 0.01;
+        value: 0.01
       },
       {
         name: "Percent Range II",
         description: "Increase attack range by 2%",
         key: "tempRangePercent",
-        value: 0.02;
+        value: 0.02
       },
       {
         name: "Percent Range III",
         description: "Increase attack range by 3%",
         key: "tempRangePercent",
-        value: 0.03;
+        value: 0.03
       },
       {
         name: "Percent Range IV",
         description: "Increase attack range by 4%",
         key: "tempRangePercent",
-        value: 0.04;
+        value: 0.04
       },
       {
         name: "Percent Range V",
         description: "Increase attack range by 5%",
         key: "tempRangePercent",
-        value: 0.05;
+        value: 0.05
       },
       {
         name: "Fire Rate I",

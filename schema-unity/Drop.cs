@@ -8,6 +8,7 @@
 using Colyseus.Schema;
 
 public class Drop : Entity {
-
+	[Type(6, "string")]
+	public string modelType = "";
 }
 

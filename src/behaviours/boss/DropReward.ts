@@ -1,5 +1,5 @@
 import { Behaviour } from '../behaviour';
-import { Enemy } from '../../models/Enemy';
+import { Drop, Enemy } from '../../models';
 
 export class DropReward extends Behaviour {
 
@@ -13,7 +13,7 @@ export class DropReward extends Behaviour {
     /**
      * Create a reward crystal
      **/
-     let drop:Drop = new Drop({ position: this.target.position.clone()} ));
+     let drop:Drop = new Drop({ position: this.target.position.clone()});
      this.target.$state.addDrop(drop);
   }
 }
