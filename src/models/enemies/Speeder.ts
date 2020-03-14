@@ -1,6 +1,4 @@
-import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
-import { TargetPlayerStartPath } from '../../behaviours/Enemy/movement/TargetPlayerStartPath';
+import { Enemy, GameState, TargetPlayerStartPath } from '../../Internal';
 
 
 export class Speeder extends Enemy {

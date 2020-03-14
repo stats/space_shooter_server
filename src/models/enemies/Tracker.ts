@@ -1,6 +1,4 @@
-import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
-import { ClosestPlayerPath } from '../../behaviours/Enemy/movement/ClosestPlayerPath';
+import { Enemy, GameState, ClosestPlayerPath } from '../../Internal';
 
 export class Tracker extends Enemy {
 

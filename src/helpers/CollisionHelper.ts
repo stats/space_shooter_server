@@ -1,5 +1,4 @@
-import { Entity } from '../models/Entity';
-import { C, CT } from '../Constants';
+import { Entity, C, CT } from '../Internal';
 import * as Intersects from 'intersects';
 
 export class CollisionHelper {

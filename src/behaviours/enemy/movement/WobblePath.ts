@@ -1,7 +1,4 @@
-import { Behaviour } from '../../behaviour';
-import { C } from '../../../Constants';
-import { CollisionHelper } from '../../../helpers/CollisionHelper';
-import { Enemy } from '../../../models/Enemy';
+import { Behaviour, C, CollisionHelper, Enemy } from '../../../Internal';
 
 export class WobblePath extends Behaviour {
 

@@ -1,9 +1,4 @@
-import { Bullet } from '../Bullet';
-import { C, CT } from '../../Constants';
-import { StraightLineDownPath } from '../../behaviours/bullet/StraightLineDownPath';
-import { StraightAnglePath } from '../../behaviours/bullet/StraightAnglePath';
-import { Primary } from './Primary';
-import { Position } from '../Position';
+import { Bullet, C, CT, BulletStraightLineDownPath, BulletStraightAnglePath, Primary, Position } from '../../Internal';
 
 export class EnemyBullet extends Primary{
 
@@ -23,10 +18,10 @@ export class EnemyBullet extends Primary{
     const bullet = new Bullet(options);
     switch(this.behaviour) {
       case 'drops':
-        bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+        bullet.registerBehaviour("path", new BulletStraightLineDownPath(bullet));
       break;
       case 'fires':
-        bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: this.entity.angle}));
+        bullet.registerBehaviour("path", new BulletStraightAnglePath(bullet, {angle: this.entity.angle}));
       break;
     }
     bullets.push(bullet);

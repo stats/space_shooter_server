@@ -65,4 +65,10 @@ export class Position  extends Schema {
     }
   }
 
+  public static CENTER_OF_SCREEN: Position = new Position(800, 450);
+
+  public static RANDOM_ON_SCREEN(): Position {
+    return new Position(C.RANDOM_X_ON_SCREEN, C.RANDOM_Y_ON_SCREEN);
+  }
+
 }

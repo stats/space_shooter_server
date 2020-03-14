@@ -1,4 +1,4 @@
-import { Entity } from '../models/Entity';
+import { Entity } from '../Internal';
 /**
  * A base class to be extended from when creating custom behaviours.
  * A behaviour could be handling input, movement patterns, or

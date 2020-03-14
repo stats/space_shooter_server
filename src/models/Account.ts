@@ -1,15 +1,7 @@
 import { Schema, type } from "@colyseus/schema";
 import { CommandResult } from 'mongodb';
 import { pick, merge } from 'lodash';
-import { UsernameGenerator } from '../helpers/UsernameGenerator';
-import { Ship } from './Ship';
-import { Statistics } from './Statistics';
-import { UnlockMessage } from './UnlockMessage';
-import { UnlockItem } from './UnlockItem';
-import { SHIP } from '../Ship';
-import { PRIMARY } from '../Primary';
-import { SPECIAL } from '../Special';
-import { MATERIAL } from '../Material';
+import { UsernameGenerator, Ship, Statistics, UnlockMessage, UnlockItem, SHIP, PRIMARY, SPECIAL, MATERIAL } from '../Internal';
 
 export class Account extends Schema {
 

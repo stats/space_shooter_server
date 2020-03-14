@@ -1,7 +1,4 @@
-import { Behaviour } from '../../behaviour';
-import { C } from '../../../Constants';
-import { Enemy, Position } from '../../../models';
-import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Behaviour, Enemy, Position, CollisionHelper } from '../../../Internal';
 
 export class MoveToLocationThenRotatePath extends Behaviour {
 
@@ -16,10 +13,7 @@ export class MoveToLocationThenRotatePath extends Behaviour {
 
   constructor(target: Enemy, moveTo: Position ) {
     super('MoveToLocationThenRotate', target);
-    this.moveTo = moveTo || C.RANDOM_ON_SCREEN();
-    if(this.moveTo == null) {
-      this.moveTo = new Position( C.RANDOM_X_ON_SCREEN,  C.RANDOM_Y_ON_SCREEN)
-    }
+    this.moveTo = moveTo || Position.RANDOM_ON_SCREEN();
 
     const dx = this.moveTo.x - this.target.position.x;
     const dy = this.moveTo.y - this.target.position.y;

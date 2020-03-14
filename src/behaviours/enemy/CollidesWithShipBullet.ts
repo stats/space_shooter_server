@@ -1,7 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { Bullet, Enemy } from '../../models';
-import { CollisionHelper } from '../../helpers/CollisionHelper';
-import { C } from '../../Constants';
+import { Behaviour, Bullet, Enemy, CollisionHelper, C } from '../../Internal';
 
 export class CollidesWithShipBullet extends Behaviour {
 

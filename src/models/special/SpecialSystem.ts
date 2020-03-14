@@ -1,4 +1,4 @@
-import { Ship } from '../Ship';
+import { Ship } from '../../Internal';
 
 export class SpecialSystem {
 

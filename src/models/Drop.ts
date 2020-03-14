@@ -1,11 +1,5 @@
 import { type } from "@colyseus/schema";
-import { Entity } from './Entity';
-import { GameState } from './GameState';
-import { DestroyedBehaviour } from '../behaviours/drop/DestroyedBehaviour';
-import { MoveToLocationPath } from '../behaviours/drop/MoveToLocationPath';
-import { DespawnAfterTime } from '../behaviours/drop/DespawnAfterTime';
-import { Crystals } from '../Crystals';
-import { C } from '../Constants';
+import { Entity, GameState, DropDestroyedBehaviour, DropMovement, DespawnAfterTime, Crystals, Position } from '../Internal';
 
 export class Drop extends Entity {
 
@@ -39,8 +33,8 @@ export class Drop extends Entity {
 
   onInitGame(state: GameState): void {
     super.onInitGame(state);
-    this.registerBehaviour("destroyed", new DestroyedBehaviour(this));
-    this.registerBehaviour("path", new MoveToLocationPath(this, C.CENTER_OF_SCREEN.clone()));
+    this.registerBehaviour("destroyed", new DropDestroyedBehaviour(this));
+    this.registerBehaviour("path", new DropMovement(this, Position.CENTER_OF_SCREEN.clone()));
     this.registerBehaviour("despawn", new DespawnAfterTime(this));
   }
 

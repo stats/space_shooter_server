@@ -1,9 +1,4 @@
-import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
-import { LoopingPath } from '../../behaviours/Enemy/movement/LoopingPath';
-import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
-import { EnemyBullet } from '../../models/primary/EnemyBullet';
-import { C, CT } from '../../Constants';
+import { Enemy, GameState, LoopingPath, FiresBulletBehaviour, EnemyBullet, C, CT } from '../../Internal';
 
 
 export class Bomber extends Enemy {

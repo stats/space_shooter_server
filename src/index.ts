@@ -5,16 +5,7 @@ import { createServer } from 'http';
 import { Server } from 'colyseus';
 import { monitor } from '@colyseus/monitor';
 
-import { ShipBuilderRoom } from "./rooms/ShipBuilderRoom";
-import { MatchMakerRoom } from "./rooms/MatchMakerRoom";
-import { GameRoom } from "./rooms/GameRoom";
-
-import { Account } from "./models/Account";
-
-import { AccountHelper } from './helpers/AccountHelper';
-import { JWTHelper } from './helpers/JWTHelper';
-
-import { DB } from './Database';
+import { ShipBuilderRoom, MatchMakerRoom, GameRoom, Account, AccountHelper, JWTHelper, DB } from './Internal';
 
 const asyncMiddleware = fn =>
 (req, res, next) => {

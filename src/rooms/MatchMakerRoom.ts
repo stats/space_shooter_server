@@ -1,6 +1,5 @@
 import { Room, Client, matchMaker } from 'colyseus';
-import { JWTHelper } from '../helpers/JWTHelper';
-import { ShipHelper } from '../helpers/ShipHelper';
+import { JWTHelper, ShipHelper } from '../Internal';
 
 interface MatchmakingGroup {
   averageRank: number;

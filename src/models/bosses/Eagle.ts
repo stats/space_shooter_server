@@ -1,9 +1,4 @@
-import { Enemy } from '../Enemy';
-import { EagleAttack } from '../../behaviours/boss/EagleAttack';
-import { EagleMovement } from '../../behaviours/boss/EagleMovement';
-import { DropReward } from '../../behaviours/boss/DropReward';
-import { GameState } from '../GameState';
-import { Position } from '../Position';
+import { Enemy, EagleAttack, EagleMovement, DropReward, GameState, Position } from '../../Internal';
 
 export enum EagleState {
   WAIT,

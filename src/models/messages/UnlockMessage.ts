@@ -1,5 +1,5 @@
 import {Schema, MapSchema, type} from '@colyseus/schema';
-import { UnlockItem } from './UnlockItem';
+import { UnlockItem } from '../../Internal';;
 
 export class UnlockMessage extends Schema {
 

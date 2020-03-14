@@ -1,5 +1,4 @@
-import { TimedPosition } from '../TimedPosition';
-import { Pattern } from '../Pattern';
+import { TimedPosition, Pattern } from '../../Internal';
 
 export class BothSideLine extends Pattern {
 

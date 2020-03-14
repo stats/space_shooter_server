@@ -1,7 +1,6 @@
-import { Behaviour } from '../behaviour';
-import { Bullet, Position } from '../../models';
+import { Behaviour, Bullet, Position } from '../../Internal';
 
-export class StraightAnglePath extends Behaviour {
+export class BulletStraightAnglePath extends Behaviour {
 
   start: Position;
 

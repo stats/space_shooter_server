@@ -1,5 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { Ship } from '../../models/Ship';
+import { Behaviour, Ship } from '../../Internal';
 
 export class InputBehaviour extends Behaviour {
 

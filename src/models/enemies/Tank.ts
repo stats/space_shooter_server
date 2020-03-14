@@ -1,10 +1,4 @@
-import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
-import { MoveToLocationThenRotatePath } from '../../behaviours/Enemy/movement/MoveToLocationThenRotatePath';
-import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
-import { EnemyBullet } from '../../models/primary/EnemyBullet';
-import { C, CT } from '../../Constants';
-import { Position } from '../../models/Position';
+import { Enemy, GameState, MoveToLocationThenRotatePath, FiresBulletBehaviour, EnemyBullet, C, CT, Position } from '../../Internal';
 
 export enum TankStates {
   MOVE,

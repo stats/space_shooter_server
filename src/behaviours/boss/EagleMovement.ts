@@ -1,7 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { Eagle, EagleState } from '../../models/bosses/Eagle';
-import { Position } from '../../models/Position';
-import { Tank } from '../../models/enemies/Tank';
+import { Behaviour, Eagle, EagleState,Eagle, Position, Tank } from '../../Internal';
 
 export class EagleMovement extends Behaviour {
 

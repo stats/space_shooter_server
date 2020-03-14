@@ -1,10 +1,5 @@
-import { Behaviour } from '../behaviour';
-import { Eagle } from '../../models/bosses/Eagle';
-import { C, CT } from '../../Constants';
-import { StraightLineDownPath } from '../bullet/StraightLineDownPath';
-import { StraightAnglePath } from '../bullet/StraightAnglePath';
-import { Position } from '../../models/Position';
-import { Bullet } from '../../models/Bullet';
+import { Behaviour, Eagle, C, CT, StraightLineDownPath, StraightAnglePath, Position, Bullet } from '../../Internal';
+
 
 export class EagleAttack extends Behaviour {
 

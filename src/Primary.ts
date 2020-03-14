@@ -1,5 +1,4 @@
-import { Cannon, Blaster, Torpedo, Missile, Primary} from './models/primary';
-import { Entity } from './models/Entity';
+import { Cannon, Blaster, Torpedo, Missile, Primary, Entity} from './Internal';
 
 export class PRIMARY {
 

@@ -1,6 +1,4 @@
-import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
-import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePath';
+import { Enemy, GameState, StraightLinePath } from '../../Internal';
 
 export class Scout extends Enemy {
 

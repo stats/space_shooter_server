@@ -1,12 +1,8 @@
 import { type } from "@colyseus/schema";
 
-import { Entity } from './Entity';
+import { Entity, BulletDestroyedBehaviour, CT } from '../Internal';
 
 import { merge } from 'lodash';
-
-import { DestroyedBehaviour } from '../behaviours/bullet/DestroyedBehaviour';
-
-import { CT } from '../Constants';
 
 export class Bullet extends Entity {
 
@@ -44,7 +40,7 @@ export class Bullet extends Entity {
   constructor(options: any) {
     super(options);
     merge(this, options);
-    this.registerBehaviour("destroyed", new DestroyedBehaviour(this));
+    this.registerBehaviour("destroyed", new BulletDestroyedBehaviour(this));
 
   }
 }

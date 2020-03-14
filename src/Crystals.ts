@@ -1,4 +1,4 @@
-export class Crystals {
+export class CRYSTALS {
 
   /**
    * These are damage type crystals.

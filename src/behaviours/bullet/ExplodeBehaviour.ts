@@ -1,6 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
-import { Bullet, Entity } from '../../models';
+import { Behaviour, C, Bullet, Entity } from '../../Internal';
 
 export class ExplodeBehaviour extends Behaviour {
 

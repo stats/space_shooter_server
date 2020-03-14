@@ -1,5 +1,4 @@
-import { DB } from '../Database';
-import { Account } from '../models/Account';
+import { DB, Account } from '../Internal';
 import { CommandResult } from 'mongodb';
 
 export class AccountHelper {

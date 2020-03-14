@@ -1,8 +1,6 @@
-import { Behaviour } from '../behaviour';
-import { Enemy, Bullet } from '../../models';
-import { CollisionHelper } from '../../helpers/CollisionHelper';
+import { Behaviour, Enemy, Bullet, CollisionHelper } from '../../Internal';
 
-export class ClosestEnemyPath extends Behaviour {
+export class BulletClosestEnemyPath extends Behaviour {
 
   targetEnemy: Enemy;
   enteredScreen = false;

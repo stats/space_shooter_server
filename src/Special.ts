@@ -1,6 +1,6 @@
 import { WeaponCharge, EmergencyBrake, Thrusters,
 RammingShield, Shotgun, ScatterShot, HyperSpeed, Invisibility,
-Bomb, MissileBarage, MegaBomb, ShieldRecharge, ForceShield } from './models/special';
+Bomb, MissileBarage, MegaBomb, ShieldRecharge, ForceShield } from './Internal';
 
 export class SPECIAL {
   public static TYPE = {

@@ -1,11 +1,6 @@
 import { Schema, type, MapSchema } from '@colyseus/schema';
 
-import { Ship } from './Ship';
-import { Enemy } from './Enemy';
-import { Bullet } from './Bullet';
-import { Drop } from './Drop';
-
-import { CollisionHelper } from '../helpers/CollisionHelper';
+import { Ship, Enemy, Bullet, Drop, CollisionHelper } from '../../Internal';
 
 export class GameState extends Schema {
 

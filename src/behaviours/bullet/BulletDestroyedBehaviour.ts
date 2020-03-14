@@ -1,7 +1,6 @@
-import { Behaviour } from '../behaviour';
-import { Bullet } from '../../models/Bullet';
+import { Behaviour, Bullet } from '../../Internal';
 
-export class DestroyedBehaviour extends Behaviour {
+export class BulletDestroyedBehaviour extends Behaviour {
 
   target: Bullet;
 

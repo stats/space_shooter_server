@@ -1,8 +1,4 @@
-import { SpecialSystem } from './SpecialSystem';
-import { Bullet } from '../Bullet';
-import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
-import { ExplodeBehaviour } from '../../behaviours/bullet/ExplodeBehaviour';
-import { C, CT } from '../../Constants';
+import { SpecialSystem, Bullet, BulletStraightAnglePath, ExplodeBehaviour, C, CT } from '../../Internal';
 
 export class Bomb extends SpecialSystem {
 
@@ -21,7 +17,7 @@ export class Bomb extends SpecialSystem {
       blastRadius: 300,
       explodes: true
     });
-    bullet.registerBehaviour("path", new StraightLineUpPath(bullet));
+    bullet.registerBehaviour("path", new BulletStraightLineUpPath(bullet));
     bullet.registerBehaviour("explode", new ExplodeBehaviour(bullet));
     bullet.firedBy = this.target;
     this.target.$state.addBullet(bullet);

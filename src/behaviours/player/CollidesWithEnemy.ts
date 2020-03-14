@@ -1,6 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { CollisionHelper } from '../../helpers/CollisionHelper';
-import { Ship } from '../../models/Ship';
+import { Behaviour, CollisionHelper, Ship } from '../../Internal';
 
 export class CollidesWithEnemy extends Behaviour {
 

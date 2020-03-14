@@ -1,12 +1,5 @@
 import { type } from "@colyseus/schema";
-import { GameState } from './GameState';
-import { Position } from './Position';
-
-import { CollidesWithShipBullet } from '../behaviours/Enemy/CollidesWithShipBullet';
-import { DestroyedBehaviour } from '../behaviours/Enemy/DestroyedBehaviour';
-import { TakesDamageBehaviour } from '../behaviours/Enemy/TakesDamageBehaviour';
-
-import { Entity } from './Entity';
+import { GameState, Entity, Position, CollidesWithShipBullet, EnemyDestroyedBehaviour, EnemyTakesDamageBehaviour } from '../Internal';
 
 export class Enemy extends Entity {
   health = 1;
@@ -53,8 +46,8 @@ export class Enemy extends Entity {
   onInitGame(state: GameState): void {
     super.onInitGame(state);
     this.registerBehaviour("collides_ship_bullet", new CollidesWithShipBullet(this));
-    this.registerBehaviour("destroyed", new DestroyedBehaviour(this));
-    this.registerBehaviour("takes_damage", new TakesDamageBehaviour(this));
+    this.registerBehaviour("destroyed", new EnemyDestroyedBehaviour(this));
+    this.registerBehaviour("takes_damage", new EnemyTakesDamageBehaviour(this));
     this.updateStats(state.currentWave);
   }
 }

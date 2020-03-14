@@ -1,12 +1,6 @@
 /* A straight shot that has an explosion on impact */
 
-import { Bullet } from '../Bullet';
-import { C, CT } from '../../Constants';
-import { Entity } from '../Entity';
-import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
-import { ExplodeBehaviour } from '../../behaviours/bullet/ExplodeBehaviour';
-import { Primary } from './Primary';
-import { Position } from '../Position';
+import { Bullet, C, CT, Entity, BulletStraightAnglePath, ExplodeBehaviour, Primary, Position } from '../../Internal';
 
 export class Torpedo extends Primary {
 
@@ -39,8 +33,8 @@ export class Torpedo extends Primary {
 
       const bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart + (i * this.bulletOffset);
-      bullet.registerBehaviour("path", new StraightLineUpPath(bullet));
-      bullet.registerBehaviour("explode", new ExplodeBehaviour(bullet));
+      bullet.registerBehaviour("path", new BulletStraightLineUpPath(bullet));
+      bullet.registerBehaviour("explode", new BulletExplodeBehaviour(bullet));
       bullets.push(bullet);
     }
 

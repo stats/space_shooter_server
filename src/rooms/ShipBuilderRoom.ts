@@ -1,10 +1,6 @@
 import { Room, Client } from 'colyseus';
 
-import { JWTHelper } from '../helpers/JWTHelper';
-import { AccountHelper } from '../helpers/AccountHelper';
-import { ShipHelper } from '../helpers/ShipHelper';
-
-import { ErrorMessage, ShipList, ShipBuilderState } from '../models';
+import { JWTHelper, AccountHelper, ShipHelper, ErrorMessage, ShipList, ShipBuilderState } from '../Internal';
 
 export class ShipBuilderRoom extends Room<ShipBuilderState> {
 

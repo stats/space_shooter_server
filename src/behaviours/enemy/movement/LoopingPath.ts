@@ -1,6 +1,4 @@
-import { Behaviour } from '../../behaviour';
-import { CollisionHelper } from '../../../helpers/CollisionHelper';
-import { Enemy } from '../../../models/Enemy';
+import { Behaviour, CollisionHelper, Enemy } from '../../../Internal';
 
 export class LoopingPath extends Behaviour {
 

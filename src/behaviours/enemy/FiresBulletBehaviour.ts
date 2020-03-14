@@ -1,6 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { Primary } from '../../models/primary/Primary';
-import { Enemy } from '../../models/Enemy';
+import { Behaviour, Primary, Enemy } from '../../Internal';
 
 export class FiresBulletBehaviour extends Behaviour {
 

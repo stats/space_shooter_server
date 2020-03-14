@@ -1,7 +1,6 @@
-import { Behaviour } from '../behaviour';
-import { Ship } from '../../models/Ship';
+import { Behaviour, Ship } from '../../Internal';
 
-export class TakesDamageBehaviour extends Behaviour {
+export class ShipTakesDamageBehaviour extends Behaviour {
 
   target: Ship;
 

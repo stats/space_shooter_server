@@ -1,4 +1,4 @@
-import { SpecialSystem } from './SpecialSystem';
+import { SpecialSystem } from '../../Internal';
 
 export class WeaponCharge extends SpecialSystem {
 

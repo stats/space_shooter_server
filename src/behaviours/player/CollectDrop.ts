@@ -1,6 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { CollisionHelper } from '../../helpers/CollisionHelper';
-import { Drop, Ship } from '../../models';
+import { Behaviour, CollisionHelper, Drop, Ship } from '../../Internal';
 
 export class CollectDrop extends Behaviour {
 

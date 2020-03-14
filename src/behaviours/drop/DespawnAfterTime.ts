@@ -1,5 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { Drop } from '../../models';
+import { Behaviour, Drop } from '../../Internal';
 
 export class DespawnAfterTime extends Behaviour {
 

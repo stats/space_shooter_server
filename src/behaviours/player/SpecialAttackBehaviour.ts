@@ -1,7 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { SPECIAL } from '../../Special';
-import { Ship } from '../../models/Ship';
-import { SpecialSystem } from '../../models/special/SpecialSystem';
+import { Behaviour, SPECIAL, Ship, SpecialSystem } from '../../Internal';
 
 
 export class SpecialAttackBehaviour extends Behaviour {

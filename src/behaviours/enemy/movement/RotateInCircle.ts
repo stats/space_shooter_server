@@ -1,7 +1,4 @@
-import { Behaviour } from '../../behaviour';
-import { C } from '../../../Constants';
-import { Enemy, Position } from '../../../models';
-import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Behaviour, C, Enemy, Position, CollisionHelper } from '../../../Internal';
 
 export class RotateInCircle extends Behaviour {
 

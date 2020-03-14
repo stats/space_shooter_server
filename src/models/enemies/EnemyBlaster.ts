@@ -1,12 +1,6 @@
-import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
-import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePath';
-import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
-import { EnemyBullet } from '../../models/primary/EnemyBullet';
-import { C, CT } from '../../Constants';
+import { Enemy, GameState, StraightLinePath, FiresBulletBehaviour, EnemyBullet, C, CT } from '../../Internal';
 
-
-export class Blaster extends Enemy {
+export class EnemyBlaster extends Enemy {
 
   constructor(options: any) {
     super(options);

@@ -1,7 +1,4 @@
-import { SpecialSystem } from './SpecialSystem';
-import { Bullet } from '../Bullet';
-import { MissilePath } from '../../behaviours/bullet/MissilePath';
-import { C, CT } from '../../Constants';
+import { SpecialSystem, Bullet, MissilePath, C, CT } from '../../Internal';
 
 export class MissileBarage extends SpecialSystem {
 

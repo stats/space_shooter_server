@@ -1,5 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { Drop, Enemy } from '../../models';
+import { Behaviour, Drop, Enemy } from '../../Internal';
 
 export class DropReward extends Behaviour {
 

@@ -1,11 +1,10 @@
-import { TimedPosition } from '../TimedPosition';
-import { Pattern } from '../Pattern';
+import { TimedPosition, Pattern } from '../../Internal';
 
 export class TopTriangle extends Pattern {
 
   constructor(enemyCount: number, enemyType: any, difficulty: number ) {
     super();
-    
+
     this.points = [
       new TimedPosition(0, 800, 1100),
       new TimedPosition(2, 700, 1100),

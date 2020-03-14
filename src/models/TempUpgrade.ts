@@ -14,12 +14,12 @@ export class TempUpgrade extends Schema {
   @type('number')
   value: number;
 
-  constructor( options: { name: string; description: string; key: string; value: number } ) {
+  constructor( options: any = {} ) {
     super();
-    this.name = options.name;
-    this.description = options.description;
-    this.key = options.key;
-    this.value = options.value;
+    this.name = options.name || "";
+    this.description = options.description || "";
+    this.key = options.key || "";
+    this.value = options.value || 0;
   }
 
 }

@@ -1,34 +1,13 @@
-import { type, ArraySchema } from '@colyseus/schema';
-import { InputBehaviour } from '../behaviours/player/InputBehaviour';
-import { CollidesWithEnemy } from '../behaviours/player/CollidesWithEnemy';
-import { CollidesWithEnemyBullet } from '../behaviours/player/CollidesWithEnemyBullet';
-import { DestroyedBehaviour } from '../behaviours/player/DestroyedBehaviour';
-import { TakesDamageBehaviour } from '../behaviours/player/TakesDamageBehaviour';
-import { PrimaryAttackBehaviour } from '../behaviours/player/PrimaryAttackBehaviour';
-import { SpecialAttackBehaviour } from '../behaviours/player/SpecialAttackBehaviour';
-import { ShieldRechargeBehaviour } from '../behaviours/player/ShieldRechargeBehaviour';
-import { CollectDrop } from '../behaviours/player/CollectDrop';
-import { CollidesWithDrop } from '../behaviours/player/CollidesWithDrop';
-
-import { C } from '../Constants';
-
-import { Crystals } from '../Crystals';
-
-import { AccountHelper } from '../helpers/AccountHelper';
-
-import { GameState } from './GameState';
-
-import { Entity } from './Entity';
-
-import { TempUpgrade } from './TempUpgrade';
-
+import { type } from '@colyseus/schema';
+import { InputBehaviour, CollidesWithEnemy, CollidesWithEnemyBullet, ShipDestroyedBehaviour,
+         ShipTakesDamageBehaviour, PrimaryAttackBehaviour, SpecialAttackBehaviour, ShieldRechargeBehaviour,
+         CollectDrop, CollidesWithDrop, C, Crystals, AccountHelper, GameState, Entity, TempUpgrade } from '../Internal';
 import { pick, merge } from 'lodash';
-
 import { v4 as uuid } from 'uuid';
 
 export class Ship extends Entity {
 
-  sessionId?: number;
+  askdfhkasj;dhf
 
   @type("string")
   name: string;
@@ -209,8 +188,14 @@ export class Ship extends Entity {
   tempSpecialDamagePercent = 1;
   tempSpecialDamageLevel = 0;
 
-  @type([TempUpgrade])
-  tempUpgrades: ArraySchema<TempUpgrade>;
+  @type(TempUpgrade)
+  tempUpgrade1: TempUpgrade;
+
+  @type(TempUpgrade)
+  tempUpgrade2: TempUpgrade;
+
+  @type(TempUpgrade)
+  tempUpgrade3: TempUpgrade;
 
   @type("number")
   tempUpgradeTimer = 0;
@@ -257,7 +242,7 @@ export class Ship extends Entity {
     this.rank = Math.max(this.rank, 1);
     console.log("[Ship] (username)", this.username);
     const account = await AccountHelper.getAccountByUsername(this.username);
-    /** This could fail **/
+
     if(account) {
       account.updateStatsWithShip(this);
       await AccountHelper.saveAccount(account);
@@ -295,8 +280,8 @@ export class Ship extends Entity {
     this.registerBehaviour("input", new InputBehaviour(this));
     this.registerBehaviour("collides_enemy", new CollidesWithEnemy(this));
     this.registerBehaviour("collides_enemy_bullet", new CollidesWithEnemyBullet(this));
-    this.registerBehaviour("destroyed", new DestroyedBehaviour(this));
-    this.registerBehaviour("takes_damage", new TakesDamageBehaviour(this));
+    this.registerBehaviour("destroyed", new ShipDestroyedBehaviour(this));
+    this.registerBehaviour("takes_damage", new ShipTakesDamageBehaviour(this));
     this.registerBehaviour("shield_recharge", new ShieldRechargeBehaviour(this));
     this.registerBehaviour("priamry", new PrimaryAttackBehaviour(this));
     this.registerBehaviour("special", new SpecialAttackBehaviour(this));
@@ -365,41 +350,48 @@ export class Ship extends Entity {
     switch(r) {
       case 0:
         upgradeIndex = this.getRandomNumbers(Crystals.RED.length);
-        for(let i = 0, l = upgradeIndex.length; i < l; i++) {
-          this.tempUpgrades[i] = new TempUpgrade(Crystals.RED[upgradeIndex[i]]);
-        }
+        this.tempUpgrade1 = new TempUpgrade(Crystals.RED[upgradeIndex[0]]);
+        this.tempUpgrade2 = new TempUpgrade(Crystals.RED[upgradeIndex[1]]);
+        this.tempUpgrade3 = new TempUpgrade(Crystals.RED[upgradeIndex[2]]);
+
       break;
       case 1:
         upgradeIndex = this.getRandomNumbers(Crystals.BLUE.length);
-        for(let i = 0, l = upgradeIndex.length; i < l; i++) {
-          this.tempUpgrades[i] = new TempUpgrade(Crystals.BLUE[upgradeIndex[i]]);
-        }
+        this.tempUpgrade1 = new TempUpgrade(Crystals.BLUE[upgradeIndex[0]]);
+        this.tempUpgrade2 = new TempUpgrade(Crystals.BLUE[upgradeIndex[1]]);
+        this.tempUpgrade3 = new TempUpgrade(Crystals.BLUE[upgradeIndex[2]]);
       break;
       case 2:
         upgradeIndex = this.getRandomNumbers(Crystals.GREEN.length);
-        for(let i = 0, l = upgradeIndex.length; i < l; i++) {
-          this.tempUpgrades[i] = new TempUpgrade(Crystals.GREEN[upgradeIndex[i]]);
-        }
+        this.tempUpgrade1 = new TempUpgrade(Crystals.GREEN[upgradeIndex[0]]);
+        this.tempUpgrade2 = new TempUpgrade(Crystals.GREEN[upgradeIndex[1]]);
+        this.tempUpgrade3 = new TempUpgrade(Crystals.GREEN[upgradeIndex[2]]);
       break;
       case 3:
         upgradeIndex = this.getRandomNumbers(Crystals.PURPLE.length);
-        for(let i = 0, l = upgradeIndex.length; i < l; i++) {
-          this.tempUpgrades[i] = new TempUpgrade(Crystals.PURPLE[upgradeIndex[i]]);
-        }
+        this.tempUpgrade1 = new TempUpgrade(Crystals.PURPLE[upgradeIndex[0]]);
+        this.tempUpgrade2 = new TempUpgrade(Crystals.PURPLE[upgradeIndex[1]]);
+        this.tempUpgrade3 = new TempUpgrade(Crystals.PURPLE[upgradeIndex[2]]);
       break;
     }
 
   }
 
   public selectUpgrade(index) {
-    if(index >= this.tempUpgrades.length) return;
-    this[this.tempUpgrades[index].key] += this.tempUpgrades[index].value;
+    if(index > 2) return;
+    switch(index) {
+      case 0: this[this.tempUpgrade1.key] += this.tempUpgrade1.value; break;
+      case 1: this[this.tempUpgrade2.key] += this.tempUpgrade2.value; break;
+      case 2: this[this.tempUpgrade3.key] += this.tempUpgrade3.value; break;
+    }
     this.clearTempUpgrades();
     this.setupShip();
   }
 
   public clearTempUpgrades() {
-    this.tempUpgrades = new ArraySchema<TempUpgrade>();
+    this.tempUpgrade1 = null;
+    this.tempUpgrade2 = null;
+    this.tempUpgrade3 = null;
   }
 
   private getRandomNumbers(array: any): number[] {

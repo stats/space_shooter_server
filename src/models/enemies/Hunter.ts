@@ -1,6 +1,4 @@
-import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
-import { ClosestPlayerAtStartPath } from '../../behaviours/Enemy/movement/ClosestPlayerAtStartPath';
+import { Enemy, GameState, ClosestPlayerAtStartPath } from '../../Internal';
 
 export class Hunter extends Enemy {
 

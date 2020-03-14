@@ -116,10 +116,16 @@ public class Ship : Entity {
 	[Type(41, "int32")]
 	public int upgradeShieldsRecharge = 0;
 
-	[Type(42, "array", typeof(ArraySchema<TempUpgrade>))]
-	public ArraySchema<TempUpgrade> tempUpgrades = new ArraySchema<TempUpgrade>();
+	[Type(42, "ref", typeof(TempUpgrade))]
+	public TempUpgrade tempUpgrade1 = new TempUpgrade();
 
-	[Type(43, "number")]
+	[Type(43, "ref", typeof(TempUpgrade))]
+	public TempUpgrade tempUpgrade2 = new TempUpgrade();
+
+	[Type(44, "ref", typeof(TempUpgrade))]
+	public TempUpgrade tempUpgrade3 = new TempUpgrade();
+
+	[Type(45, "number")]
 	public float tempUpgradeTimer = 0;
 }
 

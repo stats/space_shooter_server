@@ -1,8 +1,4 @@
-import { Behaviour } from '../behaviour';
-import { PRIMARY } from '../../Primary';
-import { Ship } from '../../models/Ship';
-import { Primary } from '../../models/primary/Primary';
-
+import { Behaviour, PRIMARY, Ship, Primary } from '../../Internal';
 
 export class PrimaryAttackBehaviour extends Behaviour {
 

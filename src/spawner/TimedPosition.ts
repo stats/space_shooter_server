@@ -1,4 +1,4 @@
-import { Position } from '../models/Position';
+import { Position } from '../Internal';
 
 export class TimedPosition extends Position {
 

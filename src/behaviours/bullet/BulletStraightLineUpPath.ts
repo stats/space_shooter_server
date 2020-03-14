@@ -1,7 +1,6 @@
-import { Behaviour } from '../behaviour';
-import { Bullet } from '../../models/Bullet';
+import { Behaviour, Bullet } from '../../Internal';
 
-export class StraightLineUpPath extends Behaviour {
+export class BulletStraightLineUpPath extends Behaviour {
 
   startY: number;
   target: Bullet;

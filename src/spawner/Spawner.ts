@@ -1,12 +1,8 @@
-import { GameState } from '../models/GameState';
-import { GameRoom } from '../rooms/GameRoom';
-import { Blaster, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
-import { Pattern } from './Pattern';
-import { Spawn } from './Spawn';
+import { GameState, GameRoom, EnemyBlaster, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker, Pattern, Spawn,
+         AlternatingSide, BothSideLine, DiagonalLine, DoubleVerticalLine, HorizontalLine,
+         SideDiagonalLine, SideLine, TopTriangle, TripleVerticalLine, VerticalLine, Eagle  } from '../Internal';
+
 import { filter, sample, shuffle } from 'lodash';
-import { AlternatingSide, BothSideLine, DiagonalLine, DoubleVerticalLine, HorizontalLine,
-         SideDiagonalLine, SideLine, TopTriangle, TripleVerticalLine, VerticalLine } from './patterns';
-import { Eagle } from '../models/bosses';
 
 export class Spawner {
 
@@ -67,7 +63,7 @@ export class Spawner {
     }
 
     for(let i = 2; i <= 15; i++) {
-      this.possiblePatterns.push(new DiagonalLine(i, Blaster, i * 2));
+      this.possiblePatterns.push(new DiagonalLine(i, EnemyBlaster, i * 2));
       this.possiblePatterns.push(new DiagonalLine(i, Scout, Math.ceil(i/2)));
     }
 
@@ -76,7 +72,7 @@ export class Spawner {
     }
 
     for(let i = 3; i <= 15; i += 2) {
-      this.possiblePatterns.push(new HorizontalLine(i, Blaster, i*2));
+      this.possiblePatterns.push(new HorizontalLine(i, EnemyBlaster, i*2));
       this.possiblePatterns.push(new HorizontalLine(i, Scout, Math.ceil(i/2)));
     }
 

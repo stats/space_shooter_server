@@ -1,5 +1,4 @@
-import { TimedPosition } from './TimedPosition';
-import { Spawn } from './Spawn';
+import { TimedPosition, Spawn } from '../Internal';
 import { cloneDeep } from 'lodash';
 
 export class Pattern {

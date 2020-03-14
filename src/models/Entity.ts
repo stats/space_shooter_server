@@ -1,8 +1,6 @@
 import { Schema, type } from "@colyseus/schema";
 import { merge } from 'lodash';
-import { GameState } from './GameState';
-import { Position } from './Position';
-import { CT } from '../Constants';
+import { GameState, Position, CT } from '../Internal';
 
 import { v4 as uuid } from 'uuid';
 

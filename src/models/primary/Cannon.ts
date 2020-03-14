@@ -2,13 +2,7 @@
 
 /* This is also the mechanism for firing the bullet */
 
-import { Bullet } from '../Bullet';
-import { Entity } from '../Entity';
-import { C, CT } from '../../Constants';
-import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
-import { StraightAnglePath } from '../../behaviours/bullet/StraightAnglePath';
-import { Primary } from './Primary';
-import { Position } from '../Position';
+import { Bullet, Entity, C, CT, BulletStraightLineUpPath, BulletStraightAnglePath, Primary, Position } from '../../Internal';
 
 export class Cannon extends Primary {
 
@@ -41,7 +35,7 @@ export class Cannon extends Primary {
       }
 
       const bullet = new Bullet(options);
-      bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: Math.PI/2 - this.bulletAngle}));
+      bullet.registerBehaviour("path", new BulletStraightAnglePath(bullet, {angle: Math.PI/2 - this.bulletAngle}));
       bullets.push( bullet );
     }
 

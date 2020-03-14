@@ -1,4 +1,4 @@
-import { Enemy } from '../models/Enemy';
+import { Enemy } from '../Internal';
 
 export class Spawn {
   time: number;

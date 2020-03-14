@@ -1,8 +1,4 @@
-import { Bullet } from '../Bullet';
-import { Entity } from '../Entity';
-import { C, CT } from '../../Constants';
-import { StraightLineUpPath } from '../../behaviours/bullet/StraightLineUpPath';
-import { Primary } from './Primary';
+import { Bullet, Entity, C, CT, BulletStraightLineUpPath, Primary } from '../../Internal';
 
 export class Blaster extends Primary{
 
@@ -33,7 +29,7 @@ export class Blaster extends Primary{
 
       const bullet = new Bullet(options);
       bullet.position.x = bullet.position.x + offsetStart + (i * this.bulletOffset);
-      bullet.registerBehaviour("path", new StraightLineUpPath(bullet));
+      bullet.registerBehaviour("path", new BulletStraightLineUpPath(bullet));
       bullets.push(bullet);
     }
 

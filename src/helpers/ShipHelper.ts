@@ -1,8 +1,4 @@
-import { DB } from '../Database';
-import { Ship } from '../models/Ship';
-import { ShipList } from '../models/ShipList';
-import { SHIP } from '../Ship';
-import { AccountHelper } from './AccountHelper';
+import { DB, Ship, ShipList, SHIP, AccountHelper } from '../Internal';
 
 export class ShipHelper {
 
@@ -18,7 +14,7 @@ export class ShipHelper {
 
   static async getShipList(username: string): Promise<ShipList> {
     const ships = await ShipHelper.getShips(username);
-    const shipList: ShipList = new ShipList();
+    const shipList: ShipList = new ShipList({});
     for(let i = 0, l = ships.length; i < l; i++) {
       shipList.ships[ships[i].uuid] = new Ship(ships[i]);
     }

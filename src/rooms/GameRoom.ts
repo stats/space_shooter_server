@@ -1,11 +1,6 @@
 import { Room, Delayed , Client} from 'colyseus';
 
-import { JWTHelper } from '../helpers/JWTHelper';
-import { ShipHelper } from '../helpers/ShipHelper';
-
-import { Bullet, Enemy, GameState, Ship } from '../models';
-
-import { Spawner } from '../spawner/Spawner';
+import { JWTHelper, ShipHelper, Bullet, Enemy, GameState, Ship, Spawner } from '../Internal';
 
 export class GameRoom extends Room<GameState> {
 

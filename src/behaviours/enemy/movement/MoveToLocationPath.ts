@@ -1,7 +1,4 @@
-import { Behaviour } from '../../behaviour';
-import { C } from '../../../Constants';
-import { Enemy, Entity, Position } from '../../../models';
-import { CollisionHelper } from '../../../helpers/CollisionHelper';
+import { Behaviour, C, Enemy, Entity, Position, CollisionHelper } from '../../../Internal';
 
 export class MoveToLocationPath extends Behaviour {
 

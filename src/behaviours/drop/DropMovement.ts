@@ -1,9 +1,6 @@
-import { Behaviour } from '../behaviour';
-import { C } from '../../Constants';
-import { Drop, Entity, Position } from '../../models';
-import { CollisionHelper } from '../../helpers/CollisionHelper';
+import { Behaviour, Drop, C, Entity, Position, CollisionHelper } from '../../Internal';
 
-export class MoveToLocationPath extends Behaviour {
+export class DropMovement extends Behaviour {
 
   moveTo: Position;
   moveComplete = false;
@@ -13,7 +10,7 @@ export class MoveToLocationPath extends Behaviour {
   target: Drop;
 
   constructor(target: Drop, moveTo?: Position) {
-    super('MoveToLocation', target);
+    super('DropMovement', target);
     this.moveTo = moveTo;
     if(this.moveTo == null) {
       this.moveTo = new Position( C.RANDOM_X_ON_SCREEN,  C.RANDOM_Y_ON_SCREEN)

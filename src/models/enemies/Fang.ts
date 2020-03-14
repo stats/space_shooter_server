@@ -1,10 +1,4 @@
-import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
-import { ClosestPlayerPath } from '../../behaviours/Enemy/movement/ClosestPlayerPath';
-import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
-import { EnemyBullet } from '../../models/primary/EnemyBullet';
-import { C, CT } from '../../Constants';
-
+import { Enemy, GameState, ClosestPlayerPath, FiresBulletBehaviour, EnemyBullet, C, CT } from '../../Internal';
 
 export class Fang extends Enemy {
 
