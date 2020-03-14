@@ -1,5 +1,4 @@
 import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
 import { SimpleFlockingPath } from '../../behaviours/Enemy/movement/SimpleFlockingPath';
 
 export class Blimp extends Enemy {
@@ -17,10 +16,10 @@ export class Blimp extends Enemy {
 
     this.modelType = "blimp";
 
-    this.radius = 30;
+    this.radius = 40;
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     super.onInitGame(state);
     this.registerBehaviour("path", new SimpleFlockingPath(this, {destination:this.destination, flock:this.flock}));
   }

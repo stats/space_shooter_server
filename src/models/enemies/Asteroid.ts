@@ -1,5 +1,4 @@
 import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
 import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePath';
 
 export class Asteroid extends Enemy {
@@ -17,10 +16,10 @@ export class Asteroid extends Enemy {
 
     this.modelType = "asteroid" + Math.ceil(Math.random() * 3);
 
-    this.radius = 30;
+    this.radius = 40;
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     super.onInitGame(state);
     this.registerBehaviour("path", new StraightLinePath(this));
   }

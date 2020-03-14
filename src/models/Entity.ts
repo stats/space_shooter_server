@@ -1,6 +1,5 @@
 import { Schema, type } from "@colyseus/schema";
 import { merge } from 'lodash';
-import { GameState } from './GameState';
 import { Position } from './Position';
 import { CT } from '../Constants';
 
@@ -38,7 +37,7 @@ export class Entity extends Schema {
   @type('boolean')
   invisible = false;
 
-  public $state: GameState;
+  public $state: any;
 
   protected $behaviours: any = {};
 
@@ -111,8 +110,12 @@ export class Entity extends Schema {
     return new Position(this.position.x + this.bulletOffsetX, this.position.y + this.bulletOffsetY);
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     this.$state = state;
-  };
+  }
+
+  addKill(currentWave: number, modelType: string): void {
+    //do nothing.
+  }
 
 }

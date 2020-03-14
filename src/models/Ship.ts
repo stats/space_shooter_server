@@ -16,8 +16,6 @@ import { Crystals } from '../Crystals';
 
 import { AccountHelper } from '../helpers/AccountHelper';
 
-import { GameState } from './GameState';
-
 import { Entity } from './Entity';
 
 import { TempUpgrade } from './TempUpgrade';
@@ -271,7 +269,7 @@ export class Ship extends Entity {
     merge(this, options);
     if(!this.tracker) this.tracker = options.tracker || {};
     if(this.uuid == null) this.uuid = uuid();
-    this.radius = 27;
+    this.radius = 40;
     this.bulletOffsetY = 50;
     this.setupShip();
     this.bulletInvulnerable = false;
@@ -289,7 +287,7 @@ export class Ship extends Entity {
     this.updateNextLevel();
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     super.onInitGame(state);
     this.removeAllBehaviours();
     this.registerBehaviour("input", new InputBehaviour(this));

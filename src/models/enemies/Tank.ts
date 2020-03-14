@@ -1,5 +1,4 @@
 import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
 import { MoveToLocationThenRotatePath } from '../../behaviours/Enemy/movement/MoveToLocationThenRotatePath';
 import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
@@ -29,7 +28,7 @@ export class Tank extends Enemy {
 
     this.modelType = "tank";
 
-    this.radius = 30;
+    this.radius = 35;
 
     this.moveTo = options.moveTo || this.randomMoveToLocation();
   }
@@ -44,7 +43,7 @@ export class Tank extends Enemy {
     return new Position(x, this.position.y);
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     super.onInitGame(state);
 
     const bulletOptions = {

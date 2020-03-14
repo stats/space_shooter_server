@@ -3,7 +3,8 @@ import { Room, Delayed , Client} from 'colyseus';
 import { JWTHelper } from '../helpers/JWTHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
-import { Bullet, Enemy, GameState, Ship } from '../models';
+import { Bullet, Enemy, Ship } from '../models';
+import { GameState } from '../models/states/GameState';
 
 import { Spawner } from '../spawner/Spawner';
 

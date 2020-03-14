@@ -2,8 +2,8 @@ import { Enemy } from '../Enemy';
 import { EagleAttack } from '../../behaviours/boss/EagleAttack';
 import { EagleMovement } from '../../behaviours/boss/EagleMovement';
 import { DropReward } from '../../behaviours/boss/DropReward';
-import { GameState } from '../GameState';
 import { Position } from '../Position';
+import { CT } from '../../Constants';
 
 export enum EagleState {
   WAIT,
@@ -37,10 +37,12 @@ export class Eagle extends Enemy {
 
     this.modelType = "eagle";
 
-    this.radius = 100;
+    this.collisionType = CT.ELLIPSE;
+    this.radiusX = 225;
+    this.radiusY = 100;
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     super.onInitGame(state);
     this.registerBehaviour("primary", new EagleAttack(this));
     this.registerBehaviour("path", new EagleMovement(this));

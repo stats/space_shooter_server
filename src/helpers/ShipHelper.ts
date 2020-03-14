@@ -1,6 +1,6 @@
 import { DB } from '../Database';
 import { Ship } from '../models/Ship';
-import { ShipList } from '../models/ShipList';
+import { ShipList } from '../models/messages';
 import { SHIP } from '../Ship';
 import { AccountHelper } from './AccountHelper';
 

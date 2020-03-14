@@ -13,9 +13,10 @@
     "test:server": "mocha --require ts-node/register test/ServerTest.ts --exit --timeout 15000",
     "test:explosion": "mocha --require ts-node/register test/TestExplosionDistance.ts --exit --timeout 15000",
     "test:username": "ts-node test/UsernameTest.ts",
-    "codegen": "npx schema-codegen src/models/Account.ts src/models/GameState.ts src/models/ShipBuilderState --output schema-unity --csharp",
+    "codegen": "npx schema-codegen src/models/Account.ts src/models/states/GameState.ts src/models/states/ShipBuilderState src/models/messages/ErrorMessage.ts src/models/messages/ShipList.ts src/models/messages/Statistics.ts src/models/messages/UnlockMessage.ts --output schema-unity --csharp",
     "parseStats": "node scripts/stat_parser.js > ship_stats.json",
-    "lint": "npx eslint \"src/**\""
+    "lint": "npx eslint \"src/**\"",
+    "circular": "npx madge --circular --extensions ts ./src"
   },
   "author": "Dan Curran",
   "license": "MIT",
@@ -40,6 +41,7 @@
     "assert": "^2.0.0",
     "eslint": "^6.8.0",
     "httpie": "^1.1.2",
+    "madge": "^3.8.0",
     "mocha": "^7.1.0",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.3"

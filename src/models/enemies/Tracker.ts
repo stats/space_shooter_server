@@ -1,5 +1,4 @@
 import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
 import { ClosestPlayerPath } from '../../behaviours/Enemy/movement/ClosestPlayerPath';
 
 export class Tracker extends Enemy {
@@ -17,10 +16,10 @@ export class Tracker extends Enemy {
 
     this.modelType = "tracker";
 
-    this.radius = 30;
+    this.radius = 40;
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     super.onInitGame(state);
     this.registerBehaviour("path", new ClosestPlayerPath(this));
   }

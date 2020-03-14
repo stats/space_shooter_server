@@ -1,5 +1,4 @@
 import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
 import { ClosestPlayerPath } from '../../behaviours/Enemy/movement/ClosestPlayerPath';
 import { FiresBulletBehaviour } from '../../behaviours/Enemy/FiresBulletBehaviour';
 import { EnemyBullet } from '../../models/primary/EnemyBullet';
@@ -21,10 +20,10 @@ export class Fang extends Enemy {
 
     this.modelType = "fang";
 
-    this.radius = 30;
+    this.radius = 40;
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     super.onInitGame(state);
     this.registerBehaviour("path", new ClosestPlayerPath(this));
 

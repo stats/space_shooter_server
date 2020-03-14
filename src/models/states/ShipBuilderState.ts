@@ -1,8 +1,5 @@
 import {Schema, type} from '@colyseus/schema';
-import { Statistics } from './Statistics';
-import { UnlockMessage } from './UnlockMessage';
-import { ErrorMessage } from './ErrorMessage';
-import { ShipList } from './ShipList';
+import { UnlockMessage, Statistics, ErrorMessage, ShipList } from '../messages';
 
 export class ShipBuilderState extends Schema {
 

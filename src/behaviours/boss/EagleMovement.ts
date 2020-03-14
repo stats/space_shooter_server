@@ -31,7 +31,7 @@ export class EagleMovement extends Behaviour {
     super('eagleMovement', target);
 
     if(this.targetPosition == null) {
-      this.targetPosition = new Position(800, 700);
+      this.targetPosition = new Position(800, 800);
     }
 
     const dx = this.targetPosition.x - this.target.position.x;
@@ -109,7 +109,7 @@ export class EagleMovement extends Behaviour {
 
     if(this.attackPhaseTimer >= this.attackPhaseCooldown) {
       this.attackPhaseTimer = 0;
-      this.moveCooldown = (Math.random() * 2000) + 4000;
+      this.moveCooldown = (Math.random() * 2000) + 8000;
       this.moveTimer = 0;
       this.target.state = EagleState.MOVE;
       this.nextState = EagleState.SPAWN;
@@ -137,7 +137,7 @@ export class EagleMovement extends Behaviour {
     }
 
     this.waitCooldown = 4000;
-    this.moveCooldown = (Math.random() * 2000) + 4000;
+    this.moveCooldown = (Math.random() * 2000) + 8000;
     this.moveTimer = 0;
     this.target.state = EagleState.WAIT;
     this.nextState = EagleState.MOVE;

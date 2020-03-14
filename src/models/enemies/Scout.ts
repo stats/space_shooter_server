@@ -1,5 +1,4 @@
 import { Enemy } from '../Enemy';
-import { GameState} from '../../models/GameState';
 import { StraightLinePath } from '../../behaviours/Enemy/movement/StraightLinePath';
 
 export class Scout extends Enemy {
@@ -20,7 +19,7 @@ export class Scout extends Enemy {
     this.radius = 30;
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     super.onInitGame(state);
     this.registerBehaviour("path", new StraightLinePath(this));
   }

@@ -1,5 +1,4 @@
 import { type } from "@colyseus/schema";
-import { GameState } from './GameState';
 import { Position } from './Position';
 
 import { CollidesWithShipBullet } from '../behaviours/Enemy/CollidesWithShipBullet';
@@ -50,7 +49,7 @@ export class Enemy extends Entity {
     this.range = Math.floor(this.rangeBase + ( this.rangeGrowth * wave ));
   }
 
-  onInitGame(state: GameState): void {
+  onInitGame(state: any): void {
     super.onInitGame(state);
     this.registerBehaviour("collides_ship_bullet", new CollidesWithShipBullet(this));
     this.registerBehaviour("destroyed", new DestroyedBehaviour(this));

@@ -1,4 +1,3 @@
-import { GameState } from '../models/GameState';
 import { GameRoom } from '../rooms/GameRoom';
 import { Blaster, Blimp, Bomber, Fang, Hunter, Scout, Speeder, Tank, Tracker } from '../models/enemies';
 import { Pattern } from './Pattern';
@@ -10,7 +9,7 @@ import { Eagle } from '../models/bosses';
 
 export class Spawner {
 
-  private state: GameState;
+  private state: any;
   private room: GameRoom;
   private spawns: Spawn[] = [];
 
@@ -101,6 +100,12 @@ export class Spawner {
     ]);
 
     this.spawns = this.getSpawns();
+
+    // const selected = sample(this.bossTypes)
+    // const boss = new selected();
+    // this.state.addEnemy(boss);
+    // this.bossActive = true;
+
     this.room.announceNextWave();
     this.timer = 0;
   }
@@ -130,10 +135,11 @@ export class Spawner {
       }
     }
 
-    if( this.spawns.length == 0) {
+    if( this.spawns.length == 0 && this.state.numberEnemies() == 0) {
       this.state.currentWave++;
-      if((this.state.currentWave - this.startWave) % 5 == 0) {
-        const boss = new sample(this.bossTypes)();
+      if(this.isBossWave()) {
+        const selected = sample(this.bossTypes)
+        const boss = new selected();
         this.state.addEnemy(boss);
         this.bossActive = true;
       } else {
@@ -142,6 +148,10 @@ export class Spawner {
         this.timer = 0;
       }
     }
+  }
+
+  public isBossWave(): boolean {
+    return (this.state.currentWave - this.startWave) % 5 == 0
   }
 
   public getSpawns(): Spawn[] {
