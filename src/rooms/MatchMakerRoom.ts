@@ -1,6 +1,8 @@
 import { Room, Client, matchMaker } from 'colyseus';
 import { JWTHelper } from '../helpers/JWTHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
+import { ShipList } from '../models/messages/ShipList';
+import { ShipBuilderState } from '../models/states/ShipBuilderState';
 
 interface MatchmakingGroup {
   averageRank: number;
@@ -20,7 +22,7 @@ interface ClientStat {
   confirmed?: boolean;
 }
 
-export class MatchMakerRoom extends Room {
+export class MatchMakerRoom extends Room<ShipBuilderState> {
   allowUnmatchedGroups = true;
 
   evaluateGroupInterval = 2000;
@@ -40,6 +42,9 @@ export class MatchMakerRoom extends Room {
   clientShipHash: any = {};
 
   onCreate(options: any): void {
+
+    this.setState(new ShipBuilderState());
+
     if(options.maxWaitingTime) {
       this.maxWaitingTime = options.maxWaitingTime;
     }
@@ -183,12 +188,12 @@ export class MatchMakerRoom extends Room {
               this.send(client.client, matchData);
             }));
           } else {
-            const ships = [];
+            const shipList: ShipList = new ShipList();
             for(let i = 0; i < group.clients.length; i++) {
               const ship = this.clientShipHash[group.clients[i].client.id];
-              ships.push(ship)
+              shipList.ships[ship.uuid] = ship;
             }
-            group.clients.forEach(client => this.send(client.client, { ships: ships }));
+            group.clients.forEach(client => this.send(client.client, shipList));
           }
         })
     );

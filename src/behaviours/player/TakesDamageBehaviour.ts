@@ -25,9 +25,9 @@ export class TakesDamageBehaviour extends Behaviour {
   public onEvent(args: {damage: number}): void {
     if(this.target.justDamaged) return;
 
-    this.target.shields = Math.max(this.target.shields - args.damage, 0);
+    this.target.shield = Math.max(this.target.shield - args.damage, 0);
     this.target.justDamaged = true;
-    if(this.target.shields <= 0) {
+    if(this.target.shield <= 0) {
       this.target.handleEvent('destroyed');
     }
   }

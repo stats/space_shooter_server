@@ -33,33 +33,6 @@ export class ShipHelper {
     return false;
   }
 
-  static setShipValues(shipData: any): any {
-    console.log(shipData);
-    console.log(SHIP.TYPE[shipData.shipType]);
-    shipData['damageBase'] = SHIP.TYPE[shipData.shipType]['damageBase'];
-    shipData['damageGrowth'] = SHIP.TYPE[shipData.shipType]['damageGrowth'];
-
-    shipData['rangeBase'] = SHIP.TYPE[shipData.shipType]['rangeBase'];
-    shipData['rangeGrowth'] = SHIP.TYPE[shipData.shipType]['rangeGrowth'];
-
-    shipData['fireRateBase'] = SHIP.TYPE[shipData.shipType]['fireRateBase'];
-    shipData['fireRateGrowth'] = SHIP.TYPE[shipData.shipType]['fireRateGrowth'];
-
-    shipData['speedBase'] = SHIP.TYPE[shipData.shipType]['speedBase'];
-    shipData['speedGrowth'] = SHIP.TYPE[shipData.shipType]['speedGrowth'];
-
-    shipData['accellerationBase'] = SHIP.TYPE[shipData.shipType]['accellerationBase'];
-    shipData['accellerationGrowth'] = SHIP.TYPE[shipData.shipType]['accellerationGrowth'];
-
-    shipData['shieldsBase'] = SHIP.TYPE[shipData.shipType]['shieldsBase'];
-    shipData['shieldsGrowth'] = SHIP.TYPE[shipData.shipType]['shieldsGrowth'];
-
-    shipData['shieldRechargeBase'] = SHIP.TYPE[shipData.shipType]['shieldRechargeBase'];
-    shipData['shieldRechargeGrowth'] = SHIP.TYPE[shipData.shipType]['shieldRechargeGrowth'];
-
-    return shipData;
-  }
-
   static async createShip(username: string, data: { name: string; shipType: string; shipMaterial: string; primaryWeapon: string; specialWeapon: string }): Promise<any> {
     const canCreate = ShipHelper.validateShipParameters(username, data);
     if(!canCreate) return false;
@@ -73,7 +46,6 @@ export class ShipHelper {
     shipData['specialWeapon'] = data.specialWeapon;
     shipData['level'] = 1;
     shipData['createdAt'] = Date.now();
-    shipData = ShipHelper.setShipValues(shipData);
 
     const account = await AccountHelper.getAccountByUsername(username);
     account.increaseStat("shipsCreated", 1);

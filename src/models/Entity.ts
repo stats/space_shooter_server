@@ -13,6 +13,8 @@ export class Entity extends Schema {
   @type(Position)
   position: Position = new Position(0, 0);
 
+  lastPosition: Position = new Position(0, 0);
+
   @type('number')
   angle = 0;
 
@@ -20,6 +22,7 @@ export class Entity extends Schema {
 
   bulletOffsetX = 0;
   bulletOffsetY = 0;
+  bulletOffsets: Position[];
 
   collisionType: number = CT.CIRCLE;
   radius = 25;

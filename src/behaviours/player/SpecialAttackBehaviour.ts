@@ -1,5 +1,6 @@
 import { Behaviour } from '../behaviour';
 import { SPECIAL } from '../../Special';
+import { SHIP } from '../../Ship';
 import { Ship } from '../../models/Ship';
 import { SpecialSystem } from '../../models/special/SpecialSystem';
 
@@ -16,7 +17,7 @@ export class SpecialAttackBehaviour extends Behaviour {
     this.system = new systemType(this.target);
     this.system.duration = SPECIAL.TYPE[this.target.specialWeapon]["duration"] || 0;
     this.system.amount = SPECIAL.TYPE[this.target.specialWeapon]["amount"] || 0;
-    this.target.specialCooldownMax = SPECIAL.TYPE[this.target.specialWeapon]["fireRate"];
+    this.target.specialCooldownMax = SPECIAL.TYPE[this.target.specialWeapon]["fireRate"] * SHIP.TYPE[this.target.shipType]["special"];
     this.target.specialCooldown = this.target.specialCooldownMax;
   }
 

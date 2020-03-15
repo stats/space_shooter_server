@@ -1,4 +1,3 @@
-export {EmergencyBrake} from './EmergencyBrake';
 export {ScatterShot} from './ScatterShot';
 export {Shotgun} from './Shotgun';
 export {WeaponCharge} from './WeaponCharge';

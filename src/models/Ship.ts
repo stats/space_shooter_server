@@ -11,6 +11,7 @@ import { CollectDrop } from '../behaviours/player/CollectDrop';
 import { CollidesWithDrop } from '../behaviours/player/CollidesWithDrop';
 
 import { C } from '../Constants';
+import { SHIP } from '../Ship';
 
 import { Crystals } from '../Crystals';
 
@@ -74,7 +75,7 @@ export class Ship extends Entity {
   currentKills = 0;
 
   @type("int32")
-  shields = 1;
+  shield = 1;
 
   @type("number")
   damage = 1;
@@ -86,22 +87,16 @@ export class Ship extends Entity {
   range = 1;
 
   @type("int32")
-  maxShields = 1; //TODO: Be the upgrade value
+  maxShield = 1; //TODO: Be the upgrade value
 
   @type("number")
-  shieldsRechargeCooldown = 0;
+  shieldRechargeCooldown = 30000;
 
   @type("number")
-  shieldsRechargeTime = 30000;
+  shieldRechargeTime = 0;
 
   @type("number")
   speed = 0;
-
-  @type("number")
-  accelleration = 0;
-
-  horizontalAccelleration = 0;
-  verticalAccelleration = 0;
 
   @type("number")
   rank = 1; //The current ranking of the ship which corresponds to which wave to start on
@@ -139,37 +134,31 @@ export class Ship extends Entity {
   upgradeFireRate = 0;
 
   @type("int32")
-  upgradeAccelleration = 0;
-
-  @type("int32")
   upgradeSpeed = 0;
 
   @type("int32")
-  upgradeShieldsMax = 0;
+  upgradeShield = 0;
 
   @type("int32")
-  upgradeShieldsRecharge = 0;
+  upgradeShieldRecharge = 0;
 
-  damageBase = 1;
+  damageBase = 5;
   damageGrowth = 1;
 
-  rangeBase = 0;
-  rangeGrowth = 25;
+  rangeBase = 300;
+  rangeGrowth = 10;
 
-  fireRateBase = 0;
-  fireRateGrowth = 250;
+  fireRateBase = 1500;
+  fireRateGrowth = -20;
 
-  speedBase = 100;
-  speedGrowth = 50;
+  speedBase = 250;
+  speedGrowth = 12;
 
-  accellerationBase = 100;
-  accellerationGrowth = 50;
-
-  shieldsBase = 1;
-  shieldsGrowth = 1;
+  shieldBase = 3;
+  shieldGrowth = 1;
 
   shieldRechargeBase = 30000;
-  shieldRechargeGrowth = 750;
+  shieldRechargeGrowth = -500;
 
   tempDamage = 0;
   tempDamagePercent = 1;
@@ -186,10 +175,6 @@ export class Ship extends Entity {
   tempSpeed = 0;
   tempSpeedPercent = 1;
   tempSpeedLevel = 0;
-
-  tempAcceleration = 0;
-  tempAccelerationPercent = 1;
-  tempAccelerationLevel = 0;
 
   tempShield = 0;
   tempShieldPercent = 1;
@@ -215,32 +200,41 @@ export class Ship extends Entity {
 
   tracker: any = {};
 
+  getAbilityBase(a: string): number {
+    const base: number = this[a + "Base"] + this["temp" + this.capitalize(a)];
+    const upgrade: number = (this["upgrade" + this.capitalize(a)] + this["temp" + this.capitalize(a) + "Level"]) * this[a + "Growth"];
+    const shipModifier: number = SHIP.TYPE[this.shipType][a];
+    const value = (base + upgrade) * this["temp" + this.capitalize(a) + "Percent"] * shipModifier
+    console.log(a, ":", base, upgrade, shipModifier, value);
+    return value;
+  }
+
+  capitalize(s: string): string {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
   getDamage(): number {
-    return ( (this.damageBase + this.tempDamage) + ((this.upgradeDamage + this.tempDamageLevel) * this.damageGrowth) ) * this.weaponCharge * this.tempDamagePercent;
+    return this.getAbilityBase("damage") * this.weaponCharge;
   }
 
   getRange(): number {
-    return ((this.rangeBase + this.tempRange) + ( (this.upgradeRange + this.tempRangeLevel)  * this.rangeGrowth)) * this.tempRangePercent;
+    return this.getAbilityBase("range");
   }
 
   getFireRate(): number {
-    return ((this.fireRateBase + this.tempFireRate) - ( (this.upgradeFireRate + this.tempFireRateLevel) * this.fireRateGrowth)) * this.tempFireRatePercent;
+    return this.getAbilityBase("fireRate");
   }
 
-  getMaxShields(): number {
-    return ((this.shieldsBase + this.tempShield) + ((this.upgradeShieldsMax + this.tempShieldLevel) * this.shieldsGrowth)) * this.tempShieldPercent;
+  getMaxShield(): number {
+    return this.getAbilityBase("shield");
   }
 
   getShieldRecharge(): number {
-    return ( (this.shieldRechargeBase + this.tempShieldRecharge) - ((this.upgradeShieldsRecharge + this.tempShieldRechargeLevel) * this.shieldRechargeGrowth)) * this.tempShieldRechargePercent;
+    return this.getAbilityBase("shieldRecharge");
   }
 
   getSpeed(): number {
-    return ((this.speedBase + this.tempSpeed) + ((this.upgradeSpeed + this.tempSpeedLevel) * this.speedGrowth)) * this.thrusters * this.tempSpeedPercent;
-  }
-
-  getAccelleration(): number {
-    return ( (this.accellerationBase + this.tempAcceleration) + ((this.upgradeAccelleration + this.tempAccelerationLevel) * this.accellerationGrowth)) * this.thrusters * this.tempAccelerationPercent;
+    return this.getAbilityBase("speed") * this.thrusters;
   }
 
   async updateWaveRank(wave: number): Promise<void> {
@@ -280,10 +274,9 @@ export class Ship extends Entity {
     this.damage = this.getDamage();
     this.fireRate = this.getFireRate();
     this.range = this.getRange();
-    this.shields = this.maxShields = this.getMaxShields();
+    this.shield = this.maxShield = this.getMaxShield();
     this.speed = this.getSpeed();
-    this.accelleration = this.getAccelleration();
-    this.shieldsRechargeTime = this.getShieldRecharge();
+    this.shieldRechargeCooldown = this.getShieldRecharge();
     this.updateNextLevel();
   }
 
@@ -311,7 +304,6 @@ export class Ship extends Entity {
   setThrusters(n: number): void {
     this.thrusters = n;
     this.speed = this.getSpeed();
-    this.accelleration = this.getAccelleration();
   }
 
   checkLevelUp(): void {
@@ -325,19 +317,15 @@ export class Ship extends Entity {
   clampToBounds(): void {
     if(this.position.x < C.BOUNDS.minX) {
       this.position.x = C.BOUNDS.minX;
-      this.horizontalAccelleration = 0;
     }
     if(this.position.x > C.BOUNDS.maxX) {
        this.position.x = C.BOUNDS.maxX;
-       this.horizontalAccelleration = 0;
     }
     if(this.position.y < C.BOUNDS.minY) {
        this.position.y = C.BOUNDS.minY;
-       this.verticalAccelleration = 0;
     }
     if(this.position.y > C.BOUNDS.maxY) {
        this.position.y = C.BOUNDS.maxY;
-       this.verticalAccelleration = 0;
     }
   }
 
@@ -435,24 +423,9 @@ export class Ship extends Entity {
       'upgradeDamage',
       'upgradeRange',
       'upgradeFireRate',
-      'upgradeAccelleration',
       'upgradeSpeed',
-      'upgradeShieldsMax',
-      'upgradeShieldsRecharge',
-      'damageBase',
-      'damageGrowth',
-      'rangeBase',
-      'rangeGrowth',
-      'fireRateBase',
-      'fireRateGrowth',
-      'speedBase',
-      'speedGrowth',
-      'accellerationBase',
-      'accellerationGrowth',
-      'shieldsBase',
-      'shieldsGrowth',
-      'shieldRechargeBase',
-      'shieldRechargeGrowth',
+      'upgradeShieldMax',
+      'upgradeShieldRecharge',
       'tracker'
     ]);
     return baseObj;

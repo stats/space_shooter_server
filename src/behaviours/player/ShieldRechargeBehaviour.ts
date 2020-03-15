@@ -14,11 +14,11 @@ export class ShieldRechargeBehaviour extends Behaviour {
   }
 
   public onUpdate(deltaTime: number): void {
-    if(this.target.shieldsRechargeCooldown < this.target.shieldsRechargeTime && this.target.shields < this.target.maxShields) {
-      this.target.shieldsRechargeCooldown += deltaTime;
-    } else if(this.target.shieldsRechargeCooldown >= this.target.shieldsRechargeTime && this.target.shields < this.target.maxShields) {
-      this.target.shieldsRechargeCooldown = 0;
-      this.target.shields += 1;
+    if(this.target.shieldRechargeTime < this.target.shieldRechargeCooldown && this.target.shield < this.target.maxShield) {
+      this.target.shieldRechargeTime += deltaTime;
+    } else if(this.target.shieldRechargeTime >= this.target.shieldRechargeCooldown && this.target.shield < this.target.maxShield) {
+      this.target.shieldRechargeTime = 0;
+      this.target.shield += 1;
     }
   }
 

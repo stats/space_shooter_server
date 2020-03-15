@@ -1,4 +1,4 @@
-import { WeaponCharge, EmergencyBrake, Thrusters,
+import { WeaponCharge, Thrusters,
 RammingShield, Shotgun, ScatterShot, HyperSpeed, Invisibility,
 Bomb, MissileBarage, MegaBomb, ShieldRecharge, ForceShield } from './models/special';
 
@@ -45,18 +45,11 @@ export class SPECIAL {
       'unlockKey': "maxKills_Scatter Shot",
       'unlockCount': 200
     },
-    "Emergency Brake": {
-      'systemType': EmergencyBrake,
-      'description': `Immediately stop your ships movement, transfering that energy in the form of a blast wave from the ship.`,
-      'fireRate': 2000
-    },
     "Shield Recharge": {
       'systemType': ShieldRecharge,
       'description': `Immediately recharge your shields. When used at full charge causes an explosion around your ship.`,
       'amount': 1,
-      'fireRate': 15000,
-      'unlockKey': "maxKills_Emergency Brake",
-      'unlockCount': 200
+      'fireRate': 15000
     },
     "Ramming Shield": {
       'systemType': RammingShield,
@@ -84,7 +77,7 @@ export class SPECIAL {
     "Hyper Speed": {
       'systemType': HyperSpeed,
       'description': `Create a wormhole and travel a short distance thought spacetime damaging all enemies in your path.`,
-      'amount': 1,
+      'amount': 250,
       'fireRate': 5000,
       'unlockKey': "maxKills_Thrusters",
       'unlockCount': 200

@@ -24,7 +24,7 @@ export class EagleAttack extends Behaviour {
       range: this.target.range,
       collisionType: CT.CIRCLE,
       radius: 15,
-      bulletMesh: "Enemy1",
+      bulletMesh: "Enemy2",
       position: this.target.position.clone(),
       bulletType: C.ENEMY_BULLET
     }

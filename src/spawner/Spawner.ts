@@ -6,6 +6,7 @@ import { filter, sample, shuffle } from 'lodash';
 import { AlternatingSide, BothSideLine, DiagonalLine, DoubleVerticalLine, HorizontalLine,
          SideDiagonalLine, SideLine, TopTriangle, TripleVerticalLine, VerticalLine } from './patterns';
 import { Eagle } from '../models/bosses';
+import { Position } from '../models/Position';
 
 export class Spawner {
 
@@ -105,6 +106,8 @@ export class Spawner {
     // const boss = new selected();
     // this.state.addEnemy(boss);
     // this.bossActive = true;
+
+    this.state.addEnemy(new Blaster( {position: new Position(500, 1100)}));
 
     this.room.announceNextWave();
     this.timer = 0;
