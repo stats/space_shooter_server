@@ -5,7 +5,7 @@ import { Spawn } from './Spawn';
 import { filter, sample, shuffle } from 'lodash';
 import { AlternatingSide, BothSideLine, DiagonalLine, DoubleVerticalLine, HorizontalLine,
          SideDiagonalLine, SideLine, TopTriangle, TripleVerticalLine, VerticalLine } from './patterns';
-import { Eagle } from '../models/bosses';
+import { Eagle, WingedDevil } from '../models/bosses';
 import { Position } from '../models/Position';
 import { Drop } from '../models/Drop';
 
@@ -18,7 +18,8 @@ export class Spawner {
   private possiblePatterns: any[];
 
   private bossTypes: any[] = [
-    Eagle
+    //Eagle,
+    WingedDevil,
   ]
 
   private bossActive = false;
@@ -102,16 +103,16 @@ export class Spawner {
       new TopTriangle(10, Scout, 5),
     ]);
 
-    this.spawns = this.getSpawns();
-    this.room.announceNextWave();
-    this.timer = 0;
-
-    // this.bossActive = true;
+    // this.spawns = this.getSpawns();
+    // this.room.announceNextWave();
     // this.timer = 0;
-    // this.bossSpawned = false;
-    // this.room.announceBossWave();
 
-    this.state.addDrop(new Drop({position: new Position(200, 200)}));
+    this.bossActive = true;
+    this.timer = 0;
+    this.bossSpawned = false;
+    this.room.announceBossWave();
+
+    //this.state.addDrop(new Drop({position: new Position(200, 200)}));
   }
 
   onUpdate(deltaTime: number): void {

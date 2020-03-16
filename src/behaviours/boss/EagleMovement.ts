@@ -1,7 +1,10 @@
 import { Behaviour } from '../behaviour';
 import { Eagle, EagleState } from '../../models/bosses/Eagle';
-import { Position } from '../../models/Position';
+import { StraightAnglePath } from '../bullet/StraightAnglePath';
+import { StraightLineDownPath } from '../bullet/StraightLineDownPath';
+import { Bullet, Position } from '../../models';
 import { Tank } from '../../models/enemies/Tank';
+import { C, CT } from '../../Constants';
 
 export class EagleMovement extends Behaviour {
 
@@ -11,7 +14,7 @@ export class EagleMovement extends Behaviour {
 
   private targetPosition: Position;
 
-  private passiveAttackCooldown = 3000;
+  private passiveAttackCooldown = 4000;
   private passiveAttackTimer = 0;
 
   private attackCooldown = 500;
@@ -44,29 +47,28 @@ export class EagleMovement extends Behaviour {
     switch(this.target.state) {
       case EagleState.WAIT:
         this.wait(deltaTime);
-        this.passiveAttack(deltaTime);
+        this.passive(deltaTime);
       break;
       case EagleState.ENTER_SCREEN:
         this.enterScreen(deltaTime);
-        this.passiveAttack(deltaTime);
       break;
       case EagleState.ATTACK:
         this.attack(deltaTime);
       break;
       case EagleState.SPAWN:
         this.spawn(deltaTime);
-        this.passiveAttack(deltaTime);
+        this.passive(deltaTime);
       break;
       case EagleState.MOVE:
         this.move(deltaTime);
-        this.passiveAttack(deltaTime);
+        this.passive(deltaTime);
       break;
     }
   }
 
-  private passiveAttack(deltaTime: number ) {
+  private passive(deltaTime: number ) {
     if(this.passiveAttackTimer >= this.passiveAttackCooldown) {
-      this.target.handleEvent("eagleAttack");
+      this.passiveAttack();
       this.passiveAttackTimer = 0;
     } else {
       this.passiveAttackTimer += deltaTime;
@@ -101,7 +103,7 @@ export class EagleMovement extends Behaviour {
     this.target.collisionInvulnerable = false;
 
     if(this.attackTimer >= this.attackCooldown) {
-      this.target.handleEvent("eagleAttack", {attackPhase:true});
+      this.activeAttack();
       this.attackTimer = 0;
     } else {
       this.attackTimer += deltaTime;
@@ -165,5 +167,75 @@ export class EagleMovement extends Behaviour {
     } else if (this.moveTimer < this.moveCooldown) {
       this.moveTimer += deltaTime;
     }
+  }
+
+  private passiveAttack() {
+    const options = {
+      damage: this.target.damage,
+      speed: this.target.speed * 5,
+      range: this.target.range,
+      collisionType: CT.CIRCLE,
+      radius: 15,
+      bulletMesh: "Enemy2",
+      position: this.target.position.clone(),
+      bulletType: C.ENEMY_BULLET
+    }
+
+    let bullet;
+
+    bullet = new Bullet(options);
+    bullet.position = new Position(this.target.position.x, this.target.position.y - 120);
+    bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+    this.target.$state.addBullet(bullet);
+
+    bullet = new Bullet(options);
+    bullet.position = new Position(this.target.position.x - 70, this.target.position.y - 83);
+    bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+    this.target.$state.addBullet(bullet);
+
+    bullet = new Bullet(options);
+    bullet.position = new Position(this.target.position.x + 70, this.target.position.y - 83);
+    bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+    this.target.$state.addBullet(bullet);
+  }
+
+  private activeAttack() {
+    const options = {
+      damage: this.target.damage,
+      speed: this.target.speed * 5,
+      range: this.target.range,
+      collisionType: CT.CIRCLE,
+      radius: 15,
+      bulletMesh: "Enemy2",
+      position: this.target.position.clone(),
+      bulletType: C.ENEMY_BULLET
+    }
+
+    let bullet;
+
+    bullet = new Bullet(options);
+    bullet.position = new Position(this.target.position.x, this.target.position.y - 120);
+    bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+    this.target.$state.addBullet(bullet);
+
+    bullet = new Bullet(options);
+    bullet.position = new Position(this.target.position.x - 70, this.target.position.y - 83);
+    bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+    this.target.$state.addBullet(bullet);
+
+    bullet = new Bullet(options);
+    bullet.position = new Position(this.target.position.x + 70, this.target.position.y - 83);
+    bullet.registerBehaviour("path", new StraightLineDownPath(bullet));
+    this.target.$state.addBullet(bullet);
+
+    bullet = new Bullet(options);
+    bullet.position = new Position(this.target.position.x - 140, this.target.position.y - 83);
+    bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: -Math.PI/2 - Math.PI/8}));
+    this.target.$state.addBullet(bullet);
+
+    bullet = new Bullet(options);
+    bullet.position = new Position(this.target.position.x + 140, this.target.position.y - 83);
+    bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: -Math.PI/2 + Math.PI/8}));
+    this.target.$state.addBullet(bullet);
   }
 }

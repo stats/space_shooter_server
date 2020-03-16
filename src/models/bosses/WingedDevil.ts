@@ -1,23 +1,21 @@
 import { Enemy } from '../Enemy';
-import { EagleMovement } from '../../behaviours/boss/EagleMovement';
+import { WingedDevilMovement } from '../../behaviours/boss/WingedDevilMovement';
 import { DropReward } from '../../behaviours/boss/DropReward';
 import { Position } from '../Position';
 import { CT } from '../../Constants';
 
-export enum EagleState {
-  WAIT,
+export enum WingedDevilState {
   ENTER_SCREEN,
   ATTACK,
-  SPAWN,
   MOVE
 }
 
-export class Eagle extends Enemy {
+export class WingedDevil extends Enemy {
 
   constructor(options) {
     super(options);
     this.position = new Position(800, 1200);
-    this.state = EagleState.ENTER_SCREEN;
+    this.state = WingedDevilState.ENTER_SCREEN;
 
     this.healthBase = 25;
     this.healthGrowth = 1;
@@ -34,7 +32,7 @@ export class Eagle extends Enemy {
     this.rangeBase = 1200;
     this.rangeGrowth = 0;
 
-    this.modelType = "eagle";
+    this.modelType = "wingedDevil";
 
     this.collisionType = CT.ELLIPSE;
     this.radiusX = 225;
@@ -43,7 +41,7 @@ export class Eagle extends Enemy {
 
   onInitGame(state: any): void {
     super.onInitGame(state);
-    this.registerBehaviour("path", new EagleMovement(this));
+    this.registerBehaviour("path", new WingedDevilMovement(this));
     this.registerBehaviour("reward", new DropReward(this));
   }
 

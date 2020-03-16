@@ -1,23 +1,21 @@
 import { Enemy } from '../Enemy';
-import { EagleMovement } from '../../behaviours/boss/EagleMovement';
+import { DiskMovement } from '../../behaviours/boss/DiskMovement';
 import { DropReward } from '../../behaviours/boss/DropReward';
 import { Position } from '../Position';
 import { CT } from '../../Constants';
 
-export enum EagleState {
-  WAIT,
+export enum DiskState {
   ENTER_SCREEN,
   ATTACK,
-  SPAWN,
   MOVE
 }
 
-export class Eagle extends Enemy {
+export class Disk extends Enemy {
 
   constructor(options) {
     super(options);
     this.position = new Position(800, 1200);
-    this.state = EagleState.ENTER_SCREEN;
+    this.state = DiskState.ENTER_SCREEN;
 
     this.healthBase = 25;
     this.healthGrowth = 1;
@@ -34,7 +32,7 @@ export class Eagle extends Enemy {
     this.rangeBase = 1200;
     this.rangeGrowth = 0;
 
-    this.modelType = "eagle";
+    this.modelType = "disk";
 
     this.collisionType = CT.ELLIPSE;
     this.radiusX = 225;
@@ -43,7 +41,7 @@ export class Eagle extends Enemy {
 
   onInitGame(state: any): void {
     super.onInitGame(state);
-    this.registerBehaviour("path", new EagleMovement(this));
+    this.registerBehaviour("path", new DiskMovement(this));
     this.registerBehaviour("reward", new DropReward(this));
   }
 
