@@ -14,6 +14,7 @@ export class DropReward extends Behaviour {
      * Create a reward crystal
      **/
      const drop: Drop = new Drop({ position: this.target.position.clone()});
+     console.log("Drop Released: ", drop);
      this.target.$state.addDrop(drop);
   }
 }

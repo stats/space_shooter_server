@@ -7,6 +7,7 @@ import { AlternatingSide, BothSideLine, DiagonalLine, DoubleVerticalLine, Horizo
          SideDiagonalLine, SideLine, TopTriangle, TripleVerticalLine, VerticalLine } from './patterns';
 import { Eagle } from '../models/bosses';
 import { Position } from '../models/Position';
+import { Drop } from '../models/Drop';
 
 export class Spawner {
 
@@ -21,6 +22,7 @@ export class Spawner {
   ]
 
   private bossActive = false;
+  private bossSpawned = false;
 
   private timer = 0;
 
@@ -101,25 +103,32 @@ export class Spawner {
     ]);
 
     this.spawns = this.getSpawns();
-
-    // const selected = sample(this.bossTypes)
-    // const boss = new selected();
-    // this.state.addEnemy(boss);
-    // this.bossActive = true;
-
-    this.state.addEnemy(new Blaster( {position: new Position(500, 1100)}));
-
     this.room.announceNextWave();
     this.timer = 0;
+
+    // this.bossActive = true;
+    // this.timer = 0;
+    // this.bossSpawned = false;
+    // this.room.announceBossWave();
+
+    this.state.addDrop(new Drop({position: new Position(200, 200)}));
   }
 
   onUpdate(deltaTime: number): void {
 
     if(this.bossActive) {
-      if(this.state.numberEnemies() > 0) {
+      if(this.bossSpawned == true && this.state.numberEnemies() > 0) {
         return;
+      } else if (this.bossSpawned == false) {
+        this.timer += deltaTime;
+        if(this.timer >= 5) {
+          const selected = sample(this.bossTypes)
+          const boss = new selected();
+          this.state.addEnemy(boss);
+          this.bossSpawned = true;
+        }
       } else {
-          this.bossActive = false;
+        this.bossActive = false;
       }
     }
 
@@ -141,10 +150,10 @@ export class Spawner {
     if( this.spawns.length == 0 && this.state.numberEnemies() == 0) {
       this.state.currentWave++;
       if(this.isBossWave()) {
-        const selected = sample(this.bossTypes)
-        const boss = new selected();
-        this.state.addEnemy(boss);
         this.bossActive = true;
+        this.timer = 0;
+        this.bossSpawned = false;
+        this.room.announceBossWave();
       } else {
         this.spawns = this.getSpawns();
         this.room.announceNextWave();
@@ -154,7 +163,7 @@ export class Spawner {
   }
 
   public isBossWave(): boolean {
-    return (this.state.currentWave - this.startWave) % 5 == 0
+    return (this.state.currentWave - this.startWave) % 1 == 0
   }
 
   public getSpawns(): Spawn[] {
@@ -183,7 +192,7 @@ export class Spawner {
     for(let i = 0, l = patterns.length; i < l; i++) {
       const s: Spawn[] = patterns[i].getSpawns(timeOffset);
       spawns = spawns.concat(s);
-      timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 5) - 2;  //add a random -2 to 3 second delay between spawns
+      timeOffset += patterns[i].maxTime + Math.floor(Math.random() * 3) - 2;  //add a random -2 to 3 second delay between spawns
       timeOffset = Math.max(timeOffset, 10); //ensure that the delay is never less than 10 seconds
     }
 

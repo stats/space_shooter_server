@@ -16,7 +16,7 @@ export class Drop extends Entity {
 
   constructor(options) {
     super(options);
-    const r = Math.random() * 4;
+    const r = Math.floor(Math.random() * 4);
 
     switch(r) {
       case 0:
@@ -33,8 +33,6 @@ export class Drop extends Entity {
       break;
     }
   }
-
-
 
   onInitGame(state: any): void {
     super.onInitGame(state);

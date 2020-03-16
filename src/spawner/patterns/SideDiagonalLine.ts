@@ -19,7 +19,7 @@ export class SideDiagonalLine extends Pattern {
       new TimedPosition(a[3], i, 400),
       new TimedPosition(a[3], i, 300),
     ];
-    this.maxTime = enemyCount * 2 + 2;
+    this.maxTime = enemyCount * 2;
     this.enemyCount = enemyCount;
     this.enemyType = enemyType;
     this.difficulty = difficulty;

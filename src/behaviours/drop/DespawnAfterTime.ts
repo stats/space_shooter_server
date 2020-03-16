@@ -6,7 +6,7 @@ export class DespawnAfterTime extends Behaviour {
   target: Drop;
 
   timer = 0;
-  cooldown = 10;
+  cooldown = 10000;
 
   constructor(target: Drop) {
     super('despawnAfterTime', target);
@@ -17,9 +17,5 @@ export class DespawnAfterTime extends Behaviour {
     if(this.timer >= this.cooldown) {
       this.target.handleEvent('destroyed');
     }
-  }
-
-  onEvent(): void {
-    this.target.$state.removeDrop(this.target);
   }
 }

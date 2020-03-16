@@ -3,7 +3,7 @@ import { Room, Delayed , Client} from 'colyseus';
 import { JWTHelper } from '../helpers/JWTHelper';
 import { ShipHelper } from '../helpers/ShipHelper';
 
-import { Bullet, Enemy, Ship } from '../models';
+import { Bullet, Enemy, Ship, Drop } from '../models';
 import { GameState } from '../models/states/GameState';
 
 import { Spawner } from '../spawner/Spawner';
@@ -114,6 +114,10 @@ export class GameRoom extends Room<GameState> {
       const bullet: Bullet = this.state.bullets[uuid];
       bullet.onUpdate(deltaTime);
     }
+    for(uuid in this.state.drops) {
+      const drop: Drop = this.state.drops[uuid];
+      drop.onUpdate(deltaTime);
+    }
 
     if(this.state.hasStarted() && !this.state.hasShips()) {
       console.log(`[GameRoom (${this.roomId})] Battle Lost`);
@@ -135,17 +139,9 @@ export class GameRoom extends Room<GameState> {
     console.log(`[GameRoom (${this.roomId})] Wave ${this.state.currentWave} Incoming`);
   }
 
-  // startWave(): void {
-  //   this.spawner.nextWave();
-  //   this.announceNextWave();
-  //
-  //   this.spawnCompleteInterval = this.clock.setInterval(() => {
-  //     if(this.spawner.complete() && !this.state.hasEnemies()) {
-  //       this.spawnCompleteInterval.clear();
-  //       this.state.currentWave++;
-  //       this.startWave();
-  //     }
-  //   }, this.spawnCompleteFrequency);
-  // }
+  announceBossWave() {
+    this.broadcast(`Boss Incoming`);
+    console.log(`[GameRoom (${this.roomId})] Boss Incoming`)
+  }
 
 }

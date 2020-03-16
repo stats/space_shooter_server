@@ -10,7 +10,7 @@ export class VerticalLine extends Pattern {
     for(let i = 0; i < 8; i++) {
       this.points.push(new TimedPosition(i * 2, 100 + column * 100, 1100))
     }
-    this.maxTime = (2 * enemyCount) + 2;
+    this.maxTime = (2 * enemyCount);
     this.enemyCount = enemyCount;
     this.enemyType = enemyType;
     this.difficulty = difficulty;

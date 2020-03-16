@@ -21,7 +21,7 @@ export class TripleVerticalLine extends Pattern {
       this.points.push(new TimedPosition(i * 2, 100 + column2 * 100, 1100))
       this.points.push(new TimedPosition(i * 2, 100 + column3 * 100, 1100))
     }
-    this.maxTime = Math.ceil(2 * (enemyCount/3)) + 2;
+    this.maxTime = Math.ceil(2 * (enemyCount/3));
     this.enemyCount = enemyCount;
     this.enemyType = enemyType;
     this.difficulty = difficulty;
