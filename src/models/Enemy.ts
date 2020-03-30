@@ -8,7 +8,9 @@ import { TakesDamageBehaviour } from '../behaviours/Enemy/TakesDamageBehaviour';
 import { Entity } from './Entity';
 
 export class Enemy extends Entity {
+  @type("number")
   health = 1;
+  
   healthBase = 1;
   healthGrowth = 0.1;
 

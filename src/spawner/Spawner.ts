@@ -103,14 +103,14 @@ export class Spawner {
       new TopTriangle(10, Scout, 5),
     ]);
 
-    // this.spawns = this.getSpawns();
-    // this.room.announceNextWave();
-    // this.timer = 0;
-
-    this.bossActive = true;
+    this.spawns = this.getSpawns();
+    this.room.announceNextWave();
     this.timer = 0;
-    this.bossSpawned = false;
-    this.room.announceBossWave();
+
+    // this.bossActive = true;
+    // this.timer = 0;
+    // this.bossSpawned = false;
+    // this.room.announceBossWave();
 
     //this.state.addDrop(new Drop({position: new Position(200, 200)}));
   }
@@ -164,7 +164,7 @@ export class Spawner {
   }
 
   public isBossWave(): boolean {
-    return (this.state.currentWave - this.startWave) % 1 == 0
+    return (this.state.currentWave - this.startWave) % 5 == 0
   }
 
   public getSpawns(): Spawn[] {
