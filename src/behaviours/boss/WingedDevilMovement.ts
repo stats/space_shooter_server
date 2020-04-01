@@ -92,23 +92,38 @@ export class WingedDevilMovement extends Behaviour {
     // Facing down = (3 * Math.PI) / 2 -> 4.71
     // Facing right = 0
     // Facing left = Math.PI -> 3.14
+
+    // Facing down is -1.57
+
+    console.log(this.moveDirection, this.rotationDirection, this.target.angle, - Math.PI / 2)
     if(this.moveDirection == -1) { //The ship is now on the right hand side of the screen
       this.target.angle += this.rotationDirection * 0.5 * deltaTime/1000;
-      if(this.target.angle >= 2 * Math.PI && this.rotationDirection == 1 ) {
-        this.rotationDirection = -1;
-      } else if(this.target.angle <= (3 * Math.PI / 2) && this.rotationDirection == -1) {
-        this.target.angle = (3 * Math.PI / 2);
-        this.target.state = WingedDevilState.MOVE;
-      }
-    } else if ( this.moveDirection == 1 ) { //The ship is now on the right hand side of the screen
-      this.target.angle += this.rotationDirection * 0.5 * deltaTime / 1000;
-      if(this.target.angle <= 0 && this.rotationDirection == -1 ) {
+
+      if (this.target.angle < -Math.PI && this.rotationDirection == -1) {
         this.rotationDirection = 1;
-      } else if(this.target.angle >= (3 * Math.PI / 2) && this.rotationDirection == 1) {
-        this.target.angle = (3 * Math.PI / 2);
+      } else if ( this.target.angle >= - Math.PI / 2 && this.rotationDirection == 1) {
+        this.target.angle = - Math.PI / 2;
         this.target.state = WingedDevilState.MOVE;
       }
+    } else {
+      this.moveDirection == 1;
+      this.target.state = WingedDevilState.MOVE;
     }
+    //   if(this.target.angle >= 2 * Math.PI && this.rotationDirection == -1 ) {
+    //     this.rotationDirection = 1;
+    //   } else if(this.target.angle <= 0 && this.rotationDirection == 1) {
+    //     this.target.angle = (3 * Math.PI / 2);
+    //     this.target.state = WingedDevilState.MOVE;
+    //   }
+    // } else if ( this.moveDirection == 1 ) { //The ship is now on the right hand side of the screen
+    //   this.target.angle += this.rotationDirection * 0.5 * deltaTime / 1000;
+    //   if(this.target.angle <= 0 && this.rotationDirection == 1 ) {
+    //     this.rotationDirection = -1;
+    //   } else if(this.target.angle >= (3 * Math.PI / 2) && this.rotationDirection == -1) {
+    //     this.target.angle = (3 * Math.PI / 2);
+    //     this.target.state = WingedDevilState.MOVE;
+    //   }
+    // }
 
     if(this.attackTimer >= this.attackCooldown) {
       this.activeAttack();
@@ -126,10 +141,12 @@ export class WingedDevilMovement extends Behaviour {
 
     if(this.target.position.x >= 1400) {
       this.moveDirection = -1;
+      this.rotationDirection = -1;
       this.target.state = WingedDevilState.ATTACK;
     }
     if( this.target.position.x <= 200) {
       this.moveDirection = 1;
+      this.rotationDirection = 1;
       this.target.state = WingedDevilState.ATTACK;
     }
   }
@@ -170,7 +187,7 @@ export class WingedDevilMovement extends Behaviour {
     this.target.$state.addBullet(bullet);
   }
 
-  private rotateOffset(x, y): Position {
+  private rotateOffset(x: number, y: number): Position {
 
     let ox = this.target.position.x;
     let oy = this.target.position.y;
@@ -178,7 +195,9 @@ export class WingedDevilMovement extends Behaviour {
     let qx = ox + Math.cos(this.target.angle) * (x - ox) + Math.sin(this.target.angle) * ( y - oy);
     let qy = oy + -Math.sin(this.target.angle) * ( x - ox) + Math.cos(this.target.angle) * ( y - oy);
 
-    return new Position(qx, qy);
+    console.log("RotateOffset", qx, ",", qy, "|", ox, ",", oy);
+    return new Position(ox, oy);
+    //return new Position(qx, qy);
   }
 
   private activeAttack() {
@@ -217,7 +236,6 @@ export class WingedDevilMovement extends Behaviour {
     this.target.$state.addBullet(bullet);
 
     bullet = new Bullet(options);
-    bullet.position =
     bullet.position = this.rotateOffset(-90, -60);
     bullet.registerBehaviour("path", new StraightAnglePath(bullet, {angle: this.target.angle}));
     this.target.$state.addBullet(bullet);

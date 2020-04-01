@@ -34,9 +34,8 @@ export class WingedDevil extends Enemy {
 
     this.modelType = "wingedDevil";
 
-    this.collisionType = CT.ELLIPSE;
-    this.radiusX = 225;
-    this.radiusY = 100;
+    this.collisionType = CT.CIRCLE;
+    this.radius = 250;
   }
 
   onInitGame(state: any): void {
